@@ -7,18 +7,18 @@
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 
 <!-- Home -->
-			<div class="wrapper style1 first">
+			<div class="wrapper style1 background-image">
 				<article class="container" id="top">
 					<div class="row">
-						<div class="4u 12u(mobile)">
-							<span class="image fit"><img src="images/pic00.jpg" alt="" /></span>
-						</div>
-						<div class="8u 12u(mobile)">
-							<header>
+						<div class="12u 12u(mobile) claim">
+							
 								<h1><strong>GeoDevelopers.org</strong></h1>
-							</header>
+							
+							<p>Comunidad abierta de profesionales del mundo de los SIG</p>
+							<!--
+
 							<p>Somos una <strong>comunidad abierta</strong> de profesionales que colaboramos para estar a la última de tecnologías geográficas.</p>
-							<a href="#activities" class="button big scrolly">Descubre qué hacemos</a>
+							<a href="#activities" class="button big scrolly">Descubre qué hacemos</a>-->
 						</div>
 					</div>
 				</article>

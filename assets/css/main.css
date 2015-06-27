@@ -1607,6 +1607,44 @@
 			background-image: none;
 			background-color: #fff;
 		}
+		.style1 h1 strong{
+			color: white;
+		}
+		#nav .logo a{
+			  margin: 0 1em 0 0;
+  padding: 0;
+  height: auto;
+		}
+		#nav li a:hover{
+			background-color: inherit;
+		}
+		.logo img{
+			
+			height: 40px;
+		  margin-top: 0px;
+		  position: relative;
+		  bottom: -14px;
+		}
+		.claim{
+			text-align: center;
+			margin-top: 5em;
+			color:white;
+   		text-shadow: 0px 2px 3px #555;
+
+		}
+		.claim p{
+		  background-color: rgba(0, 0, 0, 0.5);
+		  width: 65%;
+		  padding: 20px;
+		  margin: 0 auto;
+		}
+		.wrapper.background-image{
+			background-image: url(images/background.jpeg);
+		  background-size: 100%;
+		  border-bottom:10px solid #000;
+		  height: 450px;
+		}
+
 
 		.wrapper.style2 {
 			background-color: #fafafa;
@@ -1831,7 +1869,7 @@
 			}
 
 				.wrapper.first {
-					padding-top: 12em;
+					padding-top: 5em;
 				}
 
 		/* Nav */

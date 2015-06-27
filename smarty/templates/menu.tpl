@@ -1,6 +1,7 @@
 <!-- Nav -->
 			<nav id="nav">
 				<ul class="container">
+					<li class="logo"><a href="{$ROOT}"><img src="{$ROOT}images/geodevelopers-logo.png"></a></li>
 					<li><a href="{$ROOT}tutoriales">Tutoriales</a></li>
 					<li><a href="{$ROOT}webinars">Webinars</a></li>
 					<li><a href="{$ROOT}academy">Academy</a></li>
