@@ -85,10 +85,12 @@ define(['jquery','jsrender'], function($){
 
       var cargarContenidos = function(youtubeID, fechaEvento, transparencias, descripcion, tags, meetupid, videosrelacionados){
         
-        if(transparencias.substring(0,4)=="http"){
-          $("#ppts").append('<iframe src="'+transparencias+'" style="width:100%;1px solid #ccc" frameborder="0" height="389" ></iframe');
-        }else{
-          $("#ppts").append('<iframe src="https://docs.google.com/presentation/d/'+transparencias+'/embed?start=false&loop=false&delayms=3000" frameborder="0" style="width:100%" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>');
+        if(transparencias!=""){
+          if(transparencias.substring(0,4)=="http"){
+            $("#ppts").append('<iframe src="'+transparencias+'" style="width:100%;1px solid #ccc" frameborder="0" height="389" ></iframe');
+          }else{
+            $("#ppts").append('<iframe src="https://docs.google.com/presentation/d/'+transparencias+'/embed?start=false&loop=false&delayms=3000" frameborder="0" style="width:100%" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>');
+          }
         }
 
         $("#home .descripcion").html(descripcion);
@@ -155,33 +157,42 @@ define(['jquery','jsrender'], function($){
             videoDesc = videoDesc.replace(/(?:\r\n|\r|\n)/g, '<br />');
             $("#youtube-index").html(desc);
             $("#firechat-wrapper").hide();
+            $("#youtube-index").css('visibility','visible');
           }else{
-            $("#youtube-index").hide();
-            var chatRef = new Firebase("https://blistering-fire-8130.firebaseio.com");
-              var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
-             
-              chatRef.authAnonymously(function(error, authData) {
-                if (error) {
-                  console.log("Login Failed!", error);
-                } else {
-                  console.log("Authenticated successfully with payload:", authData);
-                  if (authData) {
-                      chat.setUser(authData.uid, "Anonymous" + authData.uid.substr(10, 8));
 
-                      setTimeout(function() {
-                        $("#spinner").hide();
-                        $("#firechat #firechat-tab-content").css("border-top","1px solid #bbb");
-                        chat._chat.enterRoom('-JgAvXEjG13D3DoIq9mc')
-                      },2000);
-                    } else {
-                      chatRef.authAnonymously(function(error, authData) {
-                        if (error) {
-                          console.log(error);
-                        }
-                      });
-                    }
-                }
+            $("#youtube-index").hide();
+
+            jQuery.getScript("https://cdn.firebase.com/js/client/2.0.2/firebase.js", function(){
+              jQuery.getScript("https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js", function(){
+                console.log("cargado!");
+                var chatRef = new Firebase("https://blistering-fire-8130.firebaseio.com");
+                var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+                 
+                chatRef.authAnonymously(function(error, authData) {
+                  $("#firechat-wrapper").css('visibility','visible');
+                  if (error) {
+                    console.log("Login Failed!", error);
+                  } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                    if (authData) {
+                        chat.setUser(authData.uid, "Anonymous" + authData.uid.substr(10, 8));
+
+                        setTimeout(function() {
+                          $("#spinner").hide();
+                          $("#firechat #firechat-tab-content").css("border-top","1px solid #bbb");
+                          chat._chat.enterRoom('-JgAvXEjG13D3DoIq9mc')
+                        },2000);
+                      } else {
+                        chatRef.authAnonymously(function(error, authData) {
+                          if (error) {
+                            console.log(error);
+                          }
+                        });
+                      }
+                  }
+                });
               });
+            });
           }
         });
       };
@@ -196,23 +207,9 @@ define(['jquery','jsrender'], function($){
         });
       });
 
-      //Loading disqus
-      disqus_shortname="geodevelopers";
       (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-
-      (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'https://cdn.firebase.com/js/client/2.0.2/firebase.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-
-      (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js';
+        dsq.src = '//geodevelopers.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
     }

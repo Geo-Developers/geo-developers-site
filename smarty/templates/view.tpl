@@ -32,8 +32,8 @@
 		  	  </div>
 			  <div class="col-md-6">
 			  	<div id="spinner"><img src="{$ROOT}assets/css/images/spinner.gif"></div>
-			  	<div id="firechat-wrapper"></div>
-			  	<div id="youtube-index"></div>
+			  	<div id="firechat-wrapper" style="visibility:hidden"></div>
+			  	<div id="youtube-index"  style="visibility:hidden"></div>
 			  </div>
 			</div>
 			<div class="row">
