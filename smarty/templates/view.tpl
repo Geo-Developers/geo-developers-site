@@ -9,6 +9,7 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
+		<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
 	</head>
 	
 	<body id="view-page">
@@ -19,7 +20,7 @@
 				<div class="col-md-12">
 					<h1 class="breadcum">
 						<a href="../">Home</a> &gt; 
-						<a href="index.php">Eventos</a> &gt; 
+						<a href="index.php">Academy</a> &gt; 
 						<span class="title"></span>
 					</h1>
 					
@@ -91,9 +92,9 @@
 	{include file="footer.tpl"}
 	<script>
 	 	require([
-  		'jquery.min',
+  		'jquery',
   		'view',
-			'bootstrap.min'
+			'bootstrap'
   	],function($, view){
   		view.init();
   	});

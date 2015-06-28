@@ -107,21 +107,25 @@ define(['jquery','jsrender'], function($){
           $("#resources .meetup").hide();
         }
 
-        //Cargamos los videos relacionados
-        var videos = videosrelacionados.split(","),
-            nVideos = rows.length,
-            v, template, related={data:[]}, htmlOutput;
-        
-        for(i=0; i < videos.length; i++){
-          v = rows[nVideos-parseInt(videos[i])];
-            related.data.push({
-              videoid: v["gsx$idyoutube"]["$t"],
-              videoTitle: v["gsx$charla"]["$t"]
-            });
+        if(videosrelacionados != ""){
+          //Cargamos los videos relacionados
+          var videos = videosrelacionados.split(","),
+              nVideos = rows.length,
+              v, template, related={data:[]}, htmlOutput;
+          
+          for(i=0; i < videos.length; i++){
+            v = rows[nVideos-parseInt(videos[i])];
+            console.log(v);
+              related.data.push({
+                videoid: v["gsx$idyoutube"]["$t"],
+                videoTitle: v["gsx$charla"]["$t"]
+              });
+          }
+          
+          template = $.templates("#videoTmpl");
+          htmlOutput = template.render(related);
+          $("#related").html(htmlOutput);
         }
-        template = $.templates("#videoTmpl");
-        htmlOutput = template.render(related);
-        $("#related").html(htmlOutput);
 
         var videoDesc,
             url = "https://www.googleapis.com/youtube/v3/videos?id="+youtubeID+"&part=snippet&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
@@ -152,6 +156,7 @@ define(['jquery','jsrender'], function($){
             $("#youtube-index").html(desc);
             $("#firechat-wrapper").hide();
           }else{
+            $("#youtube-index").hide();
             var chatRef = new Firebase("https://blistering-fire-8130.firebaseio.com");
               var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
              
@@ -196,6 +201,18 @@ define(['jquery','jsrender'], function($){
       (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://cdn.firebase.com/js/client/2.0.2/firebase.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
     }

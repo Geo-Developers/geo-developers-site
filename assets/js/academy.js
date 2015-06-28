@@ -1,6 +1,6 @@
 define(['jquery','jsrender'], function($){
   var Methods = {
-    init: function(){
+    init: function(seccion){
       var youtubeID = window.location.search.split("=")[1],
           api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadVideos";
 
@@ -18,10 +18,22 @@ define(['jquery','jsrender'], function($){
         data = data.feed.entry;
 
         $.each( data, function( key, val ) { 
-          videos.push({
-          	titulo: val["gsx$charla"]["$t"],
-          	id: val["gsx$idyoutube"]["$t"]
-          }); 
+
+          fechaEvento = val["gsx$fechammddaaaa"]["$t"];
+          var data = {
+            titulo: val["gsx$charla"]["$t"],
+            id: val["gsx$idyoutube"]["$t"]
+          };
+          
+          if(seccion == "videos"){
+            if (Date.parse(fechaEvento) < Date.now()) {
+              videos.push(data); 
+            }
+          }else{
+            if (Date.parse(fechaEvento) >= Date.now()) {
+              videos.push(data); 
+            }
+          }
         });
 
         var videos = {
@@ -33,7 +45,7 @@ define(['jquery','jsrender'], function($){
 			  $("#videoList").html(htmlOutput);
       }
 
-      var view = function(youtubeID){
+      window.view = function(youtubeID){
           window.location.href='view.php?id='+youtubeID;
       };
     }

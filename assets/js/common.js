@@ -1,5 +1,5 @@
 var conf = {
-	baseUrl: '/geodevelopers/assets/js',
+	baseUrl: '/new/assets/js',
 	'shim': {
       "bootstrap" : { "deps" :['jquery'] },
       'bootstrap/modal': { deps: ['jquery'], exports: '$.fn.modal' },
@@ -13,11 +13,11 @@ var conf = {
   paths:{
 		jquery: [
 			'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min',
-			'jquery.min'
+			'jquery'
 		],
 		jsrender: [
-			'http://www.jsviews.com/download/jsrender.min',
-			'jsrender.min'
+			'http://www.jsviews.com/download/jsrender',
+			'jsrender'
 		],
 		disqus: [
 			'https://geodevelopers.disquscdn.com/embed',

@@ -13,7 +13,7 @@
 							
 								<h1><strong>GeoDevelopers.org</strong></h1>
 							
-							<p>Comunidad abierta de profesionales del mundo de los SIG</p>
+							<p>La comunidad de profesionales del mundo de los SIG</p>
 							<!--
 
 							<p>Somos una <strong>comunidad abierta</strong> de profesionales que colaboramos para estar a la última de tecnologías geográficas.</p>
@@ -33,15 +33,8 @@
 						<div class="row">
 							<div class="4u 12u(mobile)">
 								<article class="box style2">
-									<a href="tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-									<h3><a href="tutoriales">Tutoriales</a></h3>
-									<p>Estamos preparando y recopilando tutoriales sobre APIs, SDKs, etc.</p>
-								</article>
-							</div>
-							<div class="4u 12u(mobile)">
-								<article class="box style2">
 									<a href="http://meetup.com/Geo-Developers/" target="_blank" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-									<h3><a href="http://meetup.com/Geo-Developers/" target="_blank">Eventos en vivo</a></h3>
+									<h3><a href="http://meetup.com/Geo-Developers/" target="_blank">Eventos</a></h3>
 									<p>Organizamos seminarios online y presenciales mensualmente.</p>
 								</article>
 							</div>
@@ -49,7 +42,14 @@
 								<article class="box style2">
 									<a href="academy" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 									<h3><a href="academy">Generar contenidos</a></h3>
-									<p>Recopilamos todos los materiales de los eventos en nuestra web.</p>
+									<p>Recopilamos todos los vídeos y transparencias en nuestra web.</p>
+								</article>
+							</div>
+							<div class="4u 12u(mobile)">
+								<article class="box style2">
+									<a href="tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+									<h3><a href="tutoriales">Tutoriales</a></h3>
+									<p>Estamos preparando y recopilando tutoriales sobre APIs, SDKs, etc.</p>
 								</article>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 								<article class="box style2">
 									<a href="miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
 									<h3><a href="miembros">Bolsa de profesionales</a></h3>
-									<p>Si buscas un desarrollador GIS o eres uno puedes inscribirte al directorio</p>
+									<p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
 								</article>
 							</div>
 							<div class="4u 12u(mobile)">

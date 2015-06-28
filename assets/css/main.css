@@ -1299,7 +1299,9 @@
 			display: block;
 			width: 100%;
 		}
-
+		.videoList .image img {
+			max-height: 216px;
+		}
 		.image.fit {
 			display: block;
 			width: 100%;
