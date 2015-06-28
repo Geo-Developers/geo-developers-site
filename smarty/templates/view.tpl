@@ -5,97 +5,98 @@
 	
 		<meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
 		<meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
-
-		
-
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
-
-
 	</head>
-<body id="view-page">
+	
+	<body id="view-page">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 		<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="breadcum"><a href="../">Home</a> &gt; <a href="/videos">Eventos</a> &gt; <span class="title"></span></h1>
-				
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="breadcum">
+						<a href="../">Home</a> &gt; 
+						<a href="index.php">Eventos</a> &gt; 
+						<span class="title"></span>
+					</h1>
+					
+				</div>
 			</div>
-		</div>
-		<div class="row">
-		  <div class="col-md-6" id="youtubeVideo">
-		  	
-	  	  </div>
-		  <div class="col-md-6">
-		  	<div id="spinner"><img src="{$ROOT}assets/css/images/spinner.gif"></div>
-		  	<div id="firechat-wrapper"></div>
-		  	<div id="youtube-index"></div>
-		  </div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 padding-top-0" id="ppts">
-				<!--<iframe src="https://docs.google.com/presentation/d/16wNWpNhnzxVxQ1TXPccERxBfi_q2T8sKBMHHbi6rcOg/embed?start=false&loop=false&delayms=3000" frameborder="0" width="640" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>-->
-				
+			<div class="row">
+			  <div class="col-md-6" id="youtubeVideo">
+			  	
+		  	  </div>
+			  <div class="col-md-6">
+			  	<div id="spinner"><img src="{$ROOT}assets/css/images/spinner.gif"></div>
+			  	<div id="firechat-wrapper"></div>
+			  	<div id="youtube-index"></div>
+			  </div>
 			</div>
-			<div class="col-md-6 padding-top-0">
-				<div role="tabpanel">
+			<div class="row">
+				<div class="col-md-6 padding-top-0" id="ppts"></div>
 
-				  <!-- Nav tabs -->
-				  <ul class="nav nav-tabs" role="tablist">
-				    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Preguntas</a></li>
-				    <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción y Recursos</a></li>
-				    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Relacionados</a></li>
-				    <!--<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Amigos</a></li>-->
-				  </ul>
+				<div class="col-md-6 padding-top-0">
+					<div role="tabpanel">
 
-				  <!-- Tab panes -->
-				  <div class="tab-content">
-				    <div role="tabpanel" class="tab-pane" id="home">
-					    <div class="descripcion"></div>
-					    <p style="margin-top:20px;"><strong>Otros recursos</strong></p>
-					    <ul id="resources" class="style-none">
-					    	<li class="ppts">Transparencias</li>
-					    	<li class="meetup">Ver evento en Meetup</li>
-					    	<li class="youtube"><a href="https://www.youtube.com/channel/UC5Kegds6aV88wjdAhqQ5Wsg?sub_confirmation=1">Suscríbete al canal de Youtube</a></li>
-					    </ul>
+					  <!-- Nav tabs -->
+					  <ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Preguntas</a></li>
+					    <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción y Recursos</a></li>
+					    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Relacionados</a></li>
+					  </ul>
 
-					    
-				    </div>
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					    <div role="tabpanel" class="tab-pane" id="home">
+						    <div class="descripcion"></div>
+						    <p style="margin-top:20px;"><strong>Otros recursos</strong></p>
+						    <ul id="resources" class="style-none">
+						    	<li class="ppts">Transparencias</li>
+						    	<li class="meetup">Ver evento en Meetup</li>
+						    	<li class="youtube"><a href="https://www.youtube.com/channel/UC5Kegds6aV88wjdAhqQ5Wsg?sub_confirmation=1">Suscríbete al canal de Youtube</a></li>
+						    </ul>
+					    </div>
 
-				    <div role="tabpanel" class="tab-pane active" id="profile">
-				    	<div id="disqus_thread"></div>
-				    </div>
-				    <div role="tabpanel" class="tab-pane" id="messages">
-				    	<ul id="related" class="style-none">
-				    		
-				    	</ul>
-							{literal}
-				    	<script id="videoTmpl" type="text/x-jsrender">
-							{{for data}}
-							<li onclick=view("{{:videoid}}") title="{{:videoTitle}}">
-				        <img src='https://i.ytimg.com/vi/{{:videoid}}/default.jpg'>
-				        <div class='videoDesc'>
-				          <p class='videoTitle'>{{:videoTitle}}</p>
-				        </div>
-				      </li>
-				      {{/for}}
-							</script>
-							{/literal}
-				    </div>
-				    <div role="tabpanel" class="tab-pane" id="settings">...</div>
-				  </div>
+					    <div role="tabpanel" class="tab-pane active" id="profile">
+					    	<div id="disqus_thread"></div>
+					    </div>
 
+					    <div role="tabpanel" class="tab-pane" id="messages">
+					    	<ul id="related" class="style-none">
+					    		
+					    	</ul>
+								{literal}
+					    	<script id="videoTmpl" type="text/x-jsrender">
+								{{for data}}
+								<li onclick=view("{{:videoid}}") title="{{:videoTitle}}">
+					        <img src='https://i.ytimg.com/vi/{{:videoid}}/default.jpg'>
+					        <div class='videoDesc'>
+					          <p class='videoTitle'>{{:videoTitle}}</p>
+					        </div>
+					      </li>
+					      {{/for}}
+								</script>
+								{/literal}
+					    </div>
+					  </div>
+
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
 
-{include file="footer.tpl"}
-<script>
-	
-</script>
+	{include file="footer.tpl"}
+	<script>
+	 	require([
+  		'jquery.min',
+  		'view',
+			'bootstrap.min'
+  	],function($, view){
+  		view.init();
+  	});
+	</script>
 </body>
 </html>

@@ -7,6 +7,7 @@ var conf = {
       'main': { deps:['jquery'], exports: 'jQuery'},
       'util': ['jquery'],
       'views': ['jquery','jsrender'],
+      'academy': ['jquery','jsrender'],
       'main': ['util']
   },
   paths:{
@@ -30,12 +31,3 @@ var conf = {
 }
 
 requirejs.config(conf);
-   
-  	require([
-  		'jquery',
-  		'view',
-  		//'disqus',
-			'bootstrap'
-  	],function($, view){
-  		view.init();
-  	});
