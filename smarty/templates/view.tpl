@@ -6,23 +6,7 @@
 		<meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
 		<meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
 
-		<!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-		<script src="http://www.jsviews.com/download/jsrender.min.js"></script>
-		{literal}
-		<script type="text/javascript">
-		$.getScript("http://www.jsviews.com/download/jsrender.min.js");
-			(function () {
-	      var s = document.createElement('script');
-	      s.type = 'text/javascript';
-	      s.async = true;
-	      s.src = 'http://www.jsviews.com/download/jsrender.min.js';
-	      var x = document.getElementsByTagName('script')[0];
-	      x.parentNode.insertBefore(s, x);
-	  })();
-	  </script>
-	  {/literal}
+		
 
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -30,27 +14,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="{$ROOT}assets/js/view.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-modal.min.js"></script>
 
-
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
-
-    <!-- Firechat -->
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
-    <script src="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js"></script>
-
-
-    {literal}
-    <script type="text/javascript">var switchTo5x=true;</script>
-		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-		<script type="text/javascript">stLight.options({publisher: "c6c82cb4-c766-4e38-bfd1-0d531786e983", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-		{/literal}
 	</head>
-<body>
+<body id="view-page">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 		<div class="container">
 		<div class="row">
@@ -101,20 +67,6 @@
 
 				    <div role="tabpanel" class="tab-pane active" id="profile">
 				    	<div id="disqus_thread"></div>
-							{literal}
-							<script type="text/javascript">
-							    /* * * CONFIGURATION VARIABLES * * */
-							    var disqus_shortname = 'geodevelopers';
-							    
-							    /* * * DON'T EDIT BELOW THIS LINE * * */
-							    (function() {
-							        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-							        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-							        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-							    })();
-							</script>
-							<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-							{/literal}
 				    </div>
 				    <div role="tabpanel" class="tab-pane" id="messages">
 				    	<ul id="related" class="style-none">
@@ -142,3 +94,8 @@
 		</div>
 
 {include file="footer.tpl"}
+<script>
+	
+</script>
+</body>
+</html>

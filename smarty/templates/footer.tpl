@@ -43,13 +43,5 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="{$ROOT}assets/js/jquery.min.js"></script>
-			<script src="{$ROOT}assets/js/jquery.scrolly.min.js"></script>
-			<script src="{$ROOT}assets/js/skel.min.js"></script>
-			<script src="{$ROOT}assets/js/skel-viewport.min.js"></script>
-			<script src="{$ROOT}assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="{$ROOT}assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="{$ROOT}assets/js/main.js"></script>
-
-	</body>
-</html>
+		<script data-main="{$ROOT}assets/js/common" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.min.js"></script>
+	
