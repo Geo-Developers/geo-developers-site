@@ -8,8 +8,8 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
 		<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
+		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
 	</head>
 	
 	<body id="view-page">
@@ -49,6 +49,7 @@
 					    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Relacionados</a></li>
 					  </ul>
 
+
 					  <!-- Tab panes -->
 					  <div class="tab-content">
 					    <div role="tabpanel" class="tab-pane" id="home">
@@ -70,16 +71,16 @@
 					    		
 					    	</ul>
 								{literal}
-					    	<script id="videoTmpl" type="text/x-jsrender">
-								{{for data}}
-								<li onclick=view("{{:videoid}}") title="{{:videoTitle}}">
-					        <img src='https://i.ytimg.com/vi/{{:videoid}}/default.jpg'>
-					        <div class='videoDesc'>
-					          <p class='videoTitle'>{{:videoTitle}}</p>
-					        </div>
-					      </li>
-					      {{/for}}
-								</script>
+  					    	<script id="videoTmpl" type="text/x-jsrender">
+  								{{for data}}
+  								<li onclick=view("{{:videoid}}") title="{{:videoTitle}}">
+  					        <img src='https://i.ytimg.com/vi/{{:videoid}}/default.jpg'>
+  					        <div class='videoDesc'>
+  					          <p class='videoTitle'>{{:videoTitle}}</p>
+  					        </div>
+  					      </li>
+  					      {{/for}}
+  								</script>
 								{/literal}
 					    </div>
 					  </div>
@@ -93,10 +94,9 @@
 	<script>
 	 	require([
   		'jquery',
-  		'view',
-			'bootstrap'
+  		'view'
   	],function($, view){
-  		view.init();
+  		view.init("{$TYPE}");
   	});
 	</script>
 </body>

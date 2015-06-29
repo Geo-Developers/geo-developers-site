@@ -26,10 +26,12 @@ define(['jquery','jsrender'], function($){
           };
           
           if(seccion == "videos"){
+            data.webinar = false;
             if (Date.parse(fechaEvento) < Date.now()) {
               videos.push(data); 
             }
           }else{
+            data.webinar = true;
             if (Date.parse(fechaEvento) >= Date.now()) {
               videos.push(data); 
             }

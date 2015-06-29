@@ -18,7 +18,12 @@ h1{
 	color:white;
 }
 #firechat .chat{
-	height: 152px;
+	height: 205px;
+}
+#firechat .firechat-dropdown-toggle.btn,
+#firechat .btn:hover, 
+#firechat .btn:focus{
+	height: 27px;
 }
 #firechat-wrapper,
 #youtube-index {
@@ -37,6 +42,9 @@ h1{
 	-webkit-box-shadow: 0 5px 25px #666;
 	-moz-box-shadow: 0 5px 25px #666;
 	box-shadow: 0 5px 25px #666;*/
+}
+#firechat-wrapper{
+	height: 340px;
 }
 #youtube-index{
 	padding: 0px;
@@ -115,10 +123,14 @@ border-right: 1px solid #ddd;
 padding: 10px;
 min-height: 348px
 }
-#firechat #firechat-tabs {
-height: 225px;
-overflow: hidden;
+#youtubeVideo iframe.webinars{
+	height: 340px !important;
 }
+#firechat #firechat-tabs {
+	height: 275px;
+	overflow: hidden;
+}
+
 #fb-root{
 	position: relative;
 	top: -3px;

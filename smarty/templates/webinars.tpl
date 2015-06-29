@@ -20,7 +20,13 @@
 				{{for data}}
 					<div class="4u 12u(mobile)">
 						<article class="box style2">
-							<a href="#" class="image featured" onclick=view("{{:id}}")><img src="https://i.ytimg.com/vi/{{:id}}/mqdefault.jpg" alt="" /></a>
+							<a href="#" class="image featured" onclick=view("{{:id}}")>
+								{{if webinar}}
+									<img src="../images/webinar.jpg" alt="" />
+								{{else}}
+									<img src="https://i.ytimg.com/vi/{{:id}}/mqdefault.jpg" alt="" />
+								{{/if}}
+							</a>
 							<div class="table">
 								<p>{{:titulo}}</p>
 							</div>
@@ -36,8 +42,7 @@
 	<script>
 	 	require([
   		'jquery',
-  		'academy',
-			'bootstrap'
+  		'academy'
   	],function($, academy){
   		academy.init("webinars");
   	});

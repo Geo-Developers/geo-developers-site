@@ -1,6 +1,7 @@
-define(['jquery','jsrender'], function($){
+define(['jquery','bootstrap','jsrender'], function($){
   var Methods = {
-    init: function(){
+    init: function(type){
+
       var youtubeID = window.location.search.split("=")[1];
           api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadPPTs";
 
@@ -36,8 +37,7 @@ define(['jquery','jsrender'], function($){
              'onReady': onPlayerReady,
              'onStateChange': onPlayerStateChange,
            }
-             
-         });         
+         });
       }
       function onPlayerStateChange(evt) 
       {
@@ -50,6 +50,7 @@ define(['jquery','jsrender'], function($){
       }
 
       function onPlayerReady(evt) {
+
          
         // doesn't work here
         // player.seekTo(30);  
@@ -59,7 +60,6 @@ define(['jquery','jsrender'], function($){
       }
 
       $(function() {
-          
           $(document).on('click', '.btnSeek', function() {
               player.seekTo($(this).data('seek'), true);
           });
@@ -117,7 +117,7 @@ define(['jquery','jsrender'], function($){
           
           for(i=0; i < videos.length; i++){
             v = rows[nVideos-parseInt(videos[i])];
-            console.log(v);
+            //console.log(v);
               related.data.push({
                 videoid: v["gsx$idyoutube"]["$t"],
                 videoTitle: v["gsx$charla"]["$t"]
@@ -127,6 +127,8 @@ define(['jquery','jsrender'], function($){
           template = $.templates("#videoTmpl");
           htmlOutput = template.render(related);
           $("#related").html(htmlOutput);
+        }else{
+          $("a[href='#messages']").hide();
         }
 
         var videoDesc,
@@ -158,13 +160,23 @@ define(['jquery','jsrender'], function($){
             $("#youtube-index").html(desc);
             $("#firechat-wrapper").hide();
             $("#youtube-index").css('visibility','visible');
+            (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//geodevelopers.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
           }else{
 
             $("#youtube-index").hide();
-
+            $("li.active").hide();
+            $("a[href='#home']").click();
+            $("#youtubeVideo iframe").addClass(type);         
+            //$("a[href='#home']").parent().addClass("active")
+            
+            
             jQuery.getScript("https://cdn.firebase.com/js/client/2.0.2/firebase.js", function(){
               jQuery.getScript("https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js", function(){
-                console.log("cargado!");
+
                 var chatRef = new Firebase("https://blistering-fire-8130.firebaseio.com");
                 var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
                  
@@ -173,7 +185,7 @@ define(['jquery','jsrender'], function($){
                   if (error) {
                     console.log("Login Failed!", error);
                   } else {
-                    console.log("Authenticated successfully with payload:", authData);
+                    //console.log("Authenticated successfully with payload:", authData);
                     if (authData) {
                         chat.setUser(authData.uid, "Anonymous" + authData.uid.substr(10, 8));
 
@@ -207,11 +219,7 @@ define(['jquery','jsrender'], function($){
         });
       });
 
-      (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//geodevelopers.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
+      
     }
   };
   return Methods;
