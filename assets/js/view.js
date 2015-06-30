@@ -1,12 +1,16 @@
-define(['jquery','bootstrap','jsrender'], function($){
+define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,base){
   var Methods = {
     init: function(type){
 
+      base.init(Cookies);
+      
       var youtubeID = window.location.search.split("=")[1];
           api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadPPTs";
 
       var rows = [];
       $.getScript('http://www.youtube.com/iframe_api');
+      $.getScript('http://w.sharethis.com/button/buttons.js'); 
+      $.getScript('http://w.sharethis.com/button/buttons.js');
 
       window.loadPPTs = function(data){
         rows = data = data.feed.entry, i = 0;
@@ -19,8 +23,9 @@ define(['jquery','bootstrap','jsrender'], function($){
             tags = val["gsx$tags"]["$t"];
             meetupid = val["gsx$meetupid"]["$t"];
             videosrelacionados = val["gsx$videosrelacionados"]["$t"];
+            firechat = val["gsx$firechat"]["$t"];
             
-            cargarContenidos(youtubeID, fechaEvento, transparencias, descripcion, tags, meetupid, videosrelacionados);
+            cargarContenidos(youtubeID, fechaEvento, transparencias, descripcion, tags, meetupid, videosrelacionados, firechat);
           }
           
         });         
@@ -83,7 +88,7 @@ define(['jquery','bootstrap','jsrender'], function($){
           window.location.href='/videos/view.html?id='+youtubeID;
       };
 
-      var cargarContenidos = function(youtubeID, fechaEvento, transparencias, descripcion, tags, meetupid, videosrelacionados){
+      var cargarContenidos = function(youtubeID, fechaEvento, transparencias, descripcion, tags, meetupid, videosrelacionados, firechat){
         
         if(transparencias!=""){
           if(transparencias.substring(0,4)=="http"){
@@ -160,6 +165,8 @@ define(['jquery','bootstrap','jsrender'], function($){
             $("#youtube-index").html(desc);
             $("#firechat-wrapper").hide();
             $("#youtube-index").css('visibility','visible');
+            
+            // Loading disqus
             (function() {
               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
               dsq.src = '//geodevelopers.disqus.com/embed.js';
@@ -192,7 +199,9 @@ define(['jquery','bootstrap','jsrender'], function($){
                         setTimeout(function() {
                           $("#spinner").hide();
                           $("#firechat #firechat-tab-content").css("border-top","1px solid #bbb");
-                          chat._chat.enterRoom('-JgAvXEjG13D3DoIq9mc')
+                          if(firechat != ""){
+                            chat._chat.enterRoom(firechat);
+                          }
                         },2000);
                       } else {
                         chatRef.authAnonymously(function(error, authData) {
@@ -205,6 +214,14 @@ define(['jquery','bootstrap','jsrender'], function($){
                 });
               });
             });
+
+            
+            (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5110fe544ae3cec6';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            
           }
         });
       };

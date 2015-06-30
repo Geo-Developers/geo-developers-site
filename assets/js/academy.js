@@ -1,6 +1,9 @@
-define(['jquery','jsrender'], function($){
+define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
   var Methods = {
     init: function(seccion){
+
+      base.init(Cookies);
+
       var youtubeID = window.location.search.split("=")[1],
           api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadVideos";
 

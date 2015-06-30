@@ -25,6 +25,9 @@ h1{
 #firechat .btn:focus{
 	height: 27px;
 }
+#firechat .btn{
+  color: #000 !important;
+}
 #firechat-wrapper,
 #youtube-index {
 	height: 285px;

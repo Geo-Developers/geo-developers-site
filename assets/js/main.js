@@ -4,9 +4,12 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-define(['jquery','util'], function($) {
+define(['jquery','cookies','base','util'], function($, Cookies, base) {
 	var Methods = {
 		init:function(){
+			
+			base.init(Cookies);
+
 			skel
 				.breakpoints({
 					desktop: '(min-width: 737px)',

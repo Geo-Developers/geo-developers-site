@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		{include file="header.tpl" title="Comunidad de Geo Developers"}
+		{include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: "}
 	
 		<meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
 		<meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>

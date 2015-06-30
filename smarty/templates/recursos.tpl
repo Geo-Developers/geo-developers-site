@@ -48,5 +48,14 @@
 			</article>
 		</div>
 {include file="footer.tpl"}
+
+<script>
+ 	require([
+		'jquery',
+		'resources'
+	],function($, resources){
+		resources.init();
+	});
+</script>
 </body>
 </html>

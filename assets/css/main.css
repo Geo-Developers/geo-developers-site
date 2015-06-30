@@ -2210,3 +2210,98 @@
 	#contact .row .12u{
 		padding-top: 0;
 	}
+
+	#cookies,
+	#geodev-academy {
+	  display: block;
+	  font-size: .9em;
+	  position: fixed;
+	  bottom: -400px;
+	  left: 0;
+	  z-index: 8999;
+	  color: #FFF;
+	  background-color: #FABE78;
+	  width: 380px;
+	  background-image: url(images/cookie.png);
+	  background-position: 15px 23px;
+	  background-repeat: no-repeat;
+	  -moz-transition: all 3s ease-in-out !important;
+	  -o-transition: all 3s ease-in-out !important;
+	  -webkit-transition: all 3s ease-in-out !important;
+	  transition: all 3s ease-in-out !important;
+	  padding-left: 1em;
+  	padding-right: 1em;
+	}
+	#geodev-academy {
+    right: 0;
+	  left: inherit;
+	  background-color: #FFF;
+	  background-image: url(images/terminal.png);
+	  background-size: 80px;
+	  color: #000;
+	  border-top: 3px solid #000;
+	  border-left: 3px solid #000;
+	  -webkit-box-shadow: -4px -2px 29px -7px rgba(0,0,0,0.75);
+		-moz-box-shadow: -4px -2px 29px -7px rgba(0,0,0,0.75);
+		box-shadow: -4px -2px 29px -7px rgba(0,0,0,0.75);
+		width: 580px;
+		background-position: 30px 30px;
+  	padding-left: 50px;
+  }
+	#cookies p,
+	#geodev-academy p,
+	#mc_embed_signup{
+	  padding: 1.5em 1.5em 1.5em 6em;
+	  color: #A52A2A;
+	  position: relative;
+	  margin-bottom: 0;
+	}
+	#geodev-academy p{
+		padding-bottom: 0;
+	}
+	#mc_embed_signup{
+		padding-top: .5em;
+		margin-bottom: .8em;
+	}
+	#mc_embed_signup .email{
+		padding: .3em .7em;
+  	width: 270px;
+  	border-radius: 0;
+  	font-size: .9em;
+  	display: inline-block;
+	}
+	#mc_embed_signup input[type="submit"]{
+		padding: 0em 1em;
+	  border-radius: 0;
+	  height: 35px;
+	  box-shadow: none;
+	  font-weight: normal;
+	  font-size: .9em;
+  }
+	#cookies p a{
+		color: white;
+		text-decoration: none;
+	}
+	#geodev-academy small{
+		font-size: .9em;	
+	}
+	
+	#cookies p .close,
+	#geodev-academy p .close {
+	  position: absolute;
+	  display: block;
+	  cursor: pointer;
+	  top: 7px;
+	  right: 0;
+	  color: #A52A2A;
+	}
+	#geodev-academy p,
+	#geodev-academy p .close {
+		color: black;
+	}
+	#cookies.show,
+	#geodev-academy.show {
+	  bottom: 0;
+	}
+
+
