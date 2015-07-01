@@ -3,14 +3,12 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
     init: function(type){
 
       base.init(Cookies);
-      
+
       var youtubeID = window.location.search.split("=")[1];
           api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadPPTs";
 
       var rows = [];
       $.getScript('http://www.youtube.com/iframe_api');
-      $.getScript('http://w.sharethis.com/button/buttons.js'); 
-      $.getScript('http://w.sharethis.com/button/buttons.js');
 
       window.loadPPTs = function(data){
         rows = data = data.feed.entry, i = 0;
@@ -31,9 +29,9 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
         });         
       }
 
-      var player;
-      function onYouTubePlayerAPIReady() {
-         player = new YT.Player('youtubeVideo', {
+      //var player;
+      window.onYouTubePlayerAPIReady = function () {
+         window.player = new YT.Player('youtubeVideo', {
            height: '280',
            width: '640',
            videoId: youtubeID,
@@ -56,7 +54,6 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
 
       function onPlayerReady(evt) {
 
-         
         // doesn't work here
         // player.seekTo(30);  
          
