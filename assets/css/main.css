@@ -1069,6 +1069,10 @@
 
 /* Basic */
 
+	#nav{
+		font-size: 1.25em;
+	}
+
 	body, input, textarea, select {
 		font-family: 'Open Sans', sans-serif;
 		line-height: 1.85em;
@@ -1628,7 +1632,7 @@
 		  position: relative;
 		  bottom: -14px;
 		}
-		body#view-page .logo img{
+		body .logo img{
 			bottom:	0;
 		}
 		.claim{
@@ -2252,6 +2256,8 @@
 	#geodev-academy p,
 	#mc_embed_signup{
 	  padding: 1.5em 1.5em 1.5em 6em;
+	  font-size: 15px;
+	  line-height: 32px;
 	  color: #A52A2A;
 	  position: relative;
 	  margin-bottom: 0;
@@ -2264,7 +2270,8 @@
 		margin-bottom: .8em;
 	}
 	#mc_embed_signup .email{
-		padding: .3em .7em;
+		padding: 1px 9px;
+		height: 35px;
   	width: 270px;
   	border-radius: 0;
   	font-size: .9em;
@@ -2303,5 +2310,63 @@
 	#geodev-academy.show {
 	  bottom: 0;
 	}
+	#nav .dropdown-menu a,
+	#nav .dropdown-menu li a:hover{
+		color: #333 !important;
+	}
+	
 
+	.dropdown-toggle img{
+		max-width: 25px;
+	}
 
+	#login{
+		margin-left: 20px;
+	  background-color: #3FB282;
+	  padding: 5px;
+	  border-radius: 3px;
+	}
+	#login .caret{
+		color: white;
+	}
+	.acenter{
+		text-align: center;
+	}
+	.acenter img{
+		margin: 0 auto;
+	}
+	.mb1{margin-bottom: 1em;}
+	.mb2{margin-bottom: 2em;}
+	.mb3{margin-bottom: 3em;}
+	.mt1{margin-top: 1em;}
+	.mt2{margin-top: 2em;}
+	.mt3{margin-top: 3em;}
+	/*************************************
+	*
+	*							LOGIN PAGE
+	*
+	**************************************/
+	#login-page{
+		margin-top: 30px;
+	}
+	#login-btn{
+		border: 1px solid #D43F3A;
+	}
+	a#login-btn{ 
+		  color: #D43F3A;
+		  font-size: 2em;
+		  vertical-align: middle;
+		  font-weight: 200;
+		  margin-top: 150px;
+		  padding: 20px 50px;
+		  text-transform: uppercase;
+	}
+	a#login-btn:hover{
+		color: red !important;
+		background-color: #FFEAEA ;
+	}
+
+	#login-btn img{
+		height: 40px;
+		  margin-top: -6px;
+	}

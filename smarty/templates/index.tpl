@@ -13,7 +13,7 @@
 							
 								<h1><strong>GeoDevelopers.org</strong></h1>
 							
-							<p>La comunidad de profesionales del mundo de los SIG</p>
+							<p>La comunidad de profesionales del mundo de los <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica" target="_blank">SIG</a></p>
 							<!--
 
 							<p>Somos una <strong>comunidad abierta</strong> de profesionales que colaboramos para estar a la última de tecnologías geográficas.</p>

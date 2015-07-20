@@ -1,14 +1,15 @@
 var conf = {
 	baseUrl: '/new/assets/js',
 	'shim': {
-      "bootstrap" : { "deps" :['jquery'] },
-      'bootstrap/modal': { deps: ['jquery'], exports: '$.fn.modal' },
-      'jsrender': { deps: ['jquery'], exports: '$.templates' },
-      'main': { deps:['jquery'], exports: 'jQuery'},
-      'util': ['jquery'],
-      'views': ['jquery','jsrender','base'],
-      'academy': ['jquery','jsrender','base'],
-      'main': ['jquery','util','base']
+      "bootstrap" : 				{ deps: ['jquery'] },
+      'bootstrap/modal': 		{ deps: ['jquery'], exports: '$.fn.modal' },
+      'bootstrap/dropdown': { deps: ['jquery'], exports: '$.fn.dropdown' },
+      'jsrender': 					{ deps: ['jquery'], exports: '$.templates' },
+      'main': 							{ deps: ['jquery'], exports: 'jQuery'},
+      'util': 							['jquery'],
+      'views': 							['jquery', 'jsrender', 'base'],
+      'academy': 						['jquery', 'jsrender', 'base'],
+      'main': 							['jquery', 'util', 'base']
   },
   paths:{
 		jquery: [
@@ -24,12 +25,15 @@ var conf = {
 			'disqus'
 		],
 		bootstrap: [
-			"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min",
-			"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-modal.min"
+			"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js",
+			"bootstrap"
 		],
 		cookies: [
 			"cookies",
 			"https://raw.githubusercontent.com/ScottHamper/Cookies/master/dist/cookies.min.js"
+		],
+		dropdown:[
+			"dropdown"
 		]
               
 	}

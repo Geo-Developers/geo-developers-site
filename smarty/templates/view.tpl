@@ -14,6 +14,7 @@
 	
 	<body id="view-page">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
+
 		<div class="container">
 
 			<div class="row">
@@ -22,6 +23,7 @@
 						<a href="../">Home</a> &gt; 
 						<a href="index.php">Academy</a> &gt; 
 						<span class="title"></span>
+						asdasd userid: {$USER_ID}
 					</h1>
 					
 				</div>
@@ -36,6 +38,7 @@
 			  	<div id="youtube-index"  style="visibility:hidden"></div>
 			  </div>
 			</div>
+
 			<div class="row">
 				<div class="col-md-6 padding-top-0" id="ppts"></div>
 

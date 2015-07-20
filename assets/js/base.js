@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'dropdown'], function($) {
 
   var Methods = {
  
@@ -11,16 +11,26 @@ define(['jquery'], function($) {
 					Cookies.set("cookies","true");
 				}
 			}else{
-				if(Cookies.get("geodev-academy") !== "true"){
+				var visits = parseInt(Cookies.get("visits"));
+				if(!visits){
+					Cookies.set("visits",1);
+				}else{
+					Cookies.set("visits",visits+1);
+				}
+				if(Cookies.get("geodev-academy") !== "true" && visits > 3){
 					document.getElementById('geodev-academy').className = "show";
+					$("#mc-embedded-subscribe-form").submit(function(){
+						closeCookies();
+					});
 					window.closeCookies = function(){
 						document.getElementById('geodev-academy').className = "";
 						Cookies.set("geodev-academy","true");
 					}
 				}
 			}
-			
+			$('.dropdown-toggle').dropdown();	
 		}
+
 	}
 	return Methods;
 });

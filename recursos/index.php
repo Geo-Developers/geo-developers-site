@@ -1,7 +1,7 @@
 <?php
 
 $ROOT = "../";
-include($ROOT."config.php");
+include($ROOT."init.php");
 
 $smarty->assign('ROOT', $ROOT);
 $smarty->display('recursos.tpl');

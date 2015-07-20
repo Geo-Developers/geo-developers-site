@@ -1,0 +1,69 @@
+<?php
+session_start();
+
+require 'meetup.php';
+
+if(isset($_SESSION['returnURL'])){
+  $returnURL = $_SESSION['returnURL'];
+}else{
+  $returnURL = "/";
+}
+
+if( !isset($_SESSION['user_id']) ){
+  if( !isset($_GET['code']) )
+  {
+   
+    $meetup = new Meetup();
+    $meetup->authorize(array(
+      'client_id'     => $client_id,
+      'redirect_uri'  => $redirect_uri
+    ));
+  }
+  else
+  {
+    $meetup = new Meetup(
+      array(
+        "client_id"     => $client_id,
+        "client_secret" => $client_secret,
+        "redirect_uri"  => $redirect_uri,
+        "code"          => $_GET['code'] 
+      )
+    );
+
+    //get an access token
+    $response = $meetup->access();
+
+    //now we can re-use this object for several requests using our access
+    //token
+    $meetup = new Meetup(array("access_token"  => $response->access_token));
+
+    //store details for later in case we need to do requests elsewhere
+    //or refresh token
+    $_SESSION['access_token'] = $response->access_token;
+    $_SESSION['refresh_token'] = $response->refresh_token;
+    $_SESSION['expires'] = time() + intval($response->expires_in); //use if >= intval($_SESSION['expires']) to check
+
+    
+    $response = $meetup->getMemberInfo(array('member_id' => 'self'));
+    //print_r($response);
+
+    
+    $_SESSION['user_id'] = $response->id;
+    $_SESSION['bio'] = $response->bio;
+    $_SESSION['name'] = $response->name;
+    $_SESSION['member_url'] = $response->link;
+    $_SESSION['photo'] = $response->photo->highres_link;
+    $_SESSION['twitter'] = $response->other_services->twitter->identifier;
+    $_SESSION['city'] = $response->city;
+    
+
+    header('Location: '.$returnURL);
+      //
+           //get all events for this member
+           //$response = $meetup->getEvents(array('member_id' => '<member id>'));
+  }
+}else{
+  header('Location: '.$returnURL);
+}
+
+?>

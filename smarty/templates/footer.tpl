@@ -16,6 +16,7 @@
 									<li><a href="https://plus.google.com/b/109447485563959028354/109447485563959028354/posts" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
 									<li><a href="https://github.com/Geo-Developers" class="icon fa-github"><span class="label">Github</span></a></li>
 									<li><a href="http://www.meetup.com/es/Geo-Developers/" class="icon fa-users"><span class="label">Meetup</span></a></li>
+									<li><a href="http://eepurl.com/br1h59" class="icon fa-envelope-o"><span class="label">Mailchimp</span></a></li>
 									<!--
 									<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
 									<li><a href="#" class="icon fa-instagram"><span>Instagram</span></a></li>
@@ -52,7 +53,7 @@
         	<span onclick="closeCookies()" class="close">X</span>
         </p>
       	<div id="mc_embed_signup">
-					<form action="//geodevelopers.us11.list-manage.com/subscribe/post?u=02831ef74a5e28f16ea6f19c5&amp;id=419c60e17a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+					<form action="//geodevelopers.us11.list-manage.com/subscribe/post?u=02831ef74a5e28f16ea6f19c5&amp;id=419c60e17a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate >
 					   <div id="mc_embed_signup_scroll">
 						
 							<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Tu email" required>
