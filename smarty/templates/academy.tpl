@@ -3,7 +3,7 @@
 	<head>
 		{include file="header.tpl" title="Comunidad de Geo Developers"}
 	</head>
-<body class="videoList">
+<body class="video-list" id="academy-listing">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 		<div class="container">
 			<div class="row">
@@ -14,7 +14,7 @@
 		</div>
 		
 		<div class="container">
-			<div class="row" id="videoList">
+			<div class="row" id="video-list">
 			{literal}
 				<script id="videoTmpl" type="text/x-jsrender">
 				{{for data}}

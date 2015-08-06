@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
 	</head>
 	
-	<body id="view-page">
+	<body id="view-page-{$TYPE}">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 
 		<div class="container">
@@ -23,7 +23,6 @@
 						<a href="../">Home</a> &gt; 
 						<a href="index.php">Academy</a> &gt; 
 						<span class="title"></span>
-						asdasd userid: {$USER_ID}
 					</h1>
 					
 				</div>

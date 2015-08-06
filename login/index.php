@@ -14,7 +14,6 @@ if( !isset($_SESSION['user_id']) ){
 		header('Location: '.$_GET['returnURL']);
 	}else{
 		header('Location: /');
-	}
-  
+	}  
 }
 ?>

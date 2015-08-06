@@ -47,7 +47,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
 	  	  
 	  		template = $.templates("#videoTmpl");
 			  htmlOutput = template.render(videos);
-			  $("#videoList").html(htmlOutput);
+			  $("#video-list").html(htmlOutput);
       }
 
       window.view = function(youtubeID){

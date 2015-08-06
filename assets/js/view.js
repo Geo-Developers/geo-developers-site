@@ -35,7 +35,11 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
            height: '280',
            width: '640',
            videoId: youtubeID,
-             playerVars: { 'start': 159, 'autoplay': 1, 'controls': 1 },
+             playerVars: { 
+              'start': 159, 
+              'autoplay': 0, 
+              'controls': 1 
+            },
            events: {
              'onReady': onPlayerReady,
              'onStateChange': onPlayerStateChange,

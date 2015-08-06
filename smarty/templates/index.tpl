@@ -3,7 +3,7 @@
 	<head>
 		{include file="header.tpl" title="Comunidad de Geo Developers"}
 	</head>
-	<body>
+	<body id="home">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 <!-- Home -->
 			<div class="wrapper style1 background-image">

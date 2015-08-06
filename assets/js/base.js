@@ -1,3 +1,7 @@
+/*
+	This script is load on every page
+*/
+
 define(['jquery', 'dropdown'], function($) {
 
   var Methods = {
@@ -29,6 +33,18 @@ define(['jquery', 'dropdown'], function($) {
 				}
 			}
 			$('.dropdown-toggle').dropdown();	
+
+			console.log("Ejecutamos");
+			/* Mixpanel tracking */
+			mixpanel.people.set(USER);
+			// identify must be called along with people.set
+			mixpanel.identify(USER.id);
+
+			var pageID = $("body").attr("id");
+			mixpanel.track(
+		    "View page [" + pageID + "]"/*,
+		    { "Banner Color": "Blue" }*/
+			);
 		}
 
 	}

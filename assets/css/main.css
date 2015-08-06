@@ -1303,7 +1303,7 @@
 			display: block;
 			width: 100%;
 		}
-		.videoList .image img {
+		.video-list .image img {
 			max-height: 216px;
 		}
 		.image.fit {
@@ -2176,24 +2176,24 @@
 
 
 
-	#videoList{
+	#video-list{
 	  
 	  
 	}
-	#videoList article{
+	#video-list article{
 		padding-bottom: 0;
 	}
-	#videoList .table{
+	#video-list .table{
 		display: table;
 		width: 100%;
 	}
-	#videoList .table-column{
+	#video-list .table-column{
 		display: table-column;	
 	}
-	#videoList a{
+	#video-list a{
 		  margin-bottom: 2em;
 	}
-	#videoList p{
+	#video-list p{
 		display: table-cell;
 	  height: 128px;
 	  width: 100%;
