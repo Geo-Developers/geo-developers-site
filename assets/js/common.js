@@ -1,5 +1,5 @@
 var conf = {
-	baseUrl: '/new/assets/js',
+	baseUrl: '/assets/js',
 	'shim': {
       "bootstrap" : 				{ deps: ['jquery'] },
       'bootstrap/modal': 		{ deps: ['jquery'], exports: '$.fn.modal' },
@@ -37,6 +37,10 @@ var conf = {
 		]
               
 	}
+}
+
+if(window.location.host == "localhost"){
+	conf.baseUrl = "/new" + conf.baseUrl;
 }
 
 requirejs.config(conf);

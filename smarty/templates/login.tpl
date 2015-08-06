@@ -17,7 +17,7 @@
 			  </div>
 			  <div class="col-md-6">
 			  	
-			  	<a href="login.php" class="btn btn-lg" id="login-btn"><img src="../images/meetup.png"> Entrar ahora</a>
+			  	<a href="login.php?returnURL={$returnURL}" class="btn btn-lg" id="login-btn"><img src="../images/meetup.png"> Entrar ahora</a>
 			  </div>
 			</div>
 			</div>

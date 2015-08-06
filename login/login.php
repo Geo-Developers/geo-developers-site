@@ -2,6 +2,7 @@
 session_start();
 
 require 'meetup.php';
+require '../config.php';
 
 if(isset($_SESSION['returnURL'])){
   $returnURL = $_SESSION['returnURL'];
