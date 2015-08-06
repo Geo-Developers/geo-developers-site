@@ -1,5 +1,4 @@
 <?php
-session_start();
 $ROOT = "../";
 include($ROOT."init.php");
 
@@ -10,10 +9,11 @@ if( !isset($_SESSION['user_id']) ){
 	}
 	$smarty->display('login.tpl');
 }else{
-	if(isset($_GET['returnURL'])){
-		header('Location: '.$_GET['returnURL']);
+	if( !isset($_SESSION['logged']) ){
+		header('Location: ../register/');
 	}else{
-		header('Location: /');
-	}  
+		header('Location: '.$_GET['returnURL']);
+	}
+	
 }
 ?>

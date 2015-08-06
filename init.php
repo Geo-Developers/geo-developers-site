@@ -1,5 +1,5 @@
 <?php
-	
+	session_start();
 	
 	require($ROOT.'smarty-3.1.21/libs/Smarty.class.php');
 	ini_set('date.timezone', 'Europe/Berlin');
@@ -10,10 +10,13 @@
 	$smarty->setCacheDir($ROOT.'smarty/cache');
 	$smarty->setConfigDir($ROOT.'smarty/configs');
 
-	if( isset($_SESSION['user_id']) ){
-		$smarty->assign('USER_ID', $_SESSION['user_id']);
+	if( isset($_SESSION['logged']) ){
+	  $smarty->assign('LOGGED', $_SESSION['logged']);
+	  $smarty->assign('USER_ID', $_SESSION['user_id']);
 	  $smarty->assign('BIO', $_SESSION['bio']);
+	  $smarty->assign('EMAIL', $_SESSION['user_id']);
 	  $smarty->assign('NAME', $_SESSION['name']);
+	  $smarty->assign('EMAIL', $_SESSION['email']);
 	  $smarty->assign('MEMBER_URL', $_SESSION['member_url']);
 	  $smarty->assign('PHOTO', $_SESSION['photo']);
 	  $smarty->assign('TWITTER', $_SESSION['twitter']);

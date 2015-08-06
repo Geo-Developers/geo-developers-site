@@ -23,7 +23,7 @@
 						  </ul>
 						</div>-->
 						
-						{if isset($USER_ID)}
+						{if isset($LOGGED)}
 							<div class="dropdown" id="login">
 							  <div class="dropdown-toggle" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <img src="{$PHOTO}">

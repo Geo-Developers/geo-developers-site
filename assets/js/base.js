@@ -36,6 +36,7 @@ define(['jquery', 'dropdown'], function($) {
 
 			console.log("Ejecutamos");
 			/* Mixpanel tracking */
+			
 			mixpanel.people.set(USER);
 			// identify must be called along with people.set
 			mixpanel.identify(USER.id);
