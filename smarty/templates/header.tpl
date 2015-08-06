@@ -20,7 +20,7 @@ mixpanel.init("2fb16fed90e1d8d0a909ba12f84051c0");</script><!-- end Mixpanel -->
 	<script type="text/javascript">
 {/literal}
 
-		{{if $USER_ID}}
+		{if isset($USER_ID)}
 			var USER = {};
 			USER.id = {{$USER_ID}};
 			USER.bio = "{{$BIO}}";
@@ -31,7 +31,7 @@ mixpanel.init("2fb16fed90e1d8d0a909ba12f84051c0");</script><!-- end Mixpanel -->
 			USER.city = "{{$CITY}}";		
 
 			USER["$name"] = "{{$NAME}}";
- 		{{/if}}	  
+ 		{/if}
 
 {literal}
 	</script>

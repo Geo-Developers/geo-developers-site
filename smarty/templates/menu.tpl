@@ -23,7 +23,7 @@
 						  </ul>
 						</div>-->
 						
-						{{if $USER_ID}}
+						{if isset($USER_ID)}
 							<div class="dropdown" id="login">
 							  <div class="dropdown-toggle" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <img src="{$PHOTO}">
@@ -33,7 +33,7 @@
 							    <li><a href="{$ROOT}logout">Cerrar sesión</a></li>
 							  </ul>
 							</div>
-							{{/if}}
+							{/if}
 						
 						</li>
 					<!--<li><a href="{$ROOT}nosotros">Sobre nosotros</a></li>-->

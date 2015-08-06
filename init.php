@@ -1,6 +1,6 @@
 <?php
 	
-	session_start();
+	
 	require($ROOT.'smarty-3.1.21/libs/Smarty.class.php');
 	ini_set('date.timezone', 'Europe/Berlin');
 	$smarty = new Smarty();

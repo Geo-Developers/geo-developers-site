@@ -3,7 +3,7 @@
 	<head>
 		{include file="header.tpl" title="Comunidad de Geo Developers"}
 	</head>
-<body class="video-list" id="academy-listing">
+  <body class="video-list" id="academy-listing">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 		<div class="container">
 			<div class="row">
@@ -37,7 +37,7 @@
 	 	require([
   		'jquery',
   		'academy',
-			'bootstrap'
+		  'bootstrap'
   	],function($, academy){
   		academy.init("videos");
   	});
