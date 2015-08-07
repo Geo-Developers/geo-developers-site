@@ -19,6 +19,9 @@
 
 			<script type="text/javascript">
 		{/literal}
+        GEODEV = {};
+        GEODEV.rootpath = "{$ROOT}";
+
 
 		{if isset($USER_ID)}
 			var USER = {};
@@ -29,7 +32,9 @@
 			USER.memberUrl = "{{$MEMBER_URL}}";
 			USER.photo = "{{$PHOTO}}";
 			USER.twitter = "{{$TWITTER}}";
-			USER.city = "{{$CITY}}";		
+			USER.city = "{{$CITY}}";
+            USER.cookies = {{$COOKIES}};
+            USER.newsletter = {{$NEWSLETTER}};
 
 			USER["$name"] = "{{$NAME}}";
  		{/if}

@@ -1,7 +1,7 @@
 <?php
-$ROOT = "../";
-include($ROOT."init.php");
-include($ROOT."config.php");
+
+require_once("../config.php");
+require_once("init.php");
 
 //First we will check if the user is already registered
 $mysqli = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
@@ -46,7 +46,6 @@ if($new_user && isset($_POST["name"]) ){
 }
 
 if( isset($_SESSION['user_id']) && !isset($_SESSION['logged']) ){
- $smarty->assign('ROOT', $ROOT);
  $smarty->assign('USER_ID', $_SESSION['user_id']);
  $smarty->assign('NAME', $_SESSION['name']);
  $smarty->assign('PHOTO', $_SESSION['photo']);

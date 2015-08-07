@@ -1,9 +1,7 @@
 <?php
+require_once("../config.php");
+require_once("init.php");
 
-$ROOT = "../";
-include($ROOT."init.php");
-
-$smarty->assign('ROOT', $ROOT);
 $smarty->display('recursos.tpl');
 
 ?>

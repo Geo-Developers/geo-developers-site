@@ -26,7 +26,7 @@ $app->post('/user/:userid/update', function ($userId) use ($app, $db){
     if(isset($_SESSION['user_id'])){
         if(intval($userId) !== intval($_SESSION['user_id'])){
             $data = array(
-                'response' => 'error',
+                'status' => 'error',
                 'message' => 'Tu no eres este!, eres'.$_SESSION['user_id']
             );
         }else{
@@ -46,13 +46,13 @@ $app->post('/user/:userid/update', function ($userId) use ($app, $db){
                 $message = 'update failed: ' . $db->getLastError();
 
             $data = array(
-                'response' => 'success',
+                'status' => 'success',
                 'message' => $message
             );
         }
     }else{
         $data = array(
-            'response' => 'error',
+            'status' => 'error',
             'message' => 'Debes estar autenticado'
         );
     }
