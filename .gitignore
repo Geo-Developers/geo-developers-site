@@ -1,3 +1,8 @@
 smarty/templates_c
 smarty/cache
 config.php
+.idea/
+composer.lock
+composer.phar
+testdb.php
+vendor/
