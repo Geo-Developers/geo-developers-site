@@ -4,7 +4,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-define(['jquery','cookies','base','util'], function($, Cookies, base) {
+define(['jquery','cookies','base','skel.min','skel-viewport.min','util'], function($, Cookies, base, skel, view) {
 	var Methods = {
 		init:function(){
 			

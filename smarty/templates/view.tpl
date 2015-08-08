@@ -5,9 +5,7 @@
 	
 		<meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
 		<meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
 		<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
 		<link rel="stylesheet" href="{$ROOT}assets/css/view.css">
 	</head>

@@ -30,7 +30,6 @@ define(['jquery', 'dropdown'], function($) {
                             dataType: "json",
                             success: function (r) {
                                 if (r.status !== "success") {
-                                    +
                                         alert("Error: " + r.message);
                                 } else {
                                     console.log("r=", r);
@@ -40,7 +39,7 @@ define(['jquery', 'dropdown'], function($) {
                     }catch(e){}
                 }
 			}else{
-                var showNewsletter = true;
+                var showNewsletter = true, visits;
                 try{
                     if (Cookies.get("geodev-academy") === "true" || USER.newsletter === 1){
                         showNewsletter = false;
@@ -48,9 +47,8 @@ define(['jquery', 'dropdown'], function($) {
                 }catch(e){
                     console.log("Exception: ",e)
                 }
-                console.log("showNewsletter: ",showNewsletter)
 
-				var visits = parseInt(Cookies.get("visits"));
+				visits = parseInt(Cookies.get("visits"));
 				if(!visits){
 					Cookies.set("visits",1);
 				}else{
