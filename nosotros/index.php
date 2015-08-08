@@ -1,7 +1,7 @@
 <?php
 
-require_once("../config.php");
-require_once($ROOT."init.php");
+require_once '../config.php';
+require_once 'init.php';
 
 $smarty->display('nosotros.tpl');
 

@@ -1,8 +1,8 @@
 <?php
 	session_start();
 
-    require_once ('/vendor/joshcam/mysqli-database-class/MysqliDb.php');
-	require('/smarty-3.1.21/libs/Smarty.class.php');
+    require_once '/vendor/joshcam/mysqli-database-class/MysqliDb.php';
+    require_once '/smarty-3.1.21/libs/Smarty.class.php';
 	ini_set('date.timezone', 'Europe/Berlin');
 	$smarty = new Smarty();
 

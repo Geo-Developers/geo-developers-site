@@ -1,6 +1,6 @@
 <?php
-require_once("../config.php");
-require_once("init.php");
+require_once '../config.php';
+require_once 'init.php';
 
 if( !isset($_SESSION['user_id']) ){
 	if(isset($_SESSION['returnURL'])){

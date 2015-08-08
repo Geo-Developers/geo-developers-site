@@ -1,17 +1,9 @@
 <?php
-session_start();
-header('Content-Type: application/json');
-require '../vendor/slim/slim/Slim/Slim.php';
-require_once ('../vendor/joshcam/mysqli-database-class/MysqliDb.php');
-require_once ('../config.php');
 
-$db = new MysqliDb (Array (
-        'host' => $dbhost,
-        'username' => $dbuser,
-        'password' => $dbpass,
-        'db'=> $dbname,
-        'charset' => 'utf8')
-);
+header('Content-Type: application/json');
+require_once '../config.php';
+require_once 'init.php';
+require_once 'vendor/slim/slim/Slim/Slim.php';
 
 \Slim\Slim::registerAutoloader();
 
@@ -27,7 +19,7 @@ $app->post('/user/:userid/update', function ($userId) use ($app, $db){
         if(intval($userId) !== intval($_SESSION['user_id'])){
             $data = array(
                 'status' => 'error',
-                'message' => 'Tu no eres este!, eres'.$_SESSION['user_id']
+                'message' => 'Forbidden, you are: '.$_SESSION['user_id']
             );
         }else{
             $data = array();
@@ -53,7 +45,7 @@ $app->post('/user/:userid/update', function ($userId) use ($app, $db){
     }else{
         $data = array(
             'status' => 'error',
-            'message' => 'Debes estar autenticado'
+            'message' => 'You must be authenticated'
         );
     }
     echo json_encode($data);

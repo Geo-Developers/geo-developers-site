@@ -1,9 +1,11 @@
 <?php
-    require_once("../config.php");
-    require_once("init.php");
 
-	session_start();
-	session_destroy();
+require_once '../config.php';
+require_once 'init.php';
 
-	header('Location: '. $ROOT);
+session_start();
+session_destroy();
+
+header('Location: '. $ROOT);
+
 ?>
