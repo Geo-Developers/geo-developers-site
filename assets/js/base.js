@@ -1,46 +1,62 @@
 /*
 	This script is load on every page
 */
+"use strict";
 
 define(['jquery', 'dropdown'], function($) {
 
   var Methods = {
  
 		init: function(Cookies) {
+            var showCookies = true;
 
-			if(Cookies.get("cookies") !== "true"){
-                if(typeof(USER) === "undefined" || USER.cookies !== 1) {
-                    document.getElementById('cookies').className = "show";
-                    window.closeCookies = function () {
-                        document.getElementById('cookies').className = "";
+            try{
+                if(Cookies.get("cookies") === "true" || USER.cookies === 1) {
+                    showCookies = false;
+                }
+            }catch(e){}
 
-                        Cookies.set("cookies", "true");
-                        if (typeof(USER) !== "undefined") {
-                            $.ajax({
-                                type: "POST",
-                                url: GEODEV.rootpath + "api/user/" + USER.id + "/update",
-                                data: {cookies: 1},
-                                dataType: "json",
-                                success: function (r) {
-                                    if (r.status !== "success") {
-                                        +
-                                            alert("Error: " + r.message);
-                                    } else {
-                                        console.log("r=", r);
-                                    }
+			if(showCookies){
+                document.getElementById('cookies').className = "show";
+                window.closeCookies = function () {
+                    document.getElementById('cookies').className = "";
+
+                    Cookies.set("cookies", "true");
+                    try{
+                        $.ajax({
+                            type: "POST",
+                            url: GEODEV.rootpath + "api/user/" + USER.id + "/update",
+                            data: {cookies: 1},
+                            dataType: "json",
+                            success: function (r) {
+                                if (r.status !== "success") {
+                                    +
+                                        alert("Error: " + r.message);
+                                } else {
+                                    console.log("r=", r);
                                 }
-                            });
-                        }
-                    }
+                            }
+                        });
+                    }catch(e){}
                 }
 			}else{
+                var showNewsletter = true;
+                try{
+                    if (Cookies.get("geodev-academy") === "true" || USER.newsletter === 1){
+                        showNewsletter = false;
+                    }
+                }catch(e){
+                    console.log("Exception: ",e)
+                }
+                console.log("showNewsletter: ",showNewsletter)
+
 				var visits = parseInt(Cookies.get("visits"));
 				if(!visits){
 					Cookies.set("visits",1);
 				}else{
 					Cookies.set("visits",visits+1);
 				}
-				if(Cookies.get("geodev-academy") !== "true" && visits > 3){
+				if(showNewsletter && visits > 3){
 					document.getElementById('geodev-academy').className = "show";
 					$("#mc-embedded-subscribe-form").submit(function(){
 						closeCookies();
@@ -48,12 +64,14 @@ define(['jquery', 'dropdown'], function($) {
 					window.closeCookies = function(){
 						document.getElementById('geodev-academy').className = "";
 						Cookies.set("geodev-academy","true");
-                        /*$.ajax({
-                            type: "POST",
-                            url: "/new/api/user/139909072/update",
-                            data: {newsletter:1},
-                            success: function(r){console.log("r=",r)}
-                        });*/
+                        try{
+                            $.ajax({
+                                type: "POST",
+                                url: GEODEV.rootpath + "api/user/" + USER.id + "/update",
+                                data: {newsletter:1},
+                                success: function(r){console.log("r=",r)}
+                            });
+                        }catch(e){}
 					}
 				}
 			}

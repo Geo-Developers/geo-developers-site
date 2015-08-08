@@ -65,6 +65,9 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
             $db->where ("id", $_SESSION['user_id']);
             $user = $db->getOne ("users");
 
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+
             if($user){
                 $_SESSION['logged'] = true;
                 header('Location: '.$returnURL);
