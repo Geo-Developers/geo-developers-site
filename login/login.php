@@ -63,12 +63,12 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
                     'charset' => 'utf8')
             );
             $db->where ("id", $_SESSION['user_id']);
-            $user = $db->getOne ("users");
+            $user = $db->getOne("users");
 
             $_SESSION['name'] = $user['name'];
             $_SESSION['email'] = $user['email'];
 
-            if($user){
+            if($user && $user["email"] !== null){
                 $_SESSION['logged'] = true;
                 header('Location: '.$returnURL);
             }else{

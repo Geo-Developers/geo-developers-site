@@ -40,6 +40,7 @@ if( isset($_SESSION['logged']) ){
             'id'        => $mailchimp_listid
     ));
     $interests = array();
+
     $groupings = $result["data"][0]["merges"]["GROUPINGS"];
     foreach($groupings as $grouping){
 

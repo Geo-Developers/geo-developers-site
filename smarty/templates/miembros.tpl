@@ -32,5 +32,14 @@
 
 		</div>
 {include file="footer.tpl"}
+        <script>
+            require([
+                'jquery',
+                'academy',
+                'bootstrap'
+            ],function($, academy){
+                academy.init("videos");
+            });
+        </script>
 </body>
 </html>

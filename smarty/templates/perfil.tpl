@@ -35,7 +35,7 @@
                                     {if $SKILLS[$I]["level"] == 4 } width: 100%;{/if}
                                  "
                             >
-                                {if $SKILLS[$I]["level"] == 0 } {/if}
+                                {if $SKILLS[$I]["level"] == 0 } ?{/if}
                                 {if $SKILLS[$I]["level"] == 1 } Básico{/if}
                                 {if $SKILLS[$I]["level"] == 2 } Medio{/if}
                                 {if $SKILLS[$I]["level"] == 3 } Avanzado{/if}
@@ -73,12 +73,6 @@
                         <li><a href='{$PROFILE["flickr_url"]}'>Flickr</a></li>
                     {/if}
                 </ul>
-            </div>
-            <div class="row box mb3">
-                Recursos
-            </div>
-            <div class="row box mb3">
-                Bolsa de trabajo
             </div>
         </div>
     </div>

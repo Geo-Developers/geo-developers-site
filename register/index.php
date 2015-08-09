@@ -13,7 +13,7 @@ $db = new MysqliDb (Array (
 $db->where ("id", $_SESSION['user_id']);
 $user = $db->getOne ("users");
 
-if($user){
+if($user && $user["email"] !== null){
     $_SESSION['logged'] = true;
     $_SESSION['email'] = $user['email'];
     $_SESSION['name'] = $user['name'];
@@ -40,22 +40,32 @@ if($new_user && isset($_POST["name"]) ){
 
     // Add user to the database
     $data = Array (
-        "id" => $_POST["id"],
         "mailchimp_euid" => $result["euid"],
         "name" => $_POST["name"],
         "email" => $_POST["email"]
     );
 
-    $id = $db->insert ('users', $data);
+    if($user){
 
-    if($id){
-        $_SESSION['logged'] = true;
-        $_SESSION['email'] = $data['email'];
-        $_SESSION['name'] = $data['name'];
-        header('Location: '. $returnURL);
+        if ($db->update('users', $data))
+            echo $db->count . ' records were updated';
+        else {
+            $message = 'update failed: ' . $db->getLastError();
+            die($message);
+        }
     }else{
-        die("The user could not be added, please contact to the webmaster at root@geodevelopers.org");
+        $data["id"] = $_POST["id"];
+        $id = $db->insert ('users', $data);
+        if(!$id){
+            die("The user could not be added, please contact to the webmaster at root@geodevelopers.org");
+        }
     }
+
+    $_SESSION['logged'] = true;
+    $_SESSION['email'] = $data['email'];
+    $_SESSION['name'] = $data['name'];
+    header('Location: '. $returnURL);
+
 }
 
 if( isset($_SESSION['user_id']) && !isset($_SESSION['logged']) ){
