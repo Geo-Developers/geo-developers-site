@@ -1189,7 +1189,7 @@
 	form input[type=text],
 	form input[type=email],
 	form input[type=password],
-	form select,
+
 	form textarea {
 		-moz-transition: background .2s ease-in-out, box-shadow .2s ease-in-out;
 		-webkit-transition: background .2s ease-in-out, box-shadow .2s ease-in-out;
@@ -1303,9 +1303,52 @@
 			display: block;
 			width: 100%;
 		}
+        .video-list{
+            font-family: 'Roboto', sans-serif;
+        }
 		.video-list .image img {
 			max-height: 216px;
+            position: relative;
 		}
+        .video-list .tags,
+        .video-list .details{
+            margin-top: 16px;
+            font-size: .9em;
+        }
+        .video-list .tags ul,
+        .video-list .tags li{
+            display: inline-block;
+
+        }
+        .video-list .tags li{
+            margin-right: 5px;
+        }
+        .video-list .tags li:not(:last-child):after{
+            content: ','
+        }
+        .video-list .details span{
+            margin-right: 10px;
+        }
+        .video-list .details i{
+            margin-right: 10px;
+        }
+
+
+        .video-list .title{
+            font-weight: bold;
+        }
+
+        .video-list .image span{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(0,0,0,.5);
+            color: white;
+            padding: 3px 6px;
+            font-size: 0.75em;
+            margin: 1px;
+        }
+
 		.image.fit {
 			display: block;
 			width: 100%;
@@ -1337,7 +1380,7 @@
 	input[type="button"],
 	input[type="submit"],
 	input[type="reset"],
-	button,
+	button:not(.btn-default),
 	.button {
 		background-image: url("images/bg.png"), -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 		background-image: url("images/bg.png"), -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
@@ -2194,10 +2237,10 @@
 		  margin-bottom: 2em;
 	}
 	#video-list p{
-		display: table-cell;
+		/*display: table-cell;
 	  height: 128px;
 	  width: 100%;
-	  vertical-align: middle;
+	  vertical-align: middle;*/
 	}	
 
 
@@ -2341,6 +2384,9 @@
 	.mt1{margin-top: 1em;}
 	.mt2{margin-top: 2em;}
 	.mt3{margin-top: 3em;}
+    .mb1{margin-bottom: 1em;}
+    .mb2{margin-bottom: 2em;}
+    .mb3{margin-bottom: 3em;}
 	/*************************************
 	*
 	*							LOGIN PAGE

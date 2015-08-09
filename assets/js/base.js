@@ -25,7 +25,7 @@ define(['jquery', 'dropdown'], function($) {
                     try{
                         $.ajax({
                             type: "POST",
-                            url: GEODEV.rootpath + "api/user/" + USER.id + "/update",
+                            url: GEODEV.rootpath + "api/user/" + USER.id,
                             data: {cookies: 1},
                             dataType: "json",
                             success: function (r) {
@@ -65,7 +65,7 @@ define(['jquery', 'dropdown'], function($) {
                         try{
                             $.ajax({
                                 type: "POST",
-                                url: GEODEV.rootpath + "api/user/" + USER.id + "/update",
+                                url: GEODEV.rootpath + "api/user/" + USER.id,
                                 data: {newsletter:1},
                                 success: function(r){console.log("r=",r)}
                             });
