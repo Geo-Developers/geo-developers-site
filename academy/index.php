@@ -4,6 +4,7 @@ require_once '../config.php';
 require_once 'init.php';
 
 if( isset($_SESSION['logged']) ){
+    $db->orderBy("publishedAt","desc");
     $videos = $db->get('videos');
     if ($db->count > 0)
 

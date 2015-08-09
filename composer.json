@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "^2.6",
-        "joshcam/mysqli-database-class": "dev-master"
+        "joshcam/mysqli-database-class": "dev-master",
+        "drewm/mailchimp-api": "^1.1"
     }
 }

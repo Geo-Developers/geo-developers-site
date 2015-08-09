@@ -13,4 +13,6 @@ $dbhost 		= '';
 $dbuser 		= '';
 $dbpass 		= '';
 $dbname			= '';
+
+$mailchimp_apikey   = '';
 ?>

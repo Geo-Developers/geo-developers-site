@@ -30,9 +30,10 @@
 							    <span class="caret"></span>
 							  </div>
 							  <ul class="dropdown-menu" aria-labelledby="dLabel">
-							    <li><a href="{$ROOT}logout">Cerrar sesión</a></li>
-							  </ul>
-							</div>
+                                <li><a href="{$ROOT}avisos"><i class="glyphicon glyphicon-bell"></i> Avisos</a></li>
+                                  <li><a href="{$ROOT}logout"><i class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
+                              </ul>
+                            </div>
 							{/if}
 						
 						</li>

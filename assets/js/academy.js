@@ -115,6 +115,12 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
 
                 });
 
+                window.onhashchange = function(){
+                    hash = window.location.hash.substr(1);
+                    $("#search").val(hash);
+                    that.filter(hash);
+                };
+
                 tags = tags.sort();
                 filter = $("#filter");
 
@@ -138,7 +144,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 $(".video").each(function(i, elem){
                     cadena = $(elem).data("tags") + $(elem).data("title")
 
-                    if(cadena.indexOf(val)==-1){
+                    if(cadena.toLowerCase().indexOf(val.toLowerCase())==-1){
                         $(elem).hide();
                     }else{
                         $(elem).show();

@@ -1,8 +1,8 @@
 <?php
 	session_start();
 
-    require_once '/vendor/joshcam/mysqli-database-class/MysqliDb.php';
     require_once '/smarty-3.1.21/libs/Smarty.class.php';
+    require_once 'vendor/autoload.php';
 	ini_set('date.timezone', 'Europe/Berlin');
 	$smarty = new Smarty();
 
@@ -35,7 +35,7 @@
         $db->where ("id", $_SESSION['user_id']);
         $user = $db->getOne ("users");
         $smarty->assign('COOKIES', $user['cookies']);
-        $smarty->assign('NEWSLETTER', $user['newsletter']);
+        $smarty->assign('NEWSLETTER', $user['mailchimp_euid']);
 	}
  
 ?>

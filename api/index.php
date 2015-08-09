@@ -14,7 +14,7 @@ $app->get('/user/:userid', function ($userid) use ($app, $db){
 });
 
 $app->post('/user/:userid', function ($userId) use ($app, $db){
-    $userAttrs = array("cookies", "newsletter");
+    $userAttrs = array("cookies", "mailchimp_euid");
     /*$data = Array (
         "id" => $_POST["id"],
         "name" => $_POST["name"],
@@ -29,7 +29,7 @@ $app->post('/user/:userid', function ($userId) use ($app, $db){
                 'message' => 'Forbidden, you are: ' . $_SESSION['user_id']
             );
         } else {
-            $userAttrs = array("cookies", "newsletter");
+            $userAttrs = array("cookies", "mailchimp_euid");
             $data = insertOrUpdate($db, 'users', $userAttrs, $_SESSION['user_id']);
         }
     }else{

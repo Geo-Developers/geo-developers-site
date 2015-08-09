@@ -41,7 +41,7 @@ define(['jquery', 'dropdown'], function($) {
 			}else{
                 var showNewsletter = true, visits;
                 try{
-                    if (Cookies.get("geodev-academy") === "true" || USER.newsletter === 1){
+                    if (Cookies.get("geodev-academy") === "true" || USER["mailchimp_euid"] === 1){
                         showNewsletter = false;
                     }
                 }catch(e){
@@ -66,7 +66,7 @@ define(['jquery', 'dropdown'], function($) {
                             $.ajax({
                                 type: "POST",
                                 url: GEODEV.rootpath + "api/user/" + USER.id,
-                                data: {newsletter:1},
+                                data: {mailchimp_euid:1},
                                 success: function(r){console.log("r=",r)}
                             });
                         }catch(e){}

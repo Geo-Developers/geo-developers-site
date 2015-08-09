@@ -3,7 +3,7 @@
 	<head>
 		{include file="header.tpl" title="Comunidad de Geo Developers"}
 	</head>
-	<body id="login-page">
+	<body id="register-page">
 		{include file="menu.tpl" title="Comunidad de Geo Developers"}
 
 		<div class="container style1 wrapper">
@@ -25,7 +25,7 @@
 				  		<input type="type" value="{{$NAME}}" id="name" name="name" class="form-control"  required="required">
 			  		</div>
 
-			  		<input type="hidden" name="id" value="{{$USER_ID}}">
+			  		<input type="hidden" name="id" value="{{$NEWSLETTER}}">
 
 			  		<input type="submit" value="Terminar" class="btn btn-primary btn-block" style="margin:0">
 

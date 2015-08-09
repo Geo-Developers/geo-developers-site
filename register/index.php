@@ -24,8 +24,24 @@ if($user){
 
 //New user without trying to register
 if($new_user && isset($_POST["name"]) ){
+
+
+    // Add user to mailchimp
+    $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
+    $result = $MailChimp->call('lists/subscribe', array(
+        'id'                => $mailchimp_listid,
+        'email'             => array('email'=> $_POST["email"]),
+        'merge_vars'        => array('FNAME'=> $_POST["name"]),
+        'double_optin'      => false,
+        'update_existing'   => true,
+        'replace_interests' => false,
+        'send_welcome'      => false,
+    ));
+
+    // Add user to the database
     $data = Array (
         "id" => $_POST["id"],
+        "mailchimp_euid" => $result["euid"],
         "name" => $_POST["name"],
         "email" => $_POST["email"]
     );
