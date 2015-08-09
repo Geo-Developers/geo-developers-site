@@ -14,7 +14,7 @@
             </h1>
 
             {if isset($MESSAGE)}
-                <div class="success">{$MESSAGE}</div>
+                <div class="box success">{$MESSAGE}</div>
             {/if}
             <form action="." method="POST" class="box text-left">
                 {for $I=0 to $NUMGROUPINGS}
