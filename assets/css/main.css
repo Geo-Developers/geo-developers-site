@@ -1607,6 +1607,10 @@
 		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 		text-align: center;
 	}
+    .box img{
+        max-width: 100%;
+        padding:0;
+    }
 
 /* Icons */
 
@@ -2405,7 +2409,8 @@
 	**************************************/
 	#login-page,
     #register-page,
-    #notifications-page{
+    #notifications-page,
+    #members-page{
 		margin-top: 30px;
 	}
 	#login-btn{
@@ -2442,4 +2447,51 @@
         background-color: rgba(0, 255, 0, 0.1);
         padding: 1em;
         margin-bottom: 1em;
+    }
+
+    #member-list,
+    #member-list li{
+
+    }
+    #member-list{}
+    #member-list li{
+
+        margin-bottom: 1.5em;
+    }
+    #member-list .picture{
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: block;
+        height: 80px;
+        float: left;
+        width: 80px;
+    }
+    #member-list .image-wrapper{
+        background-color: black;
+        width: 80px;
+        height: 80px;
+        float: left;
+        margin-right: 10px;
+    }
+    #member-list li img{
+
+        max-height: 60px;
+    }
+
+    ul.inline{
+
+    }
+
+    #profile-page .progress{
+        margin-top: .5em;
+        margin-bottom: 0;
+    }
+    .strong{
+        font-weight: bold;
+    }
+    #profile-page .text-label{
+        display: inline-block;
+        font-weight: bold;
+        width: 140px;
     }

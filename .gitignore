@@ -6,3 +6,5 @@ composer.lock
 composer.phar
 testdb.php
 vendor/
+test.csv
+utils/

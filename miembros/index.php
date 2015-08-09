@@ -3,7 +3,24 @@
 require_once '../config.php';
 require_once 'init.php';
 
-$smarty->assign('ROOT', $ROOT);
+
+$total = $db->getValue("profiles", "count(meetup_id)");
+
+$db->join("users u", "u.id=p.meetup_id", "LEFT");
+$db->orderBy("p.progress","desc");
+$users = $db->get ("profiles p", 24, "u.id, u.name, p.meetup_url, p.progress, p.photo_url, p.location");
+
+/*foreach($users as $user){
+    $user =
+}*/
+/*echo "<pre>";
+print_r($users);
+echo "</pre>";
+die("Ya");*/
+
+$smarty->assign('TOTALUSERS', $total);
+$smarty->assign('NUMUSERS', sizeof($users)-1);
+$smarty->assign('USERS', $users);
 $smarty->display('miembros.tpl');
 
 ?>
