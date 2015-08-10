@@ -85,8 +85,7 @@
 <script>
     require([
         'jquery',
-        'academy',
-        'bootstrap'
+        'academy'
     ],function($, academy){
         academy.init("videos");
     });

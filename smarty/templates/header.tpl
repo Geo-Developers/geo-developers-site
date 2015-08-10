@@ -26,21 +26,16 @@
         GEODEV.rootpath = "{$ROOT}";
 
 
-		{if isset($USER_ID)}
+		{if isset($USER["meetup_id"])}
 			var USER = {};
-            USER.id = {{$USER_ID}};
-			{if isset($BIO)} USER.bio = "{{$BIO}}"; {/if}
-            {if isset($EMAIL)} USER["$email"] = "{{$EMAIL}}";{/if}
-            {if isset($NAME)} USER.name = "{{$NAME}}";{/if}
-            {if isset($MEMBER_URL)} USER.memberUrl = "{{$MEMBER_URL}}";{/if}
-            {if isset($PHOTO)} USER.photo = "{{$PHOTO}}";{/if}
 
-            {if isset($TWITTER)} USER.twitter = "{{$TWITTER}}";{/if}
-            {if isset($CITY)} USER.city = "{{$CITY}}";{/if}
-            {if isset($COOKIES)} USER.cookies = "{{$COOKIES}}";{/if}
-            {if isset($NEWSLETTER)} USER.newsletter = "{{$NEWSLETTER}}";{/if}
+            {foreach from=$USER key=k item=v}
+                {if $v|is_array == false}
+                    USER.{$k} = "{$v}";
+                {/if}
+            {/foreach}
+            USER["$email"]  = USER.email;
 
-			USER["$name"] = "{{$NAME}}";
  		{/if}
 
 	{literal}

@@ -8,7 +8,7 @@ if( !isset($_SESSION['user_id']) ){
 	}
 	$smarty->display('login.tpl');
 }else{
-	if( !isset($_SESSION['logged']) ){
+	if( !isset($_SESSION['user']['logged']) ){
 		header('Location: '.$ROOT.'register/');
 	}else{
 		header('Location: '.$_GET['returnURL']);

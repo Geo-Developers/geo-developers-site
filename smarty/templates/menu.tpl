@@ -9,15 +9,15 @@
         <li><a href="{$ROOT}recursos">Recursos</a></li>
         <li><a href="https://github.com/Geo-Developers">Proyectos</a></li>
         <li>
-            {if isset($LOGGED)}
+            {if isset($USER["logged"])}
                 <div class="dropdown" id="login">
                     <div class="dropdown-toggle" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{$PHOTO}">
+                        <img src="{$USER["photo_url"]}">
                         <span class="caret"></span>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dLabel">
                         <li><a href="{$ROOT}avisos"><i class="glyphicon glyphicon-bell"></i> Avisos</a></li>
-                        <li><a href="{$ROOT}miembros/{$USER_ID}"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
+                        <li><a href="{$ROOT}miembros/{$USER["meetup_id"]}"><i class="glyphicon glyphicon-user"></i> Perfil</a></li>
                         <li><a href="{$ROOT}logout"><i class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
                     </ul>
                 </div>

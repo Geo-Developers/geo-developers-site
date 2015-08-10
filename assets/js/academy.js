@@ -52,37 +52,38 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                                     data.tags.push(element);
                                 }
                             });
-
-                            var contentDetails = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=contentDetails&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";contentDetails
-                            var statistiscs = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=statistics&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
-                            var snippet = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=snippet&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
-                            $.when(
-                                $.getJSON(contentDetails , function(d){
-                                    data.duration = d.items[0].contentDetails.duration;
-                                }),
-                                $.getJSON(statistiscs , function(d){
-                                    data.viewCount = d.items[0].statistics.viewCount;
-                                    data.likeCount = d.items[0].statistics.likeCount;
-                                }),
-                                $.getJSON(snippet , function(d){
-                                    data.publishedAt = d.items[0].snippet.publishedAt;
-                                })
-                            ).then( function(videos){
-                                videos.push(data);
-                                $.ajax({
-                                    type: "POST",
-                                    url: GEODEV.rootpath + "api/video/" + data.id,
-                                    data: data,
-                                    dataType: "json",
-                                    success: function (r) {
-                                        if (r.status !== "success") {
-                                            alert("Error: " + r.message);
-                                        } else {
-                                            //console.log("r=", r);
+                            (function(data){
+                                var contentDetails = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=contentDetails&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";contentDetails
+                                var statistiscs = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=statistics&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
+                                var snippet = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=snippet&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
+                                $.when(
+                                    $.getJSON(contentDetails , function(d){
+                                        data.duration = d.items[0].contentDetails.duration;
+                                    }),
+                                    $.getJSON(statistiscs , function(d){
+                                        data.viewCount = d.items[0].statistics.viewCount;
+                                        data.likeCount = d.items[0].statistics.likeCount;
+                                    }),
+                                    $.getJSON(snippet , function(d){
+                                        data.publishedAt = d.items[0].snippet.publishedAt;
+                                    })
+                                ).then( function(videos){
+                                    videos.push(data);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: GEODEV.rootpath + "api/video/" + data.id,
+                                        data: data,
+                                        dataType: "json",
+                                        success: function (r) {
+                                            if (r.status !== "success") {
+                                                alert("Error: " + r.message);
+                                            } else {
+                                                //console.log("r=", r);
+                                            }
                                         }
-                                    }
+                                    });
                                 });
-                            });
+                            })(data);
                         }
                     }else{
                         data.webinar = true;

@@ -13,7 +13,7 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
         $returnURL = "/";
     }
 
-    if( !isset($_SESSION['logged']) ){
+    if( !isset($_SESSION['user']['logged']) ){
         if( !isset($_GET['code']) )
         {
             $meetup = new Meetup();
@@ -33,28 +33,41 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
                 )
             );
 
-            //get an access token
-            $response = $meetup->access();
-            //now we can re-use this object for several requests using our access
-            //token
-            $meetup = new Meetup(array("access_token"  => $response->access_token));
-            //store details for later in case we need to do requests elsewhere
-            //or refresh token
-            $_SESSION['access_token'] = $response->access_token;
-            $_SESSION['refresh_token'] = $response->refresh_token;
-            $_SESSION['expires'] = time() + intval($response->expires_in); //use if >= intval($_SESSION['expires']) to check
+            $r1 = $meetup->access();
+
+            $meetup = new Meetup(array("access_token"  => $r1->access_token));
+
+            $r2 = $meetup->getMemberInfo(array('member_id' => 'self'));
+            /*$array = array(
+                "foo" => "bar",
+                "bar" => "foo",
+            );*/
+            // Set $_SESSION var
+            $_SESSION['user'] = array(
+                "meetup_id"     => $r2->id,
+                "name"          => $r2->name,
+                "meetup_url"    => $r2->link,
+                "lat"           => $r2->lat,
+                "lon"           => $r2->lon,
+                "location"      => $r2->city,
+                "bio"           => (isset ($r2->bio)) ? $r2->bio : "",
+                "joined"        => date("Y-m-d", strtotime($r2->joined))
+            );
 
 
-            $response = $meetup->getMemberInfo(array('member_id' => 'self'));
+            if(isset($r2->photo->highres_link)){
+                $_SESSION['user']['photo_url'] = $r2->photo->highres_link;
+            }elseif(isset($r2->photo->photo_link)){
+                $_SESSION['user']['photo_url'] = $r2->photo->photo_link;
+            }
 
-            $_SESSION['user_id'] = $response->id;
-            $_SESSION['bio'] = $response->bio;
-            $_SESSION['name'] = $response->name;
-            $_SESSION['member_url'] = $response->link;
-            $_SESSION['photo'] = $response->photo->highres_link;
-            $_SESSION['twitter'] = $response->other_services->twitter->identifier;
-            $_SESSION['city'] = $response->city;
+            if($r2->other_services){
+                foreach($r2->other_services as $key => $service){
+                    $_SESSION['user'][$key."_url"] = $service->identifier;
+                }
+            }
 
+            // Recover local values (email and name)
             $db = new MysqliDb (Array (
                     'host' => $dbhost,
                     'username' => $dbuser,
@@ -62,14 +75,19 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
                     'db'=> $dbname,
                     'charset' => 'utf8')
             );
-            $db->where ("id", $_SESSION['user_id']);
+
+            $db->where("meetup_id", $_SESSION['user']['meetup_id']);
             $user = $db->getOne("users");
 
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['email'] = $user['email'];
+            if($user){
+                $_SESSION['user']['name'] = $user['name'];
+                $_SESSION['user']['email'] = $user['email'];
+            }
+            //echo "user=".$user;
 
+            // Check if user is in the database and it has an email
             if($user && $user["email"] !== null){
-                $_SESSION['logged'] = true;
+                $_SESSION['user']['logged'] = true;
                 header('Location: '.$returnURL);
             }else{
                 header('Location: ../register');

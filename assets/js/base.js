@@ -25,7 +25,7 @@ define(['jquery', 'dropdown'], function($) {
                     try{
                         $.ajax({
                             type: "POST",
-                            url: GEODEV.rootpath + "api/user/" + USER.id,
+                            url: GEODEV.rootpath + "api/user/" + USER["meetup_id"],
                             data: {cookies: 1},
                             dataType: "json",
                             success: function (r) {
@@ -65,7 +65,7 @@ define(['jquery', 'dropdown'], function($) {
                         try{
                             $.ajax({
                                 type: "POST",
-                                url: GEODEV.rootpath + "api/user/" + USER.id,
+                                url: GEODEV.rootpath + "api/user/" + USER["meetup_id"],
                                 data: {mailchimp_euid:1},
                                 success: function(r){console.log("r=",r)}
                             });
@@ -81,7 +81,7 @@ define(['jquery', 'dropdown'], function($) {
             if(typeof(USER) !== "undefined"){
                 mixpanel.people.set(USER);
                 // identify must be called along with people.set
-                mixpanel.identify(USER.id);
+                mixpanel.identify(USER["meetup_id"]);
             }
 
 			var pageID = $("body").attr("id");

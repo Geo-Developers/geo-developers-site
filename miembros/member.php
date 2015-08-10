@@ -2,12 +2,15 @@
 require_once '../config.php';
 require_once 'init.php';
 
-$db->where ("id", $_GET["query"]);
-$user = $db->getOne ("users");
+$db->where("meetup_id", $_GET["query"]);
+$user = $db->getOne("users");
+
 if($user){
-    $db->where ("user_id", $_GET["query"]);
-    $db->orderBy("level","desc");
-    $skills = $db->get ("skills");
+    $db->where("meetup_id", $_GET["query"]);
+    $db->join("user_skills u", "u.meetup_skill_id=s.meetup_skill_id", "LEFT");
+    $db->orderBy("u.level","desc");
+    $skills = $db->get("skills s", null , "u.level, s.name, s.slug");
+
     $numSkills = sizeof($skills)-1;
     $profile = $db->where("meetup_id", $_GET["query"])->getOne("profiles");
 
@@ -15,7 +18,6 @@ if($user){
     $smarty->assign('PROFILE', $profile);
     $smarty->assign('NUMSKILLS', $numSkills);
     $smarty->assign('SKILLS', $skills);
-
     $smarty->assign('USER', $user);
     $smarty->display('perfil.tpl');
 }else{

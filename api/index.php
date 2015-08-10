@@ -14,23 +14,18 @@ $app->get('/user/:userid', function ($userid) use ($app, $db){
 });
 
 $app->post('/user/:userid', function ($userId) use ($app, $db){
-    $userAttrs = array("cookies", "mailchimp_euid");
-    /*$data = Array (
-        "id" => $_POST["id"],
-        "name" => $_POST["name"],
-        "email" => $_POST["email"]
-    );*/
 
+    if(isset($_SESSION['user']['meetup_id'])) {
+        $meetup_id = $_SESSION['user']['meetup_id'];
 
-    if(isset($_SESSION['user_id'])) {
-        if (intval($userId) !== intval($_SESSION['user_id'])) {
+        if (intval($userId) !== intval($meetup_id)) {
             $data = array(
                 'status' => 'error',
-                'message' => 'Forbidden, you are: ' . $_SESSION['user_id']
+                'message' => 'Forbidden, you are: ' . $meetup_id
             );
         } else {
             $userAttrs = array("cookies", "mailchimp_euid");
-            $data = insertOrUpdate($db, 'users', $userAttrs, $_SESSION['user_id']);
+            $data = insertOrUpdate($db, 'users', $userAttrs, $meetup_id, "meetup_id");
         }
     }else{
         $data = array(
@@ -45,16 +40,15 @@ $app->post('/user/:userid', function ($userId) use ($app, $db){
 $app->post('/video/:videoid', function ($userId) use ($app, $db){
 
 
-    if(isset($_SESSION['user_id'])) {
-
+    if(isset($_SESSION['user']['meetup_id'])) {
         $videoAttrs = array("id", "title", "publishedAt", "duration", "viewCount", "likeCount", "tags");
-        $data = insertOrUpdate($db, 'videos', $videoAttrs, $_POST['id']);
+        $data = insertOrUpdate($db, 'videos', $videoAttrs, $_POST['id'], "id");
 
     }
     echo json_encode($data);
 });
 
-function insertOrUpdate($db,$table,$attrs,$id){
+function insertOrUpdate($db, $table, $attrs, $id, $where){
     $data = array();
 
     foreach($attrs as $attr){
@@ -69,17 +63,18 @@ function insertOrUpdate($db,$table,$attrs,$id){
         }
     }
 
-    $db->where("id", $id);
+    $db->where($where, $id);
     $elem = $db->getOne($table);
     if($elem){
 
-        $db->where("id", $id);
+        $db->where($where, $id);
+
         if ($db->update($table, $data))
             $message = $db->count . ' records were updated';
         else
             $message = 'update failed: ' . $db->getLastError();
     }else{
-        if($id = $db->insert ($table, $data))
+        if($id = $db->insert($table, $data))
             $message = $db->count . ' records were added';
         else
             $message = 'insetion failed: ' . $db->getLastError();
