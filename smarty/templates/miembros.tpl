@@ -14,7 +14,7 @@
             <ul id="member-list">
                 {for $I=0 to $NUMUSERS}
 
-                    <li class="col-md-4" data-userid="{$USERS[$I]["id"]}">
+                    <li class="col-md-4" data-userid="{$USERS[$I]["meetup_id"]}">
                         {if isset($USERS[$I]["photo_url"])}
                             <div class="image-wrapper">
                                 <div class="picture clearfix" style="background-image: url('{$USERS[$I]["photo_url"]}')">
@@ -23,7 +23,7 @@
                         {else}
                             Sin foto<br>
                         {/if}
-                        <p><a href="{$USERS[$I]["id"]}">{$USERS[$I]["name"]}</a></p>
+                        <p><a href="{$USERS[$I]["meetup_id"]}">{$USERS[$I]["name"]}</a></p>
                         <p>{$USERS[$I]["location"]}</p>
                     </li>
 

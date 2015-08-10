@@ -7,7 +7,6 @@ $total = $db->getValue("profiles", "count(meetup_id)");
 
 $db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
 $db->orderBy("p.progress","desc");
-//$db->where("u.id", 6);
 $users = $db->get("profiles p", null /*24*/, "u.meetup_id, u.name, p.meetup_url, p.progress, p.photo_url, p.location");
 
 $smarty->assign('TOTALUSERS', $total);

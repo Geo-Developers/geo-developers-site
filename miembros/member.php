@@ -18,7 +18,7 @@ if($user){
     $smarty->assign('PROFILE', $profile);
     $smarty->assign('NUMSKILLS', $numSkills);
     $smarty->assign('SKILLS', $skills);
-    $smarty->assign('USER', $user);
+    $smarty->assign('USERPROFILE', $user);
     $smarty->display('perfil.tpl');
 }else{
     echo "Error el usuario no existe en la base de datos";
