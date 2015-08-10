@@ -38,6 +38,9 @@ function getMeetupMember($idOrArray, $type)
                 $data["photo_url"] = $response["photo"]["photo_link"];
             } elseif (isset($response["photo"]["thumb_link"])) {
                 $data["photo_url"] = $response["photo"]["thumb_link"];
+            }else{
+                $email = strtolower( $meetup_id."@gmail.com" );
+                $data["photo_url"] = "http://www.gravatar.com/avatar/".md5($email);
             }
 
             foreach ($response["other_services"] as $key => $service) {
@@ -68,6 +71,21 @@ function getMeetupMember($idOrArray, $type)
                 "skills"        => $skills,
                 "user_skills"   => $user_skills
             );
+
+            break;
+        case "user":
+
+            $data = Array (
+                "meetup_id" => $response["id"],
+                "name" => $response["name"],
+                "mailchimp_euid" => null,
+                "email" => null
+            );
+
+            return $data;
+        case "object":
+
+            return $response;
 
             break;
         default:

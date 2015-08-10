@@ -84,10 +84,10 @@
 {include file="footer.tpl"}
 <script>
     require([
-        'jquery',
-        'academy'
-    ],function($, academy){
-        academy.init("videos");
+        'jquery'
+        'resources'
+    ],function($, resources){
+        resources.init();
     });
 </script>
 </body>

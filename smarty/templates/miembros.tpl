@@ -15,14 +15,16 @@
                 {for $I=0 to $NUMUSERS}
 
                     <li class="col-md-4" data-userid="{$USERS[$I]["meetup_id"]}">
-                        {if isset($USERS[$I]["photo_url"])}
-                            <div class="image-wrapper">
-                                <div class="picture clearfix" style="background-image: url('{$USERS[$I]["photo_url"]}')">
-                                </div>
-                            </div>
-                        {else}
-                            Sin foto<br>
-                        {/if}
+                        <div class="image-wrapper">
+                            {if isset($USERS[$I]["photo_url"])}
+
+                                    <div class="picture clearfix" style="background-image: url('{$USERS[$I]["photo_url"]}')">
+                                    </div>
+
+                            {else}
+                                Sin foto<br>
+                            {/if}
+                        </div>
                         <p><a href="{$USERS[$I]["meetup_id"]}">{$USERS[$I]["name"]}</a></p>
                         <p>{$USERS[$I]["location"]}</p>
                     </li>

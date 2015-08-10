@@ -41,7 +41,7 @@ define(['jquery', 'dropdown'], function($) {
 			}else{
                 var showNewsletter = true, visits;
                 try{
-                    if (Cookies.get("geodev-academy") === "true" || USER["mailchimp_euid"] === 1){
+                    if (Cookies.get("geodev-academy") === "true" || USER["newsletter"] !== 0){
                         showNewsletter = false;
                     }
                 }catch(e){
