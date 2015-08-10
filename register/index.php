@@ -40,21 +40,22 @@ if($new_user && isset($_POST["name"]) ){
 
     // Add user to the database
     $data = Array (
+        "id" => $_SESSION['user_id'],
         "mailchimp_euid" => $result["euid"],
         "name" => $_POST["name"],
         "email" => $_POST["email"]
     );
 
-    if($user){
 
-        if ($db->update('users', $data))
-            echo $db->count . ' records were updated';
-        else {
+    if($user){
+        $db->where("id",$_SESSION['user_id']);
+        if ($db->update('users', $data)){
+            $message =  $db->count . ' records were updated';
+        }else {
             $message = 'update failed: ' . $db->getLastError();
             die($message);
         }
     }else{
-        $data["id"] = $_POST["id"];
         $id = $db->insert ('users', $data);
         if(!$id){
             die("The user could not be added, please contact to the webmaster at root@geodevelopers.org");

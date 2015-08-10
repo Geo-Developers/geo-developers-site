@@ -28,16 +28,17 @@
 
 		{if isset($USER_ID)}
 			var USER = {};
-			USER.id = {{$USER_ID}};
-			USER.bio = "{{$BIO}}";
-			USER["$email"] = "{{$EMAIL}}";
-			USER.name = "{{$NAME}}";
-			USER.memberUrl = "{{$MEMBER_URL}}";
-			USER.photo = "{{$PHOTO}}";
-			USER.twitter = "{{$TWITTER}}";
-			USER.city = "{{$CITY}}";
-            USER.cookies = "{{$COOKIES}}";
-            USER.newsletter = "{{$NEWSLETTER}}";
+            USER.id = {{$USER_ID}};
+			{if isset($BIO)} USER.bio = "{{$BIO}}"; {/if}
+            {if isset($EMAIL)} USER["$email"] = "{{$EMAIL}}";{/if}
+            {if isset($NAME)} USER.name = "{{$NAME}}";{/if}
+            {if isset($MEMBER_URL)} USER.memberUrl = "{{$MEMBER_URL}}";{/if}
+            {if isset($PHOTO)} USER.photo = "{{$PHOTO}}";{/if}
+
+            {if isset($TWITTER)} USER.twitter = "{{$TWITTER}}";{/if}
+            {if isset($CITY)} USER.city = "{{$CITY}}";{/if}
+            {if isset($COOKIES)} USER.cookies = "{{$COOKIES}}";{/if}
+            {if isset($NEWSLETTER)} USER.newsletter = "{{$NEWSLETTER}}";{/if}
 
 			USER["$name"] = "{{$NAME}}";
  		{/if}
