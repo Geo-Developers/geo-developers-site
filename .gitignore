@@ -7,3 +7,4 @@ composer.phar
 testdb.php
 vendor/
 utils/
+backups/
