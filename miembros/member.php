@@ -11,7 +11,7 @@ if($user){
     $db->orderBy("u.level","desc");
     $skillsGis = $db->get("skills s", null , "u.level, s.name, s.slug");
 
-    $db->where("meetup_id", $_GET["query"])->where("is_gis IS NULL");
+    $db->where("meetup_id", $_GET["query"])->where("is_gis IS NULL")->where("is_important",1);
     $db->join("user_skills u", "u.skill_id=s.id", "LEFT");
     $db->orderBy("u.level","desc");
     $skills = $db->get("skills s", null , "u.level, s.name, s.slug");
