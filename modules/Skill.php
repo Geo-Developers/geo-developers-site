@@ -5,6 +5,7 @@ class Skill
 {
     // Class properties and methods go here
     private $db;
+    public $skills;
 
     public function __construct()
     {
@@ -17,6 +18,42 @@ class Skill
                 'db' => $dbname,
                 'charset' => 'utf8')
         );
+    }
+
+    public function extractRelevantSkills($string){
+
+        // TODO: change is_gis for is_relevant
+        // Not use $this->skill (not all of them)
+        $this->db->where('is_gis',1);
+        $skills = $this->db->get('skills');
+
+        $relevants = array();
+        foreach($skills as $s){
+            $pos = strpos($string, strtolower($s["name"]));
+            if($pos){
+                //echo "<hr>Encontrado ".$s["name"];
+                //echo " | strpos=".$pos;
+
+                array_push($relevants, $s);
+            }elseif(isset($s["synonyms"])){
+                //echo "<hr>Compruebo sinónimos de ".$s["name"];
+                $synoms = explode(",",$s["synonyms"]);
+                $synoms = array_map("trim",$synoms);
+                $synoms = array_map("strtolower",$synoms);
+                //echo "<br>Sinónimos:";
+                //prettyprint($synoms);
+                foreach($synoms as $synonym) {
+                    if(strpos($string, $synonym)){
+                        //echo "<br>Está el sinónimo ".$synonym;
+                        //echo ": strpos=".strpos($string, $synonym);
+                        array_push($relevants, $s);
+                    }
+                }
+            }
+        }
+
+        return $relevants;
+
     }
 
     // Find an skill in the database
@@ -34,6 +71,8 @@ class Skill
         $skills = $this->db->get("skills");
 
         foreach($skills as $s){
+            echo "find(), skill=";
+            prettyprint($s);
             if(strtolower($s["name"]) == strtolower($skill["name"])){
                 return $s;
             }

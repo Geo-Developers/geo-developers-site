@@ -22,6 +22,7 @@
             <h1>{$USERPROFILE["name"]}</h1>
             <p><span class="text-label">Ubicación:</span> {$PROFILE["location"]}</p>
             <p><span class="text-label">Miembro desde:</span> {$PROFILE["joined"]}</p>
+            <p><span class="text-label">Bio:</span> {$PROFILE["bio"]|default:'No disponible'}</p>
             <p><span class="text-label">Profesión:</span> {$PROFILE["occupation"]|default:'Desconocida'}</p>
             <p><span class="text-label">Cargo:</span> {$PROFILE["position"]|default:'Desconocido'}</p>
             <p><span class="text-label">Estudios:</span> {$PROFILE["studies"]|default:'Desconocidos'}</p>

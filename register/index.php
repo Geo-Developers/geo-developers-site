@@ -7,13 +7,20 @@ require_once 'modules/Skill.php';
 
 // The constructor loads all information available from
 // the database or directly using the Meetup API
-$member = new Member($_SESSION["user"]["meetup_id"]);
+$member = new Member(array(
+    "meetup_id" => $_SESSION["user"]["meetup_id"]
+));
+
 
 if($member->isRegistered()){
     $_SESSION["user"]['logged'] = true;
     $_SESSION["user"]['email'] = $member->email;
     $_SESSION["user"]['name'] = $member->name;
-    header('Location: '.$returnURL);
+    if(isset($returnURL)){
+        header('Location: '. $returnURL);
+    }else{
+        header('Location: '. $ROOT);
+    }
 }else{
     $new_user = true;
 }
@@ -29,7 +36,11 @@ if($new_user && isset($_POST["name"]) ){
     $_SESSION["user"]['logged'] = true;
     $_SESSION["user"]['email'] = $member->email;
     $_SESSION["user"]['name'] = $member->name;
-    header('Location: '. $returnURL);
+    if(isset($returnURL)){
+        header('Location: '. $returnURL);
+    }else{
+        header('Location: '. $ROOT);
+    }
 }
 
 if( isset($_SESSION["user"]['meetup_id']) && !isset($_SESSION["user"]['logged']) ){

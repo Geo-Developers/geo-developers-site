@@ -28,7 +28,7 @@ if(isset($_GET['tech']) && $_GET['tech']){
 }else{
     $db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
     $db->orderBy("p.progress","desc");
-    $users = $db->get("profiles p", 24, "u.meetup_id, u.name,  p.progress, p.photo_url, p.location");
+    $users = $db->get("profiles p",/* 24*/null, "u.meetup_id, u.name,  p.progress, p.photo_url, p.location");
 }
 
 $total = $db->getValue("profiles", "count(meetup_id)");

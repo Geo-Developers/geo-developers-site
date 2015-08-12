@@ -28,15 +28,15 @@ class Member
     public $photo_url;
     public $lat;
     public $lon;
+    public $last_visit;
+    public $bio;
     public $skills = array();
 
     private $db;
 
-    public function __construct($id)
+    public function __construct($args)
     {
         global $dbhost, $dbuser, $dbpass, $dbname;
-
-        $this->meetup_id = $id;
 
         $this->db = new MysqliDb (Array (
                 'host' => $dbhost,
@@ -46,58 +46,72 @@ class Member
                 'charset' => 'utf8')
         );
 
-        $this->db->where("meetup_id", $this->meetup_id);
-        $user = $this->db->getOne("users");
+        if(isset($args["meetup_id"])){
+            // We will request it from the DB or USING THE MEETUP API
+            $this->meetup_id = $args["meetup_id"];
 
-        if(!$user || !$user["email"]){
-            $this->loadFromMeetup();
+            $this->db->where("meetup_id", $this->meetup_id);
+            $user = $this->db->getOne("users");
+
+            if(!$user || !$user["email"]){
+                $this->loadFromMeetup();
+            }else{
+                $this->db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
+                $this->db->where("u.meetup_id", $this->meetup_id);
+                $userProfile = $this->db->getOne("profiles p");
+
+                $this->name = $userProfile["name"];
+                $this->email = $userProfile["email"];
+                $this->cookies = $userProfile["cookies"];
+                $this->mailchimp_euid = $userProfile["mailchimp_euid"];
+                $this->last_name = $userProfile["last_name"];
+                $this->location = $userProfile["location"];
+                $this->joined = $userProfile["joined"];
+                $this->twitter_url = $userProfile["twitter_url"];
+                $this->linkedin_url = $userProfile["linkedin_url"];
+                $this->github_url = $userProfile["github_url"];
+                $this->meetup_url = $userProfile["meetup_url"];
+                $this->facebook_url = $userProfile["facebook_url"];
+                $this->flickr_url = $userProfile["flickr_url"];
+                $this->occupation = $userProfile["occupation"];
+                $this->position = $userProfile["position"];
+                $this->studies = $userProfile["studies"];
+                $this->progress = $userProfile["progress"];
+                $this->photo_url = $userProfile["photo_url"];
+                $this->lat = $userProfile["lat"];
+                $this->lon = $userProfile["lon"];
+
+                $this->db->join("user_skills u", "u.skill_id=s.id", "LEFT");
+                $this->db->where("u.meetup_id", $this->meetup_id);
+                $this->skills = $this->db->get("skills s");
+            }
+        }elseif(isset($args["meetup_response"])){
+            $this->loadFromMeetup($args["meetup_response"]);
         }else{
-            $this->db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
-            $this->db->where("u.meetup_id", $this->meetup_id);
-            $userProfile = $this->db->getOne("profiles p");
-
-            $this->name = $userProfile["name"];
-            $this->email = $userProfile["email"];
-            $this->cookies = $userProfile["cookies"];
-            $this->mailchimp_euid = $userProfile["mailchimp_euid"];
-            $this->last_name = $userProfile["last_name"];
-            $this->location = $userProfile["location"];
-            $this->joined = $userProfile["joined"];
-            $this->twitter_url = $userProfile["twitter_url"];
-            $this->linkedin_url = $userProfile["linkedin_url"];
-            $this->github_url = $userProfile["github_url"];
-            $this->meetup_url = $userProfile["meetup_url"];
-            $this->facebook_url = $userProfile["facebook_url"];
-            $this->flickr_url = $userProfile["flickr_url"];
-            $this->occupation = $userProfile["occupation"];
-            $this->position = $userProfile["position"];
-            $this->studies = $userProfile["studies"];
-            $this->progress = $userProfile["progress"];
-            $this->photo_url = $userProfile["photo_url"];
-            $this->lat = $userProfile["lat"];
-            $this->lon = $userProfile["lon"];
-
-            $this->db->join("user_skills u", "u.skill_id=s.id", "LEFT");
-            $this->db->where("u.meetup_id", $this->meetup_id);
-            $this->skills = $this->db->get("skills s");
+            echo "Args = ";
+            prettyprint($args);
+            die("You mush set ona param: meetup_id or meetup_response");
         }
 
     }
 
     public function suscribeToMailchimp(){
         global $mailchimp_apikey, $mailchimp_listid;
-
-        $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
-        $result = $MailChimp->call('lists/subscribe', array(
-            'id'                => $mailchimp_listid,
-            'email'             => array('email'=> $this->email),
-            'merge_vars'        => array('FNAME'=> $this->name),
-            'double_optin'      => false,
-            'update_existing'   => true,
-            'replace_interests' => false,
-            'send_welcome'      => false
-        ));
-        $this->mailchimp_euid = $result["euid"];
+        if($this->email){
+            $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
+            $result = $MailChimp->call('lists/subscribe', array(
+                'id'                => $mailchimp_listid,
+                'email'             => array('email'=> $this->email),
+                'merge_vars'        => array('FNAME'=> $this->name),
+                'double_optin'      => false,
+                'update_existing'   => true,
+                'replace_interests' => false,
+                'send_welcome'      => false
+            ));
+            $this->mailchimp_euid = $result["euid"];
+            return $result["euid"];
+        }
+        return -1;
     }
 
     public function getUser(){
@@ -128,7 +142,9 @@ class Member
             "progress"      => ($this->progress)? $this->progress : 0,
             "photo_url"     => $this->photo_url,
             "lat"           => $this->lat,
-            "lon"           => $this->lon
+            "lon"           => $this->lon,
+            "last_visit"    => $this->last_visit,
+            "bio"           => $this->bio
         );
     }
 
@@ -169,6 +185,7 @@ class Member
 
         // Add user to the database
         $data = $this->getUser();
+
         $this->db->where("meetup_id", $this->meetup_id);
         $user = $this->db->getOne("users");
         //echo "User:";
@@ -192,7 +209,7 @@ class Member
         // Add profile to the database
         $data = $this->getProfile();
         //prettyprint($this);
-        //echo "Profile:";
+        //cho "Profile:";
         //prettyprint($data);
         //die("<hr>");
         $this->db->where("meetup_id", $this->meetup_id);
@@ -241,11 +258,14 @@ class Member
                     //echo $db->count . ' user_skills were added';
                 }else
                     die('insetion failed: ' . $this->db->getLastError());
+            }else{
+                //prettyprint($s);
             }
         }
 
-        $member = new Member($this->meetup_id);
-        $member->updateProgress();
+        //$member = new Member(array("meetup_id" =>$this->meetup_id));
+        $this->updateProgress();
+
 
         return true;
     }
@@ -274,7 +294,8 @@ class Member
             $progress += 5;
         }
 
-        if($user["twitter_url"]){ $progress += 10; }
+        if($user["bio"]){ $progress += 5; }
+        if($user["twitter_url"]){ $progress += 5; }
         if($user["linkedin_url"]){ $progress += 10; }
 
         $this->db->join("user_skills us", "us.skill_id=s.id", "LEFT");
@@ -318,7 +339,7 @@ class Member
         }
 
 
-        echo "Meetupid = $this->meetup_id, Progress = $progress<br>";
+        //echo "Meetupid = $this->meetup_id, Progress = $progress<br>";
 
         $this->db->where("meetup_id", $this->meetup_id);
         $this->db->update("profiles", array("progress" => $progress));
@@ -326,8 +347,134 @@ class Member
 
     }
 
-    public function addSkills($skills)
-    {
+    public function loadFromMeetup($meetup_response = NULL){
+        global $meetup_group_id, $meetup_group_urlname, $meetup_api_key;;
+
+        $client = DMS\Service\Meetup\MeetupKeyAuthClient::factory(array('key' => $meetup_api_key));
+
+        if(!$meetup_response){
+            $response = $client->getMember(array('id' => $this->meetup_id));
+        }else{
+            $response = $meetup_response;
+        }
+
+        $this->name = $response["name"];
+        $this->meetup_id = $response["id"];
+        $this->location = $response["city"].", ".$response["country"];
+        $this->meetup_url = $response["link"];
+        $this->lat = $response["lat"];
+        $this->lon = $response["lon"];
+        $this->name = $response["name"];
+
+        if(isset($response["photo"])){
+            if (isset($response["photo"]["highres_link"])) {
+                $this->photo_url = $response["photo"]["highres_link"];
+            } elseif (isset($response["photo"]["photo_link"])) {
+                $this->photo_url = $response["photo"]["photo_link"];
+            } elseif (isset($response["photo"]["thumb_link"])) {
+                $this->photo_url = $response["photo"]["thumb_link"];
+            }
+        }elseif (isset($response["photo_url"])) {
+            $this->photo_url = $response["photo_url"];
+        }else{
+            $email = strtolower( $this->meetup_id."@gmail.com" );
+            $this->photo_url = "http://www.gravatar.com/avatar/".md5($email);
+        }
+
+        if(isset($response["other_services"]) && is_array($response["other_services"])) {
+            foreach ($response["other_services"] as $key => $service) {
+                $s = $service["identifier"];
+
+                switch ($key) {
+                    case "twitter":
+                        $this->twitter_url = $s;
+                        break;
+                    case "flickr":
+                        $this->flickr_url = $s;
+                        break;
+                    case "facebook":
+                        $this->facebook_url = $s;
+                        break;
+                    case "linkedin":
+                        $this->facebook_url = $s;
+                        break;
+                }
+            }
+        }
+
+        $service = new Skill();
+
+        if(isset($response["topics"]) && is_array($response["topics"])) {
+            foreach ($response["topics"] as $topic) {
+                $s = $service->find(array(
+                    "meetup_skill_id" => $topic["id"]
+                ));
+
+                if ($s) {
+                    array_push($this->skills, $s);
+                } else {
+                    array_push($this->skills, array(
+                        "meetup_skill_id" => $topic["id"],
+                        "is_gis" => 0,
+                        "synonyms" => NULL,
+                        "name" => $topic["name"],
+                        "slug" => $topic["urlkey"],
+                    ));
+                }
+            }
+        }
+
+        $options = array(
+            'group_urlname' => $meetup_group_urlname,
+            'group_id'      => $meetup_group_id,
+            'member_id'     => $this->meetup_id
+        );
+
+        $profiles = $client->getProfiles($options);
+
+        if($profiles->count() > 0){
+
+            // Find relevant skills in open answers and add them to the profile
+            foreach($profiles as $p){
+                $answers = "";
+
+                foreach ($p["answers"] as $a) {
+                    if(isset($a["answer"])){
+                        $answers .= $a["answer"]." ";
+                    }
+                }
+                $answers = strtolower($answers);
+                $r = $service->extractRelevantSkills($answers);
+                $this->merge_skills($r);
+
+                //When user joined
+                $this->joined = $this->parseEpoch($p["created"]);
+                $this->last_visit= $this->parseEpoch($p["visited"]);
+
+                if(isset($p["bio"])){
+                    $this->bio = $p["bio"];
+                }
+
+                if(isset($p["photo"])){
+                    if (isset($p["photo"]["highres_link"])) {
+                        $this->photo_url = $p["photo"]["highres_link"];
+                    } elseif (isset($p["photo"]["photo_link"])) {
+                        $this->photo_url = $p["photo"]["photo_link"];
+                    } elseif (isset($p["photo"]["thumb_link"])) {
+                        $this->photo_url = $p["photo"]["thumb_link"];
+                    }
+                }elseif (isset($p["photo_url"])) {
+                    $this->photo_url = $p["photo_url"];
+                }
+
+                if(isset($p["profile_url"])){
+                    $this->meetup_url = $p["profile_url"];
+                }
+
+                //TODO: check if other services
+            }
+
+        }
 
     }
 
@@ -341,74 +488,43 @@ class Member
      *      "array" =>
      * )
      */
-    public function loadFromMeetup(){
-        global $meetup_api_key;
-        $client = DMS\Service\Meetup\MeetupKeyAuthClient::factory(array('key' => $meetup_api_key));
-        $response = $client->getMember(array('id' => $this->meetup_id));
-
-        $epoch = $response["joined"];
+    public function parseEpoch($date){
+        $epoch = $date;
         $epoch = substr($epoch,0, -3);
         $dt = new DateTime("@$epoch");
-        $date = $dt->format('Y-m-d');
-
-        $this->joined = $date;
-        $this->location = $response["city"];
-        $this->meetup_url = $response["link"];
-        $this->lat = $response["lat"];
-        $this->lon = $response["lon"];
-        $this->name = $response["name"];
-
-        if (isset($response["photo"]["highres_link"])) {
-            $this->photo_url = $response["photo"]["highres_link"];
-        } elseif (isset($response["photo"]["photo_link"])) {
-            $this->photo_url = $response["photo"]["photo_link"];
-        } elseif (isset($response["photo"]["thumb_link"])) {
-            $this->photo_url = $response["photo"]["thumb_link"];
-        }else{
-            $email = strtolower( $this->meetup_id."@gmail.com" );
-            $this->photo_url = "http://www.gravatar.com/avatar/".md5($email);
-        }
-
-        foreach ($response["other_services"] as $key => $service) {
-            $s = $service["identifier"];
-
-            switch($key){
-                case "twitter":
-                    $this->twitter_url = $s;
-                    break;
-                case "flickr":
-                    $this->flickr_url = $s;
-                    break;
-                case "facebook":
-                    $this->facebook_url= $s;
-                    break;
-                case "linkedin":
-                    $this->facebook_url= $s;
-                    break;
-            }
-        }
-
-        $service = new Skill();
-
-
-        foreach($response["topics"] as $topic) {
-            $s = $service->find(array(
-                "meetup_skill_id" => $topic["id"]
-            ));
-
-            if($s){
-                array_push($this->skills,$s);
-            }else{
-                array_push($this->skills, array(
-                    "meetup_skill_id"   => $topic["id"],
-                    "is_gis"            => 0,
-                    "synonyms"          => NULL,
-                    "name"              => $topic["name"],
-                    "slug"              => $topic["urlkey"],
-                ));
-            }
-        }
+        return $dt->format('Y-m-d');
     }
+
+    public function merge_skills($new_skills){
+        $a = $this->skills;
+        $b = $new_skills;
+
+        if(sizeof($a) >= sizeof($b)){
+            $mixed = $a;
+            $iter = $b;
+        }else{
+            $mixed = $b;
+            $iter = $a;
+        }
+
+        foreach($iter as $i){
+            $hash_array = false;
+            foreach($mixed as $m){
+                if($m["id"] == $i["id"]){
+                    $hash_array = true;
+                    break;
+                }
+            }
+            if(!$hash_array){
+                array_push($mixed,$i);
+            }
+        }
+
+        $this->skills = $mixed;
+
+
+    }
+    //function
 
 }
 ?>
