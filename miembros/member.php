@@ -6,17 +6,25 @@ $db->where("meetup_id", $_GET["query"]);
 $user = $db->getOne("users");
 
 if($user){
-    $db->where("meetup_id", $_GET["query"]);
-    $db->join("user_skills u", "u.meetup_skill_id=s.meetup_skill_id", "LEFT");
+    $db->where("meetup_id", $_GET["query"])->where("is_gis", 1);
+    $db->join("user_skills u", "u.skill_id=s.id", "LEFT");
+    $db->orderBy("u.level","desc");
+    $skillsGis = $db->get("skills s", null , "u.level, s.name, s.slug");
+
+    $db->where("meetup_id", $_GET["query"])->where("is_gis IS NULL");
+    $db->join("user_skills u", "u.skill_id=s.id", "LEFT");
     $db->orderBy("u.level","desc");
     $skills = $db->get("skills s", null , "u.level, s.name, s.slug");
 
-    $numSkills = sizeof($skills)-1;
+    $numSkillsGIS = sizeof($skillsGis);
+    $numSkills = sizeof($skills);
     $profile = $db->where("meetup_id", $_GET["query"])->getOne("profiles");
-
+    $profile["joined"] = date('d/m/Y', strtotime($profile["joined"]));
 
     $smarty->assign('PROFILE', $profile);
+    $smarty->assign('NUMSKILLSGIS', $numSkillsGIS);
     $smarty->assign('NUMSKILLS', $numSkills);
+    $smarty->assign('SKILLSGIS', $skillsGis);
     $smarty->assign('SKILLS', $skills);
     $smarty->assign('USERPROFILE', $user);
     $smarty->display('perfil.tpl');

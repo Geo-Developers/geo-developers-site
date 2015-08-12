@@ -62,7 +62,7 @@ function getMeetupMember($idOrArray, $type)
                 ));
 
                 array_push($user_skills, array(
-                    "meetup_skill_id"   => $topic["id"],
+                    "skill_id"   => $topic["id"],
                     "meetup_id"         => $meetup_id
                 ));
             }

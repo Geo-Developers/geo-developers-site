@@ -1101,7 +1101,7 @@
 	}
 
 		a:hover {
-			color: #43bff0 !important;
+			color: #43bff0;
 		}
 
 		a img {
@@ -1608,7 +1608,8 @@
 		text-align: center;
 	}
     .box img{
-        max-width: 100%;
+        max-width: 250px;
+        max-height: 180px;
         padding:0;
     }
 
@@ -2453,9 +2454,9 @@
     #member-list li{
 
     }
-    #member-list{}
+    #member-list{    width: 100%;}
     #member-list li{
-
+        padding: 0;
         margin-bottom: 1.5em;
     }
     #member-list .picture{
@@ -2474,13 +2475,66 @@
         float: left;
         margin-right: 10px;
     }
+    #members-page button:hover{
+        color: #333 !important;
+    }
+
+    .input-group input.form-control[name="tech"]{
+        color: black;
+        float: left;
+        width: 270px;
+    }
+    #members-page .input-group-btn{
+        float: left;
+    }
+    #members-page .input-group{
+        display: inline-block;
+        width: 300px;
+    }
+    #members-page .input-container{
+        display: inline-block;
+    }
+    #members-page label{
+        display: inline-block;
+        height: 34px;
+        float: left;
+        margin-right: 10px;
+        padding: 7px 0;
+    }
+    #member-list li:nth-child(3n+1) .member-wrapper{
+        /*1, 4, 7*/
+        margin-right: 15px;
+    }
+    #member-list li:nth-child(3n+2) .member-wrapper{
+        /*2, 5, 8*/
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+    #member-list li:nth-child(3n+3) .member-wrapper{
+        /*2, 5, 8*/
+        margin-left: 15px;
+
+    }
+    .member-wrapper{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-wrapper .progress{
+        margin-bottom: 5px;
+    }
     #member-list li img{
 
         max-height: 60px;
     }
 
-    ul.inline{
-
+    ul.inline,
+    ul.inline li{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
     }
 
     #profile-page .progress{
@@ -2495,3 +2549,78 @@
         font-weight: bold;
         width: 140px;
     }
+
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('../../fonts/icomoon.eot?-nhmkw');
+    src:url('../../fonts/icomoon.eot?#iefix-nhmkw') format('embedded-opentype'),
+    url('../../fonts/icomoon.ttf?-nhmkw') format('truetype'),
+    url('../../fonts/icomoon.woff?-nhmkw') format('woff'),
+    url('../../fonts/icomoon.svg?-nhmkw#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-meetup:before {
+    content: "\e600";
+}
+.icon-facebook:before {
+    content: "\e601";
+}
+.icon-twitter:before {
+    content: "\e602";
+}
+.icon-flickr:before {
+    content: "\e603";
+}
+.icon-flickr-squared:before {
+    content: "\e604";
+}
+.icon-github:before {
+    content: "\e605";
+}
+.icon-github-rounded:before {
+    content: "\e606";
+}
+.icon-linkedin-squared:before {
+    content: "\e607";
+}
+.icon-linkedin:before {
+    content: "\e608";
+}
+
+.row.box,
+.row.box p{
+
+    padding:10px;
+}
+.row.box p{
+    float:none;
+}
+
+.truncate {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}

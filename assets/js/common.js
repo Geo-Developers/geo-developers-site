@@ -6,6 +6,7 @@ var conf = {
         'bootstrap' : 				{ deps: ['jquery'], exports: 'jquery' },
         'bootstrap/modal': 		    { deps: ['jquery'], exports: '$.fn.modal' },
         'bootstrap/dropdown':       { deps: ['jquery'], exports: '$.fn.dropdown' },
+        'typeahead':                { deps: ['jquery'], exports: '$.fn.typeahead' },
         'jsrender': 				{ deps: ['jquery'], exports: '$.templates' },
         'util': 					['jquery'],
         'views': 					['jquery', 'jsrender', 'base'],
@@ -17,6 +18,7 @@ var conf = {
             'jquery',
             'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min'
         ],
+
         jsrender: [
             'jsrender',
             'http://www.jsviews.com/download/jsrender'
