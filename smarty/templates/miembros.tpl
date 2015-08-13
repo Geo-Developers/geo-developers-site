@@ -62,7 +62,7 @@
                                 Sin foto<br>
                             {/if}
                         </div>
-                        <p><a href="{$USERS[$I]["meetup_id"]}">{$USERS[$I]["name"]}</a></p>
+                        <p><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]}</a></p>
                         {if isset($USERS[$I]["progress"])}
                             <p><small>Porcentaje de perfil completado:</small></p>
                             <div class="progress">

@@ -2490,7 +2490,9 @@
     #members-page button:hover{
         color: #333 !important;
     }
-
+    .capitalize{
+        text-transform: capitalize;
+    }
     .input-group input.form-control[name="tech"]{
         color: black;
         float: left;

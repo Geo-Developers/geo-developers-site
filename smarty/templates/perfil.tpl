@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p id="picture"><img src="{$PROFILE["photo_url"]}"></p>
-                            <h1>{$USERPROFILE["name"]}</h1>
+                            <h1 class="capitalize">{$USERPROFILE["name"]}</h1>
                         </div>
                     </div>
                     <p class="row">

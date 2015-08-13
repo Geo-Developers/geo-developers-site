@@ -8,7 +8,7 @@
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px;padding-left: 0;">
+        <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px;">
             <a href="../../">Home</a> &gt; <a href="{$ROOT}miembros">Miembros</a> &gt; Rankings
         </div>
     </div>
@@ -59,8 +59,8 @@
                             {for $I=0 to $NTOPGISEROS-1}
                                 <tr>
                                     <td>{$I}</td>
-                                    <td class="text-left"><a href="{$ROOT}miembros/{$TOPGISEROS[$I]["meetup_id"]}">
-
+                                    <td class="text-left">
+                                        <a href="{$ROOT}miembros/{$TOPGISEROS[$I]["meetup_id"]}" class="capitalize">
                                         <div class="image-wrapper">
                                             <div class="picture" style="background-image: url('{$TOPGISEROS[$I]["photo_url"]}')"></div>
                                         </div>
@@ -89,11 +89,13 @@
                             {for $I=0 to $NTOPEXPERTS-1}
                                 <tr>
                                     <td>{$I}</td>
-                                    <td class="text-left"><a href="{$ROOT}miembros/{$TOPEXPERTS[$I]["meetup_id"]}">
+                                    <td class="text-left">
+                                        <a href="{$ROOT}miembros/{$TOPEXPERTS[$I]["meetup_id"]}" class="capitalize">
                                             <div class="image-wrapper">
                                             <div class="picture" style="background-image: url('{$TOPEXPERTS[$I]["photo_url"]}')"></div>
                                             </div>
-                                            {$TOPEXPERTS[$I]["name"]}</a>
+                                            {$TOPEXPERTS[$I]["name"]}
+                                        </a>
                                     </td>
                                     <td>{$TOPEXPERTS[$I]["count"]}</td>
                                 </tr>
