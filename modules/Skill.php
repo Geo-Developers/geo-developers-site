@@ -28,9 +28,12 @@ class Skill
         $skills = $this->db->get('skills');
 
         $relevants = array();
+        $special_character = "[\ |\.|,|;\?|¿|!|¡|:|-|(|)|_]";
         foreach($skills as $s){
-            $pos = strpos($string, strtolower($s["name"]));
-            if($pos){
+            //$pos = strpos($string, ));
+            $regex = "/".$special_character.$s["name"].$special_character."/i";
+            $found = preg_match($regex, $string);
+            if($found){
                 //echo "<hr>Encontrado ".$s["name"];
                 //echo " | strpos=".$pos;
 
@@ -43,7 +46,9 @@ class Skill
                 //echo "<br>Sinónimos:";
                 //prettyprint($synoms);
                 foreach($synoms as $synonym) {
-                    if(strpos($string, $synonym)){
+                    $regex = "/".$special_character.$synonym.$special_character."/i";
+                    $found = preg_match($regex, $string);
+                    if($found){
                         //echo "<br>Está el sinónimo ".$synonym;
                         //echo ": strpos=".strpos($string, $synonym);
                         array_push($relevants, $s);

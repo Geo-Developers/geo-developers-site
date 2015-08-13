@@ -37,6 +37,51 @@ $app->post('/user/:userid', function ($userId) use ($app, $db){
     echo json_encode($data);
 });
 
+$app->post('/vote/:userid', function ($userId) use ($app, $db){
+
+    if(isset($_SESSION['user']['meetup_id'])) {
+        $meetup_id = $_SESSION['user']['meetup_id'];
+
+        if (intval($userId) === intval($meetup_id)) {
+            $data = array(
+                'status' => 'error',
+                'message' => 'You can not vote for yourself'
+            );
+        } else {
+
+            $db->where("referrer",$meetup_id)->where("refered",$userId);
+            if($elem = $db->getOne('votes')){
+                $db->where("referrer",$meetup_id)->where("refered",$userId);
+                $db->delete('votes');
+                $data = array(
+                    'status' => 'success',
+                    'recommended' => false,
+                    'message' => 'Vote successfully removed'
+                );
+            }else{
+                $db->insert('votes', array(
+                    "referrer" => $meetup_id,
+                    "refered" => $userId
+                ));
+                $data = array(
+                    'status' => 'success',
+                    'recommended' => true,
+                    'message' => 'Vote successfully added'
+                );
+            }
+            $votesAttrs = array("referrer", "refered");
+            //$data = insertOrUpdate($db, 'votes', $votesAttrs, $meetup_id, "meetup_id");
+        }
+    }else{
+        $data = array(
+            'status' => 'error',
+            'message' => 'You must be authenticated'
+        );
+    }
+
+    echo json_encode($data);
+});
+
 $app->post('/video/:videoid', function ($userId) use ($app, $db){
 
 

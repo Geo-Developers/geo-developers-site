@@ -7,10 +7,12 @@ $config = "../config.php";
 
 if( file_exists($config) && is_readable($config) && require_once($config)) {
 
-    if(isset($_SESSION['returnURL'])){
-        $returnURL = $_SESSION['returnURL'];
-    }else{
-        $returnURL = "/";
+    if(!isset($_SESSION['returnURL']) || isset($_GET['returnURL'])){
+        if(isset($_GET['returnURL'])){
+            $_SESSION['returnURL'] = $_GET['returnURL'];
+        }else{
+            $_SESSION['returnURL'] = $ROOT;
+        }
     }
 
     if( !isset($_SESSION['user']['logged']) ){
@@ -88,13 +90,13 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
             // Check if user is in the database and it has an email
             if($user && $user["email"] !== null){
                 $_SESSION['user']['logged'] = true;
-                header('Location: '.$returnURL);
+                header('Location: '.$_SESSION['returnURL']);
             }else{
                 header('Location: ../register');
             }
         }
     }else{
-        header('Location: '.$returnURL);
+        header('Location: '.$_SESSION['returnURL']);
     }
 }else{
     echo "$config can not be found or read";

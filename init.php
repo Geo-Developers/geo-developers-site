@@ -11,6 +11,7 @@ $smarty->setCompileDir($ROOTPATH.'smarty/templates_c');
 $smarty->setCacheDir($ROOTPATH.'smarty/cache');
 $smarty->setConfigDir($ROOTPATH.'smarty/configs');
 
+$smarty->assign('returnURL', $_SERVER['REQUEST_URI']);
 $smarty->assign('ROOT', $ROOT);
 
 $db = new MysqliDb (Array (

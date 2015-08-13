@@ -3,9 +3,13 @@
 require_once '../config.php';
 require_once 'init.php';
 
-session_start();
+$_SESSION["logged"]=false;
 session_destroy();
 
-header('Location: '. $ROOT);
+if(isset($_GET["returnURL"])){
+    header('Location: '. $_GET["returnURL"]);
+}else{
+    header('Location: '. $ROOT);
+}
 
 ?>

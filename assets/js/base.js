@@ -3,13 +3,14 @@
 */
 "use strict";
 
-define(['jquery', 'dropdown'], function($) {
+define(['jquery', 'dropdown', 'tab', 'tooltip'], function($) {
 
   var Methods = {
  
 		init: function(Cookies) {
             var showCookies = true;
-
+            $('.tabs').tab();
+            $('[data-toggle="tooltip"]').tooltip();
             try{
                 if(Cookies.get("cookies") === "true" || USER.cookies === 1) {
                     showCookies = false;

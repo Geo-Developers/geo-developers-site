@@ -52,7 +52,7 @@
                         <ul class="inline col-md-8 pt05" id="social-networks">
                             {if $PROFILE["twitter_url"]}
                                 <li>
-                                    <a href='{$PROFILE["twitter_url"]}' class="icon twitter" title="Twitter">
+                                    <a href='{$PROFILE["twitter_url"]}' class="icon twitter" title="{$PROFILE["twitter_name"]}" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-twitter"></i>
                                         <span class="label">Twitter</span>
                                     </a>
@@ -60,7 +60,7 @@
                             {/if}
                             {if $PROFILE["linkedin_url"]}
                                 <li>
-                                    <a href='{$PROFILE["linkedin_url"]}' class="icon linkedin" title="Linkedin">
+                                    <a href='{$PROFILE["linkedin_url"]}' class="icon linkedin" title="Linkedin" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-linkedin"></i>
                                         <span class="label">Linkedin</span>
                                     </a>
@@ -68,7 +68,7 @@
                             {/if}
                             {if $PROFILE["github_url"]}
                                 <li>
-                                    <a href='{$PROFILE["github_url"]}' class="icon github" title="Github">
+                                    <a href='{$PROFILE["github_url"]}' class="icon github" title="Github" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-github"></i>
                                         <span class="label">Github</span>
                                     </a>
@@ -77,7 +77,7 @@
                             {if $PROFILE["meetup_url"]}
                                 <li>
 
-                                    <a href='{$PROFILE["meetup_url"]}' class="icon meetup" title="Meetup">
+                                    <a href='{$PROFILE["meetup_url"]}' class="icon meetup" title="Meetup" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-users"></i>
                                         <span class="label">Meetup</span>
                                     </a>
@@ -85,7 +85,7 @@
                             {/if}
                             {if $PROFILE["facebook_url"]}
                                 <li>
-                                    <a href='{$PROFILE["facebook_url"]}' class="icon facebook" title="Facebook">
+                                    <a href='{$PROFILE["facebook_url"]}' class="icon facebook" title="Facebook" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-facebook"></i>
                                         <span class="label">Facebook</span>
                                     </a>
@@ -93,7 +93,7 @@
                             {/if}
                             {if $PROFILE["flickr_url"]}
                                 <li>
-                                    <a href='{$PROFILE["flickr_url"]}' class="icon flickr" title="Flickr">
+                                    <a href='{$PROFILE["flickr_url"]}' class="icon flickr" title="Flickr" data-toggle="tooltip" data-placement="bottom">
                                         <i class="fa fa-flickr"></i>
                                         <span class="label">Flickr</span>
                                     </a>
@@ -110,12 +110,14 @@
             {if $NUMSKILLSGIS == 0}
                 <p>No se ha especificado ninguno</p>
             {else}
-                <ul class="row">
+                <ul class="row skills">
                     {for $I=0 to $NUMSKILLSGIS-1}
                         <li class="col-md-4">
-                            <a class="truncate" title="{$SKILLSGIS[$I]["name"]}" href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}">
-                                <i class="fa fa-info-circle"></i> {$SKILLSGIS[$I]["name"]}
-                            </a>
+                            <div class="truncate" >
+                                <a href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
+                                    {$SKILLSGIS[$I]["name"]}
+                                </a>
+                            </div>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                      style="
@@ -147,7 +149,8 @@
                 {else}
                     {for $I=0 to $NUMSKILLS-1}
                         <li class="col-md-4">
-                            <a class="truncate" title="{$SKILLS[$I]["name"]}" href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}">
+                            <a class="truncate" title="{$SKILLS[$I]["name"]}"
+                               href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}">
                                 {$SKILLS[$I]["name"]}
                             </a>
                             <div class="progress">
@@ -214,17 +217,38 @@
                 <!--{$PROFILE["progress"]}%<br>-->
 
             </div>
-            <div class="row box mb3 text-center recommendations pb2">
-                <p class="text-label col-md-12 mb0">Lo han recomendado</p>
-
-                {for $I=0 to 8}
-                    <div class="col-md-4 pt05">
-                        <a href=""><img src="{$PROFILE["photo_url"]}"></a>
+            <div class="row box mb3 text-center recommendations pb2" id="referrers">
+                <p class="text-label col-md-12 mt1 title" style="{if $NREFERRERS == 0}display:none;{/if}">
+                    Recomendado por
+                </p>
+                <div class="col-md-12 pt0 text-center">
+                {for $J=0 to $NREFERRERS-1}
+                    <div class="referrer" data-referrer="{$REFERRERS[$J]["meetup_id"]}">
+                        <a href="{$ROOT}miembros/{$REFERRERS[$J]["meetup_id"]}"  class="image-wrapper">
+                            <span class="picture clearfix" style="background-image: url('{$REFERRERS[$J]["photo_url"]}')"></span>
+                        </a>
                     </div>
                 {/for}
-                <div class="col-md-12 pt05">
+
+                {if isset($USER)}
+                    <div class="referrer" data-referrer="{$USER["meetup_id"]}" style="display:none;">
+                        <a href="{$ROOT}miembros/{$USER["meetup_id"]}" class="image-wrapper">
+                            <span class="picture clearfix" style="background-image: url('{$USER["photo_url"]}')"></span>
+                        </a>
+                    </div>
+                {/if}
+                </div>
+
+                <div class="col-md-12">
                     <p class="pb0">
-                        <a href="#" class="btn btn-block btn-primary">
+                        {literal}<script>{/literal}
+                            var refered = {$USERPROFILE["meetup_id"]};
+                        {literal}</script>{/literal}
+                        <a href="#" class="btn btn-block {if {$ISRECOMMENDED}}recommended btn-danger{else}btn-primary{/if}"
+                           id="vote"
+                           {if isset({$USER}) == false}data-toggle="modal" data-target="#loginModal"{/if}
+                        >
+                            <i class="fa fa-times"></i>
                             <i class="fa fa-thumbs-o-up"></i> Recomendar
                         </a>
                     </p>
@@ -244,15 +268,32 @@
 
 </div>
 
+{if isset($USER) == false}
 
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Esta acción requiere estar identificado</h4>
+                </div>
+                <div class="modal-body">
+                    <a href="{$ROOT}login/login.php?returnURL={$returnURL}" class="btn btn-lg" id="login-btn"><img src="../images/meetup.png"> Entrar ahora</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}
 
 {include file="footer.tpl"}
 <script>
     require([
         'jquery',
-        'resources'
-    ],function($, resources){
-        resources.init();
+        'profile'
+    ],function($, profile){
+        profile.init();
     });
 </script>
 </body>

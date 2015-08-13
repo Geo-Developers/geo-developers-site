@@ -1412,7 +1412,7 @@
 		button:hover,
 		.button:hover {
 			background-color: #43bff0;
-			color: #fff !important;
+			color: #fff;
 		}
 
 		input[type="button"]:active,
@@ -1607,12 +1607,12 @@
 		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
 		text-align: center;
 	}
-    .box img{
+ /*   .box img{
         max-width: 250px;
         max-height: 180px;
         padding:0;
     }
-
+*/
 /* Icons */
 
 	.icon {
@@ -2427,6 +2427,13 @@
 		  padding: 20px 50px;
 		  text-transform: uppercase;
 	}
+    #loginModal a#login-btn{
+       margin-top:0;
+    }
+    #loginModal .modal-body{text-align: center;}
+    #loginModal .modal-header{text-align: center;}
+    #loginModal .modal-header,
+    #loginModal .modal-footer{border:0}
 	a#login-btn:hover{
 		color: red !important;
 		background-color: #FFEAEA ;
@@ -2461,7 +2468,8 @@
         margin-bottom: 1.5em;
     }
     #member-list .picture,
-    #rankings-page .picture
+    #rankings-page .picture,
+    .referrer .picture,
     {
         background-size: 100%;
         background-repeat: no-repeat;
@@ -2472,12 +2480,29 @@
         width: 80px;
     }
     #member-list .image-wrapper,
-    #rankings-page .image-wrapper{
+    #rankings-page .image-wrapper,
+    .referrer .image-wrapper{
         background-color: black;
         width: 80px;
         height: 80px;
         float: left;
         margin-right: 10px;
+    }
+    .referrer .picture{
+        width: 100%;
+        height: 100%;
+    }
+    .referrer .image-wrapper{
+        height: 65px;
+        height: 70px;
+        margin: 0;
+        width: 100%;
+    }
+    .referrer .picture{
+        display: block;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     #rankings-page .picture,
     #rankings-page .image-wrapper{
@@ -2551,6 +2576,34 @@
         padding: 0;
     }
 
+    #profile-page #referrers p{padding:0;}
+    .referrer {
+        padding: 15px 7px 0;
+        width: 32%;
+        display: inline-block;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    .referrer:nth-child(3n+1){
+        /*1, 4, 7*/
+        padding-left: 0px;
+    }
+    .referrer:nth-child(3n+2){
+        /*1, 4, 7*/
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    .referrer:nth-child(3n+3){
+        /*1, 4, 7*/
+        padding-right: 0px;
+    }
+    #vote.recommended .fa-thumbs-o-up{
+        display: none;
+    }
+    #vote:not(.recommended) .fa-times{
+        display: none;
+    }
     #profile-page .progress{
         margin-top: .5em;
         margin-bottom: 0;
@@ -2585,6 +2638,24 @@
     .icon.facebook{color:#3b5998;}
     .icon.twitter{color:#00aced;}
     .icon.flickr{color:#ff0084;}
+
+    .modal {
+        text-align: center;
+    }
+    @media screen and (min-width: 768px) {
+        .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 100%;
+        }
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
 
     #ranking-content{
         padding: 2em 1em;

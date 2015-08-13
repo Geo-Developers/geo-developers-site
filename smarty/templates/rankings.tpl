@@ -14,7 +14,7 @@
     </div>
 
     <div id="content">
-        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <ul id="tabs" class="tabs nav nav-tabs" data-tabs="tabs">
             <li class="active"><a href="#members" data-toggle="tab"><i class="fa fa-users"></i> Miembros</a></li>
             <li><a href="#tech" data-toggle="tab"><i class="fa fa-cogs"></i> Tecnologías</a></li>
         </ul>
@@ -22,7 +22,7 @@
             <div class="tab-pane active" id="members">
                 <div class="col-md-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading text-center">Top 20 - Recomendados <i class="fa fa-info-circle"></i> </div>
+                        <div class="panel-heading text-center">Top {$NTOPRECOMMENDED} - Recomendados <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Este listado muestra los miembros que más recomendaciones han recibido por parte de otros miembros"></i> </div>
                         <table class="table text-center">
                             <thead>
                             <tr>
@@ -32,11 +32,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {for $I=0 to $NTOPOTHERS-1}
+                            {for $I=0 to $NTOPRECOMMENDED-1}
                                 <tr>
-                                    <td>{$I}</td>
-                                    <td class="text-left">n.a.</td>
-                                    <td>n.a.</td>
+                                    <td>{$I+1}</td>
+                                    <td class="text-left">
+                                        <a href="{$ROOT}miembros/{$TOPRECOMMENDED[$I]["meetup_id"]}" class="capitalize">
+                                            <div class="image-wrapper">
+                                                <div class="picture" style="background-image: url('{$TOPRECOMMENDED[$I]["photo_url"]}')"></div>
+                                            </div>
+                                            {$TOPRECOMMENDED[$I]["name"]}</a>
+                                    </td>
+                                    <td>{$TOPRECOMMENDED[$I]["count"]}</td>
                                 </tr>
                             {/for}
                             </tbody>
@@ -46,7 +52,7 @@
 
                 <div class="col-md-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading text-center">Top 20 - Giseros <i class="fa fa-info-circle"></i> </div>
+                        <div class="panel-heading text-center">Top 20 - Giseros <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Miembros con más conocimientos o intereses GIS"></i> </div>
                         <table class="table text-center">
                             <thead>
                             <tr>
@@ -58,7 +64,7 @@
                             <tbody>
                             {for $I=0 to $NTOPGISEROS-1}
                                 <tr>
-                                    <td>{$I}</td>
+                                    <td>{$I+1}</td>
                                     <td class="text-left">
                                         <a href="{$ROOT}miembros/{$TOPGISEROS[$I]["meetup_id"]}" class="capitalize">
                                         <div class="image-wrapper">
@@ -76,7 +82,7 @@
 
                 <div class="col-md-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading text-center">Top 20 - Curiosos <i class="fa fa-info-circle"></i> </div>
+                        <div class="panel-heading text-center">Top 20 - Curiosos <i class="fa fa-info-circle"  data-toggle="tooltip" data-placement="top" title="Miembros con más conocimientos o intereses GIS y no GIS"></i> </div>
                         <table class="table text-center">
                             <thead>
                             <tr>
@@ -88,7 +94,7 @@
                             <tbody>
                             {for $I=0 to $NTOPEXPERTS-1}
                                 <tr>
-                                    <td>{$I}</td>
+                                    <td>{$I+1}</td>
                                     <td class="text-left">
                                         <a href="{$ROOT}miembros/{$TOPEXPERTS[$I]["meetup_id"]}" class="capitalize">
                                             <div class="image-wrapper">
@@ -117,14 +123,19 @@
                             <tr>
                                 <th>#</th>
                                 <th class="text-left">Tecnología</th>
-                                <th>Miembros</th>
+                                <th class="text-center"><i class="fa fa fa-users"></i></th>
                             </tr>
                             </thead>
                             <tbody>
                             {for $I=0 to $NTOPGIS-1}
                                 <tr>
-                                    <td>{$I}</td>
-                                    <td class="text-left"><a href="../?tech={$TOPGIS[$I]["name"]}">{$TOPGIS[$I]["name"]}</a></td>
+                                    <td>{$I+1}</td>
+                                    <td class="text-left">
+                                        <a  href="../?tech={$TOPGIS[$I]["name"]}"
+                                            data-toggle="tooltip" data-placement="bottom" title="{$TOPGIS[$I]["desc"]}">
+                                            {$TOPGIS[$I]["name"]}
+                                        </a>
+                                    </td>
                                     <td>{$TOPGIS[$I]["count"]}</td>
                                 </tr>
                             {/for}
@@ -142,13 +153,13 @@
                             <tr>
                                 <th>#</th>
                                 <th class="text-left">Tecnología</th>
-                                <th>Miembros</th>
+                                <th class="text-center"><i class="fa fa fa-users"></i></th>
                             </tr>
                             </thead>
                             <tbody>
                             {for $I=0 to $NTOPOTHERS-1}
                                 <tr>
-                                    <td>{$I}</td>
+                                    <td>{$I+1}</td>
                                     <td class="text-left"><a href="../?tech={$TOPOTHERS[$I]["name"]}">{$TOPOTHERS[$I]["name"]}</a></td>
                                     <td>{$TOPOTHERS[$I]["count"]}</td>
                                 </tr>
@@ -170,11 +181,9 @@
 <script>
     require([
         'jquery',
-        'resources',
-        'tab'
+        'resources'
     ],function($, resources){
         resources.init();
-        $('#tabs').tab();
     });
 </script>
 
