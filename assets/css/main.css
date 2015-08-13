@@ -2384,25 +2384,26 @@
 		margin: 0 auto;
 	}
 
-    .mt0{margin-top: 0em; !important}
-    .mt1{margin-top: 1em; !important}
-    .mt2{margin-top: 2em; !important}
-    .mt3{margin-top: 3em; !important}
+    .mt0{margin-top: 0em !important;}
+    .mt1{margin-top: 1em !important;}
+    .mt2{margin-top: 2em !important;}
+    .mt3{margin-top: 3em !important;}
 
-    .mb0{margin-bottom: 0em; !important}
-    .mb1{margin-bottom: 1em; !important}
-    .mb2{margin-bottom: 2em; !important}
-    .mb3{margin-bottom: 3em; !important}
+    .mb0{margin-bottom: 0em !important;}
+    .mb1{margin-bottom: 1em !important;}
+    .mb2{margin-bottom: 2em !important;}
+    .mb3{margin-bottom: 3em !important;}
 
-    .pt0{padding-top: 0em; !important}
-    .pt1{padding-top: 1em; !important}
-    .pt2{padding-top: 2em; !important}
-    .pt3{padding-top: 3em; !important}
+    .pt0{padding-top: 0em !important;}
+    .pt05{padding-top: .5em !important;}
+    .pt1{padding-top: 1em !important;}
+    .pt2{padding-top: 2em !important;}
+    .pt3{padding-top: 3em !important;}
 
-    .pb0{padding-bottom: 0em; !important}
-    .pb1{padding-bottom: 1em; !important}
-    .pb2{padding-bottom: 2em; !important}
-    .pb3{padding-bottom: 3em; !important}
+    .pb0{padding-bottom: 0em !important;}
+    .pb1{padding-bottom: 1em !important;}
+    .pb2{padding-bottom: 2em !important;}
+    .pb3{padding-bottom: 3em !important;}
 	/*************************************
 	*
 	*							LOGIN PAGE
@@ -2459,7 +2460,9 @@
         padding: 0;
         margin-bottom: 1.5em;
     }
-    #member-list .picture{
+    #member-list .picture,
+    #rankings-page .picture
+    {
         background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -2468,12 +2471,21 @@
         float: left;
         width: 80px;
     }
-    #member-list .image-wrapper{
+    #member-list .image-wrapper,
+    #rankings-page .image-wrapper{
         background-color: black;
         width: 80px;
         height: 80px;
         float: left;
         margin-right: 10px;
+    }
+    #rankings-page .picture,
+    #rankings-page .image-wrapper{
+        width: 30px;
+        height: 30px;
+    }
+    #members tbody td{
+        line-height: 30px;
     }
     #members-page button:hover{
         color: #333 !important;
@@ -2547,10 +2559,36 @@
     #profile-page .text-label{
         display: inline-block;
         font-weight: bold;
-        width: 140px;
+        /*width: 140px;*/
     }
+    #profile-page #picture{
+        position: absolute;right:15px;top:15px
+    }
+    #profile-page #picture img{
+        padding-top: 15px;
+        max-height: 110px;
+    }
+    #profile-page .recommendations img{
+        width: 100%
+    }
+    #profile-page #social-networks{
+        padding-right:.5em;
+        font-size: 1.2em;
+    }
+    #profile-page #social-networks li{
+        padding-left: 1em
+    }
+    .icon.meetup{color: #ff0530;}
+    .icon.github{color: #222;}
+    .icon.facebook{color:#3b5998;}
+    .icon.twitter{color:#00aced;}
+    .icon.flickr{color:#ff0084;}
 
-
+    #ranking-content{
+        padding: 2em 1em;
+        border: 1px solid #ddd;
+        border-top: 0;
+    }
 @font-face {
     font-family: 'icomoon';
     src:url('../../fonts/icomoon.eot?-nhmkw');

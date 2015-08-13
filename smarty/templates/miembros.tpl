@@ -35,7 +35,7 @@
             </form>
         </div>
         <div class="col-md-offset-4 col-md-2 text-right">
-            <a href="" class="mt1" style="display: inline-block"><i class="fa fa-pie-chart fa-lg"></i> Estadísticas</a>
+            <a href="rankings/" class="mt1" style="display: inline-block"><i class="fa fa-trophy"></i> Rankings</a>
 
             <!-- asd-->
         </div>
@@ -64,7 +64,7 @@
                         </div>
                         <p><a href="{$USERS[$I]["meetup_id"]}">{$USERS[$I]["name"]}</a></p>
                         {if isset($USERS[$I]["progress"])}
-                            <p><small>Eficacia del perfil:</small></p>
+                            <p><small>Porcentaje de perfil completado:</small></p>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                      style="width: {$USERS[$I]["progress"]}%">

@@ -15,13 +15,7 @@ if(isset($_GET['tech']) && $_GET['tech']){
             "    INNER JOIN skills".
             "        ON user_skills.skill_id = skills.id".
             " WHERE skills.name = '".$_GET['tech']."' ORDER BY user_skills.level DESC";
-/*
-    $ids = $db->subQuery ();
-    $ids->where ("qty", 2, ">");
-    $ids->get ("products", null, "userId");
 
-    $db->where ("id", $ids, 'in');
-    $res = $db->get ("users");*/
     $users = $db->rawQuery($query);
 
     $smarty->assign('TECH', $_GET['tech']);

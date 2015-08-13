@@ -133,8 +133,6 @@ foreach($GISTech as $tech){
 }
 
 //prettyprint($GISTechLower);
-//die("ya");
-//$GISTechLower = array_map('strtolower', $GISTech);
 
 /*function in_arrayi($needle, $haystack) {
     if(is_array($haystack)){
@@ -209,7 +207,6 @@ function skill_exists($skills, $tech)
         }
     }
 
-
     return $response;
 
 }
@@ -217,23 +214,13 @@ function skill_exists($skills, $tech)
 
 function slugify($text)
 {
-    // replace non letter or digits by -
     $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-
-    // trim
     $text = trim($text, '-');
-
-    // transliterate
     $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-    // lowercase
     $text = strtolower($text);
-
-    // remove unwanted characters
     $text = preg_replace('~[^-\w]+~', '', $text);
 
-    if (empty($text))
-    {
+    if (empty($text)){
         return 'n-a';
     }
 
@@ -246,7 +233,6 @@ function in_array_r($needle, $haystack, $strict = false) {
             return true;
         }
     }
-
     return false;
 }
 //prettyprint($GISTech);

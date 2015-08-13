@@ -4,4 +4,5 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^(.*)$ ./member.php?query=$1
+RewriteRule ^rankings ./rankings.php?id=$1
+RewriteRule ^(\d+)$ ./member.php?query=$1

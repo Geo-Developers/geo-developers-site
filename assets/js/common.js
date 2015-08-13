@@ -6,6 +6,7 @@ var conf = {
         'bootstrap' : 				{ deps: ['jquery'], exports: 'jquery' },
         'bootstrap/modal': 		    { deps: ['jquery'], exports: '$.fn.modal' },
         'bootstrap/dropdown':       { deps: ['jquery'], exports: '$.fn.dropdown' },
+        'bootstrap/tab':            { deps: ['jquery'], exports: '$.fn.tab' },
         'typeahead':                { deps: ['jquery'], exports: '$.fn.typeahead' },
         'jsrender': 				{ deps: ['jquery'], exports: '$.templates' },
         'util': 					['jquery'],
@@ -37,6 +38,9 @@ var conf = {
         ],
         dropdown:[
             "dropdown"
+        ],
+        tab:[
+            "tab"
         ]
 
     }
