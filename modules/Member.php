@@ -1,7 +1,7 @@
 <?php
-require("../config.php");
-require("../modules/Skill.php");
-require("../modules/prettyprint.php");
+require_once '../config.php';
+require_once '../modules/Skill.php';
+require_once '../modules/prettyprint.php';
 
 class Member
 {
@@ -92,7 +92,14 @@ class Member
             prettyprint($args);
             die("You mush set ona param: meetup_id or meetup_response");
         }
+    }
 
+    public function update($values){
+        $this->name = $values["name"];
+        $this->last_name = $values["last_name"];
+        $this->bio = $values["bio"];
+        //$this->email = $values["email"];
+        $this->location = $values["location"];
     }
 
     public function suscribeToMailchimp(){

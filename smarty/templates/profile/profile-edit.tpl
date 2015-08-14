@@ -1,23 +1,52 @@
-<form>
+{if isset($MESSAGE)}
+    {$MESSAGE}
+{/if}
+<form action="{$ROOT}miembros/{$PROFILE["meetup_id"]}/editar" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
-                    <p id="picture"><img src="{$PROFILE["photo_url"]}"></p>
                     <h1>Edición de perfil</h1>
                 </div>
             </div>
             <p class="row">
                 <span class="text-label col-md-3 pt05">Nombre:</span>
-                <span class="col-md-9 pt05"><input class="form-control" value="{$PROFILE["name"]}"></span>
+                <span class="col-md-9 pt05">
+                    <input class="form-control" value="{$PROFILE["name"]}" name="name">
+                </span>
+            </p>
+            <p class="row">
+                <span class="text-label col-md-3 pt05">Apellidos:</span>
+                <span class="col-md-9 pt05">
+                    <input class="form-control" value="{$PROFILE["last_name"]}" name="last_name">
+                </span>
+            </p>
+            <p class="row">
+                <span class="text-label col-md-3 pt05">Foto:</span>
+                <span class="col-md-9 pt05">
+                    <input type="file" id="exampleInputFile" name="photo">
+                    <small class="help-block">
+                        <span id="picture"><img src="{$PROFILE["photo_url"]}"></span>
+                        Si seleccionas un archivo reemplazarás <a href="{$PROFILE["photo_url"]}">tu foto actual</a>.
+                    </small>
+                </span>
             </p>
             <p class="row">
                 <span class="text-label col-md-3 pt05">Ubicación:</span>
-                <span class="col-md-9 pt05">{$PROFILE["location"]}</span>
+                <span class="col-md-9 pt05">
+                    <input class="form-control" value="{$PROFILE["location"]}" name="location">
+                    <small class="help-block">
+                        Es probable que en un futuro integremos un buscador de profesionales
+                        por localización, por lo que cuanto más preciso seas,más preciso será
+                        el resultado.
+                    </small>
+                </span>
             </p>
             <p class="row">
                 <span class="text-label col-md-3 pt05">Bio:</span>
-                            <span class="col-md-9 pt05">{$PROFILE["bio"]|default:'No disponible'}
+                <span class="col-md-9 pt05">
+                    <textarea class="form-control" name="bio">{$PROFILE["bio"]}</textarea>
+                </span>
             </p>
             <p class="row">
                 <span class="text-label col-md-3 pt05">Profesión:</span>
@@ -87,6 +116,8 @@
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-default">Guardar</button>
+
     <hr class="clearfix mt1">
 
     <h2>Conocimientos e intereses:</h2>

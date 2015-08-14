@@ -4,12 +4,20 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
-<body id="profile-page">
+<body id="profile-{$ACTION}-page">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px;padding-left: 0;">
-            <a href="../../">Home</a> &gt; <a href="{$ROOT}miembros">Miembros</a> &gt; Perfil de {$PROFILE["name"]}
+
+            <a href="{$ROOT}">Home</a> &gt;
+                <a href="{$ROOT}miembros">Miembros</a> &gt;
+                {if $ACTION == "view"}
+                    Perfil de {$PROFILE["name"]}
+                {else}
+                    <a href="{$ROOT}miembros/{$PROFILE["meetup_id"]}">Perfil de {$PROFILE["name"]}</a> &gt;
+                        Editar
+                {/if}
         </div>
     </div>
     <div class="row">

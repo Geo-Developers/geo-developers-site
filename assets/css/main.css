@@ -2621,21 +2621,26 @@
         font-weight: bold;
         /*width: 140px;*/
     }
-    #profile-page #picture{
+    #profile-view-page #picture{
         position: absolute;right:15px;top:15px
     }
-    #profile-page #picture img{
+    #profile-view-page #picture img{
         padding-top: 15px;
         max-height: 110px;
     }
-    #profile-page .recommendations img{
+    #profile-edit-page #picture img{
+        width: 40px;
+        margin-right: 1em;
+    }
+
+    #profile-view-page .recommendations img{
         width: 100%
     }
-    #profile-page #social-networks{
+    #profile-view-page #social-networks{
         padding-right:.5em;
         font-size: 1.2em;
     }
-    #profile-page #social-networks li{
+    #profile-view-page #social-networks li{
         padding-left: 1em
     }
     .icon.meetup{color: #ff0530;}

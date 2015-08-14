@@ -8,10 +8,10 @@ $userprofile = $GeodevDB->getUser(array("type" => "userprofile"));
 
 if($userprofile){
 
-    $smarty->assign('PROFILE', $userprofile);
-    $smarty->assign('SKILLSGIS', $GeodevDB->getUserSkills(array("type" => "gis")));
-    $smarty->assign('SKILLS', $GeodevDB->getUserSkills(array("type" => "other")));
-    $smarty->assign('REFERRERS', $referrers = $GeodevDB->getReferrers());
+    $smarty->assign('PROFILE',      $userprofile);
+    $smarty->assign('SKILLSGIS',    $GeodevDB->getUserSkills(array("type" => "gis")));
+    $smarty->assign('SKILLS',       $GeodevDB->getUserSkills(array("type" => "other")));
+    $smarty->assign('REFERRERS',    $referrers = $GeodevDB->getReferrers());
     $smarty->assign('ACTION', "view");
 
     $smarty->assign('ISRECOMMENDED', false);
