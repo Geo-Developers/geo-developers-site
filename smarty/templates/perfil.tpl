@@ -226,15 +226,25 @@
                     }
 
                     {literal}</script>{/literal}
-                <p>
-                    <small>¿Eres tú?, puedes <a href="#">completarlo ahora</a>; o si sabes quién es <a href="#">puedes avísarle</a>.</small>
-                </p>
+                    {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+                        <a href="{$ROOT}miembros/{$USER["meetup_id"]}/editar" class="btn btn-primary btn-block mb1">Editar perfil</a>
+                    {else}
+                        <p>
+                            <small>
+                                {if isset($USER["email"])==false}
+                                    ¿Eres tú?, puedes <a href="#">completarlo ahora</a>; o si sabes quién es <a href="#">puedes avísarle</a>.
+                                {else}
+                                    Si sabes quién es <a href="#">puedes avísarle</a>.
+                                {/if}
+                            </small>
+                        </p>
+                    {/if}
 
                 <!--{$PROFILE["progress"]}%<br>-->
 
             </div>
             <div class="row box mb3 text-center recommendations pb2" id="referrers">
-                {if $NREFERRERS == 0 & $USER["email"]==$PROFILE["email"]}
+                {if $NREFERRERS == 0 && isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
                     <p class="text-label col-md-12 mt1 title">Recomendaciones <i class="fa fa-thumbs-o-up"></i></p>
                     <p>
                         <small>
@@ -279,8 +289,8 @@
                 {/if}
                 </div>
 
-                {if $USER["email"]!=$PROFILE["email"]}
-                <div class="col-md-12">
+
+                <div class="col-md-12" style="{if isset($USER) && $USER["email"]==$PROFILE["email"]}display:none{/if}">
                     <p class="pb0">
                         {literal}<script>{/literal}
                             var refered = {$PROFILE["meetup_id"]};
@@ -288,7 +298,7 @@
                         <a href="#"
                            class="  btn btn-block
                                     {if {$ISRECOMMENDED}}recommended btn-danger{else}btn-primary{/if}
-                                    {if $USER["email"]==$PROFILE["email"]}disabled{/if}
+                                    {if isset($USER) && $USER["email"]==$PROFILE["email"]}disabled{/if}
                                  "
                            id="vote"
                            {if isset({$USER}) == false}data-toggle="modal" data-target="#loginModal"{/if}
@@ -298,14 +308,23 @@
                             <i class="fa fa-thumbs-o-up"></i> Recomendar
                         </a>
                     </p>
-
+                    <!-- TODO: Modal con formulario de contacto -->
+                    <!--
                     <p class="pb0 pt05">
-                        <a href="#" class="btn btn-block {if $PROFILE["email"] & $USER["email"]!=$PROFILE["email"]}btn-danger"{else}disabled btn-default" title="No tenemos sus datos de contacto"{/if}>
+                        <a href="#" class="btn btn-block
+                            {if $PROFILE["email"] && $USER["email"]!=$PROFILE["email"]}
+                                btn-danger"
+                            {else}
+                               disabled btn-default" title="No tenemos sus datos de contacto"
+                            {/if}
+                        >
+
                         <i class="fa fa-envelope-o"></i> Contactar
                         </a>
                     </p>
+                    -->
                 </div>
-                {/if}
+
             </div>
             <!--<div class="row box mb3">
 
