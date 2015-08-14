@@ -16,18 +16,18 @@
             <form action="" method="GET" id="search-form">
                 <div class="form-group">
 
-                        <label>Filtrar:</label>
-                        <div id="input-container">
-                            <div class="input-group">
-                                <input name="tech" type="text" autocomplete="off" id="search" class="form-control" data-provide="typeahead"
-                                       value="{if isset($TECH)}{$TECH}{/if}"
-                                       placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc" >
+                    <label class="search">Filtrar:</label>
+                    <div id="input-container">
+                        <div class="input-group">
+                            <input name="tech" type="text" autocomplete="off" id="search" class="form-control" data-provide="typeahead"
+                                   value="{if isset($TECH)}{$TECH}{/if}"
+                                   placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc" >
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
                                 </span>
-                            </div>
                         </div>
-                        <p class="mt1">Resultados: {if $NUMUSERS == -1}0{else}{$NUMUSERS}{/if} de {$TOTALUSERS}</p>
+                    </div>
+                    <p class="mt1">Resultados: {if $NUMUSERS == -1}0{else}{$NUMUSERS}{/if} de {$TOTALUSERS}</p>
 
 
 
@@ -35,13 +35,13 @@
             </form>
         </div>
         <div class="col-md-offset-4 col-md-2 text-right">
-            <a href="rankings/" class="mt1" style="display: inline-block"><i class="fa fa-trophy"></i> Rankings</a>
+            <a href="rankings/" class="btn btn-warning btn-block"><i class="fa fa-trophy"></i> Rankings</a>
 
             <!-- asd-->
         </div>
         <div class="col-md-2  text-right">
 
-            <a href="" class="mt1" style="display: inline-block"><i class="fa fa-question-circle fa-lg"></i> Tecnologías</a>
+            <button class="btn btn-default btn-block" data-toggle="modal" data-target="#modalTechs"><i class="fa fa-question-circle fa-lg"></i> Tecnologías</button>
             <!-- asd-->
         </div>
     </div>
@@ -100,6 +100,54 @@
 </div>
 
 </div>
+
+<div class="modal fade" id="modalTechs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Tecnologías</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <small>El buscador permite filtrar por cualquier conocimiento o aptitud que tenga
+                    algún miembro en la comunidad, pero como actualmente son {$NUMSKILLS} hemos decidido
+                    que en las sugerencias sólo se muestren las relacionadas con el geo-desarrollo.</small>
+                </p>
+                <p>
+                    <small>Igualmente aquí te dejamos una lista de todos los conocimientos y aptitudes de la base
+                    de datos para que sepas por qué valores puedes buscar:</small>
+                </p>
+
+                <form class="clearfix form-inline">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-3 mt1 mb1">Geo-Desarrollo:</label>
+                            <select class="col-md-9 input-group form-control mt1 mb1">
+                                {for $I=0 to $NUMGEOSKILLS-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
+                            </select>
+                            <label class="col-md-3">Otros</label>
+                            <select class="col-md-9 input-group form-control ">
+                                {for $I=0 to $NUMSKILLS-1}<option>{$SKILLS[$I]["name"]}</option>{/for}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="mt2">
+                    <small>Si echas en falta alguna tecnología o conocimiento GIS puedes colaborar sugiriendolo
+                    en esta <a href="https://docs.google.com/spreadsheets/d/1Ewzh5miL5Kh4Qqb3d49pnKXq-zC3Bv7I6lOnbjW0kL8/edit?usp=sharing" rel="popover" data-placement="bottom" data-img="{$ROOT}images/thumb-up.gif">hoja de cálculo de Google Drive</a>. La identificación de estas
+                    tecnologías es muy importante para ayudar a los miembros tanto a buscar profesionales
+                    como a la hora de completar su perfiles, por lo que cualquier ayuda es bienvenida.</small>
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {include file="footer.tpl"}
 <script>
 

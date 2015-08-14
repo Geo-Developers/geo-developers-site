@@ -22,17 +22,27 @@ if(isset($_GET['tech']) && $_GET['tech']){
 }else{
     $db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
     $db->orderBy("p.progress","desc");
-    $users = $db->get("profiles p",/* 24*/null, "u.meetup_id, u.name,  p.progress, p.photo_url, p.location");
+    $users = $db->get("profiles p",24, "u.meetup_id, u.name,  p.progress, p.photo_url, p.location");
 }
 
 $total = $db->getValue("profiles", "count(meetup_id)");
 
+
+$db->where("is_gis IS NULL")->where("is_important",1);
+$db->join("user_skills u", "u.skill_id=s.id", "LEFT");
+$db->orderBy("s.name","asc");
+$skills = $db->get("skills s", null , "DISTINCT s.name");
+
+$numSkills = sizeof($skills);
+
 $db->where("is_gis","1");
 $db->orderBy("name","asc");
-$skills = $db->get("skills");
+$geoskills = $db->get("skills");
 
-$smarty->assign('NUMGEOSKILLS', sizeof($skills)-1);
-$smarty->assign('GEOSKILLS', $skills);
+$smarty->assign('NUMSKILLS', sizeof($skills)-1);
+$smarty->assign('SKILLS', $skills);
+$smarty->assign('NUMGEOSKILLS', sizeof($geoskills)-1);
+$smarty->assign('GEOSKILLS', $geoskills);
 $smarty->assign('TOTALUSERS', $total);
 $smarty->assign('NUMUSERS', sizeof($users));
 $smarty->assign('USERS', $users);

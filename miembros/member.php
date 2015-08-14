@@ -20,8 +20,6 @@ if($user){
     $numSkillsGIS = sizeof($skillsGis);
     $numSkills = sizeof($skills);
 
-
-
     $user["joined"] = date('d/m/Y', strtotime($user["joined"]));
     if(isset($user["twitter_url"])){
         $user["twitter_name"] = $user["twitter_url"];

@@ -1,14 +1,6 @@
 define(['jquery','cookies','base', 'bootstrap','jsrender', 'modal'], function($,Cookies,base){
     var Methods = {
         init: function(type){
-            $('i[rel=popover]').popover({
-                html: true,
-                placement: 'left',
-                trigger: 'hover',
-                content: function () {
-                    return '<img src="'+$(this).data('img') + '" style="width:200px" />';
-                }
-            });
             //debugger;
             $('#donut_single[rel=popover]').popover({
                 html: true,

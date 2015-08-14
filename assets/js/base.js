@@ -3,7 +3,7 @@
 */
 "use strict";
 
-define(['jquery', 'dropdown', 'tab', 'tooltip'], function($) {
+define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
 
   var Methods = {
  
@@ -16,6 +16,15 @@ define(['jquery', 'dropdown', 'tab', 'tooltip'], function($) {
                     showCookies = false;
                 }
             }catch(e){}
+
+            $('i[rel=popover], a[rel=popover]').popover({
+                html: true,
+                placement: $(this).data('placement'),
+                trigger: 'hover',
+                content: function () {
+                    return '<img src="'+$(this).data('img') + '" style="width:200px" />';
+                }
+            });
 
 			if(showCookies){
                 document.getElementById('cookies').className = "show";
