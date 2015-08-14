@@ -3,9 +3,8 @@ session_start();
 
 require_once 'smarty-3.1.21/libs/Smarty.class.php';
 require_once 'vendor/autoload.php';
-require_once 'modules/GeodevDB.php';
-require_once 'modules/Member.php';
-
+require_once $ROOTPATH.'modules/GeodevDB.php';
+require_once $ROOTPATH.'modules/Member.php';
 ini_set('date.timezone', 'Europe/Berlin');
 $smarty = new Smarty();
 

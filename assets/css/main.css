@@ -1186,7 +1186,7 @@
 		margin: 0 0 0.5em 0;
 	}
 
-	form input[type=text],
+	/*form input[type=text],
 	form input[type=email],
 	form input[type=password],
 
@@ -1206,7 +1206,7 @@
 		color: #bbb;
 		box-shadow: inset 0px 2px 3px 1px rgba(0, 0, 0, 0.05), 0px 1px 0px 0px rgba(255, 255, 255, 0.025);
 		width: 100%;
-	}
+	}*/
 
 		form input[type=text]:focus,
 		form input[type=email]:focus,
@@ -2569,9 +2569,14 @@
         max-height: 60px;
     }
 
-    #modalTechs label{
+    #modalTechs label,
+    #profile-edit-page span.text-label{
         line-height: 34px;
         margin: 0;
+    }
+    #profile-edit-page span.text-label,
+    #profile-view-page span.text-label{
+        font-weight: bold;
     }
 
     ul.inline,
@@ -2581,7 +2586,7 @@
         padding: 0;
     }
 
-    #profile-page #referrers p{padding:0;}
+    #profile-view.page #referrers p{padding:0;}
     .referrer {
         padding: 15px 7px 0;
         width: 32%;
@@ -2609,14 +2614,14 @@
     #vote:not(.recommended) .fa-times{
         display: none;
     }
-    #profile-page .progress{
+    #profile-view.page .progress{
         margin-top: .5em;
         margin-bottom: 0;
     }
     .strong{
         font-weight: bold;
     }
-    #profile-page .text-label{
+    #profile-view.page .text-label{
         display: inline-block;
         font-weight: bold;
         /*width: 140px;*/

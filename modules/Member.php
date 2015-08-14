@@ -1,7 +1,7 @@
 <?php
-require_once '../config.php';
-require_once '../modules/Skill.php';
-require_once '../modules/prettyprint.php';
+require_once 'config.php';
+require_once 'modules/Skill.php';
+require_once 'modules/prettyprint.php';
 
 class Member
 {
@@ -97,9 +97,20 @@ class Member
     public function update($values){
         $this->name = $values["name"];
         $this->last_name = $values["last_name"];
-        $this->bio = $values["bio"];
-        //$this->email = $values["email"];
+        $this->email = $values["email"];
         $this->location = $values["location"];
+        $this->bio = $values["bio"];
+        $this->studies = $values["studies"];
+
+        $position = array();
+        if( isset($values["worker"]) ){ array_push($position, $values["worker"]);}
+        if( isset($values["student"]) ){ array_push($position, $values["student"]);}
+        if( isset($values["unemployed"]) ){ array_push($position, $values["unemployed"]);}
+        if( isset($values["freelance"]) ){ array_push($position, $values["freelance"]);}
+        $this->position = implode(",", $position);
+
+        $this->occupation = $values["occupation"];
+
     }
 
     public function suscribeToMailchimp(){
@@ -153,6 +164,21 @@ class Member
             "last_visit"    => $this->last_visit,
             "bio"           => $this->bio
         );
+    }
+
+    public function getUserProfile(){
+        $userprofile = array_merge(
+            $this->getUser(),
+            $this->getProfile()
+        );
+
+        $userprofile["joined"] = date('d/m/Y', strtotime($userprofile["joined"]));
+        if(isset($userprofile["twitter_url"])){
+            $userprofile["twitter_name"] = $userprofile["twitter_url"];
+            $userprofile["twitter_url"] = "http://www.twitter.com/".substr($userprofile["twitter_url"], 1);
+        }
+
+        return $userprofile;
     }
 
     public function getSkills(){

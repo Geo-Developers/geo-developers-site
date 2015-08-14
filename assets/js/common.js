@@ -7,7 +7,7 @@ var conf = {
         'bootstrap/modal': 		    { deps: ['jquery'], exports: '$.fn.modal' },
         'bootstrap/dropdown':       { deps: ['jquery'], exports: '$.fn.dropdown' },
         'bootstrap/tab':            { deps: ['jquery'], exports: '$.fn.tab' },
-        'bootstrap/tooltip':            { deps: ['jquery'], exports: '$.fn.tooltip' },
+        'bootstrap/tooltip':        { deps: ['jquery'], exports: '$.fn.tooltip' },
         'typeahead':                { deps: ['jquery'], exports: '$.fn.typeahead' },
         'jsrender': 				{ deps: ['jquery'], exports: '$.templates' },
         'util': 					['jquery'],
@@ -46,6 +46,7 @@ var conf = {
         tooltip:[
             "tooltip"
         ]
+
 
     }
 };

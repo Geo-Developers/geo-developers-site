@@ -1,7 +1,7 @@
 <?php
-require_once '../config.php';
-require_once '../modules/Skill.php';
-require_once '../modules/prettyprint.php';
+
+require_once 'modules/Skill.php';
+require_once 'modules/prettyprint.php';
 
 class GeodevDB
 {

@@ -44,7 +44,7 @@
         'jquery',
         'profile'
     ],function($, profile){
-        profile.init();
+        profile.init("{$ACTION}");
     });
 </script>
 </body>

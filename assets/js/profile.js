@@ -1,6 +1,6 @@
-define(['jquery','cookies','base','jsrender'], function($,Cookies,base){
+define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,base){
     var Methods = {
-        init: function(type){
+        init: function(action){
             //debugger;
             $('#donut_single[rel=popover]').popover({
                 html: true,
@@ -12,6 +12,11 @@ define(['jquery','cookies','base','jsrender'], function($,Cookies,base){
                     return html;
                 }
             });
+
+            if(action=="edit"){
+                $("#studies").typeahead({source: studies});
+                $("#occupation").typeahead({source: occupation});
+            }
 
             base.init(Cookies);
             $("#vote").click(function(e){

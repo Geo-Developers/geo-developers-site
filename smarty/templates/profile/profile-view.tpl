@@ -20,17 +20,19 @@
                         <span class="col-md-9 pt05">{$PROFILE["bio"]|default:'No disponible'}
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Profesión:</span>
-            <span class="col-md-9 pt05">{$PROFILE["occupation"]|default:'Desconocida'}</span>
-        </p>
-        <p class="row">
-            <span class="text-label col-md-3 pt05">Cargo:</span>
-            <span class="col-md-9 pt05">{$PROFILE["position"]|default:'Desconocido'}</span>
-        </p>
-        <p class="row">
             <span class="text-label col-md-3 pt05">Estudios:</span>
             <span class="col-md-9 pt05">{$PROFILE["studies"]|default:'Desconocidos'}</span>
         </p>
+        <p class="row">
+            <span class="text-label col-md-3 pt05">Situación:</span>
+            <span class="col-md-9 pt05">{$PROFILE["position"]|default:'Desconocida'}</span>
+        </p>
+        <p class="row">
+            <span class="text-label col-md-3 pt05">Profesión:</span>
+            <span class="col-md-9 pt05">{$PROFILE["occupation"]|default:'Desconocida'}</span>
+        </p>
+
+
         <div class="row">
             <span class="text-label col-md-3 pt05">Perfiles sociales:</span>
             <ul class="inline col-md-9 pt05" id="social-networks">
