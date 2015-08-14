@@ -2,13 +2,11 @@
 require_once '../config.php';
 require_once 'init.php';
 
-$db->where("meetup_id", $_GET["query"]);
-$user = $db->getOne("users");
+$db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
+$db->where("u.meetup_id", $_GET["query"]);
+$user = $db->getOne("profiles p");
 
 if($user){
-
-
-
     $db->where("meetup_id", $_GET["query"])->where("is_gis", 1);
     $db->join("user_skills u", "u.skill_id=s.id", "LEFT");
     $db->orderBy("u.level","desc");
@@ -21,11 +19,13 @@ if($user){
 
     $numSkillsGIS = sizeof($skillsGis);
     $numSkills = sizeof($skills);
-    $profile = $db->where("meetup_id", $_GET["query"])->getOne("profiles");
-    $profile["joined"] = date('d/m/Y', strtotime($profile["joined"]));
-    if(isset($profile["twitter_url"])){
-        $profile["twitter_name"] = $profile["twitter_url"];
-        $profile["twitter_url"] = "http://www.twitter.com/".substr($profile["twitter_url"], 1);
+
+
+
+    $user["joined"] = date('d/m/Y', strtotime($user["joined"]));
+    if(isset($user["twitter_url"])){
+        $user["twitter_name"] = $user["twitter_url"];
+        $user["twitter_url"] = "http://www.twitter.com/".substr($user["twitter_url"], 1);
     }
 
     $db->where("refered", $_GET["query"]);
@@ -43,7 +43,7 @@ if($user){
         }
     }
 
-    $smarty->assign('PROFILE', $profile);
+    $smarty->assign('PROFILE', $user);
 
     $smarty->assign('NREFERRERS', sizeof($referrers));
     $smarty->assign('REFERRERS', $referrers);
@@ -52,7 +52,7 @@ if($user){
     $smarty->assign('NUMSKILLS', $numSkills);
     $smarty->assign('SKILLSGIS', $skillsGis);
     $smarty->assign('SKILLS', $skills);
-    $smarty->assign('USERPROFILE', $user);
+    //$smarty->assign('USERPROFILE', $user);
     $smarty->display('perfil.tpl');
 }else{
     echo "Error el usuario no existe en la base de datos";

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px;padding-left: 0;">
-            <a href="../../">Home</a> &gt; <a href="{$ROOT}miembros">Miembros</a> &gt; Perfil de {$USERPROFILE["name"]}
+            <a href="../../">Home</a> &gt; <a href="{$ROOT}miembros">Miembros</a> &gt; Perfil de {$PROFILE["name"]}
         </div>
     </div>
     <div class="row">
@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p id="picture"><img src="{$PROFILE["photo_url"]}"></p>
-                            <h1 class="capitalize">{$USERPROFILE["name"]}</h1>
+                            <h1 class="capitalize">{$PROFILE["name"]}</h1>
                         </div>
                     </div>
                     <p class="row">
@@ -180,7 +180,23 @@
             <div class="row box mb3 text-center">
                 <p class="text-label">Eficacia del perfil</p>
                 {literal}<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
-                <div id="donut_single" style="width: 180px; height: 180px;padding:0;margin: 0 45px 15px;"></div>
+                <div id="donut_single" style="width: 180px; height: 180px;padding:0;margin: 0 45px 15px;" rel="popover"></div>
+                <div style="display: none">
+                    <div id="donut_info">
+                        <div style="font-size: .9em">
+                        <p style="margin-bottom: 0"><strong>¿Qué indica la eficacia del perfil?</strong></p>
+                        <p>Indica la visibilidad que tiene el perfil dentro de la página.
+                        Aumentando la eficacia se mejora la posibilidad de que cualquier
+                        visitante de la página encuentre el perfil.</p>
+                        <p>Para calcular la eficacia de un perfil se tienen en cuenta si el usuario a indicado:<br>
+                        1) Conocimientos GIS y no GIS<br>
+                        2) Nivel <u>en todos</u> los conocimientos<br>
+                        3) Bio, Profesión, Cargo y Estudios<br>
+                        4) Perfiles sociales (Twitter y Linkedin)<br>
+                        </p>
+                        </div>
+                    </div>
+                </div>
                 <script>{/literal}
 
                     google.setOnLoadCallback(drawChart);
@@ -218,6 +234,30 @@
 
             </div>
             <div class="row box mb3 text-center recommendations pb2" id="referrers">
+                {if $NREFERRERS == 0 & $USER["email"]==$PROFILE["email"]}
+                    <p class="text-label col-md-12 mt1 title">Recomendaciones <i class="fa fa-thumbs-o-up"></i></p>
+                    <p>
+                        <small>
+                            Aún no has recibido ninguna recomendación.
+                        </small>
+                    </p>
+                    <p>
+                        <small>
+                    ¿Por qué no le echas un poquillo'
+                            de morro y le haces una
+                            "<i rel="popover" data-img="{$ROOT}images/gato_de_srek.gif" style="color:#337ab7;cursor:pointer;text-decoration: underline">kindly suggestion</i>"
+                            a los <a href="{$ROOT}miembros">miembros de la comunidad</a> con los
+                            que tengas confianza?.<br>
+                    </small>
+                    </p>
+                    <p>
+                        <small>
+                            Te ayudará a ganar visibilidad en
+                            <a href="{$ROOT}miembros/rankings/">el ranking</a>. <i class="fa fa-smile-o"></i>
+                    </small>
+                    </p>
+
+                {/if}
                 <p class="text-label col-md-12 mt1 title" style="{if $NREFERRERS == 0}display:none;{/if}">
                     Recomendado por
                 </p>
@@ -239,14 +279,20 @@
                 {/if}
                 </div>
 
+                {if $USER["email"]!=$PROFILE["email"]}
                 <div class="col-md-12">
                     <p class="pb0">
                         {literal}<script>{/literal}
-                            var refered = {$USERPROFILE["meetup_id"]};
+                            var refered = {$PROFILE["meetup_id"]};
                         {literal}</script>{/literal}
-                        <a href="#" class="btn btn-block {if {$ISRECOMMENDED}}recommended btn-danger{else}btn-primary{/if}"
+                        <a href="#"
+                           class="  btn btn-block
+                                    {if {$ISRECOMMENDED}}recommended btn-danger{else}btn-primary{/if}
+                                    {if $USER["email"]==$PROFILE["email"]}disabled{/if}
+                                 "
                            id="vote"
                            {if isset({$USER}) == false}data-toggle="modal" data-target="#loginModal"{/if}
+
                         >
                             <i class="fa fa-times"></i>
                             <i class="fa fa-thumbs-o-up"></i> Recomendar
@@ -254,11 +300,12 @@
                     </p>
 
                     <p class="pb0 pt05">
-                        <a href="#" class="btn btn-block {if $USERPROFILE["email"]}btn-danger"{else}disabled btn-default" title="No tenemos sus datos de contacto"{/if}>
+                        <a href="#" class="btn btn-block {if $PROFILE["email"] & $USER["email"]!=$PROFILE["email"]}btn-danger"{else}disabled btn-default" title="No tenemos sus datos de contacto"{/if}>
                         <i class="fa fa-envelope-o"></i> Contactar
                         </a>
                     </p>
                 </div>
+                {/if}
             </div>
             <!--<div class="row box mb3">
 
