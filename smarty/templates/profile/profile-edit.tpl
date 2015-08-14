@@ -27,7 +27,7 @@
             <p class="row">
                 <span class="text-label col-md-3 pt05">Foto:</span>
                 <span class="col-md-9 pt05">
-                    <input type="file" id="exampleInputFile" name="photo">
+                    <input type="file" id="photo" name="photo">
                     <small class="help-block">
                         <span id="picture"><img src="{$PROFILE["photo_url"]}"></span>
                         Si seleccionas un archivo reemplazarás <a href="{$PROFILE["photo_url"]}">tu foto actual</a>.
