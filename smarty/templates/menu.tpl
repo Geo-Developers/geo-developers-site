@@ -8,8 +8,9 @@
         <li><a href="{$ROOT}webinars">Webinars</a></li>
         <li><a href="{$ROOT}recursos">Recursos</a></li>
         <li><a href="https://github.com/Geo-Developers">Proyectos</a></li>
-        <li>
-            {if isset($USER["logged"])}
+        {if isset($USER["logged"])}
+            <li>
+
                 <div class="dropdown" id="login">
                     <div class="dropdown-toggle" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{$USER["photo_url"]}">
@@ -21,9 +22,15 @@
                         <li><a href="{$ROOT}logout/?returnURL={$returnURL}"><i class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
                     </ul>
                 </div>
-            {/if}
+            </li>
+        {else}
+            <li>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                    Entrar <i class="fa fa-sign-in"></i>
+                </button>
+            </li>
+        {/if}
 
-        </li>
         <!--<li><a href="{$ROOT}nosotros">Sobre nosotros</a></li>-->
     </ul>
 </nav>

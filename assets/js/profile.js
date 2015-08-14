@@ -1,4 +1,4 @@
-define(['jquery','cookies','base', 'bootstrap','jsrender', 'modal'], function($,Cookies,base){
+define(['jquery','cookies','base','jsrender'], function($,Cookies,base){
     var Methods = {
         init: function(type){
             //debugger;
