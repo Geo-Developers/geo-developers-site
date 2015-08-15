@@ -83,7 +83,10 @@ class Member
 
                 $this->db->join("user_skills u", "u.skill_id=s.id", "LEFT");
                 $this->db->where("u.meetup_id", $this->meetup_id);
-                $this->skills = $this->db->get("skills s");
+                $skills = $this->db->get("skills s");
+                foreach($skills as $s){
+                    $this->skills[$s["id"]] = $s;
+                }
             }
         }elseif(isset($args["meetup_response"])){
             $this->loadFromMeetup($args["meetup_response"]);
@@ -116,6 +119,18 @@ class Member
         $this->github_url = $values["github_url"];
         $this->facebook_url = $values["facebook_url"];
         $this->flickr_url = $values["flickr_url"];
+
+        if(isset($values["skills"])){
+
+            //TODO, nuevas que no tenga el user
+            foreach($values["skills"] as $key => $val){
+                $this->skills[$key]["level"] = $val;
+                //echo "$key, $val <br>";
+            }
+            /*prettyprint($this->skills);
+            die("Yeah");*/
+
+        }
     }
 
     public function suscribeToMailchimp(){
@@ -211,6 +226,7 @@ class Member
         foreach($this->skills as $s){
             array_push($data, array(
                 "skill_id"   => $s["id"],
+                "level"      => $s["level"],
                 "meetup_id"  => $this->meetup_id
             ));
         }
@@ -284,9 +300,9 @@ class Member
 
         // Insert new user_skills
         $skills = $this->getUserSkills();
-        //echo "UserSkills:";
-        //prettyprint($skills);
-        //die("<hr>");
+        /*echo "UserSkills:";
+        prettyprint($skills);
+        die("<hr>");*/
         foreach($skills as $s) {
             $this->db -> where("skill_id", $s["skill_id"])
                       -> where("meetup_id", $this->meetup_id);
@@ -299,8 +315,15 @@ class Member
                     die('insetion failed: ' . $this->db->getLastError());
             }else{
                 //prettyprint($s);
+                $this->db -> where("skill_id", $s["skill_id"])
+                          -> where("meetup_id", $this->meetup_id);
+                if(!$this->db->update('user_skills', $s)){
+                    die("User skills could not be updated");
+                }
+
             }
         }
+
 
         //$member = new Member(array("meetup_id" =>$this->meetup_id));
         $this->updateProgress();
@@ -360,13 +383,14 @@ class Member
         $this->db->join("user_skills us", "us.skill_id=s.id", "LEFT");
         $this->db->where("us.meetup_id", $this->meetup_id);
         $this->db->where("s.is_gis", NULL, " is ");
-        $gis_skills = $this->db->get("skills s");
+        $this->db->where("s.is_important", 1);
+        $other_skills = $this->db->get("skills s");
 
         // Have NON-GIS skills 10%
-        if($gis_skills){
+        if($other_skills){
             $progress += 10;
             $all_filled = true;
-            foreach($gis_skills as $skill){
+            foreach($other_skills as $skill){
                 if($skill["level"] == 0){
                     $all_filled = false;
                 }
@@ -450,15 +474,15 @@ class Member
                 ));
 
                 if ($s) {
-                    array_push($this->skills, $s);
+                    $this->skills[$s["id"]] = $s;
                 } else {
-                    array_push($this->skills, array(
+                    $this->skills[$s["id"]] = array(
                         "meetup_skill_id" => $topic["id"],
                         "is_gis" => 0,
                         "synonyms" => NULL,
                         "name" => $topic["name"],
                         "slug" => $topic["urlkey"],
-                    ));
+                    );
                 }
             }
         }

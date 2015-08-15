@@ -1,26 +1,26 @@
 <div class="row">
     <div class="col-md-12">
         <p class="row">
-            <span class="text-label col-md-3 pt05">Nombre:</span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Nombre:</span>
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["name"]}" name="name" type="text">
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Apellidos:</span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Apellidos:</span>
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["last_name"]}" name="last_name" type="text">
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Email: <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tu dirección de email será privada y se usará en función de las preferencias que nos indiques"></i></span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Email: <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tu dirección de email será privada y se usará en función de las preferencias que nos indiques"></i></span>
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["email"]}" name="email" type="email">
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Foto:</span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Foto:</span>
+                <span class="col-md-10 pt05">
                     <input type="file" id="photo" name="photo">
                     <small class="help-block">
                         <span id="picture"><img src="{$PROFILE["photo_url"]}"></span>
@@ -29,8 +29,8 @@
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Ubicación:</span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Ubicación:</span>
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["location"]}" name="location">
                     <!--<small class="help-block">
                         Es probable que en un futuro integremos un buscador de profesionales
@@ -40,25 +40,25 @@
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-3 pt05">Bio:</span>
-                <span class="col-md-9 pt05">
+            <span class="text-label col-md-2 pt05">Bio:</span>
+                <span class="col-md-10 pt05">
                     <textarea class="form-control" name="bio">{$PROFILE["bio"]}</textarea>
                 </span>
         </p>
         <p class="row">
-                <span class="text-label col-md-3 pt05">
+                <span class="text-label col-md-2 pt05">
                     Estudios en:
                     <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc."></i>
                 </span>
-                <span class="col-md-9 pt05">
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["studies"]}" name="studies" id="studies" autocomplete="off" >
                 </span>
         </p>
         <p class="row">
-                <span class="text-label col-md-3 pt05">
+                <span class="text-label col-md-2 pt05">
                     Situación
                 </span>
-                <span class="col-md-9 pt05">
+                <span class="col-md-10 pt05">
                     <!-- select
                     <input class="form-control" value="{$PROFILE["position"]}" name="position" id="position">-->
                     <label class="checkbox-inline">
@@ -80,11 +80,11 @@
                 </span>
         </p>
         <p class="row">
-                <span class="text-label col-md-3 pt05">
+                <span class="text-label col-md-2 pt05">
                     Profesión:
                     <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc."></i>
                 </span>
-                <span class="col-md-9 pt05">
+                <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["occupation"]}" name="occupation" id="occupation" autocomplete="off" >
                 </span>
         </p>

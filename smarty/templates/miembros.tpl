@@ -22,9 +22,9 @@
                             <input name="tech" type="text" autocomplete="off" id="search" class="form-control" data-provide="typeahead"
                                    value="{if isset($TECH)}{$TECH}{/if}"
                                    placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc" >
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                </span>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                            </span>
                         </div>
                     </div>
                     <p class="mt1">Resultados: {if $NUMUSERS == -1}0{else}{$NUMUSERS}{/if} de {$TOTALUSERS}</p>
@@ -62,9 +62,9 @@
                                 Sin foto<br>
                             {/if}
                         </div>
-                        <p><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]}</a></p>
+                        <p class="mb0"><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]}</a></p>
                         {if isset($USERS[$I]["progress"])}
-                            <p><small>Porcentaje de perfil completado:</small></p>
+                            <p class="mb05"><small>Porcentaje de perfil completado:</small></p>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                      style="width: {$USERS[$I]["progress"]}%">

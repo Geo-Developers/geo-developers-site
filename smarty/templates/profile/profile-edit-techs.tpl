@@ -1,68 +1,94 @@
-<p class="strong mt2 uppercase">Relacionados con el GeoDesarrollo:</p>
+<div class="row">
+    <p class="strong col-md-12 uppercase text-center">Relacionados con el GeoDesarrollo</p>
+</div>
 {if $SKILLSGIS|@count == 0}
     <p>No se ha especificado ninguno</p>
 {else}
-    <ul class="row skills">
-        {for $I=0 to $SKILLSGIS|@count -1}
-            <li class="col-md-4">
-                <div class="truncate" >
-                    <a href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
-                        {$SKILLSGIS[$I]["name"]}
-                    </a>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                         style="
-                         {if $SKILLSGIS[$I]["level"] == 0 } width: 10%;{/if}
-                         {if $SKILLSGIS[$I]["level"] == 1 } width: 25%;{/if}
-                         {if $SKILLSGIS[$I]["level"] == 2 } width: 50%;{/if}
-                         {if $SKILLSGIS[$I]["level"] == 3 } width: 75%;{/if}
-                         {if $SKILLSGIS[$I]["level"] == 4 } width: 100%;{/if}
-                                 "
-                            >
-                        {if $SKILLSGIS[$I]["level"] == 0 } ?{/if}
-                        {if $SKILLSGIS[$I]["level"] == 1 } Básico{/if}
-                        {if $SKILLSGIS[$I]["level"] == 2 } Medio{/if}
-                        {if $SKILLSGIS[$I]["level"] == 3 } Avanzado{/if}
-                        {if $SKILLSGIS[$I]["level"] == 4 } Experto{/if}
-                    </div>
-                </div>
-            </li>
-        {/for}
-    </ul>
+    <div class="row">
+        <table class="table text-center table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Tecnología</th>
+                <th class="text-center">Básico</th>
+                <th class="text-center">Medio</th>
+                <th class="text-center">Avanzado</th>
+                <th class="text-center">Profesional</th>
+            </tr>
+            </thead>
+            <tbody>
+            {for $I=0 to $SKILLSGIS|@count -1}
+                <tr>
+                    <td>
+                        <div class="truncate" >
+                            <a href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
+                                {$SKILLSGIS[$I]["name"]}
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="1" {if $SKILLSGIS[$I]["level"]==1}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="2" {if $SKILLSGIS[$I]["level"]==2}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="3" {if $SKILLSGIS[$I]["level"]==3}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="4" {if $SKILLSGIS[$I]["level"]==4}checked="checked"{/if}>
+                    </td>
+                </tr>
+            {/for}
+            </tbody>
+        </table>
+    </div>
 {/if}
 
-<hr>
+<div class="row">
 
-<p class="strong mt2 uppercase">Otros:</p>
-<ul class="row">
-    {if $SKILLS|@count == 0}
-        <p>No se ha especificado ninguno</p>
-    {else}
-        {for $I=0 to $SKILLS|@count -1}
-            <li class="col-md-4">
-                <a class="truncate" title="{$SKILLS[$I]["name"]}"
-                   href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}">
-                    {$SKILLS[$I]["name"]}
-                </a>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                         style="
-                         {if $SKILLS[$I]["level"] == 0 } width: 10%;{/if}
-                         {if $SKILLS[$I]["level"] == 1 } width: 25%;{/if}
-                         {if $SKILLS[$I]["level"] == 2 } width: 50%;{/if}
-                         {if $SKILLS[$I]["level"] == 3 } width: 75%;{/if}
-                         {if $SKILLS[$I]["level"] == 4 } width: 100%;{/if}
-                                 "
-                            >
-                        {if $SKILLS[$I]["level"] == 0 } ?{/if}
-                        {if $SKILLS[$I]["level"] == 1 } Básico{/if}
-                        {if $SKILLS[$I]["level"] == 2 } Medio{/if}
-                        {if $SKILLS[$I]["level"] == 3 } Avanzado{/if}
-                        {if $SKILLS[$I]["level"] == 4 } Experto{/if}
-                    </div>
-                </div>
-            </li>
-        {/for}
-    {/if}
-</ul>
+    <p class="strong col-md-12 uppercase text-center">Otros:</p>
+</div>
+
+
+{if $SKILLS|@count == 0}
+    <p>No se ha especificado ninguno</p>
+{else}
+    <div class="row">
+        <table class="table text-center table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Tecnología</th>
+                <th class="text-center">Básico</th>
+                <th class="text-center">Medio</th>
+                <th class="text-center">Avanzado</th>
+                <th class="text-center">Profesional</th>
+            </tr>
+            </thead>
+            <tbody>
+            {for $I=0 to $SKILLS|@count -1}
+                <tr>
+                    <td>
+                        <div class="truncate" >
+                            <a href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLS[$I]["desc"]}">
+                                {$SKILLS[$I]["name"]}
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="1" {if $SKILLS[$I]["level"]==1}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="2" {if $SKILLS[$I]["level"]==2}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="3" {if $SKILLS[$I]["level"]==3}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="4" {if $SKILLS[$I]["level"]==4}checked="checked"{/if}>
+                    </td>
+                </tr>
+            {/for}
+            </tbody>
+        </table>
+    </div>
+{/if}
