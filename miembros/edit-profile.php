@@ -15,8 +15,6 @@ if(intval($_SESSION["user"]["meetup_id"]) === intval($_GET["meetup_id"])){
     if(!empty($_POST)){
         $user = new Member(array("meetup_id" => $_SESSION["user"]["meetup_id"]));
 
-        /*prettyprint($_POST);
-        die("Ya");*/
         $errorMessage = "";
         if($_FILES["photo"]["name"]){
             $path = uploadFile($_SESSION["user"]["meetup_id"]);
@@ -26,8 +24,6 @@ if(intval($_SESSION["user"]["meetup_id"]) === intval($_GET["meetup_id"])){
                 $user->photo_url = $path["response"];
             }
         }
-
-        //die("Path = ".$path);
 
         $user->update($_POST);
 
@@ -46,6 +42,7 @@ if(intval($_SESSION["user"]["meetup_id"]) === intval($_GET["meetup_id"])){
     }
 
     $smarty->assign('PROFILE',      $userprofile);
+    $smarty->assign('GEOSKILLS',    $GeodevDB->getSkills(array("type" => "geo")));
     $smarty->assign('SKILLSGIS',    $GeodevDB->getUserSkills(array("type" => "gis")));
     $smarty->assign('SKILLS',       $GeodevDB->getUserSkills(array("type" => "other")));
     $smarty->assign('REFERRERS',    $GeodevDB->getReferrers());

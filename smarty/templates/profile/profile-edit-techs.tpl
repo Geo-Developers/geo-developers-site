@@ -8,7 +8,7 @@
         <table class="table text-center table-hover mb0">
             <thead>
             <tr>
-                <th class="text-left">Tecnología</th>
+                <th class="text-left">&nbsp;</th>
                 <th class="text-center">Interesado <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Si te gustaría aprender pero aún no sabes casi nada o nada"></i></th>
                 <th class="text-center">Básico</th>
                 <th class="text-center">Medio</th>
@@ -16,14 +16,13 @@
                 <th class="text-center">Avanzado</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="geoSkillTable">
             {for $I=0 to $SKILLSGIS|@count -1}
-                <tr>
+                <tr id="skill_{$SKILLSGIS[$I]["id"]}">
                     <td class="text-left">
                         <div class="truncate" >
-                            <a href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
-                                {$SKILLSGIS[$I]["name"]}
-                            </a>
+                            <i class="fa fa-times" onclick="removeSkill({$SKILLSGIS[$I]["id"]}, '#skill_{$SKILLSGIS[$I]["id"]}')"></i>
+                            {$SKILLSGIS[$I]["name"]}
                         </div>
                     </td>
                     <td>
@@ -47,15 +46,23 @@
             </tbody>
         </table>
 
-        <div class="form-group pt0 col-md-12">
+        <div class="form-group pt0 col-md-6">
             Añadir
             <div id="input-container">
                 <div class="input-group">
-                <input name="tech" type="text" autocomplete="off" id="search" class="form-control" data-provide="typeahead" value="" placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc">
+                <input name="tech" type="text" autocomplete="off" id="geoskill" class="form-control" data-provide="typeahead" value="" placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc">
                 <span class="input-group-btn pull-left">
-                    <button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-default" type="button"><i class="fa fa-plus disabled" data-target="#geoskill" data-isgis="true" data-table="#geoSkillTable"></i></button>
                 </span>
                 </div>
+            </div>
+        </div>
+        <div class="form-group pt0 col-md-6">
+            ¿Necesitas inspiración?, ten un listado:
+            <div id="input-container">
+                <select class="input-group form-control">
+                    {for $I=0 to $GEOSKILLS|@count-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
+                </select>
             </div>
         </div>
     </div>
@@ -74,7 +81,7 @@
         <table class="table text-center table-hover">
             <thead>
             <tr>
-                <th class="text-left">Tecnología</th>
+                <th class="text-left">&nbsp;</th>
                 <th class="text-center">Interesado  <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Si te gustaría aprender pero aún no sabes casi nada o nada"></i></th>
                 <th class="text-center">Básico</th>
                 <th class="text-center">Medio</th>
@@ -82,14 +89,14 @@
                 <th class="text-center">Avanzado</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="skills" id="skillTable">
             {for $I=0 to $SKILLS|@count -1}
-                <tr>
+                <tr id="skill_{$SKILLS[$I]["id"]}">
                     <td class="text-left">
                         <div class="truncate" >
-                            <a href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLS[$I]["desc"]}">
-                                {$SKILLS[$I]["name"]}
-                            </a>
+                            <i class="fa fa-times" onclick="removeSkill({$SKILLS[$I]["id"]}, '#skill_{$SKILLS[$I]["id"]}')"></i>
+                            {$SKILLS[$I]["name"]}
+
                         </div>
                     </td>
                     <td>
@@ -111,9 +118,49 @@
             {/for}
             </tbody>
         </table>
+
+        <div class="form-group pt0 col-md-6">
+            Añadir
+            <div id="input-container">
+                <div class="input-group">
+                    <input name="tech" type="text" autocomplete="off" id="skill" class="form-control" data-provide="typeahead" value="" placeholder="Javascript, AngularJS, etc">
+                    <span class="input-group-btn pull-left">
+                        <button class="btn btn-default" type="button"><i class="fa fa-plus disabled" data-target="#skill" data-isgis="false" data-table="#skillTable"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 {/if}
 
 {literal}<script>{/literal}
-var GEOSKILLS = [{for $I=0 to $NUMGEOSKILLS}"{$GEOSKILLS[$I]["name"]}",{/for}]
+var GEOSKILLS = [{for $I=0 to $GEOSKILLS|@count-1}"{$GEOSKILLS[$I]["name"]}",{/for}]
 {literal}</script>{/literal}
+
+{literal}
+    <script id="skillTmpl" type="text/x-jsrender">
+        <tr id="skill_{{:id}}">
+        <td class="text-left">
+            <div class="truncate" >
+                <i class="fa fa-times" onclick="removeSkill({{:id}}, '#skill_{{:id}}')"></i>
+                {{:name}}
+            </div>
+        </td>
+        <td>
+            <input type="radio" name="skills[{{:id}}]" value="1">
+        </td>
+        <td>
+            <input type="radio" name="skills[{{:id}}]" value="2">
+        </td>
+        <td>
+            <input type="radio" name="skills[{{:id}}]" value="3">
+        </td>
+        <td>
+            <input type="radio" name="skills[{{:id}}]" value="4">
+        </td>
+        <td>
+            <input type="radio" name="skills[{{:id}}]" value="5">
+        </td>
+    </tr>
+    </script>
+{/literal}

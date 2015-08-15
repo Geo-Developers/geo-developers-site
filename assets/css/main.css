@@ -53,3 +53,10 @@ body, input, textarea, select {
 #profile-edit-page tbody td{
     width: 15%;
 }
+#profile-edit-page i.fa-times{
+    color: rgba(173, 173, 173, 0.31);
+}
+#profile-edit-page i.fa-times:hover{
+    color: rgb(249, 41, 41);
+    cursor: pointer;
+}

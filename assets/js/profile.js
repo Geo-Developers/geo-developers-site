@@ -12,9 +12,12 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                     return html;
                 }
             });
-
+            var that = this;
             if(action=="edit"){
-                this.initEdit();
+                $(document).ready(function(){
+                    that.initEdit();
+                });
+
             }
 
             base.init(Cookies);
@@ -66,9 +69,74 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
         initEdit: function(){
             $("#studies").typeahead({source: studies});
             $("#occupation").typeahead({source: occupation});
-            $("#search").typeahead({
+            $("#geoskill").typeahead({
                 source: GEOSKILLS
             });
+
+            $('form').on('keyup keypress', function(e) {
+                var code = e.keyCode || e.which;
+                if (code == 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            $(".fa-plus").click(function(e){
+                console.log("añadimos");
+                //debugger;a=
+                var skill_name = $($(this).data("target")).val(),
+                    table = $(this).data("table"),
+                    data = {
+                        skill_name: skill_name
+                    };
+                if(!skill_name){
+                    return 0;
+                }
+
+                if($(this).data("isgis")){
+                    data["is_gis"] = 1;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: GEODEV.rootpath + "api/user/" + USER["meetup_id"] + "/skill",
+                    data: data,
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.status !== "success") {
+                            alert("Error: " + r.message);
+                        } else {
+                            console.log("r=", r);
+                            template = $.templates("#skillTmpl");
+                            htmlOutput = template.render({
+                                id: r.message,
+                                name: skill_name
+                            });
+                            $(table).append(htmlOutput);
+                        }
+                    }
+                });
+            });
+            $('[data-table="#geoSkillTable"]').removeClass("disabled");
+
+            window.removeSkill = function(id, elemId){
+                $.ajax({
+                    type: "POST",
+                    url: GEODEV.rootpath + "api/user/" + USER["meetup_id"] + "/skill",
+                    data: {
+                        skill_id: id,
+                        _METHOD: "DELETE"
+                    },
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.status !== "success") {
+                            alert("Error: " + r.message);
+                        } else {
+                            $(elemId).remove();
+                        }
+                    }
+                });
+            }
+
         }
     };
     return Methods;
