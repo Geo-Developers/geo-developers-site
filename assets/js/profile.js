@@ -82,7 +82,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
             });
 
             $(".fa-plus").click(function(e){
-                console.log("añadimos");
+                //console.log("añadimos");
                 //debugger;a=
                 var skill_name = $($(this).data("target")).val(),
                     table = $(this).data("table"),
@@ -105,7 +105,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                         if (r.status !== "success") {
                             alert("Error: " + r.message);
                         } else {
-                            console.log("r=", r);
+                            //console.log("r=", r);
                             template = $.templates("#skillTmpl");
                             htmlOutput = template.render({
                                 id: r.message,
