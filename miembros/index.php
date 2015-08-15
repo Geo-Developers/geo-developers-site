@@ -6,7 +6,7 @@ require_once 'init.php';
 if(isset($_GET['tech']) && $_GET['tech']){
 
 
-    $query= "SELECT distinct users.meetup_id, users.name, user_skills.level, profiles.photo_url, profiles.location".
+    $query= "SELECT distinct users.meetup_id, users.name, users.last_name, user_skills.level, profiles.photo_url, profiles.location".
             " FROM users".
             "    INNER JOIN profiles".
             "        ON users.meetup_id = profiles.meetup_id".
@@ -22,7 +22,7 @@ if(isset($_GET['tech']) && $_GET['tech']){
 }else{
     $db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
     $db->orderBy("p.progress","desc");
-    $users = $db->get("profiles p",24, "u.meetup_id, u.name,  p.progress, p.photo_url, p.location");
+    $users = $db->get("profiles p",24, "u.meetup_id, u.name, u.last_name,  p.progress, p.photo_url, p.location");
 }
 
 $total = $db->getValue("profiles", "count(meetup_id)");

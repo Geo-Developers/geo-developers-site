@@ -9,10 +9,11 @@
             <thead>
             <tr>
                 <th class="text-center">Tecnología</th>
+                <th class="text-center">Interesado <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Si te gustaría aprender pero aún no sabes casi nada o nada"></i></th>
                 <th class="text-center">Básico</th>
                 <th class="text-center">Medio</th>
+                <th class="text-center">Medio-Alto</th>
                 <th class="text-center">Avanzado</th>
-                <th class="text-center">Profesional</th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +38,9 @@
                     <td>
                         <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="4" {if $SKILLSGIS[$I]["level"]==4}checked="checked"{/if}>
                     </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLSGIS[$I]["id"]}]" value="5" {if $SKILLSGIS[$I]["level"]==5}checked="checked"{/if}>
+                    </td>
                 </tr>
             {/for}
             </tbody>
@@ -58,10 +62,11 @@
             <thead>
             <tr>
                 <th class="text-center">Tecnología</th>
+                <th class="text-center">Interesado  <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Si te gustaría aprender pero aún no sabes casi nada o nada"></i></th>
                 <th class="text-center">Básico</th>
                 <th class="text-center">Medio</th>
+                <th class="text-center">Medio-Alto</th>
                 <th class="text-center">Avanzado</th>
-                <th class="text-center">Profesional</th>
             </tr>
             </thead>
             <tbody>
@@ -85,6 +90,9 @@
                     </td>
                     <td>
                         <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="4" {if $SKILLS[$I]["level"]==4}checked="checked"{/if}>
+                    </td>
+                    <td>
+                        <input type="radio" name="skills[{$SKILLS[$I]["id"]}]" value="5" {if $SKILLS[$I]["level"]==5}checked="checked"{/if}>
                     </td>
                 </tr>
             {/for}

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-top: 42px;">
-            <a href="../">Home</a> &gt; Miembros
+            <a href="{$ROOT}">Home</a> &gt; Miembros
         </div>
 
         <div class="col-md-4 mt0">
@@ -62,7 +62,7 @@
                                 Sin foto<br>
                             {/if}
                         </div>
-                        <p class="mb0"><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]}</a></p>
+                        <p class="mb0"><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]} {$USERS[$I]["last_name"]}</a></p>
                         {if isset($USERS[$I]["progress"])}
                             <p class="mb05"><small>Porcentaje de perfil completado:</small></p>
                             <div class="progress">
@@ -75,20 +75,24 @@
                         {/if}
                         {if isset($USERS[$I]["level"])}
                             <p><small>Nivel de {$TECH}:</small></p>
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                 style="
-                                 {if $USERS[$I]["level"] == 0 } width: 10%;{/if}
-                                 {if $USERS[$I]["level"] == 1 } width: 25%;{/if}
-                                 {if $USERS[$I]["level"] == 2 } width: 50%;{/if}
-                                 {if $USERS[$I]["level"] == 3 } width: 75%;{/if}
-                                 {if $USERS[$I]["level"] == 4 } width: 100%;{/if}
-                                         "
-                                    >
-                                {if $USERS[$I]["level"] == 0 } ?{/if}
-                                {if $USERS[$I]["level"] == 1 } Básico{/if}
-                                {if $USERS[$I]["level"] == 2 } Medio{/if}
-                                {if $USERS[$I]["level"] == 3 } Avanzado{/if}
-                                {if $USERS[$I]["level"] == 4 } Experto{/if}
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                     style="
+                                     {if $USERS[$I]["level"] == 0 } width: 0%;{/if}
+                                     {if $USERS[$I]["level"] == 1 } width: 7%;{/if}
+                                     {if $USERS[$I]["level"] == 2 } width: 20%;{/if}
+                                     {if $USERS[$I]["level"] == 3 } width: 50%;{/if}
+                                     {if $USERS[$I]["level"] == 4 } width: 75%;{/if}
+                                     {if $USERS[$I]["level"] == 5 } width: 100%;{/if}
+                                             "
+                                        >
+                                    {if $USERS[$I]["level"] == 0 } ?{/if}
+                                    {if $USERS[$I]["level"] == 1 } {/if}
+                                    {if $USERS[$I]["level"] == 2 } Básico{/if}
+                                    {if $USERS[$I]["level"] == 3 } Medio{/if}
+                                    {if $USERS[$I]["level"] == 4 } Medio-Alto{/if}
+                                    {if $USERS[$I]["level"] == 5 } Avanzado{/if}
+                                </div>
                             </div>
                         {/if}
                     </div>
