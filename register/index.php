@@ -13,7 +13,7 @@ $member = new Member(array(
 
 
 if($member->isRegistered()){
-    $_SESSION["user"]['logged'] = true;
+    $_SESSION['logged'] = true;
     $_SESSION["user"]['email'] = $member->email;
     $_SESSION["user"]['name'] = $member->name;
     if(isset($returnURL)){
@@ -33,7 +33,7 @@ if($new_user && isset($_POST["name"]) ){
 
     $member->save();
 
-    $_SESSION["user"]['logged'] = true;
+    $_SESSION['logged'] = true;
     $_SESSION["user"]['email'] = $member->email;
     $_SESSION["user"]['name'] = $member->name;
     if(isset($returnURL)){
@@ -43,7 +43,7 @@ if($new_user && isset($_POST["name"]) ){
     }
 }
 
-if( isset($_SESSION["user"]['meetup_id']) && !isset($_SESSION["user"]['logged']) ){
+if( isset($_SESSION["user"]['meetup_id']) && !isset($_SESSION['logged']) ){
     // Load vars from session (established when the login)
     $smarty->assign('MEETUP_ID', $_SESSION["user"]["meetup_id"]);
     $smarty->assign('NAME', $_SESSION["user"]['name']);

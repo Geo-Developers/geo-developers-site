@@ -111,6 +111,11 @@ class Member
 
         $this->occupation = $values["occupation"];
 
+        $this->twitter_url = $values["twitter_url"];
+        $this->linkedin_url = $values["linkedin_url"];
+        $this->github_url = $values["github_url"];
+        $this->facebook_url = $values["facebook_url"];
+        $this->flickr_url = $values["flickr_url"];
     }
 
     public function suscribeToMailchimp(){
@@ -173,12 +178,13 @@ class Member
         );
 
         $userprofile["joined"] = date('d/m/Y', strtotime($userprofile["joined"]));
-        if(isset($userprofile["twitter_url"])){
+        if(isset($userprofile["twitter_url"]) && strpos($userprofile["twitter_url"],"@") !== false){
             $userprofile["twitter_name"] = $userprofile["twitter_url"];
             $userprofile["twitter_url"] = "http://www.twitter.com/".substr($userprofile["twitter_url"], 1);
         }
 
         return $userprofile;
+
     }
 
     public function getSkills(){

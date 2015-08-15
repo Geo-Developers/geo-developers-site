@@ -1376,8 +1376,10 @@
 			}
 
 /* Button */
-
-	input[type="button"],
+    button[data-target="#loginModal"]{
+        margin-left: 1.5em
+    }
+	/*input[type="button"],
 	input[type="submit"],
 	input[type="reset"],
 	button:not(.btn-default),
@@ -1448,7 +1450,7 @@
 			button.alt:active,
 			.button.alt:active {
 				background-color: #3f3f3f;
-			}
+			}*/
 
 /* List */
 

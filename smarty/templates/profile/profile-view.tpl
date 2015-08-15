@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p id="picture"><img src="{$PROFILE["photo_url"]}"></p>
-                <h1 class="capitalize">{$PROFILE["name"]}</h1>
+                <h1 class="capitalize">{$PROFILE["name"]} {$PROFILE["last_name"]}</h1>
             </div>
         </div>
         <p class="row">
@@ -38,7 +38,9 @@
             <ul class="inline col-md-9 pt05" id="social-networks">
                 {if $PROFILE["twitter_url"]}
                     <li>
-                        <a href='{$PROFILE["twitter_url"]}' class="icon twitter" title="{$PROFILE["twitter_name"]}" data-toggle="tooltip" data-placement="bottom">
+                        <a href='{$PROFILE["twitter_url"]}' class="icon twitter"
+                           {if isset($PROFILE["twitter_name"])}title="{$PROFILE["twitter_name"]}"{else}Twitter{/if}
+                           data-toggle="tooltip" data-placement="bottom">
                             <i class="fa fa-twitter"></i>
                             <span class="label">Twitter</span>
                         </a>

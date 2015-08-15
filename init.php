@@ -26,7 +26,7 @@ $db = new MysqliDb (Array (
 
 
 if(isset($_SESSION["user"]["meetup_id"]) ){
-    if(isset($_SESSION["user"]['logged'])){
+    if(isset($_SESSION['logged'])){
         $db->where ("meetup_id", $_SESSION["user"]['meetup_id']);
         $user = $db->getOne ("users");
 

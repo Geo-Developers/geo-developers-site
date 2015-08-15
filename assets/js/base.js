@@ -11,6 +11,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
             var showCookies = true;
             $('.tabs').tab();
             $('[data-toggle="tooltip"]').tooltip();
+            //$('[data-toggle="modal"]').modal();
             try{
                 if(Cookies.get("cookies") === "true" || USER.cookies === 1) {
                     showCookies = false;

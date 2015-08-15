@@ -7,10 +7,10 @@
                     <!--<h4 class="modal-title" id="myModalLabel">Esta acción requiere estar identificado</h4>-->
                 </div>
                 <div class="modal-body">
-                    <a href="{$ROOT}login/login.php?returnURL={$returnURL}" class="btn btn-lg" id="login-btn"><img src="../images/meetup.png"> Entrar ahora</a>
+                    <a href="{$ROOT}login/login.php?returnURL={$returnURL}" class="btn btn-lg" id="login-btn"><img src="{$ROOT}images/meetup.png"> Entrar ahora</a>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
                 </div>
             </div>
         </div>

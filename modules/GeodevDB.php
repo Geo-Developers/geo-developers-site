@@ -34,7 +34,8 @@ class GeodevDB
                 $result = $this->db->getOne("profiles p");
 
                 $result["joined"] = date('d/m/Y', strtotime($result["joined"]));
-                if(isset($result["twitter_url"])){
+                if(isset($result["twitter_url"]) && strpos($result["twitter_url"],"@") !== false){
+                    //die(strpos($result["twitter_url"],"@"));
                     $result["twitter_name"] = $result["twitter_url"];
                     $result["twitter_url"] = "http://www.twitter.com/".substr($result["twitter_url"], 1);
                 }

@@ -4,7 +4,7 @@ require_once '../config.php';
 require_once 'init.php';
 
 
-if( isset($_SESSION['user']['logged']) ){
+if( isset($_SESSION['logged']) ){
     $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
 
     if(!empty($_POST)){

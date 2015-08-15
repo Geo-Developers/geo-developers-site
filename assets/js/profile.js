@@ -61,9 +61,9 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                             }
                         }
                     });
-                }else{
+                }/*else{
                     $('#loginModal').modal();
-                }
+                }*/
             });
         }
     };

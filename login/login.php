@@ -4,6 +4,7 @@ session_start();
 require_once 'meetup.php';
 require_once '../vendor/joshcam/mysqli-database-class/MysqliDb.php';
 $config = "../config.php";
+require_once '../modules/prettyprint.php';
 
 if( file_exists($config) && is_readable($config) && require_once($config)) {
 
@@ -15,7 +16,7 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
         }
     }
 
-    if( !isset($_SESSION['user']['logged']) ){
+    if( !isset($_SESSION['logged']) ||  !isset($_SESSION['user'])){
         if( !isset($_GET['code']) )
         {
             $meetup = new Meetup();
@@ -89,7 +90,7 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
 
             // Check if user is in the database and it has an email
             if($user && $user["email"] !== null){
-                $_SESSION['user']['logged'] = true;
+                $_SESSION['logged'] = true;
                 header('Location: '.$_SESSION['returnURL']);
             }else{
                 header('Location: ../register');

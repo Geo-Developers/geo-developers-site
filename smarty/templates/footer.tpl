@@ -69,4 +69,7 @@
 
 		<!-- Scripts -->
 		<script data-main="{$ROOT}assets/js/common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.min.js"></script>
-	
+
+{if isset($USER) == false}
+    {include file="blocks/modal-login.tpl"}
+{/if}
