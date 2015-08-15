@@ -23,7 +23,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                 placement: $(this).data('placement'),
                 trigger: 'hover',
                 content: function () {
-                    return '<img src="'+$(this).data('img') + '" style="width:200px" />';
+                    return '<img src="'+$(this).data('img') + '" style="width:200px; max-height: none;" />';
                 }
             });
 

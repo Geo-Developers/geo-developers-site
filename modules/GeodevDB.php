@@ -68,6 +68,30 @@ class GeodevDB
         return $this->db->get("skills s");
     }
 
+    public function getExperts($options = null){
+        if(!isset($options["tech"])){
+            die("You must specify a technology with (tech)");
+        }
+
+        $query= "SELECT distinct users.meetup_id, users.name, users.last_name, user_skills.level, profiles.photo_url, profiles.location".
+            " FROM users".
+            "    INNER JOIN profiles".
+            "        ON users.meetup_id = profiles.meetup_id".
+            "    INNER JOIN user_skills".
+            "        ON profiles.meetup_id = user_skills.meetup_id".
+            "    INNER JOIN skills".
+            "        ON user_skills.skill_id = skills.id".
+            " WHERE skills.name = '".$options['tech']."' ORDER BY user_skills.level DESC";
+
+        return $this->db->rawQuery($query);
+    }
+
+    public function getMembers($options = null){
+        $this->db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
+        $this->db->orderBy("p.progress","desc");
+        return $this->db->get("profiles p",24, "u.meetup_id, u.name, u.last_name,  p.progress, p.photo_url, p.location");
+    }
+
     public function getReferrers($options = null)
     {
         $meetup_id = $this->getParam($options);
@@ -87,6 +111,27 @@ class GeodevDB
         $this->db->join("votes v", "v.referrer=p.meetup_id", "LEFT");
 
         return $this->db->getOne("profiles p");
+    }
+
+    public function getSkills($options = null){
+        switch($options["type"]){
+            case "geo":
+                $this->db->where("is_gis","1");
+                $this->db->orderBy("name","asc");
+                $skills = $this->db->get("skills");
+                break;
+            case "other":
+                $this->db->where("is_gis IS NULL")->where("is_important",1);
+                $this->db->join("user_skills u", "u.skill_id=s.id", "LEFT");
+                $this->db->orderBy("s.name","asc");
+                $skills = $this->db->get("skills s", null , "DISTINCT s.name");
+                break;
+            default:
+                $this->db->where("is_important","1");
+                $this->db->orderBy("name","asc");
+                $skills = $this->db->get("skills");
+        }
+        return $skills;
     }
 
     /*

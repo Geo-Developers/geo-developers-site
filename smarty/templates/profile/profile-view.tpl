@@ -94,9 +94,9 @@
 
         <h2>Conocimientos e intereses:</h2>
     </div>
-    <p class="strong uppercase col-md-12">Relacionados con el GeoDesarrollo:</p>
+    <div class="strong uppercase col-md-12 pt0"><p>Relacionados con el GeoDesarrollo:</p></div>
     {if $SKILLSGIS|@count == 0}
-        <p class="col-md-12">No se ha especificado ninguno</p>
+        <div class="col-md-12 pt0"><p>No se ha especificado ninguno</p></div>
     {else}
         <div class="col-md-12">
             <div class="row skills">
@@ -136,7 +136,7 @@
     </div>
     <div class="col-md-12 pt0">
         {if $SKILLS|@count == 0}
-            <p>No se ha especificado ninguno</p>
+            <div><p>No se ha especificado ninguno</p></div>
         {else}
             <div class="row">
             {for $I=0 to $SKILLS|@count -1}

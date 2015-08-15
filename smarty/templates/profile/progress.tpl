@@ -20,7 +20,9 @@
             </div>
         </div>
     </div>
-
+    {if $PROFILE["progress"] == 100}
+        <div id="progress-100">100%</div>
+    {/if}
 
     {literal}<script>{/literal}
         google.setOnLoadCallback(drawChart);

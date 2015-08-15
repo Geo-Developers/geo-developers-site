@@ -9,7 +9,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-top: 42px;">
-            <a href="{$ROOT}">Home</a> &gt; Miembros
+            <a href="{$ROOT}">Home</a> &gt;
+            {if !isset($TECH)}
+                    Miembros
+                {else}
+                    <a href="{$ROOT}miembros/">Miembros</a> &gt; {$TECH}
+                {/if}
         </div>
 
         <div class="col-md-4 mt0">
@@ -27,7 +32,7 @@
                             </span>
                         </div>
                     </div>
-                    <p class="mt1">Resultados: {if $NUMUSERS == -1}0{else}{$NUMUSERS}{/if} de {$TOTALUSERS}</p>
+                    <p class="mt1">Resultados: {if $USERS|@count == -1}0{else}{$USERS|@count}{/if} de {$TOTALUSERS}</p>
 
 
 
@@ -48,7 +53,7 @@
     <div class="row">
 
         <ul id="member-list" class="pt0 col-md-12">
-            {for $I=0 to $NUMUSERS-1}
+            {for $I=0 to $USERS|@count-1}
 
                 <li class="col-md-4" data-userid="{$USERS[$I]["meetup_id"]}">
                     <div class="member-wrapper clearfix">
@@ -114,7 +119,7 @@
             <div class="modal-body">
                 <p>
                     <small>El buscador permite filtrar por cualquier conocimiento o aptitud que tenga
-                    algún miembro en la comunidad, pero como actualmente son {$NUMSKILLS} hemos decidido
+                    algún miembro en la comunidad, pero como actualmente son {$SKILLS|@count} hemos decidido
                     que en las sugerencias sólo se muestren las relacionadas con el geo-desarrollo.</small>
                 </p>
                 <p>
@@ -127,11 +132,11 @@
                         <div class="form-group">
                             <label class="col-md-3 mt1 mb1">Geo-Desarrollo:</label>
                             <select class="col-md-9 input-group form-control mt1 mb1">
-                                {for $I=0 to $NUMGEOSKILLS-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
+                                {for $I=0 to $GEOSKILLS|@count-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
                             </select>
                             <label class="col-md-3">Otros</label>
                             <select class="col-md-9 input-group form-control ">
-                                {for $I=0 to $NUMSKILLS-1}<option>{$SKILLS[$I]["name"]}</option>{/for}
+                                {for $I=0 to $SKILLS|@count-1}<option>{$SKILLS[$I]["name"]}</option>{/for}
                             </select>
                         </div>
                     </div>
@@ -155,7 +160,7 @@
 {include file="footer.tpl"}
 <script>
 
-    var GEOSKILLS = [{for $I=0 to $NUMGEOSKILLS}"{$GEOSKILLS[$I]["name"]}",{/for}]
+    var GEOSKILLS = [{for $I=0 to $GEOSKILLS|@count-1}"{$GEOSKILLS[$I]["name"]}",{/for}]
     require([
         'jquery',
         'members'

@@ -5,6 +5,16 @@ body, input, textarea, select {
     font-weight: 300;
 }
 
+/* COMMON */
+#progress-100{
+    position: absolute;
+    top: 117px;
+    left: 102px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Roboto;
+}
+
 .progress{
     margin-bottom: 5px;
 }
@@ -33,3 +43,13 @@ body, input, textarea, select {
     #profile-view-page h2{
         font-size: 1.3em;
     }
+
+/* PROFILE-VIEW-PAGE */
+#profile-edit-page tbody td:nth-child(6n+1),
+#profile-edit-page th:nth-child(6n+1){
+    width: 25%;
+    padding-left: 16px;
+}
+#profile-edit-page tbody td{
+    width: 15%;
+}

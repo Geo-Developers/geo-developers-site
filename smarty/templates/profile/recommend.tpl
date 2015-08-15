@@ -56,7 +56,7 @@
                                     {if isset($USER) && $USER["email"]==$PROFILE["email"]}disabled{/if}
                                  "
                id="vote"
-               {if isset({$USER}) == false}data-toggle="modal" data-target="#loginModal"{/if}
+               {if !isset($USER)}data-toggle="modal" data-target="#loginModal"{/if}
 
                     >
                 <i class="fa fa-times"></i>

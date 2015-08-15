@@ -14,8 +14,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
             });
 
             if(action=="edit"){
-                $("#studies").typeahead({source: studies});
-                $("#occupation").typeahead({source: occupation});
+                this.initEdit();
             }
 
             base.init(Cookies);
@@ -61,9 +60,14 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                             }
                         }
                     });
-                }/*else{
-                    $('#loginModal').modal();
-                }*/
+                }
+            });
+        },
+        initEdit: function(){
+            $("#studies").typeahead({source: studies});
+            $("#occupation").typeahead({source: occupation});
+            $("#search").typeahead({
+                source: GEOSKILLS
             });
         }
     };
