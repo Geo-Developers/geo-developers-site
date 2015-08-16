@@ -200,7 +200,7 @@ $app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use
     echo json_encode($data);
 });
 
-$app->post('/video/:videoid', function ($userId) use ($app, $db){
+/*$app->post('/video/:videoid', function ($userId) use ($app, $db){
 
 
     if(isset($_SESSION['user']['meetup_id'])) {
@@ -209,7 +209,7 @@ $app->post('/video/:videoid', function ($userId) use ($app, $db){
 
     }
     echo json_encode($data);
-});
+});*/
 
 function insertOrUpdate($db, $table, $attrs, $id, $where){
     $data = array();

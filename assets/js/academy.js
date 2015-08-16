@@ -9,12 +9,8 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadVideos";
 
             $(document).ready(function(){
-                $.ajax({
-                    url: api_url,
-                    jsonp: "loadVideos",
-                    dataType: "jsonp",
-                    data: {format: "json"}
-                });
+
+                loadVideos();
 
                 $("#search").keyup(function(){
                     that.filter($("#search").val());
@@ -73,103 +69,14 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 });
             }
 
-            window.loadVideos = function (data){
-                var videos = [],
-                    data = data.feed.entry,
-                    tags = [], t, option, filter;
-
-                $.each( data, function( key, val ) {
-
-                    fechaEvento = val["gsx$fechammddaaaa"]["$t"];
-                    t = val["gsx$tags"]["$t"].split(",");
-
-                    data = {
-                        title: val["gsx$charla"]["$t"],
-                        id: val["gsx$idyoutube"]["$t"],
-                        tags: []
-                    };
-
-                    if(seccion === "videos"){
-
-                        data.webinar = false;
-                        if (Date.parse(fechaEvento) < Date.now()) {
-
-                            t.forEach(function(element){
-                                if(tags.indexOf(element) === -1){
-                                    tags.push(element);
-                                    data.tags.push(element);
-                                }
-                            });
-                            (function(data){
-                                var contentDetails = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=contentDetails&key="+apikey;contentDetails
-                                var statistiscs = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=statistics&key="+apikey;
-                                var snippet = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=snippet&key="+apikey;
-                                $.when(
-                                    $.getJSON(contentDetails , function(d){
-                                        data.duration = d.items[0].contentDetails.duration;
-                                    }),
-                                    $.getJSON(statistiscs , function(d){
-                                        data.viewCount = d.items[0].statistics.viewCount;
-                                        data.likeCount = d.items[0].statistics.likeCount;
-                                    }),
-                                    $.getJSON(snippet , function(d){
-                                        data.publishedAt = d.items[0].snippet.publishedAt;
-                                    })
-                                ).then( function(videos){
-                                    videos.push(data);
-                                    $.ajax({
-                                        type: "POST",
-                                        url: GEODEV.rootpath + "api/video/" + data.id,
-                                        data: data,
-                                        dataType: "json",
-                                        success: function (r) {
-                                            if (r.status !== "success") {
-                                                alert("Error: " + r.message);
-                                            } else {
-                                                //console.log("r=", r);
-                                            }
-                                        }
-                                    });
-                                });
-                            })(data);
-                        }
-                    }else{
-                        data.webinar = true;
-                        if (Date.parse(fechaEvento) >= Date.now()) {
-                            tags.push({tag: element});
-                        }
-                    }
-                });
-
-
-                $(".tags").each(function(i, elem){
-                    var tagsContainer, tags;
-
-                    tagsContainer = $(elem).find("ul");
-                    tags = tagsContainer.text().split(",");
-                    tagsContainer.empty();
-                    if(tags.length > 0){
-
-                        $(tags).each(function(j,elem2) {
-                            if (elem !== "") {
-                                var li = $("<li>");
-
-                                li.append($("<a>", {
-                                    href: "#" + elem2
-                                }).text(elem2))
-                                tagsContainer.append(li);
-                            }
-                        });
-                    }
-
-                });
+            window.loadVideos = function (){
 
                 window.onhashchange = function(){
                     hash = window.location.hash.substr(1);
                     $("#search").val(hash);
                     that.filter(hash);
                 };
-
+                var tags = [];
                 tags = tags.sort();
                 filter = $("#filter");
 
@@ -204,4 +111,3 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
     };
     return Methods;
 });
-

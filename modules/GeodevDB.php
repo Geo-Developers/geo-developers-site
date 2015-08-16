@@ -23,6 +23,58 @@ class GeodevDB
             $this->meetup_id = $args["meetup_id"];
         }
     }
+
+    public function getVideo($options = null)
+    {
+
+        if(!isset($options["youtubeId"])) die("You must specify a youtubeId param");
+
+        $this->db->where('youtubeId', $options["youtubeId"]);
+        $video = $this->db->getOne('videos');
+
+        if(strpos($video["slides"],"http")===false){
+            $video["slides"] = "https://docs.google.com/presentation/d/{$video['slides']}/embed?start=false&loop=false&delayms=3000";
+        }
+        $ids = explode(",",$video["related"]);
+        $video["related"] = array();
+        foreach($ids as $id){
+            $this->db->where('id', $id);
+            $v = $this->db->getOne('videos');
+            array_push($video["related"],$v);
+        }
+
+        $video["tags"] = explode(",", $video["tags"]);
+        $entries = explode("\n",$video["videoIndex"]);
+        $video["videoIndex"] = array();
+
+        foreach($entries as $e){
+            $index = strpos($e, " ");
+            $entry = array(
+                "time"=>substr($e,0,$index),
+                "text"=>substr($e,$index+1)
+            );
+
+            // Parse time to seconds
+            $vals = explode(":",$entry["time"]);;
+            $num = sizeof($vals)-1;
+            $seconds = intval($vals[$num]);
+            $pow = 1;
+
+            while ($num > 0){
+                $num--;
+                $seconds += intval($vals[$num])*pow(60,$pow);
+                $pow++;
+            }
+
+            $entry["seconds"] = $seconds;
+
+            array_push($video["videoIndex"],$entry);
+        }
+
+        return $video;
+
+    }
+
     public function getUser($options = null){
 
         $meetup_id = $this->getParam($options);

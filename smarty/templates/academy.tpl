@@ -38,13 +38,13 @@
                     <div class="col-md-12 video" data-tags="{$VIDEOS[$I].tags}" data-title="{$VIDEOS[$I].title}">
                         <div class="row">
                             <div class="col-md-3">
-                                <a href="view.php?id={$VIDEOS[$I].id}" class="image featured">
-                                    <img src="https://i.ytimg.com/vi/{$VIDEOS[$I].id}/mqdefault.jpg" alt="" />
+                                <a href="{$VIDEOS[$I].id}" class="image featured">
+                                    <img src="https://i.ytimg.com/vi/{$VIDEOS[$I].youtubeId}/mqdefault.jpg" alt="" />
                                     <span class="duration">{$VIDEOS[$I].duration}</span>
                                 </a>
                             </div>
                             <div class="col-md-9">
-                                <p><a href="view.php?id={$VIDEOS[$I].id}" class="title">{$VIDEOS[$I].title}</a></p>
+                                <p><a href="{$VIDEOS[$I].youtubeId}" class="title">{$VIDEOS[$I].title}</a></p>
 
                                 <div class="details">
                                     <span><i class="glyphicon glyphicon-eye-open"></i>{$VIDEOS[$I].viewCount}</span>
@@ -53,7 +53,12 @@
                                 </div>
 
                                 <div class="tags">
-                                    Etiquetas: <ul>{$VIDEOS[$I].tags}</ul>
+                                    Etiquetas:
+                                    <ul>
+                                        {for $J=0 to $VIDEOS[$I]["arrayTags"]|@count-1}
+                                            <li><a href="#{$VIDEOS[$I]["arrayTags"][$J]}">{$VIDEOS[$I]["arrayTags"][$J]}</a></li>
+                                        {/for}
+                                    </ul>
                                 </div>
                             </div>
                         </div>

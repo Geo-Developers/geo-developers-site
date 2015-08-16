@@ -5,15 +5,21 @@ require_once 'init.php';
 
 if( isset($_SESSION['logged']) ){
     $db->orderBy("publishedAt","desc");
+    $date = getdate();
+    $db->where('eventDate',$date["year"] ."-". $date["mon"]."-".$date["mday"],"<");
     $videos = $db->get('videos');
     if ($db->count > 0)
 
         for ($i=0; $i<sizeof($videos); $i++) {
             $videos[$i]["publishedAt"] = date('d-m-Y', strtotime($videos[$i]["publishedAt"]));
-            $videos[$i]["duration"] = covtime($videos[$i]["duration"]);
+            if($videos[$i]["duration"]) {
+                $videos[$i]["duration"] = covtime($videos[$i]["duration"]);
+            }
+            $videos[$i]["arrayTags"] = explode(",", $videos[$i]["tags"]);
         }
         $smarty->assign('VIDEOS', $videos);
         $smarty->assign('NUMVIDEOS', $db->count - 1);
+
     $smarty->display('academy.tpl');
 }else{
 	$_SESSION['returnURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
