@@ -29,6 +29,8 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
             if(seccion === "videos") {
 
                 $("#speakBtn").click(function(){
+                    var $this = $(this);
+                    $this.addClass("disabled");
                     $.ajax({
                         type: "POST",
                         url: GEODEV.rootpath + "api/user/" + USER.meetup_id + "/speak",
@@ -36,8 +38,12 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                         success: function (r) {
                             if (r.status !== "success") {
                                 alert("Error: " + r.message);
+                                $this.removeClass("disabled");
                             } else {
-                                console.log("r=", r);
+                                $this.removeClass("btn-warning");
+                                $this.addClass("btn-success");
+                                $this.text("¡Gracias!, en breve nos pondremos en contacto contigo.");
+                                //console.log("r=", r);
                             }
                         }
                     });

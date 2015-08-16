@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px">
-            <a href="../">Home</a> &gt; Academy
+            <a href="../../">Home</a> &gt; Academy
         </div>
     </div>
     <div class="row">
@@ -64,12 +64,12 @@
         <div class="col-md-3 col-md-offset-1">
             <div class="row box mb3">
                 <div class="col-md-12">
-                    <img src="{$ROOT}/images/speaking-image.jpg" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
+                    <img src="{$ROOT}images/speaking-image.jpg" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
                     <button class="btn btn-warning btn-block mb1" data-toggle="modal" data-target="#speak">Razones para dar una charla</button>
                 </div>
             </div>
             <div class="row box mb3">
-                <img src="{$ROOT}/images/suggestionbox.png" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
+                <img src="{$ROOT}images/suggestionbox.png" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
                 <button class="btn btn-primary btn-block mb1" data-toggle="modal" data-target="#suggestVideo">Sugerir un vídeo</button>
             </div>
         </div>
