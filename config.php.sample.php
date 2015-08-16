@@ -19,4 +19,9 @@ $dbname			    = '';
 	MAILCHIMP APIKEY
 */
 $mailchimp_apikey   = '';
+
+/*
+	YOUTUBE APIKEY
+*/
+$youtubeApiKey      = '';
 ?>
