@@ -80,18 +80,26 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                     return false;
                 }
             });
-
-            $(".fa-plus").click(function(e){
+            $("#skillList button").click(function(){
+                var value = $("#skillList select").val();
+                $("#geoskill").val(value);
+                $('.addSkill[data-target="#geoskill"]').click();
+            });
+            $(".addSkill").click(function(e){
                 //console.log("añadimos");
                 //debugger;a=
+
                 var skill_name = $($(this).data("target")).val(),
                     table = $(this).data("table"),
+                    that = this,
                     data = {
                         skill_name: skill_name
                     };
                 if(!skill_name){
                     return 0;
                 }
+                $(this).find("i").addClass("fa-circle-o-notch fa-spin");
+                $(this).addClass("disabled");
 
                 if($(this).data("isgis")){
                     data["is_gis"] = 1;
@@ -102,10 +110,15 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                     data: data,
                     dataType: "json",
                     success: function (r) {
+                        $(that).find("i").removeClass("fa-circle-o-notch fa-spin");
+                        $(that).removeClass("disabled");
+                        //$(that).addClass("fa-plus");
+
                         if (r.status !== "success") {
                             alert("Error: " + r.message);
                         } else {
                             //console.log("r=", r);
+                            $($(that).data("target")).val("");
                             template = $.templates("#skillTmpl");
                             htmlOutput = template.render({
                                 id: r.message,

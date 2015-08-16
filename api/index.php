@@ -9,204 +9,192 @@ require_once 'vendor/slim/slim/Slim/Slim.php';
 
 $app = new \Slim\Slim();
 
-$app->get('/user/:userid', function ($userid) use ($app, $db){
+/* MIDDLEWARES */
+function authenticated() {
+    global $ROOT;
 
+    if (!isset($_SESSION['user']['meetup_id'])) {
+        $app = \Slim\Slim::getInstance();
+        $app->flash('error', 'Login required');
+        $app->redirect($ROOT.'login');
+    }
+};
+
+function same_user(\Slim\Route $route) {
+    $params = $route->getParams();
+
+    if (intval($params["userid"]) !== intval($_SESSION['user']['meetup_id'])) {
+        $data = array(
+            'status' => 'error',
+            'message' => 'You are not'.$params["userid"]
+        );
+        die(json_encode($data));
+    }
+
+};
+/* END MIDDLEWARES */
+
+$app->post('/user/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
+    $userAttrs = array("cookies", "mailchimp_euid");
+    $data = insertOrUpdate($db, 'users', $userAttrs, $meetup_id, "meetup_id");
+    echo json_encode($data);
 });
 
-$app->post('/user/:userid', function ($userId) use ($app, $db){
+$app->post('/user/:userid/speak', 'authenticated', 'same_user',function ($userId) use ($app, $db) {
+    global $ROOT;
 
-    if(isset($_SESSION['user']['meetup_id'])) {
-        $meetup_id = $_SESSION['user']['meetup_id'];
+    $GeodevDB = new GeodevDB(array("meetup_id" => $userId));
+    $userprofile = $GeodevDB->getUser(array("type" => "userprofile"));
 
-        if (intval($userId) !== intval($meetup_id)) {
-            $data = array(
-                'status' => 'error',
-                'message' => 'Forbidden, you are: ' . $meetup_id
-            );
-        } else {
-            $userAttrs = array("cookies", "mailchimp_euid");
-            $data = insertOrUpdate($db, 'users', $userAttrs, $meetup_id, "meetup_id");
-        }
+    $message = "
+            Nombre: <a href='http://{$_SERVER['HTTP_HOST']}".$ROOT."miembros/{$userprofile['meetup_id']}'>
+                        {$userprofile['name']} {$userprofile['last_name']}
+                    </a><br>
+            Email: {$userprofile['email']}<br>
+            ";
+    $message = wordwrap($message, 70, "\r\n");
+
+    $to = 'root@geodevelopers.org';
+    $subject = 'Ofrecimiento para dar una charla';
+    $headers = "From: " . strip_tags($to) . "\r\n";
+    $headers .= "Reply-To: ". strip_tags($userprofile['email']) . "\r\n";
+    $headers .= "CC: susan@example.com\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+    if(@mail($to, $subject, $message, $headers))
+    {
+        $data = array(
+            'status' => 'success',
+            'message' => 'Mail sent successfully!'
+        );
     }else{
         $data = array(
             'status' => 'error',
-            'message' => 'You must be authenticated'
+            'message' => 'Inténtalo de nuevo por favor'
+        );
+    }
+    echo json_encode($data);
+});
+
+$app->delete('/user/:userid/skill', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
+
+    $db->where("skill_id",$_POST["skill_id"]);
+    if($db->delete('user_skills')){
+        $data = array(
+            'status' => 'success',
+            'message' => 'Skill removed from the user'
+        );
+    }else{
+        $data = array(
+            'status' => 'error',
+            'message' => 'The skill could not be removed from the user'
         );
     }
 
     echo json_encode($data);
 });
 
-$app->delete('/user/:userid/skill', function ($userId) use ($app, $db) {
 
-    if(isset($_SESSION['user']['meetup_id'])) {
-        $meetup_id = $_SESSION['user']['meetup_id'];
 
-        if (intval($userId) !== intval($meetup_id)) {
+$app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
+
+    $meetup_id = $_SESSION['user']['meetup_id'];
+    $skill_name = $_POST["skill_name"];
+    $db->where("name", $skill_name);
+    $elem = $db->getOne("skills");
+
+
+    if(!$elem){
+        // Its a new skill
+        $data = array(
+            "name" => $skill_name,
+            "is_important" => 1
+        );
+        if(isset($_POST["is_gis"])){
+            $data["is_gis"] = 1;
+        }
+        $id = $db->insert("skills",$data);
+        if(!$id){
             $data = array(
                 'status' => 'error',
-                'message' => 'Forbidden, you are: ' . $meetup_id
+                'message' => 'The skill could not be added to the database'
             );
-        } else {
-            $db->where("skill_id",$_POST["skill_id"]);
-            if($db->delete('user_skills')){
-                $data = array(
-                    'status' => 'success',
-                    'message' => 'Skill removed from the user'
-                );
-            }else{
-                $data = array(
-                    'status' => 'error',
-                    'message' => 'The skill could not be removed from the user'
-                );
-            }
         }
     }else{
+        $id = $elem["id"];
+    }
+
+    $db->where("skill_id", $id);
+    $db->where("meetup_id", $meetup_id);
+    $elem = $db->getOne("user_skills");
+
+    if(!$elem){
+        $res = $db->insert("user_skills",array(
+            "meetup_id" => $meetup_id,
+            "skill_id" => $id
+        ));
+        if($res){
+            $data = array(
+                'status' => 'success',
+                'message' => $id
+            );
+        }else{
+            $data = array(
+                'status' => 'error',
+                'message' => 'The skill could not be added to the user'
+            );
+        }
+    }else{
+       /* $db->where("skill_id", $id);
+        $db->where("meetup_id", $meetup_id);
+        $res = $db->update("user_skills",array(
+            "meetup_id" => $meetup_id,
+            "skill_id" => $id,
+            "level" => $_POST["level"]
+        ));
+        if($res){
+            $data = array(
+                'status' => 'success',
+                'message' => $id
+            );
+        }else{
+            $data = array(
+                'status' => 'error',
+                'message' => 'The skill could not be added to the user'
+            );
+        }*/
         $data = array(
             'status' => 'error',
-            'message' => 'You must be authenticated'
+            'message' => 'You already have this skill'
         );
     }
 
     echo json_encode($data);
 });
 
-$app->post('/user/:userid/skill', function ($userId) use ($app, $db) {
-    if(isset($_SESSION['user']['meetup_id'])) {
-        $meetup_id = $_SESSION['user']['meetup_id'];
+$app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
 
-        if (intval($userId) !== intval($meetup_id)) {
-            $data = array(
-                'status' => 'error',
-                'message' => 'Forbidden, you are: ' . $meetup_id
-            );
-        } else {
-            $skill_name = $_POST["skill_name"];
-            $db->where("name", $skill_name);
-            $elem = $db->getOne("skills");
+    $meetup_id = $_SESSION['user']['meetup_id'];
 
-
-            if(!$elem){
-                // Its a new skill
-                $data = array(
-                    "name" => $skill_name,
-                    "is_important" => 1
-                );
-                if(isset($_POST["is_gis"])){
-                    $data["is_gis"] = 1;
-                }
-                $id = $db->insert("skills",$data);
-                if(!$id){
-                    $data = array(
-                        'status' => 'error',
-                        'message' => 'The skill could not be added to the database'
-                    );
-                }
-            }else{
-                $id = $elem["id"];
-            }
-
-
-
-            $db->where("skill_id", $id);
-            $db->where("meetup_id", $meetup_id);
-            $elem = $db->getOne("user_skills");
-
-            if(!$elem){
-                $res = $db->insert("user_skills",array(
-                    "meetup_id" => $meetup_id,
-                    "skill_id" => $id
-                ));
-                if($res){
-                    $data = array(
-                        'status' => 'success',
-                        'message' => $id
-                    );
-                }else{
-                    $data = array(
-                        'status' => 'error',
-                        'message' => 'The skill could not be added to the user'
-                    );
-                }
-            }else{
-                $db->where("skill_id", $id);
-                $db->where("meetup_id", $meetup_id);
-                $res = $db->update("user_skills",array(
-                    "meetup_id" => $meetup_id,
-                    "skill_id" => $id,
-                    "level" => $_POST["level"]
-                ));
-                if($res){
-                    $data = array(
-                        'status' => 'success',
-                        'message' => $id
-                    );
-                }else{
-                    $data = array(
-                        'status' => 'error',
-                        'message' => 'The skill could not be added to the user'
-                    );
-                }
-            }
-            /*{
-                //This is not a new skill
-                $data = array(
-                    'status' => 'error',
-                    'message' => 'You already have this skill'
-                );
-            }*/
-
-
-        }
-    }else{
+    $db->where("referrer",$meetup_id)->where("refered",$userId);
+    if($elem = $db->getOne('votes')){
+        $db->where("referrer",$meetup_id)->where("refered",$userId);
+        $db->delete('votes');
         $data = array(
-            'status' => 'error',
-            'message' => 'You must be authenticated'
+            'status' => 'success',
+            'recommended' => false,
+            'message' => 'Vote successfully removed'
         );
-    }
-
-    echo json_encode($data);
-});
-
-$app->post('/vote/:userid', function ($userId) use ($app, $db){
-
-    if(isset($_SESSION['user']['meetup_id'])) {
-        $meetup_id = $_SESSION['user']['meetup_id'];
-
-        if (intval($userId) === intval($meetup_id)) {
-            $data = array(
-                'status' => 'error',
-                'message' => 'You can not vote for yourself'
-            );
-        } else {
-
-            $db->where("referrer",$meetup_id)->where("refered",$userId);
-            if($elem = $db->getOne('votes')){
-                $db->where("referrer",$meetup_id)->where("refered",$userId);
-                $db->delete('votes');
-                $data = array(
-                    'status' => 'success',
-                    'recommended' => false,
-                    'message' => 'Vote successfully removed'
-                );
-            }else{
-                $db->insert('votes', array(
-                    "referrer" => $meetup_id,
-                    "refered" => $userId
-                ));
-                $data = array(
-                    'status' => 'success',
-                    'recommended' => true,
-                    'message' => 'Vote successfully added'
-                );
-            }
-            $votesAttrs = array("referrer", "refered");
-            //$data = insertOrUpdate($db, 'votes', $votesAttrs, $meetup_id, "meetup_id");
-        }
     }else{
+        $db->insert('votes', array(
+            "referrer" => $meetup_id,
+            "refered" => $userId
+        ));
         $data = array(
-            'status' => 'error',
-            'message' => 'You must be authenticated'
+            'status' => 'success',
+            'recommended' => true,
+            'message' => 'Vote successfully added'
         );
     }
 

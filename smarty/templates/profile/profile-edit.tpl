@@ -5,12 +5,12 @@
 </div>
 <form action="{$ROOT}miembros/{$PROFILE["meetup_id"]}/editar" method="post" enctype="multipart/form-data">
     <ul id="tabs" class="tabs nav nav-tabs" data-tabs="tabs">
-        <li><a href="#general" data-toggle="tab"><i class="fa fa-user"></i> General</a></li>
+        <li class="active"><a href="#general" data-toggle="tab"><i class="fa fa-user"></i> General</a></li>
         <li><a href="#social" data-toggle="tab"><i class="fa fa-users"></i> Perfiles sociales</a></li>
-        <li class="active"><a href="#tech" data-toggle="tab"><i class="fa fa-cogs"></i> Conocimientos</a></li>
+        <li><a href="#tech" data-toggle="tab"><i class="fa fa-cogs"></i> Conocimientos</a></li>
     </ul>
     <div id="ranking-content" class="tab-content clearfix">
-        <div class="tab-pane " id="general">
+        <div class="tab-pane active" id="general">
             {include file="profile/profile-edit-general.tpl"}
             <div class="row">
                 <div class="col-md-12">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane active" id="tech">
+        <div class="tab-pane" id="tech">
             {include file="profile/profile-edit-techs.tpl"}
             <div class="row">
                 <div class="col-md-12">

@@ -16,7 +16,7 @@
                 <th class="text-center">Avanzado</th>
             </tr>
             </thead>
-            <tbody id="geoSkillTable">
+            <tbody id="geoSkillTable" class="small">
             {for $I=0 to $SKILLSGIS|@count -1}
                 <tr id="skill_{$SKILLSGIS[$I]["id"]}">
                     <td class="text-left">
@@ -52,7 +52,7 @@
                 <div class="input-group">
                 <input name="tech" type="text" autocomplete="off" id="geoskill" class="form-control" data-provide="typeahead" value="" placeholder="P.e: ArcGIS, Google Maps, Leaflet, etc">
                 <span class="input-group-btn pull-left">
-                    <button class="btn btn-default" type="button"><i class="fa fa-plus disabled" data-target="#geoskill" data-isgis="true" data-table="#geoSkillTable"></i></button>
+                    <button class="btn btn-default addSkill" type="button"  data-target="#geoskill" data-isgis="true" data-table="#geoSkillTable"><i class="fa fa-plus disabled"></i></button>
                 </span>
                 </div>
             </div>
@@ -60,9 +60,14 @@
         <div class="form-group pt0 col-md-6">
             ¿Necesitas inspiración?, ten un listado:
             <div id="input-container">
-                <select class="input-group form-control">
-                    {for $I=0 to $GEOSKILLS|@count-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
-                </select>
+                <div class="input-group" id="skillList">
+                    <select class="form-control pull-left">
+                        {for $I=0 to $GEOSKILLS|@count-1}<option>{$GEOSKILLS[$I]["name"]}</option>{/for}
+                    </select>
+                    <span class="input-group-btn pull-left">
+                        <button class="btn btn-default" type="button" data-target="#geoskill"><i class="fa fa-plus disabled"></i></button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -125,7 +130,7 @@
                 <div class="input-group">
                     <input name="tech" type="text" autocomplete="off" id="skill" class="form-control" data-provide="typeahead" value="" placeholder="Javascript, AngularJS, etc">
                     <span class="input-group-btn pull-left">
-                        <button class="btn btn-default" type="button"><i class="fa fa-plus disabled" data-target="#skill" data-isgis="false" data-table="#skillTable"></i></button>
+                        <button class="btn btn-default addSkill" type="button" data-target="#skill" data-isgis="false" data-table="#skillTable"><i class="fa fa-plus disabled"></i></button>
                     </span>
                 </div>
             </div>

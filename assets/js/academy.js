@@ -4,7 +4,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
             base.init(Cookies);
 
             var that = this;
-
+            var apikey = "AIzaSyBWrR-O_l5STwv1EO7U_Y3JNOnVjexf710";// "AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
             var youtubeID = window.location.search.split("=")[1],
                 api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadVideos";
 
@@ -26,6 +26,47 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 });
             });
 
+            if(seccion === "videos") {
+
+                $("#speakBtn").click(function(){
+                    $.ajax({
+                        type: "POST",
+                        url: GEODEV.rootpath + "api/user/" + USER.meetup_id + "/speak",
+                        dataType: "json",
+                        success: function (r) {
+                            if (r.status !== "success") {
+                                alert("Error: " + r.message);
+                            } else {
+                                console.log("r=", r);
+                            }
+                        }
+                    });
+                });
+
+                $("#searchVideo").submit(function (e) {
+                    e.preventDefault();
+                    var params = {
+                        part: "snippet",
+                        order: "viewcount",
+                        q: $("#searchVideo input").val(),
+                        type: "video+",
+                        videoDefinition: "high",
+                        apikey: apikey
+                    };
+
+                    $.ajax({
+                        type: "GET",
+                        url: "https://www.googleapis.com/youtube/v3/search",
+                        data: params,
+                        dataType: "json",
+                        success: function (r) {
+                            console.log(r);
+                            // TODO: Add video list to the container
+                        }
+                    });
+                });
+            }
+
             window.loadVideos = function (data){
                 var videos = [],
                     data = data.feed.entry,
@@ -43,6 +84,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     };
 
                     if(seccion === "videos"){
+
                         data.webinar = false;
                         if (Date.parse(fechaEvento) < Date.now()) {
 
@@ -53,9 +95,9 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                                 }
                             });
                             (function(data){
-                                var contentDetails = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=contentDetails&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";contentDetails
-                                var statistiscs = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=statistics&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
-                                var snippet = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=snippet&key=AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
+                                var contentDetails = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=contentDetails&key="+apikey;contentDetails
+                                var statistiscs = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=statistics&key="+apikey;
+                                var snippet = "https://www.googleapis.com/youtube/v3/videos?id="+data.id+"&part=snippet&key="+apikey;
                                 $.when(
                                     $.getJSON(contentDetails , function(d){
                                         data.duration = d.items[0].contentDetails.duration;

@@ -24,6 +24,15 @@ body, input, textarea, select {
    padding-bottom: 10px;
 }
 
+.numbered-list{
+    list-style: inherit;
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+
+.underline{ text-decoration: underline; }
+strong{font-weight: bold;}
+
 /* PROFILE-VIEW-PAGE */
 #profile-view-page #header{
     margin-top: -10px;
@@ -60,3 +69,5 @@ body, input, textarea, select {
     color: rgb(249, 41, 41);
     cursor: pointer;
 }
+#skillList span{ width:10%; }
+#skillList select{ width:90%; }
