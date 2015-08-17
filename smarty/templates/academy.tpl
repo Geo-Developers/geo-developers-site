@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <div class="col-md-8">
                         <div class="input-group">
-                            <input type="text" id="search" class="form-control" placeholder="">
+                            <input type="text" id="search" class="form-control" autocomplete="off">
                               <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
                               </span>
@@ -67,13 +67,30 @@
                         </div>
                     </div>
                 {/for}
+                <div class="col-md-12" id="no-results">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#" class="image featured">
+                                <img src="{$ROOT}images/suggestionbox.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-9 text-center">
+                            <p class="mb1 mt1 big">¿No encuentras lo que buscas?, sugiere un vídeo</p>
+                            <button class="btn btn-primary btn-block mb1" data-toggle="modal" data-target="#suggestVideo">Sugerir un vídeo</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-3 col-md-offset-1">
             <div class="row box mb3">
                 <div class="col-md-12">
-                    <img src="{$ROOT}images/speaking-image.jpg" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
-                    <button class="btn btn-warning btn-block mb1" data-toggle="modal" data-target="#speak">Razones para dar una charla</button>
+                    <p class="strong mt0 mb0 pt0 uppercase">Próximos eventos</p>
+                    <img src="{$ROOT}images/speaking-image.gif" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
+                    <button class="btn btn-warning btn-block mb1 blink_me" data-toggle="modal" data-target="#speak">
+                        ¡Anímate a dar una charla!
+                    </button>
+                    <p class="pt0 mt0 pb0"><a href="{$ROOT}webinars" class="small">Ver próximos eventos</a></p>
                 </div>
             </div>
             <div class="row box mb3">

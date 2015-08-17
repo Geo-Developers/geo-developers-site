@@ -12,6 +12,8 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
 
                 $("#filter").change(function(){ $("#search").val($(this).val());});
 
+                setTimeout(function(){$('[data-target="#speak"]').removeClass("blink_me")}, 5000);
+
                 window.onhashchange = function(){
                     hash = window.location.hash.substr(1);
                     $("#search").val(hash);
@@ -149,7 +151,14 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     }else{
                         $(elem).show();
                     }
+
+
                 });
+            }
+            if($(".video:visible").length === 0){
+                $("#no-results").show();
+            }else{
+                $("#no-results").hide();
             }
         }
     };

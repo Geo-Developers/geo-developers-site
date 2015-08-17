@@ -2240,13 +2240,16 @@ body .logo img{
     margin-bottom: 2em;
 }
 #video-list p{
+    margin-bottom: 0;
     /*display: table-cell;
   height: 128px;
   width: 100%;
   vertical-align: middle;*/
 }
-
-
+#video-list .details,
+#video-list .tags{
+    margin-top: .7em;
+}
 
 .creative-commons{
     height: 20px;

@@ -19,6 +19,11 @@ body, input, textarea, select {
     margin-bottom: 5px;
 }
 
+.big{
+    font-size:1.2em
+}
+
+
 .skills .col-md-4{
    padding-top: 0;
    padding-bottom: 10px;
@@ -91,6 +96,12 @@ strong{font-weight: bold;}
 }
 
 /* #academy-listing */
+
+#no-results{
+    background-color: #EFEFEF;
+    display: none;
+    margin-top: 1.5em;
+}
 
 #searchResults p{
 
