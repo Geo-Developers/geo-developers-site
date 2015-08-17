@@ -10,7 +10,26 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
 
             $(document).ready(function(){
 
-                loadVideos();
+                $("#filter").change(function(){ $("#search").val($(this).val());});
+
+                window.onhashchange = function(){
+                    hash = window.location.hash.substr(1);
+                    $("#search").val(hash);
+                    that.filter(hash);
+                    $("#filter [selected='selected']").removeAttr("selected");
+                    $("#filter [data-name='"+hash+"']").attr("selected","selected");
+                };
+                var tags = [];
+                tags = tags.sort();
+                filter = $("#filter");
+
+                tags.forEach(function(elem){
+                    if(elem !== ""){
+                        option = $("<option></option>").text(elem);
+                        option.attr("value", elem);
+                        filter.append(option);
+                    }
+                });
 
                 $("#search").keyup(function(){
                     that.filter($("#search").val());
@@ -45,17 +64,55 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     });
                 });
 
+                $("#suggestBtn").click(function(){
+                    var $this = $(this);
+                    $this.addClass("disabled");
+
+                    videos = $("#searchResults .selected");
+                    if(videos.length == 0){
+                        //alert("Debes seleccionar al menos un vídeo. Haz clic sobre el título para seleccionarlos.")
+                        return -1;
+                    }
+                    data = {videos:[]};
+                    $(videos).each(function(i,elem){
+                        data.videos.push({
+                            title: $(elem).find("p").text(),
+                            url:$(elem).find("a").attr("href")
+                        })
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: GEODEV.rootpath + "api/video/suggest",
+                        data: data,
+                        dataType: "json",
+                        success: function (r) {
+                            if (r.status !== "success") {
+                                alert("Error: " + r.message);
+                                $this.removeClass("disabled");
+                            } else {
+                                $("#suggestBtn").hide();
+                                $("#suggestDone").show();
+                                //console.log("r=", r);
+                            }
+                        }
+                    });
+                });
+
                 $("#searchVideo").submit(function (e) {
                     e.preventDefault();
+                    $("#suggestDone").hide();
+
+                    $("#searchResults .selected").removeClass("selected");
                     var params = {
                         part: "snippet",
                         order: "viewcount",
                         q: $("#searchVideo input").val(),
-                        type: "video+",
+                        type: "video",
                         videoDefinition: "high",
-                        apikey: apikey
+                        key: apikey
                     };
-
+                    template = $.templates("#videoTmpl");
                     $.ajax({
                         type: "GET",
                         url: "https://www.googleapis.com/youtube/v3/search",
@@ -63,35 +120,20 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                         dataType: "json",
                         success: function (r) {
                             console.log(r);
-                            // TODO: Add video list to the container
+                            htmlOutput = template.render(r.items);
+                            $("#searchResults").html(htmlOutput);
+                            if(r.items.length > 0){
+                                $("#suggestBtn").show();
+                            }else{
+                                $("#suggestBtn").hide();
+                            }
                         }
                     });
+
+
                 });
             }
 
-            window.loadVideos = function (){
-
-                window.onhashchange = function(){
-                    hash = window.location.hash.substr(1);
-                    $("#search").val(hash);
-                    that.filter(hash);
-                };
-                var tags = [];
-                tags = tags.sort();
-                filter = $("#filter");
-
-                tags.forEach(function(elem){
-                    if(elem !== ""){
-                        option = $("<option></option>").text(elem);
-                        option.attr("value", elem);
-                        filter.append(option);
-                    }
-                });
-            };
-
-            window.view = function(youtubeID){
-                window.location.href='view.php?id='+youtubeID;
-            };
         },
         filter: function(val){
             if(val === ""){

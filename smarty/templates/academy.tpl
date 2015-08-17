@@ -27,6 +27,9 @@
                     <div class="col-md-4">
                         <select name="filter" class="form-control" id="filter">
                             <option value="">Filtrar</option>
+                            {for $K=0 to $TAGS|@count - 1}
+                                <option data-name="{$TAGS[$K]}">{$TAGS[$K]}</option>
+                            {/for}
                         </select>
                     </div>
 
@@ -142,11 +145,30 @@
             <div class="modal-body small">
                 <p>Si conoces algún vídeo que creas que creas que deberíamos añadir por favor indícanos cual:</p>
                 <form id="searchVideo">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                        </span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class=" text-center">
+
+
+                    </div>
+                    <div class="row mt0 text-center" id="suggestBtn" style="display:none">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary">Enviar <i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="row mt0 text-center disabled" id="suggestDone" style="display:none">
+                        <div class="col-md-12">
+                            <button class="btn btn-success disabled">¡Gracias!, revisaremos la petición cuanto antes <i class="fa fa-check"></i></button>
+                        </div>
                     </div>
                 </form>
 
@@ -158,7 +180,25 @@
     </div>
 </div>
 
-
+{literal}
+    <script id="videoTmpl" type="text/x-jsrender">
+        {{if #index == 0}}<hr>{{/if}}
+        {{if #index % 3 == 0}}
+           <div class="row">
+        {{/if}}
+        <div class="col-md-4">
+            <article class="thumbnail" onclick="$(this).toggleClass('selected');">
+                <a href="https://www.youtube.com/watch?v={{:id.videoId}}" target="_blank" class="image featured mb05"><img src="https://i.ytimg.com/vi/{{:id.videoId}}/mqdefault.jpg" alt="" /></a>
+                <div class="table">
+                    <p>{{:snippet.title}}</p>
+                </div>
+            </article>
+        </div>
+        {{if ((#index % 3) + 1) % 3 == 0}}
+           </div>
+        {{/if}}
+    </script>
+{/literal}
 {include file="footer.tpl"}
 <script>
     require([

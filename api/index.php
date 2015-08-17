@@ -46,18 +46,49 @@ $app->post('/user/:userid/speak', 'authenticated', 'same_user',function ($userId
     $GeodevDB = new GeodevDB(array("meetup_id" => $userId));
     $userprofile = $GeodevDB->getUser(array("type" => "userprofile"));
 
+    $to = 'root@geodevelopers.org';
+    $replyTo = $userprofile['email'];
+    $subject = 'Ofrecimiento para dar una charla';
     $message = "
             Nombre: <a href='http://{$_SERVER['HTTP_HOST']}".$ROOT."miembros/{$userprofile['meetup_id']}'>
                         {$userprofile['name']} {$userprofile['last_name']}
                     </a><br>
             Email: {$userprofile['email']}<br>
             ";
-    $message = wordwrap($message, 70, "\r\n");
+
+    $data = sendMail($to, $subject, $message, $replyTo);
+    echo json_encode($data);
+});
+
+$app->post('/video/suggest', 'authenticated',function () use ($app, $db) {
+    global $ROOT;
+
+    $GeodevDB = new GeodevDB(array("meetup_id" => $_SESSION["user"]['meetup_id']));
+    $userprofile = $GeodevDB->getUser(array("type" => "userprofile"));
 
     $to = 'root@geodevelopers.org';
-    $subject = 'Ofrecimiento para dar una charla';
+    $replyTo = $userprofile['email'];
+    $subject = 'Nuevos vídeos sugeridos';
+    $message = "
+            Nombre: <a href='http://{$_SERVER['HTTP_HOST']}".$ROOT."miembros/{$userprofile['meetup_id']}'>
+                        {$userprofile['name']} {$userprofile['last_name']}
+                    </a><br>
+            Email: {$userprofile['email']}<br>
+            ";
+
+    foreach($_POST["videos"] as $v){
+        $message .= "<a href='{$v['url']}'>{$v['title']}</a><br>";
+    }
+
+    $data = sendMail($to, $subject, $message, $replyTo);
+    echo json_encode($data);
+});
+
+function sendMail($to, $subject, $message, $replyTo){
+
+    $message = wordwrap($message, 70, "\r\n");
     $headers = "From: " . strip_tags($to) . "\r\n";
-    $headers .= "Reply-To: ". strip_tags($userprofile['email']) . "\r\n";
+    $headers .= "Reply-To: ". strip_tags($replyTo) . "\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
@@ -65,7 +96,7 @@ $app->post('/user/:userid/speak', 'authenticated', 'same_user',function ($userId
     {
         $data = array(
             'status' => 'success',
-            'message' => 'Mail sent successfully!'
+            'message' => "Mail sent successfully to $to, replyTo $replyTo!"
         );
     }else{
         $data = array(
@@ -73,8 +104,8 @@ $app->post('/user/:userid/speak', 'authenticated', 'same_user',function ($userId
             'message' => 'Inténtalo de nuevo por favor'
         );
     }
-    echo json_encode($data);
-});
+    return $data;
+}
 
 $app->delete('/user/:userid/skill', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
 

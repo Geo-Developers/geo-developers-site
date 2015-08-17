@@ -71,3 +71,31 @@ strong{font-weight: bold;}
 }
 #skillList span{ width:10%; }
 #skillList select{ width:90%; }
+
+
+/* #academy-listing */
+
+#searchResults p{
+
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 100%;
+    height: 34px; /* Fallback for non-webkit */
+    margin: 0 auto;
+    font-size: 11.8999996185303px;
+    line-height: 17px
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+#searchResults .thumbnail:hover{
+    background-color: #efefef;
+    cursor: pointer;
+}
+#searchResults .thumbnail.selected{
+    background-color: #00ACFF;
+    color: white;
+}
