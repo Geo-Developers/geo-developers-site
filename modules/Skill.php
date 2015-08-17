@@ -63,6 +63,7 @@ class Skill
 
     // Find an skill in the database
     // Param skill is an array with a key "meetup_skill_id" or a "name"
+    // it returns false if the skill doesn't exist
     public function find($skill)
     {
         if(isset($skill["meetup_skill_id"])){
@@ -73,15 +74,14 @@ class Skill
             }
         }
 
-        $skills = $this->db->get("skills");
-
-        foreach($skills as $s){
-            echo "find(), skill=";
-            prettyprint($s);
-            if(strtolower($s["name"]) == strtolower($skill["name"])){
+        if(isset($skill["name"])){
+            $this->db->where("name", $skill["name"]);
+            $s = $this->db->get("skills");
+            if($s){
                 return $s;
             }
         }
+
         return false;
     }
 
@@ -96,8 +96,10 @@ class Skill
             if(!$elem){
                 if ($id = $this->db->insert('skills', $skill)){
                     //echo $db->count . ' skills were added';
-                }else
-                    die('insetion failed: ' . $this->db->getLastError());
+                }else{
+                    prettyprint($skill);
+                    die('skill insetion failed: ' . $this->db->getLastError());
+                }
             }
         }
     }

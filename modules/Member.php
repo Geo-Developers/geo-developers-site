@@ -60,6 +60,7 @@ class Member
                 $this->db->where("u.meetup_id", $this->meetup_id);
                 $userProfile = $this->db->getOne("profiles p");
 
+                $this->id = $userProfile["id"];
                 $this->name = $userProfile["name"];
                 $this->email = $userProfile["email"];
                 $this->cookies = $userProfile["cookies"];
@@ -224,11 +225,17 @@ class Member
     public function getUserSkills(){
         $data = array();
         foreach($this->skills as $s){
-            array_push($data, array(
+            $tmp = array(
                 "skill_id"   => $s["id"],
-                "level"      => $s["level"],
                 "meetup_id"  => $this->meetup_id
-            ));
+            );
+
+            if(!isset($s["level"])){
+                $tmp["level"] = 0;
+            }else{
+                $tmp["level"] = $s["level"];
+            }
+            array_push($data, $tmp);
         }
         return $data;
     }
@@ -251,13 +258,14 @@ class Member
             if ($this->db->update('users', $data)){
                 //echo  $db->count . ' records were updated';
             }else {
-                $message = 'User update failed: ' . $this->db->getLastError();
-                die($message);
+                prettyprint($data);
+                die('User ('.$this->id.') update failed: ' . $this->db->getLastError());
             }
         }else{
             $result = $this->db->insert ('users', $data);
             if(!$result){
-                die("The user could not be added, please contact to the webmaster at root@geodevelopers.org: ".$this->db->getLastError());
+                prettyprint($data);
+                die("The user ('.$this->meetup_id.') could not be added, please contact to the webmaster at root@geodevelopers.org: ".$this->db->getLastError());
             }
         }
 
@@ -275,13 +283,14 @@ class Member
             if ($this->db->update('profiles', $data)){
                 //echo $db->count . ' records were updated';
             }else {
-                $message = 'Profile update failed: ' . $this->db->getLastError();
-                die($message);
+                prettyprint($data);
+                die('User profile ('.$this->id.') update failed: ' . $this->db->getLastError());
             }
         }else{
             $result = $this->db->insert ('profiles', $data);
             if(!$result){
-                die("The profile could not be added, please contact to the webmaster at root@geodevelopers.org:". $this->db->getLastError());
+                prettyprint($data);
+                die("User profile ('.$this->meetup_id.') could not be added, please contact to the webmaster at root@geodevelopers.org:". $this->db->getLastError());
             }
         }
 
@@ -289,11 +298,15 @@ class Member
         //echo "Skills:";
         //prettyprint($skills);
         //die("<hr>");
-        foreach($skills as $s){
-            if(!$s["id"]){
+        foreach($skills as $key => $s){
+            if(!isset($s["id"])){
                 $s["id"] = $this->db->insert("skills",$s);
                 if(!$s["id"]){
-                    die("The skill could not be added ".$s["name"]);
+                    prettyprint($s);
+                    die("Skill ".$s["name"]." for user ('.$this->meetup_id.') could not be added ");
+                }else{
+                    $this->skills[$s["id"]] = $s;
+                    unset($this->skills["new_".$s["meetup_skill_id"]]);
                 }
             }
         }
@@ -311,14 +324,17 @@ class Member
             if(!$elem){
                 if ($id = $this->db->insert('user_skills', $s)) {
                     //echo $db->count . ' user_skills were added';
-                }else
-                    die('insetion failed: ' . $this->db->getLastError());
+                }else{
+                    prettyprint($s);
+                    die('user_skills for user ('.$this->meetup_id.') insetion failed: ' . $this->db->getLastError());
+                }
             }else{
                 //prettyprint($s);
                 $this->db -> where("skill_id", $s["skill_id"])
                           -> where("meetup_id", $this->meetup_id);
                 if(!$this->db->update('user_skills', $s)){
-                    die("User skills could not be updated");
+                    prettyprint($s);
+                    die("User ('.$this->meetup_id.') skills could not be updated");
                 }
 
             }
@@ -476,7 +492,7 @@ class Member
                 if ($s) {
                     $this->skills[$s["id"]] = $s;
                 } else {
-                    $this->skills[$s["id"]] = array(
+                    $this->skills["new_".$topic["id"]] = array(
                         "meetup_skill_id" => $topic["id"],
                         "is_gis" => 0,
                         "synonyms" => NULL,

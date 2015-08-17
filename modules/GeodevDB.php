@@ -93,6 +93,8 @@ class GeodevDB
                 }
                 break;
 
+            case "user":
+                $result = $this->db->getOne("users u");
             //default:
 
         }
