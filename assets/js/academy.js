@@ -34,8 +34,10 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 $("#search").keyup(function(){
                     that.filter($("#search").val());
                 });
+
                 $("#filter").change(function(){
                     var val = $("#filter").val();
+                    window.location.hash = val;
                     //if(val === "all")
                     that.filter(val);
                 });
