@@ -69,9 +69,8 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
         initEdit: function(){
             $("#studies").typeahead({source: studies});
             $("#occupation").typeahead({source: occupation});
-            $("#geoskill").typeahead({
-                source: GEOSKILLS
-            });
+            $("#geoskill").typeahead({source: GEOSKILLS});
+            $("#skill").typeahead({source: OTHERSKILLS});
 
             $('form').on('keyup keypress', function(e) {
                 var code = e.keyCode || e.which;
@@ -80,15 +79,25 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                     return false;
                 }
             });
-            $("#skillList button").click(function(){
-                var value = $("#skillList select").val();
-                $("#geoskill").val(value);
-                $('.addSkill[data-target="#geoskill"]').click();
-            });
-            $(".addSkill").click(function(e){
-                //console.log("añadimos");
-                //debugger;a=
 
+            $(".skillList button").click(function(){
+                var $target = $(this).data("target");
+                var $input = $(this).data("input");
+                $($target).val($($input).val());
+
+                $('.addSkill[data-target="'+$target+'"]').click();
+            });
+
+            $(".focus").focusin(function(){
+                $id = $(this).data("focus");
+                $($id).addClass("blink_me");
+            });
+            $(".focus").focusout(function(){
+                $id = $(this).data("focus");
+                $($id).removeClass("blink_me");
+            });
+
+            $(".addSkill").click(function(e){
                 var skill_name = $($(this).data("target")).val(),
                     table = $(this).data("table"),
                     that = this,
@@ -129,6 +138,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                     }
                 });
             });
+
             $('[data-table="#geoSkillTable"]').removeClass("disabled");
 
             window.removeSkill = function(id, elemId){

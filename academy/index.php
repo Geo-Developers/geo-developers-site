@@ -23,7 +23,7 @@ if( isset($_SESSION['logged']) ){
                 }
             }
         }
-
+        sort($tags);
         $smarty->assign('TAGS', $tags);
         $smarty->assign('VIDEOS', $videos);
         $smarty->assign('NUMVIDEOS', $db->count - 1);

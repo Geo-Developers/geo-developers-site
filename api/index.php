@@ -129,11 +129,9 @@ $app->delete('/user/:userid/skill', 'authenticated', 'same_user', function ($use
 
 $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
 
-    $meetup_id = $_SESSION['user']['meetup_id'];
-    $skill_name = $_POST["skill_name"];
+    $skill_name = trim($_POST["skill_name"]);
     $db->where("name", $skill_name);
     $elem = $db->getOne("skills");
-
 
     if(!$elem){
         // Its a new skill
@@ -146,7 +144,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
         }
         $id = $db->insert("skills",$data);
         if(!$id){
-            $data = array(
+            return array(
                 'status' => 'error',
                 'message' => 'The skill could not be added to the database'
             );
@@ -155,6 +153,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
         $id = $elem["id"];
     }
 
+    $meetup_id = $_SESSION['user']['meetup_id'];
     $db->where("skill_id", $id);
     $db->where("meetup_id", $meetup_id);
     $elem = $db->getOne("user_skills");

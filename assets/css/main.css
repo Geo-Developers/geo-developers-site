@@ -53,7 +53,7 @@ strong{font-weight: bold;}
         font-size: 1.3em;
     }
 
-/* PROFILE-VIEW-PAGE */
+/* PROFILE-EDIT-PAGE */
 #profile-edit-page tbody td:nth-child(6n+1),
 #profile-edit-page th:nth-child(6n+1){
     width: 25%;
@@ -63,15 +63,32 @@ strong{font-weight: bold;}
     width: 15%;
 }
 #profile-edit-page i.fa-times{
-    color: rgba(173, 173, 173, 0.31);
+    color: rgba(173, 173, 173, 0.5);
 }
 #profile-edit-page i.fa-times:hover{
     color: rgb(249, 41, 41);
     cursor: pointer;
 }
-#skillList span{ width:10%; }
-#skillList select{ width:90%; }
+#profile-edit-page .skillList span{ width:10%; }
+#profile-edit-page .skillList select{ width:90%; }
 
+.git-table,
+.other-table{
+    background-color: #3366CC;
+    padding: 10px;
+    margin-top: 1.5em;
+    color: white;
+}
+.other-table {
+    background-color: #33CC81;
+}
+#profile-edit-page .btn-success{
+    background-color: #33CC81;
+    border: 1px solid #33CC81;
+}
+#profile-edit-page .table{
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
 
 /* #academy-listing */
 
@@ -99,3 +116,5 @@ strong{font-weight: bold;}
     background-color: #00ACFF;
     color: white;
 }
+
+

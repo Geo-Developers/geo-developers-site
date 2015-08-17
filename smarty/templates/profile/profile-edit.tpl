@@ -9,7 +9,7 @@
         <li><a href="#social" data-toggle="tab"><i class="fa fa-users"></i> Perfiles sociales</a></li>
         <li><a href="#tech" data-toggle="tab"><i class="fa fa-cogs"></i> Conocimientos</a></li>
     </ul>
-    <div id="ranking-content" class="tab-content clearfix">
+    <div id="profile-content" class="tab-content clearfix">
         <div class="tab-pane active" id="general">
             {include file="profile/profile-edit-general.tpl"}
             <div class="row">

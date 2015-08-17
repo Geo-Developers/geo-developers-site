@@ -2667,10 +2667,16 @@ ul.inline li{
     vertical-align: middle;
 }
 
-#ranking-content{
+#ranking-content,
+#profile-content{
     padding: 2em 1em;
     border: 1px solid #ddd;
     border-top: 0;
+}
+
+#profile-content i{
+    float:right;
+    margin-top:10px
 }
 @font-face {
     font-family: 'icomoon';
@@ -2747,4 +2753,40 @@ div#referrers.box p{
 
 .uppercase{
     text-transform: uppercase;
+}
+
+
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
 }

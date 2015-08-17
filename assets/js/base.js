@@ -27,6 +27,16 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                 }
             });
 
+            $('[rel=popover][data-content]').popover({
+                html: true,
+                placement: $(this).data('placement'),
+                trigger: 'hover',
+                content: $(this).data('content')
+            });
+
+
+
+
 			if(showCookies){
                 document.getElementById('cookies').className = "show";
                 window.closeCookies = function () {

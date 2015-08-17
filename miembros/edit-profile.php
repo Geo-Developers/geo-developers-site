@@ -42,6 +42,7 @@ if(intval($_SESSION["user"]["meetup_id"]) === intval($_GET["meetup_id"])){
     }
 
     $smarty->assign('PROFILE',      $userprofile);
+    $smarty->assign('OTHERSKILLS',  $GeodevDB->getSkills(array("type" => "other")));
     $smarty->assign('GEOSKILLS',    $GeodevDB->getSkills(array("type" => "geo")));
     $smarty->assign('SKILLSGIS',    $GeodevDB->getUserSkills(array("type" => "gis")));
     $smarty->assign('SKILLS',       $GeodevDB->getUserSkills(array("type" => "other")));

@@ -47,11 +47,11 @@
         </p>
         <p class="row">
                 <span class="text-label col-md-2 pt05">
-                    Estudios en:
-                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc."></i>
+                    Área:
+                    <i class="fa fa-info-circle" id="info-area" data-toggle="tooltip" data-placement="right" title="" data-original-title="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc."></i>
                 </span>
                 <span class="col-md-10 pt05">
-                    <input class="form-control" value="{$PROFILE["studies"]}" name="studies" id="studies" autocomplete="off" >
+                    <input class="form-control focus" data-focus="#info-area" value="{$PROFILE["studies"]}" name="studies" id="studies" autocomplete="off" rel="popover" data-placement="top" title="Área de especialidad" data-content="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc.">
                 </span>
         </p>
         <p class="row">
@@ -81,11 +81,11 @@
         </p>
         <p class="row">
                 <span class="text-label col-md-2 pt05">
-                    Profesión:
-                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc."></i>
+                    Función:
+                    <i class="fa fa-info-circle" id="info-funcion" data-toggle="tooltip" data-placement="right" title="" data-original-title="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc."></i>
                 </span>
                 <span class="col-md-10 pt05">
-                    <input class="form-control" value="{$PROFILE["occupation"]}" name="occupation" id="occupation" autocomplete="off" >
+                    <input class="form-control focus"  data-focus="#info-funcion"  value="{$PROFILE["occupation"]}" name="occupation" id="occupation" autocomplete="off" rel="popover" data-placement="top" title="¿Cual es tú función actualmente?" data-content="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc.">
                 </span>
         </p>
     </div>
