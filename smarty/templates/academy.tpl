@@ -161,13 +161,13 @@
             </div>
             <div class="modal-body small">
                 <p>Si conoces algún vídeo que creas que creas que deberíamos añadir por favor indícanos cual:</p>
-                <form id="searchVideo">
+                <div id="searchVideo">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default search" type="button"><i class="glyphicon glyphicon-search"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -176,9 +176,15 @@
 
 
                     </div>
-                    <div class="row mt0 text-center" id="suggestBtn" style="display:none">
-                        <div class="col-md-12">
-                            <button class="btn btn-primary">Enviar <i class="fa fa-plus"></i></button>
+                    <div class="row mt0" id="youtubeNavigation" style="display:none">
+                        <div class="col-md-4 text-left">
+                            <button class="btn btn-default disabled before"><i class="fa fa-arrow-left "></i></button>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <button class="btn btn-primary" id="suggestBtn">Enviar <i class="fa fa-plus"></i></button>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button class="btn btn-default after"><i class="fa fa-arrow-right"></i></button>
                         </div>
                     </div>
 
@@ -187,7 +193,7 @@
                             <button class="btn btn-success disabled">¡Gracias!, revisaremos la petición cuanto antes <i class="fa fa-check"></i></button>
                         </div>
                     </div>
-                </form>
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -204,10 +210,13 @@
            <div class="row">
         {{/if}}
         <div class="col-md-4">
-            <article class="thumbnail" onclick="$(this).toggleClass('selected');">
-                <a href="https://www.youtube.com/watch?v={{:id.videoId}}" target="_blank" class="image featured mb05"><img src="https://i.ytimg.com/vi/{{:id.videoId}}/mqdefault.jpg" alt="" /></a>
+            <article class="thumbnail" onclick="selectVideo(this)" data-url="https://www.youtube.com/watch?v={{:id.videoId}}">
+                <div class="image featured mb05">
+                    <img src="https://i.ytimg.com/vi/{{:id.videoId}}/mqdefault.jpg" alt="" />
+                    <i class="fa fa-plus-square"></i>
+                </div>
                 <div class="table">
-                    <p>{{:snippet.title}}</p>
+                    <p><a href="https://www.youtube.com/watch?v={{:id.videoId}}" target="_blank" title="{{:snippet.title}}">{{:snippet.title}}</a></p>
                 </div>
             </article>
         </div>

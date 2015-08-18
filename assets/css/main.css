@@ -122,9 +122,24 @@ strong{font-weight: bold;}
 #searchResults .thumbnail:hover{
     background-color: #efefef;
     cursor: pointer;
+    position: relative;
+}
+
+#searchResults .fa-plus-square{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: 1.2em;
+    color: black;
+    background-color: white;
+    padding: 4px 3px 1px 3px;
+    border-radius: 29px;
 }
 #searchResults .thumbnail.selected{
     background-color: #00ACFF;
+
+}
+#searchResults .thumbnail.selected a{
     color: white;
 }
 
