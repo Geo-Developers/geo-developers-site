@@ -13,7 +13,7 @@
                 </span>
         </p>
         <p class="row">
-            <span class="text-label col-md-2 pt05">Email: <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tu dirección de email será privada y se usará en función de las preferencias que nos indiques"></i></span>
+            <span class="text-label col-md-2 pt05">Email: <i class="fa fa-info-circle onright" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tu dirección de email será privada y se usará en función de las preferencias que nos indiques"></i></span>
                 <span class="col-md-10 pt05">
                     <input class="form-control" value="{$PROFILE["email"]}" name="email" type="email">
                 </span>
@@ -48,7 +48,7 @@
         <p class="row">
                 <span class="text-label col-md-2 pt05">
                     Área:
-                    <i class="fa fa-info-circle" id="info-area" data-toggle="tooltip" data-placement="right" title="" data-original-title="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc."></i>
+                    <i class="fa fa-info-circle onright" id="info-area" data-toggle="tooltip" data-placement="right" title="" data-original-title="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc."></i>
                 </span>
                 <span class="col-md-10 pt05">
                     <input class="form-control focus" data-focus="#info-area" value="{$PROFILE["studies"]}" name="studies" id="studies" autocomplete="off" rel="popover" data-placement="top" title="Área de especialidad" data-content="Especifica en qué campo estás especializado. Por ejemplo: informática, geografía, geodesia, telecomunicaciones, cartografía, geomática, electrónica, montes, etc.">
@@ -82,7 +82,7 @@
         <p class="row">
                 <span class="text-label col-md-2 pt05">
                     Función:
-                    <i class="fa fa-info-circle" id="info-funcion" data-toggle="tooltip" data-placement="right" title="" data-original-title="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc."></i>
+                    <i class="fa fa-info-circle onright" id="info-funcion" data-toggle="tooltip" data-placement="right" title="" data-original-title="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc."></i>
                 </span>
                 <span class="col-md-10 pt05">
                     <input class="form-control focus"  data-focus="#info-funcion"  value="{$PROFILE["occupation"]}" name="occupation" id="occupation" autocomplete="off" rel="popover" data-placement="top" title="¿Cual es tú función actualmente?" data-content="Desarrollador, jefe técnico, analista programador, consultor GIS, técnico GIS, investigador, profesor, director de departamento, etc.">

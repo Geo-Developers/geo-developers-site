@@ -1705,6 +1705,7 @@ body .logo img{
     background-size: 100%;
     border-bottom:10px solid #000;
     height: 450px;
+    margin-top: -20px;
 }
 
 
@@ -2689,7 +2690,7 @@ ul.inline li{
     border-top: 0;
 }
 
-#profile-content i{
+#profile-content i.fa-info-circle.onright{
     float:right;
     margin-top:10px
 }

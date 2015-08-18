@@ -96,7 +96,15 @@
     </div>
     <div class="strong uppercase col-md-12 pt0"><p>Relacionados con el GeoDesarrollo:</p></div>
     {if $SKILLSGIS|@count == 0}
-        <div class="col-md-12 pt0"><p>No se ha especificado ninguno</p></div>
+        <div class="col-md-12 pt0">
+            <p>
+                {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+                    No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-primary">añadelos ahora</a>.
+                {else}
+                    No se ha especificado ninguno
+                {/if}
+            </p>
+        </div>
     {else}
         <div class="col-md-12">
             <div class="row skills">
@@ -128,6 +136,14 @@
                         </div>
                     </div>
                 {/for}
+                {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+                    <div class="col-md-4">
+                        <p style="margin-bottom: 5px;">Añade más conocimientos:</p>
+                        <div class="btn-group-xs">
+                            <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-warning btn-block">Editar mi perfil</a>
+                        </div>
+                    </div>
+                {/if}
             </div>
         </div>
     {/if}
@@ -136,7 +152,15 @@
     </div>
     <div class="col-md-12 pt0">
         {if $SKILLS|@count == 0}
-            <div><p>No se ha especificado ninguno</p></div>
+            <div>
+                <p>
+                    {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+                        No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-success">añadelos ahora</a>.
+                    {else}
+                        No se ha especificado ninguno
+                    {/if}
+                </p>
+            </div>
         {else}
             <div class="row">
             {for $I=0 to $SKILLS|@count -1}
@@ -166,6 +190,14 @@
                     </div>
                 </div>
             {/for}
+            {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+                <div class="col-md-4">
+                    <p style="margin-bottom: 5px;">Añade más conocimientos:</p>
+                    <div class="btn-group-xs">
+                        <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-warning btn-block">Editar mi perfil</a>
+                    </div>
+                </div>
+            {/if}
             </div>
         {/if}
     </div>

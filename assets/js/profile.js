@@ -16,6 +16,8 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
             if(action=="edit"){
                 $(document).ready(function(){
                     that.initEdit();
+                    hash = window.location.hash;
+                    $("a[href='"+hash+"']").click();
                 });
 
             }
