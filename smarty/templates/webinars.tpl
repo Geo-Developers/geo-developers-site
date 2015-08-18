@@ -7,7 +7,7 @@
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 70px;margin-bottom: 20px">
+        <div class="col-md-12" style="margin-bottom: 20px">
             <a href="../">Home</a> &gt; Webinars
         </div>
     </div>

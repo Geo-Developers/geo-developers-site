@@ -8,7 +8,7 @@
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px">
+        <div class="col-md-12" style="margin-bottom:20px">
             <a href="../../">Home</a> &gt; Academy
         </div>
     </div>
@@ -196,9 +196,9 @@
                 </div>
 
             </div>
-            <div class="modal-footer">
+            {*<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
+            </div>*}
         </div>
     </div>
 </div>

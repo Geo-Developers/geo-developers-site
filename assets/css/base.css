@@ -1070,7 +1070,7 @@ body {
 /* Basic */
 
 #nav{
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 
@@ -1673,10 +1673,13 @@ ol.default li {
 }
 .logo img{
 
-    height: 40px;
+    height: 30px;
     margin-top: 0px;
     position: relative;
     bottom: -14px;
+}
+body {
+    padding-top:60px;
 }
 body .logo img{
     bottom:	0;
@@ -1938,7 +1941,7 @@ body .logo img{
         -webkit-transition: background-color .2s ease-in-out;
         -ms-transition: background-color .2s ease-in-out;
         transition: background-color .2s ease-in-out;
-        padding: 0.2em 1em 0.2em 1em;
+        padding: 0em 1em 0em 1em;
         margin: 0.6em 0.2em 0.6em 0.2em;
         font-weight: 300;
         border-radius: 8px;
@@ -2372,8 +2375,17 @@ body .logo img{
 #login{
     margin-left: 20px;
     background-color: #3FB282;
-    padding: 5px;
-    border-radius: 3px;
+    padding: 0px;
+    border-radius: 0px;
+}
+#login .dropdown-toggle{
+    padding: 0 7px 0 0;
+    height: 27px;
+    border-radius: 0;
+    border: 1px solid #555;
+}
+#login .dropdown-toggle img{
+    margin-top: -4px;
 }
 #login .caret{
     color: white;

@@ -8,7 +8,7 @@
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 70px;margin-bottom:20px;padding-left: 0;">
+        <div class="col-md-12" style="margin-bottom:20px;padding-left: 0;">
 
             <a href="{$ROOT}">Home</a> &gt;
                 <a href="{$ROOT}miembros">Miembros</a> &gt;

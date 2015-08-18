@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="margin-top: 42px;">
+        <div class="col-md-12 pt0">
             <a href="{$ROOT}">Home</a> &gt;
             {if !isset($TECH)}
                     Miembros
