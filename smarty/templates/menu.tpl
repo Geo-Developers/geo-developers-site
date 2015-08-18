@@ -24,7 +24,7 @@
                 </div>
             </li>
         {else}
-            <li>
+            <li class="btn-group-sm">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
                     Entrar <i class="fa fa-sign-in"></i>
                 </button>
