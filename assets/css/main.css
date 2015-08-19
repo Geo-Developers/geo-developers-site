@@ -57,6 +57,31 @@ strong{font-weight: bold;}
     #profile-view-page h2{
         font-size: 1.3em;
     }
+    .progress-bar[data-level="0"]{
+        width: 0%;
+
+    }
+    .progress-bar[data-level="1"]{
+        width: 7%;
+        background-color: red;
+    }
+    .progress-bar[data-level="2"]{
+        width: 20%;
+        background-color: purple;
+    }
+    .progress-bar[data-level="3"]{
+        width: 50%;
+        background-color: #337ab7;
+    }
+    .progress-bar[data-level="4"]{
+        width: 75%;
+        background-color: orange;
+    }
+    .progress-bar[data-level="5"]{
+        width: 100%;
+        background-color: #2EAF2E;
+    }
+
 
 /* PROFILE-EDIT-PAGE */
 #profile-edit-page tbody td:nth-child(6n+1),
@@ -97,6 +122,13 @@ strong{font-weight: bold;}
 
 /* #academy-listing */
 
+.give-a-talk{
+    background-color: #D3FFC3;
+}
+.give-a-talk a{
+    color: black;
+    text-decoration: underline;
+}
 #no-results{
     background-color: #EFEFEF;
     display: none;

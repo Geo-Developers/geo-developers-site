@@ -83,11 +83,11 @@
             </div>
         </div>
         <div class="col-md-3 col-md-offset-1">
-            <div class="row box mb3">
+            <div class="row box mb3 give-a-talk">
                 <div class="col-md-12">
                     <p class="strong mt0 mb0 pt0 uppercase">Próximos eventos</p>
                     <img src="{$ROOT}images/speaking-image.gif" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
-                    <button class="btn btn-warning btn-block mb1 blink_me" data-toggle="modal" data-target="#speak">
+                    <button class="btn btn-success btn-block mb1 blink_me" data-toggle="modal" data-target="#speak">
                         ¡Anímate a dar una charla!
                     </button>
                     <p class="pt0 mt0 pb0"><a href="{$ROOT}webinars" class="small">Ver próximos eventos</a></p>

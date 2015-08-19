@@ -240,6 +240,53 @@ $app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use
     }
     echo json_encode($data);
 });*/
+$app->post('/user/:userid/video', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
+
+    $db->where("video_id",$_POST["video_id"]);
+    $db->where("meetup_id", $_SESSION['user']['meetup_id']);
+    $elem = $db->getOne("progress");
+
+    $indexes = $_POST["indexes"];
+    for($i = 0; $i < sizeof($indexes) ; $i++){
+        $indexes[$i] = implode(",",$indexes[$i]);
+    }
+    $indexes = implode("|",$indexes);
+
+    $data= array(
+        "progress" => $_POST["progress"],
+        "indexes" => $indexes
+    );
+
+    if($elem){
+
+        $db->where("video_id",$_POST["video_id"]);
+        $db->where("meetup_id", $_SESSION['user']['meetup_id']);
+        if(!$db->update("progress", $data)){
+            $res = array(
+                'status' => 'error',
+                'message' => 'Progress could no be updated: '.$db->getLastError()
+            );
+        }
+    }else{
+        $data["video_id"] = $_POST["video_id"];
+        $data["meetup_id"] = $_SESSION['user']['meetup_id'];
+        if(!$db->insert("progress", $data)){
+            $res = array(
+                'status' => 'error',
+                'message' => 'Progress could no be added: '.$db->getLastError()
+            );
+        }
+    }
+
+    if(!isset($res)){
+        $res = array(
+            'status' => 'success',
+            'message' => $data
+        );
+    }
+
+    echo json_encode($res);
+});
 
 function insertOrUpdate($db, $table, $attrs, $id, $where){
     $data = array();

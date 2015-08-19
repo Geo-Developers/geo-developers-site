@@ -33,14 +33,4 @@ if( isset($_SESSION['logged']) ){
 	$_SESSION['returnURL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   header('Location: '.$ROOT.'login/');
 }
-
-function covtime($youtube_time){
-    $start = new DateTime('@0'); // Unix epoch
-    $start->add(new DateInterval($youtube_time));
-    $time = $start->format('H:i:s');
-    if(substr($time,0,3)==="00:"){
-        $time = substr($time,3);
-    }
-    return $time;
-}
 ?>

@@ -5,7 +5,10 @@ require_once 'init.php';
 
 if( isset($_SESSION['user']['meetup_id']) ){
     $GeodevDB = new GeodevDB();
-    $video = $GeodevDB->getVideo(array("youtubeId" => $_GET["id"]));
+    $video = $GeodevDB->getVideo(array(
+        "youtubeId" => $_GET["id"],
+        "meetupId" => $_SESSION['user']['meetup_id']
+    ));
 
     $smarty->assign('VIDEO', $video);
 

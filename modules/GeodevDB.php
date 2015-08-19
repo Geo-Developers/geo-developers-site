@@ -24,6 +24,8 @@ class GeodevDB
         }
     }
 
+
+
     public function getVideo($options = null)
     {
 
@@ -55,20 +57,51 @@ class GeodevDB
             );
 
             // Parse time to seconds
-            $vals = explode(":",$entry["time"]);;
-            $num = sizeof($vals)-1;
-            $seconds = intval($vals[$num]);
-            $pow = 1;
-
-            while ($num > 0){
-                $num--;
-                $seconds += intval($vals[$num])*pow(60,$pow);
-                $pow++;
-            }
-
-            $entry["seconds"] = $seconds;
+            $entry["seconds"] = timeToSeconds($entry["time"]);
 
             array_push($video["videoIndex"],$entry);
+        }
+
+        // Parse PT40M2S to 40:02
+        $time = covtime($video["duration"]);
+        $video["length"] = timeToSeconds($time);
+
+        //TODO: get current progress for the user meetup_id
+        $this->db->where("youtubeId",$options["youtubeId"]);
+        $v = $this->db->getOne("videos");
+
+        $this->db->where("video_id",$v["id"]);
+        $this->db->where("meetup_id", $options['meetupId']);
+        $elem = $this->db->getOne("progress");
+
+        $video["progress"] = array();
+
+        if(!$elem){
+            foreach ($video["videoIndex"] as $entry) {
+                array_push($video["progress"], array(
+                    $entry["seconds"], 0));
+            }
+        }else{
+            $indexes = explode("|",$elem["indexes"]);
+            for($i=0; $i<sizeof($indexes); $i++){
+                $t = explode(",", $indexes[$i]);
+                array_push($video["progress"], array(
+                    $video["videoIndex"][$i]["seconds"], $t[1]));
+            }
+        }
+
+        $videoNumEl = sizeof($video["progress"]);
+        for($i=0; $i<$videoNumEl;$i++){
+            $t0 = $video["progress"][$i][0];
+            if($i+1 < $videoNumEl){
+                $t1 = $video["progress"][$i+1][0];
+            }else{
+                $t1 = $video["length"];
+            }
+            $num = ($t1-$t0) / $video["length"];
+            array_push($video["progress"][$i],$num
+
+            );
         }
 
         return $video;

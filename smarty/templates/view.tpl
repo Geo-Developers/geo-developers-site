@@ -26,14 +26,25 @@
                                 Webinars
                             {/if}
                         </a> &gt;
-						<span class="title">{$VIDEO.title}</span>
+						<span class="title">{$VIDEO.title} {$VIDEO.length}</span>
 					</div>
 					
 				</div>
 			</div>
 			<div class="row">
-			  <div class="col-md-6" id="youtubeVideo">
-
+			  <div class="col-md-6">
+                <div id="youtubeVideo"></div>
+                <div class="text-center clearfix" id="videoBar">
+                    <div>
+                        <button class="btn btn-default btn-xs btn-block"><i class="fa fa-thumbs-o-up"></i> Me gusta</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-xs  btn-block"><i class="fa fa-plus"></i> Suscribir</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-xs  btn-block"><i class="fa fa-bullhorn"></i> Dar una charla</button>
+                    </div>
+                </div>
 		  	  </div>
 			  <div class="col-md-6">
 			  	<!--<div id="spinner"><img src="{$ROOT}assets/css/images/spinner.gif"></div>-->
@@ -42,40 +53,76 @@
                 {else}
                     <div id="youtube-index">
                         {for $I=0 to $VIDEO.videoIndex|@count-1}
-                            <div class="index btnSeek" data-seek="{$VIDEO.videoIndex[$I].seconds}">
-                            <span>
-                                {$VIDEO.videoIndex[$I].time}
-                            </span>
-                                {$VIDEO.videoIndex[$I].text}
+                            <div class="index btnSeek {if $VIDEO.progress[$I][1] == 1}viewed{/if}"
+                                 data-seek="{$VIDEO.videoIndex[$I].seconds}">
+                                <span class="time">
+                                    {$VIDEO.videoIndex[$I].time}
+                                    <i class="fa fa-play-circle"></i>
+                                </span>
+                                <span class="text">
+                                    {$VIDEO.videoIndex[$I].text}
+                                </span>
+                                <span class="view"><i class="fa fa-eye"></i></span>
                             </div>
                         {/for}
+                    </div>
+                    <div id="progress-container" class="clearfix">
+                        <div class="progress-bar"
+                             role="progressbar"
+                             aria-valuenow="60"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="0%"
+                        >
+                            <span class="text"><span class="percentage">0</span>% Completado</span>
+                        </div>
                     </div>
                 {/if}
 			  </div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-6 padding-top-0" id="ppts">
+				<div class="col-md-6" id="ppts">
+                    <div role="tabpanel">
 
-                    {if $VIDEO.slides}
-                        <iframe src="{$VIDEO.slides}" style="width:100%;1px solid #ccc" frameborder="0" height="389" ></iframe>
-                    {/if}
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            {if $VIDEO.slides}
+                                <li role="presentation" class="active"><a href="#slides" aria-controls="slides" role="tab" data-toggle="tab">Transparencias</a></li>
+                            {/if}
+                            {if $TYPE === "academy"}
+                                <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Materiales</a></li>
+                            {/if}
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="slides">
+                                {if $VIDEO.slides}
+                                    <iframe src="{$VIDEO.slides}" style="width:100%;1px solid #ccc" frameborder="0" height="320" ></iframe>
+                                {/if}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="resources">
+                                Materiales
+                            </div>
+                        </div>
+                    </div>
 				</div>
 
-				<div class="col-md-6 padding-top-0">
+				<div class="col-md-6">
 					<div role="tabpanel">
 
 					  <!-- Nav tabs -->
 					  <ul class="nav nav-tabs" role="tablist">
-					    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Preguntas</a></li>
-					    <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción y Recursos</a></li>
-					    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Relacionados</a></li>
+                          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción</a></li>
+                          {if $TYPE === "academy"}
+                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Preguntas</a></li>
+                          {/if}
+                          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Relacionados</a></li>
 					  </ul>
 
 
 					  <!-- Tab panes -->
 					  <div class="tab-content">
-					    <div role="tabpanel" class="tab-pane" id="home">
+					    <div role="tabpanel" class="tab-pane active" id="home">
 						    <div class="descripcion">
                                 {$VIDEO.description}
 						    </div>
@@ -94,10 +141,11 @@
 						    	<li class="youtube"><a href="https://www.youtube.com/channel/UC5Kegds6aV88wjdAhqQ5Wsg?sub_confirmation=1">Suscríbete al canal de Youtube</a></li>
 						    </ul>
 					    </div>
-
-					    <div role="tabpanel" class="tab-pane active" id="profile">
-					    	<div id="disqus_thread"></div>
-					    </div>
+                        {if $TYPE === "academy"}
+					        <div role="tabpanel" class="tab-pane" id="profile">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        {/if}
                         {if $VIDEO.related}
 					    <div role="tabpanel" class="tab-pane" id="messages">
 					    	<ul id="related" class="style-none">
@@ -124,14 +172,23 @@
 
 	{include file="footer.tpl"}
 	<script>
-        var youtubeID = "{$VIDEO.youtubeId}",
+        var videoID = {$VIDEO.id},
+            youtubeID = "{$VIDEO.youtubeId}",
             fechaEvento = "{$VIDEO.eventDate}",
             transparencias = "",
 
 
             meetupid = "{$VIDEO.meetup_id}",
 
-            firechat = "{$VIDEO.firechatID}";
+            firechat = "{$VIDEO.firechatID}",
+
+            indexes = [{for $I=0 to $VIDEO.videoIndex|@count-1}{$VIDEO.videoIndex[$I].seconds},{/for}];
+
+            progress= [
+                {for $I=0 to $VIDEO.progress|@count-1}
+                    [{$VIDEO.progress[$I][0]}, {$VIDEO.progress[$I][1]}, {$VIDEO.progress[$I][2]}],
+                {/for}
+            ];
 
 	 	require([
   		'jquery',

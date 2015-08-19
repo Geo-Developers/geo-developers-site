@@ -54,21 +54,90 @@ h1{
 }
 .index{ 
 	cursor:pointer;
-	  padding: 4px 10px;
+	  padding: 0 ;
   border-bottom: 1px dotted #ccc;
+    line-height: 30px;
+    height: 31px;
 }
+.index.selected{
+    font-weight: bold;
+    background-color: #eee;
+}
+#progress-container{
+    border: 1px solid #ccc;
+    margin-top: -12px;
+    border-top: 0;
+    position: relative;
+}
+#progress-container .progress-bar{
+    width: 0%;
+    padding: 8px 0 9px;
+    height: 37px;
+    margin-top: 2px;
+}
+#progress-container .progress-bar span.text{
+    position: absolute;
+    top: 9px;
+    width: 100%;
+    display: inline-block;
+    color: black;
+    left:0;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px white;
+
+}
+
 .index:hover{
 	background-color: #efefef;
 }
+.index span.time{
+    color: #337AB7;
+    display: inline-block;
+    width: 18%;
+    text-align: right;
+
+    padding: 0 10px;
+    border-right: 1px dotted #ccc;
+}
+.index span.time i{
+    margin-left: 5px;
+}
+.index span.text{
+    padding-left: 10px;
+    width:75%;
+    display: inline-block;
+}
+
+.index.viewed .fa-eye{
+    color: black;
+}
+.index .view:hover .fa-eye{
+    color: #337AB7;
+}
+.index.viewed .view:hover .fa-eye {
+    color: red;
+}
+
 .index span{
-	color: blue;
-	display: inline-block;
-	width: 62px;
-	text-align: right;
-	padding-right: 10px;
+    float: left;
+    line-height: 31px;
+    height: 31px;
+}
+.index span.view{
+    float: right;
+    height: 31px;
+    width:7%;
+    text-align: center;
+}
+.index i.fa-eye{
+    margin-top: 8px;
+    color: #ccc;
+}
+#youtubeVideo{
+    width:100%;
 }
 #container{
-	margin-top:;
+
 }
 .header{
 	margin-bottom: 30px;
@@ -99,10 +168,28 @@ margin: 0;
 margin: 20px 0;
 padding: 0;
 }
-/*#firechat #firechat-header{display:none;}*/
-.padding-top-0{
-	padding-top: 0;
+#videoBar div{
+    width: 33.333%;
+    display: inline-block;
+    box-sizing: border-box;
+    float: left;
+    padding: 0 22px;
 }
+#videoBar div button{
+    background-color: black;
+    color: white;
+    border-color: #333;
+}
+#videoBar {
+    background-color: #181817;
+    border: 1px solid #181817;
+    border-top: 0;
+    padding: 7px 4px;
+    margin-top: -8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+/*#firechat #firechat-header{display:none;}*/
 
 #firechat .tab-pane-menu{display:none;}
 #firechat .tab-pane .tab-pane-menu{

@@ -4,11 +4,26 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
 
             base.init(Cookies);
 
-            $.getScript('http://www.youtube.com/iframe_api');
+            //$.getScript('http://www.youtube.com/iframe_api');
+            var tag = document.createElement('script');
+            tag.src = "http://www.youtube.com/player_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+
+            function onPlayerReady(event) {
+                event.target.playVideo();
+            }
+            function onPlayerStateChange(event,element) {
+                //When the video has ended
+                if (event.data == YT.PlayerState.ENDED) {
+                    //Get rid of the player
+                    element.style.display = "none";
+                }
+            }
             window.onYouTubePlayerAPIReady = function () {
                 var options = {
-                    height: '310',
+                    height: '285',
                     width: '640',
                     videoId: youtubeID,
                     playerVars: {
@@ -20,13 +35,91 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
                 if(type === "webinars"){
                     options["height"]= '365';
                 }
-                console.log("options=",options);
+                //console.log("options=",options);
                 window.player = new YT.Player('youtubeVideo', options);
+
+
             };
 
+
+           var selectVideo = function (i){
+               //console.log("Indice:",indexes[i-1]);
+               var $newSelected = $('[data-seek='+indexes[i-1]+']');
+               if(!$newSelected.hasClass("selected")){
+                   $('.index.selected').removeClass('selected');
+                   $newSelected.addClass("selected");
+               }
+               if(!$newSelected.hasClass("viewed")){
+                   $newSelected.addClass("viewed");
+                   progress[i-1][1] = 1;
+                   window.updateProgress();
+               }
+            };
+
+            $(".view").click(function(){
+                if($(this).parent().hasClass("viewed")){
+                    console.log("Quitamos visualizado");
+                    $(this).parent().removeClass("viewed")
+                    var i = indexes.indexOf($(this).parent().data('seek'));
+                    progress[i][1]=0;
+                    window.updateProgress();
+                }
+            });
+
+            window.updateProgress = function(){
+
+                var value = 0;
+                progress.forEach(function(el){
+                    if(el[1]==1){
+                        value += el[2];
+                    }
+                });
+                value *= 100;
+                console.log("Actualizamos % a ",value);
+                var rounded = parseInt(value);
+                if(rounded == 99){
+                    rounded++;
+                }
+                $(".text .percentage").text(rounded);
+                $("#progress-container .progress-bar").css("width",rounded+"%");
+
+                $.ajax({
+                    type: "POST",
+                    url: GEODEV.rootpath + "api/user/" + USER["meetup_id"] + "/video",
+                    data: {
+                        video_id: videoID,
+                        indexes: progress,
+                        progress: parseFloat(value.toFixed(2))
+                    },
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.status !== "success") {
+                            alert("Error: " + r.message);
+                        } else {
+                            console.log(r);
+                        }
+                    }
+                });
+            };
+
+            var checkProgress = function(){
+                var i=0;
+                while(player.getCurrentTime() >= indexes[i]){
+                    i++;
+                }
+                selectVideo(i);
+            };
+            setInterval(checkProgress, 3000);
+            updateProgress();
+
+
+
             $(function() {
-                $(document).on('click', '.btnSeek', function() {
-                    player.seekTo($(this).data('seek'), true);
+                $(document).on('click', '.btnSeek .text, .btnSeek .time', function() {
+                    var newTime = $(this).parent().data('seek');
+                    console.log("SeekTo=", newTime);
+                    selectVideo(indexes.indexOf(newTime)+1);
+                    player.seekTo(newTime, true);
                 });
             });
 
@@ -34,8 +127,8 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
             console.log("type=",type);
             if (type === "webinars") {
 
-                $("li.active").hide();
-                $("a[href='#home']").click();
+                //$("li.active").hide();
+                //$("a[href='#home']").click();
                 //$("#youtubeVideo").addClass(type);
 
                 jQuery.getScript("https://cdn.firebase.com/js/client/2.0.2/firebase.js", function(){

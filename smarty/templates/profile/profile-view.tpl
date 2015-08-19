@@ -116,16 +116,13 @@
                             </a>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                 style="
-                                 {if $SKILLSGIS[$I]["level"] == 0 } width: 0%;{/if}
-                                 {if $SKILLSGIS[$I]["level"] == 1 } width: 7%;{/if}
-                                 {if $SKILLSGIS[$I]["level"] == 2 } width: 20%;{/if}
-                                 {if $SKILLSGIS[$I]["level"] == 3 } width: 50%;{/if}
-                                 {if $SKILLSGIS[$I]["level"] == 4 } width: 75%;{/if}
-                                 {if $SKILLSGIS[$I]["level"] == 5 } width: 100%;{/if}
-                                         "
-                                    >
+                            <div class="progress-bar"
+                                 role="progressbar"
+                                 aria-valuenow="60"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 data-level="{$SKILLSGIS[$I]["level"]}"
+                            >
                                 {if $SKILLSGIS[$I]["level"] == 0 } ?{/if}
                                 {if $SKILLSGIS[$I]["level"] == 1 } {/if}
                                 {if $SKILLSGIS[$I]["level"] == 2 } Básico{/if}
@@ -140,7 +137,7 @@
                     <div class="col-md-4">
                         <p style="margin-bottom: 5px;">Añade más conocimientos:</p>
                         <div class="btn-group-xs">
-                            <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-warning btn-block">Editar mi perfil</a>
+                            <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-default btn-block">Editar mi perfil</a>
                         </div>
                     </div>
                 {/if}
@@ -170,16 +167,13 @@
                         {$SKILLS[$I]["name"]}
                     </a>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                             style="
-                             {if $SKILLS[$I]["level"] == 0 } width: 0%;{/if}
-                             {if $SKILLS[$I]["level"] == 1 } width: 7%;{/if}
-                             {if $SKILLS[$I]["level"] == 2 } width: 20%;{/if}
-                             {if $SKILLS[$I]["level"] == 3 } width: 50%;{/if}
-                             {if $SKILLS[$I]["level"] == 4 } width: 75%;{/if}
-                             {if $SKILLS[$I]["level"] == 5 } width: 100%;{/if}
-                                     "
-                                >
+                        <div class="progress-bar"
+                             role="progressbar"
+                             aria-valuenow="60"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             data-level="{$SKILLS[$I]["level"]}"
+                        >
                             {if $SKILLS[$I]["level"] == 0 } ?{/if}
                             {if $SKILLS[$I]["level"] == 1 } {/if}
                             {if $SKILLS[$I]["level"] == 2 } Básico{/if}
