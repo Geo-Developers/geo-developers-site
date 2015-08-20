@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-bottom:20px">
-            <a href="../../">Home</a> &gt; Academy
+            <a href="../../">Home</a> &gt; Eventos y vídeos
         </div>
     </div>
     <div class="row">
@@ -41,13 +41,13 @@
                     <div class="col-md-12 video" data-tags="{$VIDEOS[$I].tags}" data-title="{$VIDEOS[$I].title}">
                         <div class="row">
                             <div class="col-md-3">
-                                <a href="{$VIDEOS[$I].id}" class="image featured">
+                                <a href="{$VIDEOS[$I].youtubeId}/view" class="image featured">
                                     <img src="https://i.ytimg.com/vi/{$VIDEOS[$I].youtubeId}/mqdefault.jpg" alt="" />
                                     <span class="duration">{$VIDEOS[$I].duration}</span>
                                 </a>
                             </div>
                             <div class="col-md-9">
-                                <p><a href="{$VIDEOS[$I].youtubeId}" class="title">{$VIDEOS[$I].title}</a></p>
+                                <p><a href="{$VIDEOS[$I].youtubeId}/view" class="title">{$VIDEOS[$I].title}</a></p>
 
                                 <div class="details">
                                     <span><i class="glyphicon glyphicon-eye-open"></i>{$VIDEOS[$I].viewCount}</span>
@@ -95,7 +95,7 @@
             </div>
             <div class="row box mb3">
                 <img src="{$ROOT}images/suggestionbox.png" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
-                <button class="btn btn-primary btn-block mb1" data-toggle="modal" data-target="#suggestVideo">Sugerir un vídeo</button>
+                <a href="sugerir" class="btn btn-primary btn-block mb1" >Sugerir un vídeo</a>
             </div>
         </div>
     </div>

@@ -4,5 +4,11 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^(.*)$ ./view.php?id=$1
+RewriteCond %{REQUEST_URI} sugerir
+RewriteRule sugerir ./suggest.php
+
+RewriteCond %{REQUEST_URI} (.*)
+RewriteRule ^(.*)/view$ ./view.php?id=$1
+
+
 

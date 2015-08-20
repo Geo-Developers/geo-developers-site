@@ -19,14 +19,17 @@
 				<div class="col-md-12">
 					<div class="breadcum">
 						<a href="{$ROOT}">Home</a> &gt;
-                        <a href="index.php">
                             {if $TYPE === "academy"}
-                                Academy
+                            <a href="{$ROOT}/academy">
+                                Eventos y vídeos
+                            </a>
                             {else}
+                            <a href="{$ROOT}/webinars">
                                 Webinars
+                            </a>
                             {/if}
-                        </a> &gt;
-						<span class="title">{$VIDEO.title} {$VIDEO.length}</span>
+                            &gt;
+						        <span class="title">{$VIDEO.title}</span>
 					</div>
 					
 				</div>

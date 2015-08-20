@@ -2384,9 +2384,10 @@ body .logo img{
     height: 27px;
     border-radius: 0;
     border: 1px solid #555;
+    background-color: #333;
 }
 #login .dropdown-toggle img{
-    margin-top: -4px;
+    margin-top: -2px;
 }
 #login .caret{
     color: white;

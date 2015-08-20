@@ -9,3 +9,4 @@ vendor/
 utils/
 backups/
 modules/gisTechs.php
+*.iml
