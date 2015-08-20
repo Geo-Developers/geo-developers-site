@@ -1,3 +1,13 @@
+#main-wrapper{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 240px;
+}
+html,body{
+
+    height: 100%;
+}
+
 body, input, textarea, select {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.85em;
@@ -37,6 +47,15 @@ body, input, textarea, select {
 
 .underline{ text-decoration: underline; }
 strong{font-weight: bold;}
+
+/* FOOTER */
+#footer{
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
 
 /* PROFILE-VIEW-PAGE */
 #profile-view-page #header{
@@ -176,3 +195,44 @@ strong{font-weight: bold;}
 }
 
 
+/*
+
+    SUGGEST VIDEO
+
+*/
+#searchResults{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#searchResults .video-item{
+    width: 18%;
+    float:left;
+    margin: 1% 1.1%;
+}
+
+#searchResults .video-item:nth-child(6n){
+    margin-left: 0;
+}
+#searchResults .video-item:nth-child(5n){
+    margin-right: 0;
+}
+
+.confirm-list{
+    padding: 0;
+}
+.confirm-list ul{
+    border-top: 1px dotted #ccc;
+}
+.confirm-list li{
+    border-bottom: 1px dotted #ccc;
+    padding: 6px 15px;
+}
+#confirm .fa-times{
+    cursor: pointer;
+    color: #ccc;
+    margin-right: 5px;
+}
+#confirm .fa-times:hover{
+    color: red;
+}

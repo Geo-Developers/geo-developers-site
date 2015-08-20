@@ -4,8 +4,9 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
-<body class="video-list" id="academy-listing">
+<body id="video-suggest">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
+<div id="main-wrapper">
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-bottom:20px">
@@ -13,53 +14,79 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-9 box">
 
-        <div id="searchVideo">
+            <div class="row">
+                <div class="col-md-6" id="submit-url">
+                    <label>Añadir por URL: </label>
 
-            <div class="col-md-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default search" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
                                 </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6"  id="searchVideo">
+                    <label>Buscar en Youtube: </label>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default search" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="searchResults" class=" text-center">
 
-            <div id="searchResults" class=" text-center">
 
+                    </div>
+                    <div class="row mt0" id="youtubeNavigation" style="display:none">
 
+                        <div class="col-md-offset-4 col-md-4 text-center">
+                            <button class="btn btn-primary" id="loadMore">Ver más <i class="fa fa-refresh"></i></button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="row mt0" id="youtubeNavigation" style="display:none">
-                <div class="col-md-4 text-left">
-                    <button class="btn btn-default disabled before"><i class="fa fa-arrow-left "></i></button>
+        </div>
+        <div class="col-md-2 col-md-offset-1 box small text-left" id="confirm">
+            <div class="row">
+                <div class="col-md-12 text-center strong uppercase">
+                    <p class="none">Añade algún vídeo</p>
+                    <p class="pending" style="display:none">Seleccionados</p>
                 </div>
-                <div class="col-md-4 text-center">
-                    <button class="btn btn-primary" id="suggestBtn">Enviar <i class="fa fa-plus"></i></button>
+                <div class="col-md-12 pt0 confirm-list">
+                    <ul class="mb0"></ul>
                 </div>
-                <div class="col-md-4 text-right">
-                    <button class="btn btn-default after"><i class="fa fa-arrow-right"></i></button>
+                <div class="col-md-12">
+                    <button class="btn btn-primary btn-block disabled">Enviar <i class="fa fa-check"></i></button>
                 </div>
             </div>
 
             <div class="row mt0 text-center disabled" id="suggestDone" style="display:none">
-                <div class="col-md-12">
-                    <button class="btn btn-success disabled">¡Gracias!, revisaremos la petición cuanto antes <i class="fa fa-check"></i></button>
+                <div class="col-md-12 text-center pt0">
+                    <p class="alert alert-success">¡Gracias!, revisaremos la petición cuanto antes.</p>
+                    <button class="btn btn-default">Añadir más</button>
                 </div>
             </div>
         </div>
-
     </div>
+
+
+
 </div>
 
 
 
 {literal}
     <script id="videoTmpl" type="text/x-jsrender">
-        {{if #index == 0}}<hr>{{/if}}
-        {{if #index % 3 == 0}}
-           <div class="row">
-        {{/if}}
-        <div class="col-md-4">
+        <div class="video-item">
             <article class="thumbnail" onclick="selectVideo(this)" data-url="https://www.youtube.com/watch?v={{:id.videoId}}">
                 <div class="image featured mb05">
                     <img src="https://i.ytimg.com/vi/{{:id.videoId}}/mqdefault.jpg" alt="" />
@@ -70,9 +97,12 @@
                 </div>
             </article>
         </div>
-        {{if ((#index % 3) + 1) % 3 == 0}}
-           </div>
-        {{/if}}
+    </script>
+
+    <script id="confirmTpl" type="text/x-jsrender">
+        <li>
+            <i class="fa fa-times" onclick="deleteElem(this)" data-url="{{:url}}"></i> <a href="{{:url}}" target="_blank">{{:title}}</a>
+        </li>
     </script>
 {/literal}
 {include file="footer.tpl"}
@@ -84,5 +114,6 @@
         suggest.init();
     });
 </script>
+</div>
 </body>
 </html>

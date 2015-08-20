@@ -6,6 +6,7 @@
 </head>
 <body id="profile-{$ACTION}-page">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
+<div id="main-wrapper">
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-bottom:20px;padding-left: 0;">
@@ -47,5 +48,6 @@
         profile.init("{$ACTION}");
     });
 </script>
+    </div>
 </body>
 </html>

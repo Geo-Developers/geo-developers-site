@@ -6,6 +6,7 @@
 </head>
 <body class="video-list" id="academy-listing">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
+<div id="main-wrapper">
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-bottom:20px">
@@ -234,5 +235,6 @@
         academy.init("videos");
     });
 </script>
+</div>
 </body>
 </html>

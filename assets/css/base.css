@@ -2431,6 +2431,9 @@ body .logo img{
 #members-page{
     margin-top: 30px;
 }
+#video-suggest{
+    margin-top: 10px;
+}
 #login-btn{
     border: 1px solid #D43F3A;
 }
@@ -2685,7 +2688,8 @@ ul.inline li{
 }
 
 #ranking-content,
-#profile-content{
+#profile-content,
+#video-suggest .tab-content{
     padding: 2em 1em;
     border: 1px solid #ddd;
     border-top: 0;

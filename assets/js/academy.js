@@ -4,9 +4,6 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
             base.init(Cookies);
 
             var that = this;
-            var apikey = "AIzaSyBWrR-O_l5STwv1EO7U_Y3JNOnVjexf710";// "AIzaSyDki-gYirztPuR0GNGX-0uOuTUowQtq9mI";
-            var youtubeID = window.location.search.split("=")[1],
-                api_url = "https://spreadsheets.google.com/feeds/list/14-tvNCiE3Brs4eHbZvuc3B92uQDAYl9qXUMkX1EC5jU/1/public/values?alt=json-in-script&callback=loadVideos";
 
             $(document).ready(function(){
 

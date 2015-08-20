@@ -2,9 +2,25 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
     var Methods = {
         init: function(){
             base.init(Cookies);
+            var apikey = "AIzaSyBWrR-O_l5STwv1EO7U_Y3JNOnVjexf710";
 
-            $("#suggestBtn").click(function(){
+            $("#suggestDone .btn").click(function(){
+                $("#confirm ul").empty();
+                $("#suggestDone").hide();
+                $("#confirm .btn-primary").show();
+                $("#searchResults").empty();
+                $("#youtubeNavigation").hide();
+                $("#searchVideo input").val("");
+                $("#submit-url input").val("");
+                $("#confirm .none").show();
+                $("#confirm .pending").hide();
+                GEODEV["youtube"].selected = [];
+            });
+
+            $("#confirm .btn-primary").click(function(){
                 var $this = $(this);
+
+                $this.find("i").addClass("fa-circle-o-notch fa-spin");
                 $this.addClass("disabled");
 
                 if(GEODEV["youtube"].selected.length == 0){
@@ -12,7 +28,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     return -1;
                 }
                 data = {
-                    videos:GEODEV["youtube"].selected
+                    videos: GEODEV["youtube"].selected
                 };
 
                 $.ajax({
@@ -21,11 +37,12 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     data: data,
                     dataType: "json",
                     success: function (r) {
+                        $this.find("i").removeClass("fa-circle-o-notch fa-spin");
                         if (r.status !== "success") {
                             alert("Error: " + r.message);
                             $this.removeClass("disabled");
                         } else {
-                            $("#youtubeNavigation").hide();
+                            $this.hide();
                             $("#suggestDone").show();
                             //console.log("r=", r);
                         }
@@ -38,11 +55,15 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 requests: 1,
                 selected: [],
                 videos: [],
-                init: function(){
+                reset: function(){
                     GEODEV["youtube"].requests = 1;
-                    GEODEV["youtube"].selected = [];
+
                     GEODEV["youtube"].videos = [];
                     GEODEV["youtube"].page = 0;
+
+                },
+                init: function(){
+                    GEODEV["youtube"].reset();
                     GEODEV["youtube"].params.q = $("#searchVideo input").val();
 
                     var el = $("#searchVideo .search");
@@ -60,6 +81,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     videoDefinition: "high",
                     key: apikey
                 },
+
                 loadVideos: function(pageToken){
                     that = this;
                     if(pageToken){
@@ -88,11 +110,11 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 },
                 renderVideos: function(){
                     var counter = GEODEV["youtube"].page;
-                    var data = GEODEV["youtube"].videos.slice(6*counter,6*counter+6);
+                    var data = GEODEV["youtube"].videos.slice(15*counter,15*counter+15);
 
                     template = $.templates("#videoTmpl");
                     htmlOutput = template.render(data);
-                    $("#searchResults").html(htmlOutput);
+                    $("#searchResults").append(htmlOutput);
 
                     $(GEODEV["youtube"].selected).each(function(i,elem){
                         $('[data-url="'+elem.url+'"]').addClass("selected");
@@ -105,7 +127,33 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                     }else{
                         $("#youtubeNavigation").hide();
                     }
+                },
+
+                renderPendingList: function(){
+                    template = $.templates("#confirmTpl");
+                    htmlOutput = template.render(GEODEV.youtube.selected);
+                    if(GEODEV.youtube.selected.length > 0){
+                        $("#confirm .none").hide();
+                        $("#confirm .pending").show();
+                        $("#confirm .btn-primary").removeClass("disabled");
+                    }else{
+                        $("#confirm .none").show();
+                        $("#confirm .pending").hide();
+                        $("#confirm .btn-primary").addClass("disabled");
+                    }
+                    $("#confirm ul").html(htmlOutput);
                 }
+            };
+
+            window.deleteElem = function(el){
+                $url = $(el).data("url");
+                $('[data-url="'+$url+'"]').removeClass("selected");
+                $(GEODEV["youtube"].selected).each(function(i,elem){
+                    if(elem.url == $url){
+                        GEODEV["youtube"].selected.splice(i, 1);
+                    }
+                });
+                GEODEV["youtube"].renderPendingList();
             };
 
             window.selectVideo = function(elem){
@@ -126,21 +174,69 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                         }
                     });
                 }
+
+                GEODEV["youtube"].renderPendingList();
+
             };
 
             $('#searchVideo input').keypress(function (e) {
                 if (e.which == 13) {
+                    $("#searchResults").empty();
                     GEODEV["youtube"].init();
                 }
             });
-            $('#searchVideo .search').click(GEODEV["youtube"].init);
+            $('#searchVideo .search').click(function(){
+                $("#searchResults").empty();
+                GEODEV["youtube"].init();
+            });
+
+            var addByUrl = function(el){
+                $elBtn = $("#submit-url");
+                $elBtn.find(".btn").addClass("disabled");
+                $elBtn.find("i").addClass("fa-circle-o-notch fa-spin");
+
+                $.ajax({
+                    type: "POST",
+                    url: GEODEV.rootpath + "api/getTitle",
+                    data: {
+                        url: $(el).val()
+                    },
+                    dataType: "json",
+                    success: function (r) {
+                        var video = {
+                            title: r.message.title,
+                            url: $(el).val()
+                        };
+                        $(el).val("");
+                        $elBtn.find(".btn").removeClass("disabled");
+                        $elBtn.find("i").removeClass("fa-circle-o-notch fa-spin");
+
+                        GEODEV["youtube"].selected.push(video);
+                        GEODEV["youtube"].renderPendingList();
+                    }
+                });
+
+            };
+
+            $("#submit-url input").keypress(function (e) {
+                if (e.which == 13) {
+                    addByUrl(this);
+                }
+            });
+            $("#submit-url .btn").click(function(){
+                addByUrl("#submit-url input");
+            });
 
 
+            //suggestBtn
+            $("#loadMore").click(function(e){
+                GEODEV["youtube"].page++;
+                GEODEV["youtube"].renderVideos();
+            });
+            /*
             $("#searchVideo .after").click(function(e){
                 GEODEV["youtube"].page++;
-                /*if(GEODEV["youtube"].page*5 === GEODEV["youtube"].videos.length){
-                 GEODEV["youtube"].loadVideos();
-                 }*/
+
                 GEODEV["youtube"].renderVideos();
                 if(GEODEV["youtube"].page > 0){
                     $("#searchVideo .before").removeClass("disabled");
@@ -156,7 +252,7 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                 }else{
                     $(this).addClass("disabled");
                 }
-            });
+            });*/
         }
     };
     return Methods;

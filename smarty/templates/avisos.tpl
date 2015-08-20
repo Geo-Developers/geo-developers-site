@@ -5,7 +5,7 @@
 </head>
 <body id="notifications-page">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
-
+<div id="main-wrapper">
 <div class="container style1 wrapper">
     <div class="row">
         <div class="col-md-12 ">
@@ -60,6 +60,7 @@
         academy.init("videos");
     });
 </script>
+</div>
 </body>
 </html>
 

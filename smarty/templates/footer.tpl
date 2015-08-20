@@ -1,5 +1,5 @@
 <!-- Contact -->
-			<div class="wrapper style4">
+			<div class="wrapper style4" id="footer">
 				<article id="contact" class="container 75%">
 					<div>
 						<div class="row">

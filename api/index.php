@@ -175,24 +175,24 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
             );
         }
     }else{
-       /* $db->where("skill_id", $id);
-        $db->where("meetup_id", $meetup_id);
-        $res = $db->update("user_skills",array(
-            "meetup_id" => $meetup_id,
-            "skill_id" => $id,
-            "level" => $_POST["level"]
-        ));
-        if($res){
-            $data = array(
-                'status' => 'success',
-                'message' => $id
-            );
-        }else{
-            $data = array(
-                'status' => 'error',
-                'message' => 'The skill could not be added to the user'
-            );
-        }*/
+        /* $db->where("skill_id", $id);
+         $db->where("meetup_id", $meetup_id);
+         $res = $db->update("user_skills",array(
+             "meetup_id" => $meetup_id,
+             "skill_id" => $id,
+             "level" => $_POST["level"]
+         ));
+         if($res){
+             $data = array(
+                 'status' => 'success',
+                 'message' => $id
+             );
+         }else{
+             $data = array(
+                 'status' => 'error',
+                 'message' => 'The skill could not be added to the user'
+             );
+         }*/
         $data = array(
             'status' => 'error',
             'message' => 'You already have this skill'
@@ -240,6 +240,15 @@ $app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use
     }
     echo json_encode($data);
 });*/
+$app->post('/getTitle/', function () use ($app) {
+    $tags = get_meta_tags($_POST["url"]);
+    $res = array(
+        'status' => 'success',
+        'message' => $tags
+    );
+    echo json_encode($res);
+});
+
 $app->post('/user/:userid/video', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
 
     $db->where("video_id",$_POST["video_id"]);

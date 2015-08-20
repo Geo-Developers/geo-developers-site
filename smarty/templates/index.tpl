@@ -6,6 +6,7 @@
 <body id="home">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <!-- Home -->
+<div id="main-wrapper">
 <div class="wrapper style1 background-image">
     <article class="container" id="top">
         <div class="row">
@@ -92,5 +93,6 @@
         });
     });
 </script>
+</div>
 </body>
 </html>
