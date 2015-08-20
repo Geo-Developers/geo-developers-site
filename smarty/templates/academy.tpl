@@ -71,13 +71,13 @@
                 <div class="col-md-12" id="no-results">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="#" class="image featured">
+                            <a href="{$ROOT}academy/sugerir" class="image featured">
                                 <img src="{$ROOT}images/suggestionbox.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-9 text-center">
                             <p class="mb1 mt1 big">¿No encuentras lo que buscas?, sugiere un vídeo</p>
-                            <button class="btn btn-primary btn-block mb1" data-toggle="modal" data-target="#suggestVideo">Sugerir un vídeo</button>
+                            <a class="btn btn-primary btn-block mb1" href="{$ROOT}academy/sugerir">Sugerir un vídeo</a>
                         </div>
                     </div>
                 </div>
@@ -154,55 +154,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="suggestVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Sugerir un vídeo</h4>
-            </div>
-            <div class="modal-body small">
-                <p>Si conoces algún vídeo que creas que creas que deberíamos añadir por favor indícanos cual:</p>
-                <div id="searchVideo">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default search" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="searchResults" class=" text-center">
 
-
-                    </div>
-                    <div class="row mt0" id="youtubeNavigation" style="display:none">
-                        <div class="col-md-4 text-left">
-                            <button class="btn btn-default disabled before"><i class="fa fa-arrow-left "></i></button>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <button class="btn btn-primary" id="suggestBtn">Enviar <i class="fa fa-plus"></i></button>
-                        </div>
-                        <div class="col-md-4 text-right">
-                            <button class="btn btn-default after"><i class="fa fa-arrow-right"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="row mt0 text-center disabled" id="suggestDone" style="display:none">
-                        <div class="col-md-12">
-                            <button class="btn btn-success disabled">¡Gracias!, revisaremos la petición cuanto antes <i class="fa fa-check"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            {*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>*}
-        </div>
-    </div>
-</div>
 
 {literal}
     <script id="videoTmpl" type="text/x-jsrender">
