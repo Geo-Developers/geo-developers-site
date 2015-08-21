@@ -41,12 +41,15 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
 
             $meetup = new Meetup(array("access_token"  => $r1->access_token));
 
+            $_SESSION["access_token"] = $r1->access_token;
+
 
             $r2 = $meetup->getMemberInfo(array('member_id' => 'self'));
 
             $GeodevDB = new GeodevDB(array("meetup_id" => $r2->id));
             $user = $GeodevDB->getUser(array("type" => "userprofile"));
 
+            $_SESSION['meetup_member'] = $r2;
 
             if(isset($user["meetup_id"])){
                 $_SESSION['user'] = $user;
@@ -57,7 +60,6 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
                     "name"          => $r2->name,
                     "photo_id"          => $r2->photo->photo_id,
                 );
-                $_SESSION['meetup_member'] = $r2;
 
                 if(isset($r2->photo)){
                     if (isset($r2->photo->highres_link)) {
@@ -79,8 +81,6 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
             // Check if user is in the database and it has an email
 
             if($user && $user["email"]){
-                prettyprint($user);
-                die();
                 $_SESSION['logged'] = true;
                 header('Location: '.$_SESSION['returnURL']);
             }else{

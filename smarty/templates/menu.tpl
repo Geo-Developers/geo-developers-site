@@ -9,9 +9,8 @@
         <!--<li><a href="{$ROOT}webinars">Webinars</a></li>-->
         {*<li><a href="{$ROOT}recursos">Recursos</a></li>*}
         <li><a href="https://github.com/Geo-Developers">Proyectos</a></li>
-        {if isset($USER["logged"])}
+        {if isset($SESSION["logged"])}
             <li>
-
                 <div class="dropdown" id="login">
                     <div class="dropdown-toggle" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{if isset($USER["photo_url"])}{$USER["photo_url"]}{else}{$SESSION['photo_url']}{/if}">

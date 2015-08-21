@@ -42,21 +42,68 @@ if($new_user && isset($_POST["name"]) ){
 
     $member->email = $_POST["email"];
     $member->name = $_POST["name"];
+    $member->photo_url = $_SESSION["photo_url"];
+    $member->location = $_SESSION['meetup_member']->city.", ".$_SESSION['meetup_member']->country;
+
+    if(isset($_SESSION['meetup_member']->other_services)) {
+
+
+      foreach ($_SESSION['meetup_member']->other_services as $key => $service) {
+
+        if(isset($_SESSION['meetup_member']->other_services->twitter)){
+          $member->twitter_url = $_SESSION['meetup_member']->other_services->twitter->identifier;
+        }
+
+        if(isset($_SESSION['meetup_member']->other_services->flickr)){
+          $member->flickr_url = $_SESSION['meetup_member']->other_services->flickr->identifier;
+        }
+
+        if(isset($_SESSION['meetup_member']->other_services->facebook)){
+          $member->facebook_url = $_SESSION['meetup_member']->other_services->facebook->identifier;
+        }
+
+        if(isset($_SESSION['meetup_member']->other_services->linkedin)){
+          $member->linkedin_url = $_SESSION['meetup_member']->other_services->linkedin->identifier;
+        }
+
+        $member->meetup_url = $_SESSION['meetup_member']->link;
+
+      }
+    }
+
+    $answers = array();
 
     if(isset($_POST['skills'])){
         $service = new Skill();
-        foreach($_POST['skills'] as $skill){
+        for($i=0; $i< sizeof($_POST['skills']); $i++){
+            $skill=$_POST['skills'][$i];
             $s = $service->find(array("name" => $skill));
-            //TODO: FIX THIS
+
             if(!isset($member->skills[$s["name"]])){
                 $member->skills[$s["name"]] = $s;
+            }
+
+            if($i < sizeof($_POST['skills']) - 2){
+              $answers["answer_6865152"] .= $s["name"] . ", ";
+            }elseif($i == sizeof($_POST['skills']) - 2){
+              $answers["answer_6865152"] .= $s["name"] . " y ";
+            }else{
+              $answers["answer_6865152"] .= $s["name"] . ".";
             }
         }
     }
 
-    if(isset($_POST['linkedin'])){
-        $member->linkedin_url = $_POST['linkedin'];
+    if(isset($_POST['linkedin_url'])){
+        $member->linkedin_url = $_POST['linkedin_url'];
+      $answers["answer_8151456"] = $_POST['linkedin_url'];
     }
+
+    if(isset($_POST['skills'])){
+        $member->joinToMeetup($answers);
+        $date = getdate();
+        $member->joined= $date["year"] ."-". $date["mon"] . "-" . $date["mday"];
+    }
+
     if(isset($_POST['linkedin'])) {
         $member->name = $_POST["last_name"];
     }

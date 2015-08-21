@@ -23,7 +23,7 @@
                         >
                 Último paso
             </h1>
-            <form action="." method="POST" class="box text-left">
+            <form action="." method="POST" class="box text-left" onsubmit="return validateForm()">
                 <div class="row">
                     <div class="
                         {if !isset($USER["joined"]) || $USER["joined"] == null }
