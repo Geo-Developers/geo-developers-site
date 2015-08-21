@@ -136,6 +136,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                                 name: skill_name
                             });
                             $(table).append(htmlOutput);
+
                         }
                     }
                 });

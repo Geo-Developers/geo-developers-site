@@ -76,7 +76,7 @@ class Skill
 
         if(isset($skill["name"])){
             $this->db->where("name", $skill["name"]);
-            $s = $this->db->get("skills");
+            $s = $this->db->getOne("skills");
             if($s){
                 return $s;
             }

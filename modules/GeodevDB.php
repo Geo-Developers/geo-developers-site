@@ -121,9 +121,13 @@ class GeodevDB
 
         switch ($options["type"]){
             case "userprofile":
+
                 $this->db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
                 $result = $this->db->getOne("profiles p");
-
+                if(!isset($result["joined"])){
+                    $result = false;
+                    continue;
+                }
                 $result["joined"] = date('d/m/Y', strtotime($result["joined"]));
                 if(isset($result["twitter_url"]) && strpos($result["twitter_url"],"@") !== false){
                     //die(strpos($result["twitter_url"],"@"));
@@ -134,7 +138,9 @@ class GeodevDB
 
             case "user":
                 $result = $this->db->getOne("users u");
-            //default:
+                break;
+            default:
+                $result = $this->db->getOne("users u");
 
         }
         return $result;

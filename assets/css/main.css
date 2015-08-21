@@ -236,3 +236,31 @@ strong{font-weight: bold;}
 #confirm .fa-times:hover{
     color: red;
 }
+
+
+/* #register-page */
+#register-page #skillList{
+    width: 100%;
+}
+#register-page select{
+    width: 91%;
+}
+#register-page option.hidden span{
+    display: none;
+}
+
+#register-page .skills li{
+    border: 1px solid #ccc;
+    padding: 1px 7px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#register-page .skills i{
+    color: #ccc;
+}
+#register-page .skills li:hover i{
+    color: red;
+}

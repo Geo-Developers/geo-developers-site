@@ -47,14 +47,17 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
             $GeodevDB = new GeodevDB(array("meetup_id" => $r2->id));
             $user = $GeodevDB->getUser(array("type" => "userprofile"));
 
-            if($user){
+
+            if(isset($user["meetup_id"])){
                 $_SESSION['user'] = $user;
             }else{
                 // Set $_SESSION var
                 $_SESSION['user'] = array(
                     "meetup_id"     => $r2->id,
                     "name"          => $r2->name,
+                    "photo_id"          => $r2->photo->photo_id,
                 );
+                $_SESSION['meetup_member'] = $r2;
 
                 if(isset($r2->photo)){
                     if (isset($r2->photo->highres_link)) {
@@ -70,10 +73,14 @@ if( file_exists($config) && is_readable($config) && require_once($config)) {
                     $email = strtolower( $r2->id."@gmail.com" );
                     $photo = "http://www.gravatar.com/avatar/".md5($email);
                 }
+                $_SESSION['photo_url'] = $photo;
             }
 
             // Check if user is in the database and it has an email
-            if($user && $user["email"] !== null){
+
+            if($user && $user["email"]){
+                prettyprint($user);
+                die();
                 $_SESSION['logged'] = true;
                 header('Location: '.$_SESSION['returnURL']);
             }else{

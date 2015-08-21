@@ -10,19 +10,21 @@ define(['jquery','cookies','base','skel.min','skel-viewport.min','util'], functi
 			
 			base.init(Cookies);
 
-			skel
-				.breakpoints({
-					desktop: '(min-width: 737px)',
-					tablet: '(min-width: 737px) and (max-width: 1200px)',
-					mobile: '(max-width: 736px)'
-				})
-				.viewport({
-					breakpoints: {
-						tablet: {
-							width: 1080
-						}
-					}
-				});
+            if(typeof skel.breakpoints == "function"){
+                skel
+                    .breakpoints({
+                        desktop: '(min-width: 737px)',
+                        tablet: '(min-width: 737px) and (max-width: 1200px)',
+                        mobile: '(max-width: 736px)'
+                    })
+                    .viewport({
+                        breakpoints: {
+                            tablet: {
+                                width: 1080
+                            }
+                        }
+                    });
+            }
 
 			$(function() {
 				var	$window = $(window),
@@ -53,11 +55,12 @@ define(['jquery','cookies','base','skel.min','skel-viewport.min','util'], functi
 					$window.load(function() {
 
 						var x = parseInt($('.wrapper').first().css('padding-top')) - 100;
-
-						$('#nav a, .scrolly').scrolly({
-							speed: 1000,
-							offset: x
-						});
+                        if(typeof $('#nav a, .scrolly').scrolly == "function"){
+                            $('#nav a, .scrolly').scrolly({
+                                speed: 1000,
+                                offset: x
+                            });
+                        }
 
 					});
 

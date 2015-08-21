@@ -33,9 +33,13 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                 trigger: 'hover',
                 content: $(this).data('content')
             });
-
-
-
+            $('[rel=popover][data-content][trigger="focus"]').popover({
+                html: true,
+                placement: $(this).data('placement'),
+                trigger: 'focus',
+                content: $(this).data('content')
+            });
+            $('[rel=popover][data-state=open]').popover('show')
 
 			if(showCookies){
                 document.getElementById('cookies').className = "show";
