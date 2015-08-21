@@ -42,6 +42,7 @@ if($new_user && isset($_POST["name"]) ){
 
     $member->email = $_POST["email"];
     $member->name = $_POST["name"];
+    $member->last_name = $_POST["last_name"];
     $member->photo_url = $_SESSION["photo_url"];
     $member->location = $_SESSION['meetup_member']->city.", ".$_SESSION['meetup_member']->country;
 
