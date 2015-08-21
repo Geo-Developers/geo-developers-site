@@ -36,42 +36,8 @@ if($member->isRegistered()){
 
 //Add new user to the database $_POST
 if($new_user && isset($_POST["name"]) ){
-    /*prettyprint($_POST);
-    prettyprint($member);
-    die();*/
 
-    $member->email = $_POST["email"];
-    $member->name = $_POST["name"];
-    $member->last_name = $_POST["last_name"];
-    $member->photo_url = $_SESSION["photo_url"];
-    $member->location = $_SESSION['meetup_member']->city.", ".$_SESSION['meetup_member']->country;
-
-    if(isset($_SESSION['meetup_member']->other_services)) {
-
-
-      foreach ($_SESSION['meetup_member']->other_services as $key => $service) {
-
-        if(isset($_SESSION['meetup_member']->other_services->twitter)){
-          $member->twitter_url = $_SESSION['meetup_member']->other_services->twitter->identifier;
-        }
-
-        if(isset($_SESSION['meetup_member']->other_services->flickr)){
-          $member->flickr_url = $_SESSION['meetup_member']->other_services->flickr->identifier;
-        }
-
-        if(isset($_SESSION['meetup_member']->other_services->facebook)){
-          $member->facebook_url = $_SESSION['meetup_member']->other_services->facebook->identifier;
-        }
-
-        if(isset($_SESSION['meetup_member']->other_services->linkedin)){
-          $member->linkedin_url = $_SESSION['meetup_member']->other_services->linkedin->identifier;
-        }
-
-        $member->meetup_url = $_SESSION['meetup_member']->link;
-
-      }
-    }
-
+    // Firts join to meetup if neccessary
     $answers = array();
 
     if(isset($_POST['skills'])){
@@ -95,18 +61,24 @@ if($new_user && isset($_POST["name"]) ){
     }
 
     if(isset($_POST['linkedin_url'])){
-        $member->linkedin_url = $_POST['linkedin_url'];
-      $answers["answer_8151456"] = $_POST['linkedin_url'];
+        $answers["answer_8151456"] = $_POST['linkedin_url'];
     }
 
-    if(isset($_POST['skills'])){
+    if(!$member->joined){
         $member->joinToMeetup($answers);
-        $date = getdate();
-        $member->joined= $date["year"] ."-". $date["mon"] . "-" . $date["mday"];
+        $member->loadFromMeetup();
+    }
+    
+    if(!$member->joined){
+      $member->loadFromMeetup();
     }
 
-    if(isset($_POST['linkedin'])) {
-        $member->name = $_POST["last_name"];
+    $member->email = $_POST["email"];
+    $member->name = $_POST["name"];
+    $member->last_name = $_POST["last_name"];
+
+    if(isset($_POST['linkedin_url'])) {
+        $member->linkedin_url = $_POST["linkedin_url"];
     }
 
     $member->save();
@@ -129,27 +101,21 @@ if( isset($_SESSION["user"]['meetup_id']) && !isset($_SESSION['logged']) ){
     $userprofile = $GeodevDB->getUser(array("type" => "userprofile"));
 
     if($userprofile){
-        //User is not in the database
+        //User is in the database
         $smarty->assign('USER', $userprofile);
+    }elseif(isset($_SESSION["meetup_member"])){
+      // TODO: is that right? if never joined before do we have a joined date?
+      $smarty->assign('USER', array(
+        "name" => $_SESSION["meetup_member"]->name,
+        "joined" => $member->parseEpoch($_SESSION["meetup_member"]->joined),
+        "photo_url" => $_SESSION['photo_url']
+      ));
     }
+
     $smarty->assign('GEOSKILLS', $GeodevDB->getSkills(array("type" => "geo")));
     $smarty->assign("SESSION",$_SESSION);
 
-    //die();
-    /*prettyprint($userprofile);
-    prettyprint($userprofile);
-    die();
-    // Load vars from session (established when the login)
-    $smarty->assign('MEETUP_ID', $_SESSION["user"]["meetup_id"]);
-    $smarty->assign('NAME', $_SESSION["user"]['name']);
 
-    if(isset($_SESSION["user"]['photo_url'])){
-        $smarty->assign('PHOTO_URL', $_SESSION["user"]['photo_url']);
-    }
-
-    if(isset($_SESSION['returnURL'])){
-        $smarty->assign('returnURL', $_SESSION['returnURL']);
-    }*/
     $smarty->display('register.tpl');
 
 }else{
