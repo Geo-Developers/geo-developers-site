@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin-bottom:20px">
-            <a href="{$ROOT}">Home</a> &gt; <a href="{$ROOT}/academy">Eventos y vídeos</a> &gt; Sugerir vídeos
+            <a href="{$ROOT}">Home</a> &gt; <a href="{$ROOT}academy">Eventos y vídeos</a> &gt; Sugerir vídeos
         </div>
     </div>
     <div class="row">

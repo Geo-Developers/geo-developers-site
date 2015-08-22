@@ -12,7 +12,8 @@ if(isset($_GET['tech']) && $_GET['tech']){
     $users = $GeodevDB->getMembers();
 }
 
-$smarty->assign('SKILLS',       $GeodevDB->getSkills(array("type" => "other")));
+$smarty->assign('SKILLS',       $GeodevDB->getSkills(array("type" => "all")));
+$smarty->assign('OTHERSKILLS',       $GeodevDB->getSkills(array("type" => "other")));
 $smarty->assign('GEOSKILLS',    $GeodevDB->getSkills(array("type" => "geo")));
 $smarty->assign('TOTALUSERS',   $db->getValue("profiles", "count(meetup_id)"));
 $smarty->assign('USERS',        $users);

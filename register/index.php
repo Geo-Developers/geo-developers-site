@@ -68,7 +68,7 @@ if($new_user && isset($_POST["name"]) ){
         $member->joinToMeetup($answers);
         $member->loadFromMeetup();
     }
-    
+
     if(!$member->joined){
       $member->loadFromMeetup();
     }

@@ -17,7 +17,7 @@
                 {/if}
             </div>
 
-            <div class="col-md-4 mt0">
+            <div class="col-md-8 mt0">
                 <form action="" method="GET" id="search-form">
                     <div class="form-group">
 
@@ -25,7 +25,7 @@
                         <div id="input-container">
                             <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-default pull-left" type="button"><i class="fa fa-question-circle fa-lg"></i></button>
+                                <div class="btn btn-default pull-left" type="button" data-toggle="modal" data-target="#modalTechs"><i class="fa fa-question-circle fa-lg"></i></div>
                             </span>
                                 <input name="tech" type="text" autocomplete="off" id="search" class="form-control" data-provide="typeahead"
                                        value="{if isset($TECH)}{$TECH}{/if}"
@@ -42,16 +42,12 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-offset-4 col-md-2 text-right">
+            <div class="col-md-offset-2 col-md-2 text-right">
                 <a href="rankings/" class="btn btn-warning btn-block"><i class="fa fa-trophy"></i> Rankings</a>
 
                 <!-- asd-->
             </div>
-            <div class="col-md-2  text-right">
 
-                <button class="btn btn-default btn-block" data-toggle="modal" data-target="#modalTechs"><i class="fa fa-question-circle fa-lg"></i> Tecnologías</button>
-                <!-- asd-->
-            </div>
         </div>
         <div class="row">
 
@@ -74,7 +70,7 @@
                             {if isset($USERS[$I]["progress"])}
                                 <p class="mb05"><small>Porcentaje de perfil completado:</small></p>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                          style="width: {$USERS[$I]["progress"]}%">
                                         {if $USERS[$I]["progress"] != 0}{$USERS[$I]["progress"]}%{/if}
                                     </div>
@@ -84,7 +80,7 @@
                             {if isset($USERS[$I]["level"])}
                                 <p><small>Nivel de {$TECH}:</small></p>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                          style="
                                          {if $USERS[$I]["level"] == 0 } width: 0%;{/if}
                                          {if $USERS[$I]["level"] == 1 } width: 7%;{/if}
@@ -137,7 +133,7 @@
                                     </select>
                                     <label class="col-md-3">Otros</label>
                                     <select class="col-md-9 input-group form-control ">
-                                        {for $I=0 to $SKILLS|@count-1}<option>{$SKILLS[$I]["name"]}</option>{/for}
+                                        {for $I=0 to $OTHERSKILLS|@count-1}<option>{$OTHERSKILLS[$I]["name"]}</option>{/for}
                                     </select>
                                 </div>
                             </div>
@@ -165,7 +161,7 @@
 
 <script>
 
-    var GEOSKILLS = [{for $I=0 to $GEOSKILLS|@count-1}"{$GEOSKILLS[$I]["name"]}",{/for}]
+    var SKILLS = [{for $I=0 to $SKILLS|@count-1}"{$SKILLS[$I]["name"]}",{/for}]
     require([
         'jquery',
         'members'

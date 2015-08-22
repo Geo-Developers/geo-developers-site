@@ -32,11 +32,24 @@ function same_user(\Slim\Route $route) {
     }
 
 };
+
+function not_same_user(\Slim\Route $route) {
+  $params = $route->getParams();
+
+  if (intval($params["userid"]) === intval($_SESSION['user']['meetup_id'])) {
+    $data = array(
+      'status' => 'error',
+      'message' => 'You are not'.$params["userid"]
+    );
+    die(json_encode($data));
+  }
+
+};
 /* END MIDDLEWARES */
 
 $app->post('/user/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
     $userAttrs = array("cookies", "mailchimp_euid");
-    $data = insertOrUpdate($db, 'users', $userAttrs, $meetup_id, "meetup_id");
+    $data = insertOrUpdate($db, 'users', $userAttrs, $userId, "meetup_id");
     echo json_encode($data);
 });
 
@@ -202,7 +215,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
     echo json_encode($data);
 });
 
-$app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
+$app->post('/vote/:userid', 'authenticated', 'not_same_user', function ($userId) use ($app, $db){
 
     $meetup_id = $_SESSION['user']['meetup_id'];
 

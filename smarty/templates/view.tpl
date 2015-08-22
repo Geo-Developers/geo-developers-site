@@ -70,7 +70,7 @@
                         {/for}
                     </div>
                     <div id="progress-container" class="clearfix">
-                        <div class="progress-bar"
+                        <div class="progress-bar progress-bar-striped active"
                              role="progressbar"
                              aria-valuenow="60"
                              aria-valuemin="0"

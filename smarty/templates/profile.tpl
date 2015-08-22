@@ -2,7 +2,7 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]} en Geo Developers"}
 </head>
 <body id="profile-{$ACTION}-page">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
@@ -16,7 +16,7 @@
                 {if $ACTION == "view"}
                     Perfil de {$PROFILE["name"]}
                 {else}
-                    <a href="{$ROOT}miembros/{$PROFILE["meetup_id"]}">Perfil de {$PROFILE["name"]}</a> &gt;
+                    <a href="{$ROOT}miembros/{$PROFILE["meetup_id"]}">Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]}</a> &gt;
                         Editar
                 {/if}
         </div>

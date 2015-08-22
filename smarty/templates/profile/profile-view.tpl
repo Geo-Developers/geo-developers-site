@@ -116,7 +116,7 @@
                             </a>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar"
+                            <div class="progress-bar progress-bar-striped"
                                  role="progressbar"
                                  aria-valuenow="60"
                                  aria-valuemin="0"
@@ -167,7 +167,7 @@
                         {$SKILLS[$I]["name"]}
                     </a>
                     <div class="progress">
-                        <div class="progress-bar"
+                        <div class="progress-bar progress-bar-striped"
                              role="progressbar"
                              aria-valuenow="60"
                              aria-valuemin="0"

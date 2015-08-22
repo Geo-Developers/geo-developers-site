@@ -38,7 +38,7 @@
         {if isset($USER)}
             <div class="referrer" data-referrer="{$USER["meetup_id"]}" style="display:none;">
                 <a href="{$ROOT}miembros/{$USER["meetup_id"]}" class="image-wrapper">
-                    <span class="picture clearfix" style="background-image: url('{$USER["photo_url"]}')"></span>
+                    <span class="picture clearfix" style="background-image: url('{if isset($USER["photo_url"])}{$USER["photo_url"]}{else}{$SESSION['photo_url']}{/if}')"></span>
                 </a>
             </div>
         {/if}
