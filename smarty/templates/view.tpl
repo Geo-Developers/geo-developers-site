@@ -5,9 +5,9 @@
 
     <meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
     <meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
-
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
     <link rel="stylesheet" href="{$ROOT}assets/css/view.css">
+    <link rel="stylesheet" href="{$ROOT}assets/css/jquery.raty.css">
 </head>
 
 <body id="view-page-{$TYPE}">
@@ -39,13 +39,13 @@
                 <div id="youtubeVideo"></div>
                 <div class="text-center clearfix" id="videoBar">
                     <div>
-                        <button class="btn btn-default btn-xs btn-block"><i class="fa fa-thumbs-o-up"></i> Me gusta</button>
+                        <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate"><i class="fa fa-star-o"></i> Valorar</button>
                     </div>
                     <div>
                         <button class="btn btn-default btn-xs  btn-block"><i class="fa fa-plus"></i> Suscribir</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block"><i class="fa fa-bullhorn"></i> Dar una charla</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak"><i class="fa fa-bullhorn"></i> Dar una charla</button>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,9 @@
                             <li role="presentation" class="active"><a href="#slides" aria-controls="slides" role="tab" data-toggle="tab">Transparencias</a></li>
                         {/if}
                         {if $TYPE === "academy"}
-                            <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Materiales</a></li>
+                            <!-- TODO: pestaña de materiales
+                                <li role="presentation"><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab">Materiales</a></li>
+                            -->
                         {/if}
                     </ul>
                     <div class="tab-content">
@@ -175,7 +177,39 @@
     {include file="footer.tpl"}
 </div>
 
+{include file="blocks/give-a-talk.tpl"}
 
+<div class="modal fade" id="rate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Valorar</h4>
+            </div>
+            <div class="modal-body">
+                <div class="small">
+                    <div class="row">
+                        <div class="col-md-4">Valoración de la tecnología:</div> <div id="tech-rate" class="col-md-8"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pt05">Valoración del ponente:</div> <div id="speaker-rate" class="col-md-8 pt05"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pt05">Valoración general:</div> <div id="general-rate" class="col-md-8 pt05"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pt05">Comentarios:</div>
+                        <div class="col-md-12 pt05"><textarea class="form-control" name="comments"></textarea></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left alert alert-success" style="display:none" id="rating-msg"></div>
+                <button type="button" class="btn btn-warning" id="rate">Enviar <i class="fa"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var videoID = {$VIDEO.id},

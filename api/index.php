@@ -243,6 +243,68 @@ $app->post('/vote/:userid', 'authenticated', 'not_same_user', function ($userId)
     echo json_encode($data);
 });
 
+$app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app, $db){
+
+  $db -> where('userid', $_SESSION['user']['id'])
+      -> where('videoid', $videoid);
+
+  $rating = $db->getOne('video_ratings');
+
+  $date = new DateTime();
+
+  $vals = array(
+    'date' => date('Y-m-d H:i:s',$date->getTimestamp())
+  );
+
+  if($_POST['general-rate']){ $vals['general-rate'] = $_POST['general-rate'];}
+  if($_POST['speaker-rate']){ $vals['speaker-rate'] = $_POST['speaker-rate'];}
+  if($_POST['tech-rate']){ $vals['tech-rate'] = $_POST['tech-rate'];}
+  if($_POST['comments']){ $vals['comments'] = $_POST['comments'];}
+
+  if(!$rating){
+
+
+    $res = $db->insert('video_ratings', array_merge($vals, array(
+        'userid'=> $_SESSION['user']['id'],
+        'videoid' => $videoid,
+    )));
+
+    if($res){
+      $data = array(
+        'status' => 'success',
+        'message' => 'Rating saved'
+      );
+    }else{
+      $data = array(
+        'status' => 'error',
+        'message' => 'The rating could not be saved: '.$db->getLastError()
+      );
+    }
+
+  }else{
+    $db -> where('userid', $_SESSION['user']['id'])
+        -> where('videoid', $videoid);
+
+    $res = $db->update('video_ratings', $vals);
+
+    if($res){
+      $data = array(
+        'status' => 'success',
+        'message' => 'Rating updated'
+      );
+    }else{
+      $data = array(
+        'status' => 'error',
+        'message' => 'The rating could not be update: '.$db->getLastError()
+      );
+    }
+  }
+
+  echo json_encode($data);
+
+  //echo json_encode($data);
+});
+
 /*$app->post('/video/:videoid', function ($userId) use ($app, $db){
 
 
