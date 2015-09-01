@@ -51,7 +51,8 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                             alert("Error: " + r.message);
                         } else {
                             console.log(r);
-                            $("#rating-msg").show();
+                            $("#rating-msg").fadeIn();
+                            setTimeout(function(){$("#rating-msg").fadeOut()}, 3000);
                             $("#rating-msg").text(r.message);
                         }
                     }
