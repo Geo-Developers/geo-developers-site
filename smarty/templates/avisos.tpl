@@ -6,7 +6,7 @@
 <body id="notifications-page">
 {include file="menu.tpl" title="Comunidad de Geo Developers"}
 <div id="main-wrapper">
-<div class="container style1 wrapper">
+<div class="container">
     <div class="row">
         <div class="col-md-12 ">
             <h1 class="mb1">

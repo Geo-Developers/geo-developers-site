@@ -48,7 +48,7 @@
                     <div class="row mt0" id="youtubeNavigation" style="display:none">
 
                         <div class="col-md-offset-4 col-md-4 text-center">
-                            <button class="btn btn-primary" id="loadMore">Ver más <i class="fa fa-refresh"></i></button>
+                            <button class="btn btn-primary" id="loadMore">Cargar más vídeos <i class="fa fa-refresh" style="margin-left:5px"></i></button>
                         </div>
 
                     </div>

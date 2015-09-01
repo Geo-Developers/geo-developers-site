@@ -172,6 +172,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
     $elem = $db->getOne("user_skills");
 
     if(!$elem){
+
         $res = $db->insert("user_skills",array(
             "meetup_id" => $meetup_id,
             "skill_id" => $id
@@ -184,7 +185,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
         }else{
             $data = array(
                 'status' => 'error',
-                'message' => 'The skill could not be added to the user'
+                'message' => 'The skill could not be added to the user: '.$db->getLastError()
             );
         }
     }else{
@@ -272,7 +273,7 @@ $app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app
     if($res){
       $data = array(
         'status' => 'success',
-        'message' => 'Rating saved'
+        'message' => '¡Gracias! la valoración ha sido guardada'
       );
     }else{
       $data = array(
@@ -290,7 +291,7 @@ $app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app
     if($res){
       $data = array(
         'status' => 'success',
-        'message' => 'Rating updated'
+        'message' => '¡Gracias! la valoración ha sido actualizada'
       );
     }else{
       $data = array(

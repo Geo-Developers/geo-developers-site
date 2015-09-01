@@ -8,7 +8,7 @@
         <li><a href="{$ROOT}academy">Eventos y vídeos</a></li>
         <!--<li><a href="{$ROOT}webinars">Webinars</a></li>-->
         {*<li><a href="{$ROOT}recursos">Recursos</a></li>*}
-        <li><a href="https://github.com/Geo-Developers">Proyectos</a></li>
+        <!--<li><a href="https://github.com/Geo-Developers">Proyectos</a></li>-->
         {if isset($SESSION["logged"])}
             <li>
                 <div class="dropdown" id="login">
