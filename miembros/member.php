@@ -16,9 +16,24 @@ if($userprofile){
 
     $smarty->assign('ISRECOMMENDED', false);
     if(isset($_SESSION["user"])){
-        if($GeodevDB->getIsReferred(array("referrer" => $_SESSION["user"]["meetup_id"]))){
-            $smarty->assign('ISRECOMMENDED', true);
-        }
+
+      $date = getdate();
+      $date = $date["year"] ."-". $date["mon"]."-".$date["mday"];
+      $db -> where ("visitor", $_SESSION["user"]['id'])
+          -> where ("visited", $userprofile['id'])
+          -> where ("date", $date,"=");
+      $visit = $db->get('profile_views');
+      if(!$visit){
+        $db -> insert("profile_views",array(
+          "visitor" => $_SESSION["user"]['id'],
+          "visited" => $userprofile['id'],
+          "date" => $date
+        ));
+      }
+
+      if($GeodevDB->getIsReferred(array("referrer" => $_SESSION["user"]["meetup_id"]))){
+          $smarty->assign('ISRECOMMENDED', true);
+      }
     }
 
     $smarty->display('profile.tpl');

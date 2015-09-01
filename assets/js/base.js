@@ -13,7 +13,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
             $('[data-toggle="tooltip"]').tooltip();
             //$('[data-toggle="modal"]').modal();
             try{
-                if(Cookies.get("cookies") === "true" || USER.cookies === 1) {
+                if(Cookies.get("cookies") === "true" || USER.cookies === "1") {
                     showCookies = false;
                 }
             }catch(e){}

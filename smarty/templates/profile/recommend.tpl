@@ -67,7 +67,7 @@
         <!--
                     <p class="pb0 pt05">
                         <a href="#" class="btn btn-block
-                            {if $PROFILE["email"] && $USER["email"]!=$PROFILE["email"]}
+                            {if isset($USER["id"]) && $USER["id"]==$PROFILE["id"]}
                                 btn-danger"
                             {else}
                                disabled btn-default" title="No tenemos sus datos de contacto"
