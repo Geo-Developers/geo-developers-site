@@ -25,6 +25,14 @@ body, input, textarea, select {
     font-family: Roboto;
 }
 
+#nav .dropdown-menu{
+    padding: 0;
+}
+#nav .dropdown-menu li:hover{
+    width: 100%;
+    background-color: #efefef;
+}
+
 .progress{
     margin-bottom: 5px;
 }

@@ -13,7 +13,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
             $('[data-toggle="tooltip"]').tooltip();
             //$('[data-toggle="modal"]').modal();
             try{
-                if(Cookies.get("cookies") === "true" || USER.cookies === 1) {
+                if(Cookies.get("cookies") === "true" || USER.cookies === "1") {
                     showCookies = false;
                 }
             }catch(e){}
@@ -39,7 +39,8 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                 trigger: 'focus',
                 content: $(this).data('content')
             });
-            $('[rel=popover][data-state=open]').popover('show')
+
+            $('[rel=popover][data-state=open]').popover('show');
 
 			if(showCookies){
                 document.getElementById('cookies').className = "show";

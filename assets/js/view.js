@@ -1,4 +1,4 @@
-define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,base){
+define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,Cookies,base){
     var Methods = {
         init: function(type){
 
@@ -10,6 +10,54 @@ define(['jquery','cookies','base', 'bootstrap','jsrender'], function($,Cookies,b
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+            var options = {
+                path: GEODEV.rootpath+'images/',
+                half: true,
+                hints: ['mala', 'pobre', 'regular', 'buena', 'genial'],
+                starOff : 'star-off.png',
+                starOn  : 'star-on.png',
+                scoreName: 'general-rate',
+                score: function() {
+                    return $(this).attr('data-score');
+                }
+            };
+
+            $('#general-rate').raty(options);
+
+            options.scoreName = 'speaker-rate';
+            $('#speaker-rate').raty(options);
+
+            options.scoreName = 'tech-rate';
+            $('#tech-rate').raty(options);
+
+            $("button#rate").click(function(){
+                var data = {
+                    'general-rate': $("input[name='general-rate']").val(),
+                    'speaker-rate': $("input[name='speaker-rate']").val(),
+                    'tech-rate': $("input[name='tech-rate']").val(),
+                    'comments': $("textarea[name='comments']").val()
+                };
+                var that = this;
+                $(this).find("i").addClass("fa-circle-o-notch fa-spin");
+
+                $.ajax({
+                    type: "POST",
+                    url: GEODEV.rootpath + "api/video/" + videoID + "/rate",
+                    data: data,
+                    dataType: "json",
+                    success: function (r) {
+                        $(that).find("i").removeClass("fa-circle-o-notch fa-spin");
+                        if (r.status !== "success") {
+                            alert("Error: " + r.message);
+                        } else {
+                            console.log(r);
+                            $("#rating-msg").fadeIn();
+                            setTimeout(function(){$("#rating-msg").fadeOut()}, 3000);
+                            $("#rating-msg").text(r.message);
+                        }
+                    }
+                });
+            });
 
             function onPlayerReady(event) {
                 event.target.playVideo();

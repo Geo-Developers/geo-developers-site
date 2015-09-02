@@ -54,15 +54,18 @@
 
 
     {if $ACTION == "view"}
-        {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
+        {if isset($USER["id"]) && $USER["id"]==$PROFILE["id"]}
             <a href="{$ROOT}miembros/{$USER["meetup_id"]}/editar" class="btn btn-primary btn-block mb1">Editar perfil</a>
         {else}
             <p>
                 <small>
-                    {if isset($USER["email"])==false}
+                    {if isset($USER["email"]) == false}
                         ¿Eres tú?, puedes <a href="#">completarlo ahora</a>; o si sabes quién es <a href="#">puedes avísarle</a>.
                     {else}
+                        <!-- TODO: Avisar a alguien de su perfil
                         Si sabes quién es <a href="#">puedes avísarle</a>.
+
+                        -->
                     {/if}
                 </small>
             </p>

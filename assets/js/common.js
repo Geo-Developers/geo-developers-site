@@ -10,6 +10,7 @@ var conf = {
         'bootstrap/tooltip':        { deps: ['jquery'], exports: '$.fn.tooltip' },
         'typeahead':                { deps: ['jquery'], exports: '$.fn.typeahead' },
         'jsrender': 				{ deps: ['jquery'], exports: '$.templates' },
+        'raty': 				    { deps: ['jquery'], exports: '$.raty' },
         'util': 					['jquery'],
         'views': 					['jquery', 'jsrender', 'base'],
         'academy': 					['jquery', 'jsrender', 'base'],
@@ -20,7 +21,9 @@ var conf = {
             'jquery',
             'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min'
         ],
-
+        raty: [
+            'raty'
+        ],
         jsrender: [
             'jsrender',
             'http://www.jsviews.com/download/jsrender'

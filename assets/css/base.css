@@ -2541,10 +2541,11 @@ a#login-btn:hover{
 .input-group input.form-control[name="tech"]{
     color: black;
     float: left;
-    width: 270px;
+    width: 205px;
 }
 #members-page .input-group-btn{
     float: left;
+    width: auto;
 }
 #members-page .input-group{
     display: inline-block;

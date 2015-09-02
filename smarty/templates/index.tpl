@@ -23,7 +23,7 @@
         </div>
     </article>
 </div>
-
+<script>alert("Esta página está aún en fase alpha (desarrollo), debido a esto, no recomendamos rellenar los perfiles aún ya que algunos datos se podrían perder.");</script>
 <!-- Portfolio -->
 <div class="wrapper style3">
     <article id="activities">

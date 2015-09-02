@@ -26,6 +26,11 @@ $db = new MysqliDb (Array (
         'charset' => 'utf8')
 );
 
+if($_SERVER['HTTP_HOST']=='localhost'){
+  ini_set('display_errors',1);
+  ini_set('display_startup_errors',1);
+  error_reporting(-1);
+}
 
 if(isset($_SESSION["user"]["meetup_id"]) ){
     if(isset($_SESSION['logged'])){
@@ -36,7 +41,10 @@ if(isset($_SESSION["user"]["meetup_id"]) ){
         $_SESSION["user"]['newsletter'] = $user['mailchimp_euid'] ? $user['mailchimp_euid'] : 0;
     }
 
+
     $smarty->assign("USER", $_SESSION["user"]);
+  $smarty->assign("SESSION", $_SESSION);
+
 }
 
 ?>

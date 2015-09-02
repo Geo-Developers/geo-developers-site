@@ -348,3 +348,10 @@ div#video > div h2{
 #related .description{
 
 }
+
+#rating-msg{
+    font-size: .8em;
+    line-height: 21px;
+    padding: 5px 15px;
+    margin-bottom: 0;
+}

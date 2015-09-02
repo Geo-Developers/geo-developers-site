@@ -425,6 +425,31 @@ class Member
 
 
     }
+    public function joinToMeetup($answers){
+      global $meetup_group_id;
+
+      $postfields = array(
+        'group_id' => $meetup_group_id,
+        "access_token" => $_SESSION['access_token']
+      );
+
+      foreach($answers as $key => $value){
+        $postfields[$key] = $value;
+      }
+
+      $opts = array(
+        'http' => array(
+          'method'  => 'POST',
+          'header'  => 'Content-type: application/x-www-form-urlencoded',
+          'content' => http_build_query($postfields)
+        )
+      );
+      $context  = stream_context_create($opts);
+      $result = json_decode(file_get_contents('https://api.meetup.com/2/profile', false, $context));
+
+      //prettyprint($result);
+      return $result;
+    }
 
     public function loadFromMeetup($meetup_response = NULL){
         global $meetup_group_id, $meetup_group_urlname, $meetup_api_key;;
@@ -475,7 +500,7 @@ class Member
                         $this->facebook_url = $s;
                         break;
                     case "linkedin":
-                        $this->facebook_url = $s;
+                        $this->linkedin_url = $s;
                         break;
                 }
             }

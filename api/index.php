@@ -32,11 +32,24 @@ function same_user(\Slim\Route $route) {
     }
 
 };
+
+function not_same_user(\Slim\Route $route) {
+  $params = $route->getParams();
+
+  if (intval($params["userid"]) === intval($_SESSION['user']['meetup_id'])) {
+    $data = array(
+      'status' => 'error',
+      'message' => 'You are not'.$params["userid"]
+    );
+    die(json_encode($data));
+  }
+
+};
 /* END MIDDLEWARES */
 
 $app->post('/user/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
     $userAttrs = array("cookies", "mailchimp_euid");
-    $data = insertOrUpdate($db, 'users', $userAttrs, $meetup_id, "meetup_id");
+    $data = insertOrUpdate($db, 'users', $userAttrs, $userId, "meetup_id");
     echo json_encode($data);
 });
 
@@ -159,6 +172,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
     $elem = $db->getOne("user_skills");
 
     if(!$elem){
+
         $res = $db->insert("user_skills",array(
             "meetup_id" => $meetup_id,
             "skill_id" => $id
@@ -171,7 +185,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
         }else{
             $data = array(
                 'status' => 'error',
-                'message' => 'The skill could not be added to the user'
+                'message' => 'The skill could not be added to the user: '.$db->getLastError()
             );
         }
     }else{
@@ -202,7 +216,7 @@ $app->post('/user/:userid/skill', 'authenticated', 'same_user', function ($userI
     echo json_encode($data);
 });
 
-$app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use ($app, $db){
+$app->post('/vote/:userid', 'authenticated', 'not_same_user', function ($userId) use ($app, $db){
 
     $meetup_id = $_SESSION['user']['meetup_id'];
 
@@ -228,6 +242,68 @@ $app->post('/vote/:userid', 'authenticated', 'same_user', function ($userId) use
     }
 
     echo json_encode($data);
+});
+
+$app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app, $db){
+
+  $db -> where('userid', $_SESSION['user']['id'])
+      -> where('videoid', $videoid);
+
+  $rating = $db->getOne('video_ratings');
+
+  $date = new DateTime();
+
+  $vals = array(
+    'date' => date('Y-m-d H:i:s',$date->getTimestamp())
+  );
+
+  if($_POST['general-rate']){ $vals['general-rate'] = $_POST['general-rate'];}
+  if($_POST['speaker-rate']){ $vals['speaker-rate'] = $_POST['speaker-rate'];}
+  if($_POST['tech-rate']){ $vals['tech-rate'] = $_POST['tech-rate'];}
+  if($_POST['comments']){ $vals['comments'] = $_POST['comments'];}
+
+  if(!$rating){
+
+
+    $res = $db->insert('video_ratings', array_merge($vals, array(
+        'userid'=> $_SESSION['user']['id'],
+        'videoid' => $videoid,
+    )));
+
+    if($res){
+      $data = array(
+        'status' => 'success',
+        'message' => '¡Gracias! la valoración ha sido guardada'
+      );
+    }else{
+      $data = array(
+        'status' => 'error',
+        'message' => 'The rating could not be saved: '.$db->getLastError()
+      );
+    }
+
+  }else{
+    $db -> where('userid', $_SESSION['user']['id'])
+        -> where('videoid', $videoid);
+
+    $res = $db->update('video_ratings', $vals);
+
+    if($res){
+      $data = array(
+        'status' => 'success',
+        'message' => '¡Gracias! la valoración ha sido actualizada'
+      );
+    }else{
+      $data = array(
+        'status' => 'error',
+        'message' => 'The rating could not be update: '.$db->getLastError()
+      );
+    }
+  }
+
+  echo json_encode($data);
+
+  //echo json_encode($data);
 });
 
 /*$app->post('/video/:videoid', function ($userId) use ($app, $db){
