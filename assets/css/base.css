@@ -2269,7 +2269,7 @@ body .logo img{
                  }
 
 #cookies,
-#geodev-academy {
+.geodev-academy {
     display: block;
     font-size: .9em;
     position: fixed;
@@ -2289,7 +2289,7 @@ body .logo img{
     padding-left: 1em;
     padding-right: 1em;
 }
-#geodev-academy {
+.geodev-academy {
     right: 0;
     left: inherit;
     background-color: #FFF;
@@ -2306,7 +2306,7 @@ body .logo img{
     padding-left: 50px;
 }
 #cookies p,
-#geodev-academy p,
+.geodev-academy p,
 #mc_embed_signup{
     padding: 1.5em 1.5em 1.5em 6em;
     font-size: 15px;
@@ -2315,7 +2315,7 @@ body .logo img{
     position: relative;
     margin-bottom: 0;
 }
-#geodev-academy p{
+.geodev-academy p{
     padding-bottom: 0;
 }
 #mc_embed_signup{
@@ -2342,12 +2342,12 @@ body .logo img{
     color: white;
     text-decoration: none;
 }
-#geodev-academy small{
+.geodev-academy small{
     font-size: .9em;
 }
 
 #cookies p .close,
-#geodev-academy p .close {
+.geodev-academy p .close {
     position: absolute;
     display: block;
     cursor: pointer;
@@ -2355,12 +2355,12 @@ body .logo img{
     right: 0;
     color: #A52A2A;
 }
-#geodev-academy p,
-#geodev-academy p .close {
+.geodev-academy p,
+.geodev-academy p .close {
     color: black;
 }
 #cookies.show,
-#geodev-academy.show {
+.geodev-academy.show {
     bottom: 0;
 }
 #nav .dropdown-menu a,

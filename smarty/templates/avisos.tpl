@@ -28,9 +28,12 @@
     {literal}
     <script>
         require([
-            'jquery'
+            'jquery',
+            'base',
+            'cookies'
+        ],function($, base, Cookies ){
+            base.init(Cookies);
 
-        ],function($ ){
             $("#preferences").on( "submit", function( event ) {
                 event.preventDefault();
 

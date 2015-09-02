@@ -370,6 +370,13 @@ div#video > div h2{
     padding-top: 1.5em;
     box-shadow: none;
 }
+#preferencesModal .geodev-academy{
+    position: static;
+    position: static;
+    border: 0;
+    box-shadow: none;
+}
+#preferencesModal .geodev-academy .close{display:none;}
 
 div[data-grouping]{
     margin: 0 !important;

@@ -81,12 +81,12 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
 					Cookies.set("visits",visits+1);
 				}
 				if(showNewsletter && visits > 3){
-					document.getElementById('geodev-academy').className = "show";
+					$('#newsletter-footer').addClass("show");
 					$("#mc-embedded-subscribe-form").submit(function(){
 						closeCookies();
 					});
 					window.closeCookies = function(){
-						document.getElementById('geodev-academy').className = "";
+                        $('#newsletter-footer').removeClass("show");
 						Cookies.set("geodev-academy","true");
                         try{
                             $.ajax({

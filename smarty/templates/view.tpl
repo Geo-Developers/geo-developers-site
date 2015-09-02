@@ -218,7 +218,13 @@
                 <h4 class="modal-title" id="myModalLabel">Tus suscripciones</h4>
             </div>
             <div class="modal-body">
-                {include file="blocks/preferences.tpl"}
+                {if $TYPE === "academy"}
+                    {include file="blocks/preferences.tpl"}
+                {else}
+                    <div class="geodev-academy">
+                        {include file="blocks/newsletter.tpl"}
+                    </div>
+                {/if}
             </div>
 
         </div>
@@ -227,22 +233,23 @@
 
 <script>
     var videoID = {$VIDEO.id},
-            youtubeID = "{$VIDEO.youtubeId}",
-            fechaEvento = "{$VIDEO.eventDate}",
-            transparencias = "",
+        youtubeID = "{$VIDEO.youtubeId}",
+        fechaEvento = "{$VIDEO.eventDate}",
+        transparencias = "",
 
 
-            meetupid = "{$VIDEO.meetup_id}",
+        meetupid = "{$VIDEO.meetup_id}",
 
-            firechat = "{$VIDEO.firechatID}",
+        firechat = "{$VIDEO.firechatID}",
 
-            indexes = [{for $I=0 to $VIDEO.videoIndex|@count-1}{$VIDEO.videoIndex[$I].seconds},{/for}];
-
-    progress= [
-        {for $I=0 to $VIDEO.progress|@count-1}
-        [{$VIDEO.progress[$I][0]}, {$VIDEO.progress[$I][1]}, {$VIDEO.progress[$I][2]}],
-        {/for}
-    ];
+        indexes = [{for $I=0 to $VIDEO.videoIndex|@count-1}{$VIDEO.videoIndex[$I].seconds},{/for}];
+    {if $TYPE === "academy"}
+        progress= [
+            {for $I=0 to $VIDEO.progress|@count-1}
+            [{$VIDEO.progress[$I][0]}, {$VIDEO.progress[$I][1]}, {$VIDEO.progress[$I][2]}],
+            {/for}
+        ];
+    {/if}
 
     require([
         'jquery',
