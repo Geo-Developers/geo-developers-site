@@ -365,9 +365,10 @@ div#video > div h2{
 
 *********************************/
 
-#preferences .box{
+#preferences.box{
     border: 0;
     padding-top: 1.5em;
+    box-shadow: none;
 }
 
 div[data-grouping]{

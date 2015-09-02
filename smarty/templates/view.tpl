@@ -215,7 +215,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Suscripciones</h4>
+                <h4 class="modal-title" id="myModalLabel">Tus suscripciones</h4>
             </div>
             <div class="modal-body">
                 {include file="blocks/preferences.tpl"}
