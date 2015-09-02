@@ -126,11 +126,7 @@ class Member
             //TODO, nuevas que no tenga el user
             foreach($values["skills"] as $key => $val){
                 $this->skills[$key]["level"] = $val;
-                //echo "$key, $val <br>";
             }
-            /*prettyprint($this->skills);
-            die("Yeah");*/
-
         }
     }
 

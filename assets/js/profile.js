@@ -41,7 +41,6 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                                     votes = $("#vote");
                                 if(r["recommended"]){
                                     //TODO: añadir o quitar dinámicamente
-
                                     if(referrers.find("[data-referrer]:visible").length == 0){
                                         referrers.find(".title").slideDown();
                                     }

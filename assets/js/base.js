@@ -93,7 +93,9 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                                 type: "POST",
                                 url: GEODEV.rootpath + "api/user/" + USER["meetup_id"],
                                 data: {mailchimp_euid:1},
-                                success: function(r){console.log("r=",r)}
+                                success: function(r){
+                                    //console.log("r=",r);
+                                }
                             });
                         }catch(e){}
 					}
@@ -101,7 +103,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
 			}
 			$('.dropdown-toggle').dropdown();	
 
-			console.log("Ejecutamos");
+			//console.log("Ejecutamos");
 
 			/* Mixpanel tracking */
             if(typeof(USER) !== "undefined"){

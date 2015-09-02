@@ -37,7 +37,7 @@ if($member->isRegistered()){
 //Add new user to the database $_POST
 if($new_user && isset($_POST["name"]) ){
 
-    // Firts join to meetup if neccessary
+    // Firts join to meetup if necessary
     $answers = array();
 
     if(isset($_POST['skills'])){
@@ -105,7 +105,6 @@ if( isset($_SESSION["user"]['meetup_id']) && !isset($_SESSION['logged']) ){
         //User is in the database
         $smarty->assign('USER', $userprofile);
     }elseif(isset($_SESSION["meetup_member"])){
-      // TODO: is that right? if never joined before do we have a joined date?
       $smarty->assign('USER', array(
         "name" => $_SESSION["meetup_member"]->name,
         "joined" => $member->parseEpoch($_SESSION["meetup_member"]->joined),

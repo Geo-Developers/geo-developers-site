@@ -16,10 +16,8 @@ function getMeetupMember($idOrArray, $type)
 
     switch($type){
         case "profile":
-            //TODO: change this using profile joined
-            // This is when he joined to meetup, not to
             $epoch = $response["joined"];
-            $epoch = substr($epoch,0, -3);
+            $epoch = substr($epoch, 0, -3);
             $dt = new DateTime("@$epoch");
             $date = $dt->format('Y-m-d');
 

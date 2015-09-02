@@ -92,7 +92,7 @@
                         </div>
                     {/if}
                 </div>
-                <!-- TODO: Add last name input -->
+
                 <input type="submit" value="Terminar" class="btn btn-primary btn-block mt0 pt05 pb05 mt1 " style="margin: 0;">
 
             </form>

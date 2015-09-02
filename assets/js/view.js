@@ -50,7 +50,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                         if (r.status !== "success") {
                             alert("Error: " + r.message);
                         } else {
-                            console.log(r);
+                            //console.log(r);
                             $("#rating-msg").fadeIn();
                             setTimeout(function(){$("#rating-msg").fadeOut()}, 3000);
                             $("#rating-msg").text(r.message);
@@ -142,7 +142,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
 
                 $(".view").click(function(){
                     if($(this).parent().hasClass("viewed")){
-                        console.log("Quitamos visualizado");
+                        //console.log("Quitamos visualizado");
                         $(this).parent().removeClass("viewed")
                         var i = indexes.indexOf($(this).parent().data('seek'));
                         progress[i][1]=0;
@@ -159,7 +159,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                         }
                     });
                     value *= 100;
-                    console.log("Actualizamos % a ",value);
+                    //console.log("Actualizamos % a ",value);
                     var rounded = parseInt(value);
                     if(rounded == 99){
                         rounded++;
@@ -180,7 +180,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                             if (r.status !== "success") {
                                 alert("Error: " + r.message);
                             } else {
-                                console.log(r);
+                                //console.log(r);
                             }
                         }
                     });
@@ -201,7 +201,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                 $(function() {
                     $(document).on('click', '.btnSeek .text, .btnSeek .time', function() {
                         var newTime = $(this).parent().data('seek');
-                        console.log("SeekTo=", newTime);
+                        //console.log("SeekTo=", newTime);
                         selectVideo(indexes.indexOf(newTime)+1);
                         player.seekTo(newTime, true);
                     });
@@ -209,7 +209,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
             }
 
             // If it is passed event
-            console.log("type=",type);
+            //console.log("type=",type);
             if (type === "webinars") {
 
                 //$("li.active").hide();
@@ -241,7 +241,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                                 } else {
                                     chatRef.authAnonymously(function(error, authData) {
                                         if (error) {
-                                            console.log(error);
+                                            //console.log(error);
                                         }
                                     });
                                 }

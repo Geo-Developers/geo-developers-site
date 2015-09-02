@@ -67,7 +67,7 @@ class GeodevDB
         $video["length"] = timeToSeconds($time);
 
         //TODO: get current progress for the user meetup_id
-        $this->db->where("youtubeId",$options["youtubeId"]);
+        $this->db->where("youtubeId", $options["youtubeId"]);
         $v = $this->db->getOne("videos");
 
         $this->db->where("video_id",$v["id"]);

@@ -20,11 +20,10 @@ class Skill
         );
     }
 
+    // The function search (matches) in a description field any skill that we have un the database
     public function extractRelevantSkills($string){
 
-        // TODO: change is_gis for is_relevant
-        // Not use $this->skill (not all of them)
-        $this->db->where('is_gis',1);
+        $this->db->where('is_important',1);
         $skills = $this->db->get('skills');
 
         $relevants = array();
