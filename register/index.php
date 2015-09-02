@@ -47,7 +47,7 @@ if($new_user && isset($_POST["name"]) ){
         $service = new Skill();
         foreach($_POST['skills'] as $skill){
             $s = $service->find(array("name" => $skill));
-            //TODO: FIX THIS
+            //TODO: FIX THIS and submit profile
             if(!isset($member->skills[$s["name"]])){
                 $member->skills[$s["name"]] = $s;
             }
