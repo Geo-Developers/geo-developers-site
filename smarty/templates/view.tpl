@@ -42,7 +42,7 @@
                         <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate"><i class="fa fa-star-o"></i> Valorar</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block"><i class="fa fa-plus"></i> Suscribir</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#preferencesModal"><i class="fa fa-plus"></i> Suscribir</button>
                     </div>
                     <div>
                         <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak"><i class="fa fa-bullhorn"></i> Dar una charla</button>
@@ -207,6 +207,20 @@
                 <div class="pull-left alert alert-success" style="display:none" id="rating-msg"></div>
                 <button type="button" class="btn btn-warning" id="rate">Enviar <i class="fa"></i></button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="preferencesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Suscripciones</h4>
+            </div>
+            <div class="modal-body">
+                {include file="blocks/preferences.tpl"}
+            </div>
+
         </div>
     </div>
 </div>

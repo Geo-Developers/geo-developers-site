@@ -10,6 +10,13 @@ if( isset($_SESSION['user']['meetup_id']) ){
         "meetupId" => $_SESSION['user']['meetup_id']
     ));
 
+    // Get user preferences
+    $user = new Member(array("meetup_id" => $_SESSION["user"]["meetup_id"]));
+    $preferences = $user->getPreferences();
+
+    $smarty->assign('INTERESTS', $preferences["interests"]);
+    $smarty->assign('GROUPINGS', $preferences["groupings"]);
+
     $smarty->assign('VIDEO', $video);
 
     $smarty->assign('TYPE', "academy");

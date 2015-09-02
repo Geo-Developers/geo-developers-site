@@ -373,6 +373,52 @@ $app->post('/user/:userid/video', 'authenticated', 'same_user', function ($userI
     echo json_encode($res);
 });
 
+
+$app->post('/user/:userid/preferences', 'authenticated', 'same_user', function ($userId) use ($app, $db) {
+
+    global $mailchimp_listid, $mailchimp_apikey;
+    $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
+
+    $user = new Member(array("meetup_id" => $_SESSION["user"]["meetup_id"]));
+
+    $data = array(
+        'email'             => array("euid"=> $user->mailchimp_euid),
+        'merge_vars'        => array('groupings' => array()),
+        'id'                => $mailchimp_listid,
+        'replace_interests' => true
+    );
+
+    foreach($_POST["groups"] as $group){
+        $grouping = array(
+            'id'=>$group,
+            "groups" => array()
+        );
+
+        if(!empty($_POST["$group"])){
+            foreach($_POST["$group"] as $g){
+                array_push($grouping["groups"],$g);
+            }
+            array_push($data["merge_vars"]["groupings"],$grouping);
+        }
+    }
+
+    $result = $MailChimp->call('/lists/update-member', $data);
+    if($result){
+        $data = array(
+            'status' => 'success',
+            'message' => 'Tus preferencias han sido actualizadas'
+        );
+    }else{
+        $data = array(
+            'status' => 'error',
+            'message' => 'Tus preferencias no han podido ser guardadas, vuelve a intentarlo más tarde'
+        );
+    }
+
+    echo json_encode($data);
+});
+
+
 function insertOrUpdate($db, $table, $attrs, $id, $where){
     $data = array();
 

@@ -628,7 +628,41 @@ class Member
 
 
     }
-    //function
+
+    public function getPreferences(){
+        global $mailchimp_apikey, $mailchimp_listid;
+
+        $MailChimp = new \Drewm\MailChimp($mailchimp_apikey);
+        $result = $MailChimp->call('/lists/member-info', array(
+            'emails'    => array( array("euid"=> $this->mailchimp_euid )),
+            'id'        => $mailchimp_listid
+        ));
+        $interests = array();
+
+        $groupings = $result["data"][0]["merges"]["GROUPINGS"];
+        foreach($groupings as $grouping){
+
+            foreach($grouping["groups"] as $group){
+
+                if(intval($group["interested"]) === 1){
+                    $interests[$group["name"]] = true;
+                }
+            }
+        }
+
+        // Get list preferences
+        $groupings = $MailChimp->call('lists/interest-groupings', array(
+            'id' => $mailchimp_listid
+        ));
+        for($i=0;$i<sizeof($groupings);$i++) {
+            $groupings[$i]["count"] = sizeof($groupings[$i]["groups"])-1;
+        }
+
+        return array(
+            "interests" => $interests,
+            "groupings" => $groupings
+        );
+    }
 
 }
 ?>

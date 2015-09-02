@@ -355,3 +355,46 @@ div#video > div h2{
     padding: 5px 15px;
     margin-bottom: 0;
 }
+
+
+
+
+/********************************
+
+          PREFERENCES
+
+*********************************/
+
+#preferences .box{
+    border: 0;
+    padding-top: 1.5em;
+}
+
+div[data-grouping]{
+    margin: 0 !important;
+}
+div[data-grouping] p{
+    background-color: #CFE8FF;
+    padding: .6em !important;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+div[data-grouping] p:hover{
+    font-weight: 300;
+}
+div[data-grouping] .options{
+    padding: 0;
+    display: none;
+}
+div[data-grouping="5041"]{display:none}
+div[data-grouping] .col-md-6{
+    width: 100%;
+    margin-bottom: .5em;
+}
+div[data-grouping] i{
+    margin-top: 5px;
+}
+
+div[data-grouping] .col-md-6 label{
+    font-weight: normal;
+}

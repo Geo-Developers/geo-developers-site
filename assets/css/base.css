@@ -2470,7 +2470,10 @@ a#login-btn:hover{
 #notifications-page label{
     font-weight: normal;
 }
-
+#notifications-page div[data-grouping] .options{
+    padding: 0;
+    width: 100%;
+}
 .box.success{
     border: 1px solid green;
     background-color: rgba(0, 255, 0, 0.1);
@@ -2813,3 +2816,4 @@ div#referrers.box p{
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
+
