@@ -214,9 +214,11 @@
 <div class="modal fade" id="preferencesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Tus suscripciones</h4>
-            </div>
+            {if isset($SESSION["logged"])}
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Tus suscripciones</h4>
+                </div>
+            {/if}
             <div class="modal-body">
                 {if $TYPE === "academy"}
                     {include file="blocks/preferences.tpl"}

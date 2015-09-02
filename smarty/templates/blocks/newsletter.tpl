@@ -1,5 +1,5 @@
 <p>
-    <strong>GeoDevelopers Academy</strong><br>
+    <strong>GeoDevelopers.org</strong><br>
     <small>Inscríbete y recibe gratis nuestros tutoriales, seminarios, ...</small>
     <span onclick="closeCookies()" class="close">X</span>
 </p>

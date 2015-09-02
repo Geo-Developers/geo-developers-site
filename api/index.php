@@ -244,12 +244,16 @@ $app->post('/vote/:userid', 'authenticated', 'not_same_user', function ($userId)
     echo json_encode($data);
 });
 
-$app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app, $db){
+$app->post('/video/:videoid/rate',function ($videoid) use ($app, $db){
 
-  $db -> where('userid', $_SESSION['user']['id'])
-      -> where('videoid', $videoid);
+  if(isset($_SESSION['user'])){
+    $db -> where('userid', $_SESSION['user']['id'])
+        -> where('videoid', $videoid);
 
-  $rating = $db->getOne('video_ratings');
+    $rating = $db->getOne('video_ratings');
+  }else{
+    $rating = false;
+  }
 
   $date = new DateTime();
 
@@ -264,11 +268,18 @@ $app->post('/video/:videoid/rate', 'authenticated',function ($videoid) use ($app
 
   if(!$rating){
 
-
-    $res = $db->insert('video_ratings', array_merge($vals, array(
+    if(isset($_SESSION['user'])){
+      $vals = array_merge($vals, array(
         'userid'=> $_SESSION['user']['id'],
         'videoid' => $videoid,
-    )));
+      ));
+    }else{
+      $vals = array_merge($vals, array(
+        'videoid' => $videoid,
+      ));
+    }
+
+    $res = $db->insert('video_ratings', $vals);
 
     if($res){
       $data = array(
