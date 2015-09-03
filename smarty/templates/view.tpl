@@ -1,9 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: "}
+    {assign var="VIDEO.title" value="title"}
 
-    <meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
+    {if $TYPE !== "academy"}
+        {include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: " title2=$VIDEO.title}
+        {literal}
+        <script>
+        var addthis_share = {url: "{/literal}{$VIDEO.shortUrl}{literal}"};
+        </script>{/literal}
+    {else}
+        {include file="header.tpl" title=$VIDEO.title}
+    {/if}
+
+    <meta name="description" content="{$VIDEO.description|strip_tags}" />
     <meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
     <link rel="stylesheet" href="{$ROOT}assets/css/view.css">
@@ -11,7 +21,7 @@
 </head>
 
 <body id="view-page-{$TYPE}">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
 

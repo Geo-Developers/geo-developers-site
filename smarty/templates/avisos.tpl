@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Preferencias - Geo Developers"}
 </head>
 <body id="notifications-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
         <div class="row">

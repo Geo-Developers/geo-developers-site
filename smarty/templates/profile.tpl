@@ -3,9 +3,10 @@
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     {include file="header.tpl" title="Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]} en Geo Developers"}
+    <meta name="description" content="{if isset({$PROFILE["bio"]})}{$PROFILE["bio"]|default:'Descubre sus conocimientos y habilidades.'}{/if}" />
 </head>
 <body id="profile-{$ACTION}-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
 <div class="container">
     <div class="row">

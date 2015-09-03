@@ -4,7 +4,7 @@
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
 <body id="register-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="row">
         <div class="

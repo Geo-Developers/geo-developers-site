@@ -2,10 +2,11 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Ranking de profesionales GIS - Geo Developers"}
+    <meta name="description" content="Conoce a los profesionales GIS más recomendados, con más conocimientos o más activos del panorama hispano-hablante." />
 </head>
 <body id="rankings-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
         <div class="row">

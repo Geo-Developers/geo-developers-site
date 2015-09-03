@@ -1,5 +1,5 @@
 
-		<title>{$title|default:"Comunidad de Geo Developers"}</title>
+		<title>{$title|default:"Comunidad de Geo Developers"} {if isset($title2)}{$title2}{/if}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>

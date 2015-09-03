@@ -251,6 +251,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                 });
 
                 (function() {
+
                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                     dsq.src = 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5110fe544ae3cec6';
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);

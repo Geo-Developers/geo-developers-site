@@ -2,10 +2,11 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Eventos y vídeos - Geo Developers"}
+    <meta name="description" content="Plataforma de formación en GIS: vídeos, transparencias, etc." />
 </head>
 <body class="video-list" id="academy-listing">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <div id="main-wrapper">
 <div class="container">
     <div class="row">

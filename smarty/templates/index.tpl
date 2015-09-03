@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Comunidad abierta de Geo Developers"}
+    <meta name="description" content="Encontrarás: videos, tutoriales, un directorio de profesionales, etc." />
 </head>
 <body id="home">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <!-- Home -->
 <div id="main-wrapper">
 <div class="wrapper style1 background-image">
