@@ -4,7 +4,7 @@
     {include file="header.tpl" title="Seminarios online y gratuitos - Geo Developers"}
     <meta name="description" content="Únete a los seminarios online de la comunidad" />
 </head>
-<body class="video-list" id="webinar-listing">
+<body class="video-list" id="webinars">
 {include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">

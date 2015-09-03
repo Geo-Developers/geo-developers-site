@@ -21,6 +21,6 @@
             </div>
         </div>
     {/for}
-    <button class="btn btn-primary btn-block" style="margin:0">Actualizar <i class="fa"></i></button>
+    <button class="btn btn-primary btn-block" style="margin:0"  mp-name="Click suscribe confirm">Actualizar <i class="fa"></i></button>
     <div class="alert alert-success mt1 text-center mb05" style="display:none" id="preferences-msg"></div>
 </form>

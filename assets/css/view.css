@@ -112,7 +112,8 @@ h1{
     color: black;
 }
 .index .view:hover .fa-eye{
-    color: #337AB7;
+    /*color: #337AB7;*/
+    cursor: default;
 }
 .index.viewed .view:hover .fa-eye {
     color: red;

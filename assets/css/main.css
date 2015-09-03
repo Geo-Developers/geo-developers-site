@@ -68,23 +68,23 @@ strong{font-weight: bold;}
     left: 0;
 }
 
-/* PROFILE-VIEW-PAGE */
-#profile-view-page #header{
+/* profile-view */
+#profile-view #header{
     margin-top: -10px;
 
 }
-    #profile-view-page .intro{
+    #profile-view .intro{
         display: inline-block;
         vertical-align: middle;
     }
-    #profile-view-page h1{
+    #profile-view h1{
         font-size: 2em;
         margin: 0 0 10px;
     }
-    #profile-view-page img {
+    #profile-view img {
         max-height: 60px;
     }
-    #profile-view-page h2{
+    #profile-view h2{
         font-size: 1.3em;
     }
     .progress-bar[data-level="0"]{
@@ -114,23 +114,23 @@ strong{font-weight: bold;}
 
 
 /* PROFILE-EDIT-PAGE */
-#profile-edit-page tbody td:nth-child(6n+1),
-#profile-edit-page th:nth-child(6n+1){
+#profile-edit tbody td:nth-child(6n+1),
+#profile-edit th:nth-child(6n+1){
     width: 25%;
     padding-left: 16px;
 }
-#profile-edit-page tbody td{
+#profile-edit tbody td{
     width: 15%;
 }
-#profile-edit-page i.fa-times{
+#profile-edit i.fa-times{
     color: rgba(173, 173, 173, 0.5);
 }
-#profile-edit-page i.fa-times:hover{
+#profile-edit i.fa-times:hover{
     color: rgb(249, 41, 41);
     cursor: pointer;
 }
-#profile-edit-page .skillList span{ width:10%; }
-#profile-edit-page .skillList select{ width:90%; }
+#profile-edit .skillList span{ width:10%; }
+#profile-edit .skillList select{ width:90%; }
 
 .git-table,
 .other-table{
@@ -142,15 +142,15 @@ strong{font-weight: bold;}
 .other-table {
     background-color: #33CC81;
 }
-#profile-edit-page .btn-success{
+#profile-edit .btn-success{
     background-color: #33CC81;
     border: 1px solid #33CC81;
 }
-#profile-edit-page .table{
+#profile-edit .table{
     border-bottom: 1px solid rgb(221, 221, 221);
 }
 
-/* #academy-listing */
+/* #academy */
 
 .give-a-talk{
     background-color: #D3FFC3;
@@ -249,18 +249,18 @@ strong{font-weight: bold;}
 }
 
 
-/* #register-page */
-#register-page #skillList{
+/* #register */
+#register #skillList{
     width: 100%;
 }
-#register-page select{
+#register select{
     width: 91%;
 }
-#register-page option.hidden span{
+#register option.hidden span{
     display: none;
 }
 
-#register-page .skills li{
+#register .skills li{
     border: 1px solid #ccc;
     padding: 1px 7px;
     border-radius: 5px;
@@ -269,9 +269,9 @@ strong{font-weight: bold;}
     cursor: pointer;
     margin-bottom: 10px;
 }
-#register-page .skills i{
+#register .skills i{
     color: #ccc;
 }
-#register-page .skills li:hover i{
+#register .skills li:hover i{
     color: red;
 }

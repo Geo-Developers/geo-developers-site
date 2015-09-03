@@ -22,6 +22,24 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                 }
             };
 
+
+            // Load Mouseflow
+            var _mfq = _mfq || [];
+            (function() {
+                var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+                mf.src = "//cdn.mouseflow.com/projects/e104d3e4-82cc-4b5d-b477-ae31e9ed325d.js";
+                document.getElementsByTagName("head")[0].appendChild(mf);
+                console.log("Embed")
+            })();
+
+
+            if(typeof(USER) !== "undefined") {
+                _mfq.push(["setVariable", "meetup_id", USER["meetup_id"]]);
+                _mfq.push(["setVariable", "name", USER["name"] + " " + USER["last_name"]]);
+                _mfq.push(["setVariable", "userid", USER["id"]]);
+                _mfq.push(["setVariable", "email", USER["email"]]);
+            }
+
             $('#general-rate').raty(options);
 
             options.scoreName = 'speaker-rate';
@@ -188,10 +206,14 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
 
                 var checkProgress = function(){
                     var i=0;
-                    while(player.getCurrentTime() >= indexes[i]){
-                        i++;
+                    try {
+                        while (player.getCurrentTime() >= indexes[i]) {
+                            i++;
+                        }
+                        selectVideo(i);
+                    }catch(e){
+                        console.log(e);
                     }
-                    selectVideo(i);
                 };
                 setInterval(checkProgress, 3000);
                 updateProgress();

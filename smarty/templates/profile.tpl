@@ -5,7 +5,7 @@
     {include file="header.tpl" title="Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]} en Geo Developers"}
     <meta name="description" content="{if isset({$PROFILE["bio"]})}{$PROFILE["bio"]|default:'Descubre sus conocimientos y habilidades.'}{/if}" />
 </head>
-<body id="profile-{$ACTION}-page">
+<body id="profile-{$ACTION}">
 {include file="menu.tpl"}
 <div id="main-wrapper">
 <div class="container">
@@ -13,11 +13,11 @@
         <div class="col-md-12" style="margin-bottom:20px;padding-left: 0;">
 
             <a href="{$ROOT}">Home</a> &gt;
-                <a href="{$ROOT}miembros">Miembros</a> &gt;
+                <a href="{$ROOT}members">Miembros</a> &gt;
                 {if $ACTION == "view"}
                     Perfil de {$PROFILE["name"]}
                 {else}
-                    <a href="{$ROOT}miembros/{$PROFILE["meetup_id"]}">Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]}</a> &gt;
+                    <a href="{$ROOT}members/{$PROFILE["meetup_id"]}">Perfil de {$PROFILE["name"]} {$PROFILE["last_name"]}</a> &gt;
                         Editar
                 {/if}
         </div>

@@ -110,13 +110,59 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                 mixpanel.people.set(USER);
                 // identify must be called along with people.set
                 mixpanel.identify(USER["meetup_id"]);
+
+                mixpanel.register_once({
+                    'meetup_id': USER["meetup_id"],
+                    'name': USER["name"]+" "+USER["last_name"],
+                    'email': USER["email"]
+                });
             }
 
-			var pageID = $("body").attr("id");
-			mixpanel.track(
-		    "View page [" + pageID + "]"/*,
-		    { "Banner Color": "Blue" }*/
-			);
+			var $body = $("body"),
+                pageID = $body.attr("id");
+
+            if($body.hasClass("video-view")){
+                var videoProps = JSON.parse("{"+$("body").attr("mp-props")+"}");
+                mixpanel.track("View page [" + pageID + "]", videoProps);
+            }else{
+                mixpanel.track("View page [" + pageID + "]");
+            }
+
+
+
+
+            $("[mp-name]").click(function(){
+                var $this = $(this),
+                    evtName = $this.attr("mp-name") + " [" + pageID + "]";
+
+                if($this.attr("mp-props") || $("body").hasClass("video-view")){
+                    var props;
+                    if($this.attr("mp-props")){
+                        props = JSON.parse("{"+$this.attr("mp-props")+"}");
+                    }else{
+                        props = {};
+                    }
+
+                    if($("body").hasClass("video-view")){
+                        var videoProps = JSON.parse("{"+$("body").attr("mp-props")+"}");
+
+                        props["videoId"] = videoProps.videoId;
+                        props["videoTitle"] = videoProps.videoTitle;
+                        try{
+                            props["playerTime"] = player.getCurrentTime();
+                        }catch(e){
+                            console.log(e);
+                        }
+                    }
+                    mixpanel.track(evtName, props);
+
+                    console.log("%s, %s", evtName,  JSON.stringify(props, null, "\t"));
+                }else{
+                    mixpanel.track(evtName);
+                    console.log(evtName);
+                }
+
+            });
 		}
 
 	}

@@ -2373,23 +2373,23 @@ body .logo img{
     max-width: 25px;
 }
 
-#login{
+#loginBtn{
     margin-left: 20px;
     background-color: #3FB282;
     padding: 0px;
     border-radius: 0px;
 }
-#login .dropdown-toggle{
+#loginBtn .dropdown-toggle{
     padding: 0 7px 0 0;
     height: 27px;
     border-radius: 0;
     border: 1px solid #555;
     background-color: #333;
 }
-#login .dropdown-toggle img{
+#loginBtn .dropdown-toggle img{
     margin-top: -2px;
 }
-#login .caret{
+#loginBtn .caret{
     color: white;
 }
 .acenter{
@@ -2423,12 +2423,12 @@ body .logo img{
 .pb3{padding-bottom: 3em !important;}
 /*************************************
 *
-*							LOGIN PAGE
+*						LOGIN PAGE
 *
 **************************************/
-#login-page,
-#register-page,
-#members-page{
+#login,
+#register,
+#members{
     margin-top: 30px;
 }
 #video-suggest{
@@ -2463,13 +2463,13 @@ a#login-btn:hover{
     margin-top: -6px;
 }
 
-#notifications-page p{
+#notifications p{
     font-weight: bold;
 }
-#notifications-page label{
+#notifications label{
     font-weight: normal;
 }
-#notifications-page div[data-grouping] .options{
+#notifications div[data-grouping] .options{
     padding: 0;
     width: 100%;
 }
@@ -2480,18 +2480,18 @@ a#login-btn:hover{
     margin-bottom: 1em;
 }
 
-#member-list,
-#member-list li{
+#members,
+#members li{
 
 }
-#member-list{    width: 100%;}
+#members{    width: 100%;}
 #member-list li{
     padding: 0;
     margin-bottom: 1.5em;
 }
 
-#member-list .picture,
-#rankings-page .picture,
+#members .picture,
+#rankings .picture,
 .referrer .picture{
     background-size: 100%;
     background-repeat: no-repeat;
@@ -2502,8 +2502,8 @@ a#login-btn:hover{
     width: 80px;
 }
 
-#member-list .image-wrapper,
-#rankings-page .image-wrapper,
+#members .image-wrapper,
+#rankings .image-wrapper,
 .referrer .image-wrapper{
     background-color: black;
     width: 80px;
@@ -2526,16 +2526,16 @@ a#login-btn:hover{
     background-repeat: no-repeat;
     background-position: center;
 }
-#rankings-page .picture,
-#rankings-page .image-wrapper{
+#rankings .picture,
+#rankings .image-wrapper{
     width: 30px;
     height: 30px;
 }
 #members tbody td{
     line-height: 30px;
 }
-#members-page button:hover{
-    color: #333 !important;
+#members button:hover{
+    /*color: #333 !important;*/
 }
 .capitalize{
     text-transform: capitalize;
@@ -2545,34 +2545,34 @@ a#login-btn:hover{
     float: left;
     width: 205px;
 }
-#members-page .input-group-btn{
+#members .input-group-btn{
     float: left;
     width: auto;
 }
-#members-page .input-group{
+#members .input-group{
     display: inline-block;
     width: 300px;
 }
-#members-page .input-container{
+#members .input-container{
     display: inline-block;
 }
-#members-page label.search{
+#members label.search{
     display: inline-block;
     height: 34px;
     float: left;
     margin-right: 10px;
     padding: 7px 0;
 }
-#member-list li:nth-child(3n+1) .member-wrapper{
+#members li:nth-child(3n+1) .member-wrapper{
     /*1, 4, 7*/
     margin-right: 15px;
 }
-#member-list li:nth-child(3n+2) .member-wrapper{
+#members li:nth-child(3n+2) .member-wrapper{
     /*2, 5, 8*/
     margin-left: 7px;
     margin-right: 7px;
 }
-#member-list li:nth-child(3n+3) .member-wrapper{
+#members li:nth-child(3n+3) .member-wrapper{
     /*2, 5, 8*/
     margin-left: 15px;
 
@@ -2586,21 +2586,21 @@ a#login-btn:hover{
 .member-wrapper .progress{
     margin-bottom: 5px;
 }
-#member-list li img{
+#members li img{
 
     max-height: 60px;
 }
 
 #modalTechs label,
-#profile-edit-page span.text-label{
+#profile-edit span.text-label{
     line-height: 34px;
     margin: 0;
 }
 
-#profile-view-page span.text-label{
+#profile-view span.text-label{
     font-weight: bold;
 }
-#profile-edit-page span.text-label{
+#profile-edit span.text-label{
     font-weight: 400;
 }
 
@@ -2652,19 +2652,19 @@ ul.inline li{
     /*width: 140px;*/
 }
 
-#profile-edit-page #picture img{
+#profile-edit #picture img{
     width: 40px;
     margin-right: 1em;
 }
 
-#profile-view-page .recommendations img{
+#profile-view .recommendations img{
     width: 100%
 }
-#profile-view-page #social-networks{
+#profile-view #social-networks{
     padding-right:.5em;
     font-size: 1.2em;
 }
-#profile-view-page #social-networks li{
+#profile-view #social-networks li{
     padding-left: 1em
 }
 .icon.meetup{color: #ff0530;}

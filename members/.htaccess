@@ -6,4 +6,4 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^rankings ./rankings.php
 RewriteRule ^(\d+)$ ./member.php?query=$1
-RewriteRule ^(\d+)/editar$ ./edit-profile.php?meetup_id=$1
+RewriteRule ^(\d+)/edit$ ./edit-profile.php?meetup_id=$1

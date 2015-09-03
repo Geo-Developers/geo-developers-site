@@ -4,7 +4,7 @@
     {include file="header.tpl" title="Directorio de Geo Developers"}
     <meta name="description" content="Busca por tecnología y encuentra a los mejores profesionales" />
 </head>
-<body id="members-page">
+<body id="members">
 {include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
@@ -14,7 +14,7 @@
                 {if !isset($TECH)}
                     Miembros
                 {else}
-                    <a href="{$ROOT}miembros/">Miembros</a> &gt; {$TECH}
+                    <a href="{$ROOT}members/">Miembros</a> &gt; {$TECH}
                 {/if}
             </div>
 

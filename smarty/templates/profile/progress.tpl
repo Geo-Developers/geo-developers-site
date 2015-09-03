@@ -55,7 +55,7 @@
 
     {if $ACTION == "view"}
         {if isset($USER["id"]) && $USER["id"]==$PROFILE["id"]}
-            <a href="{$ROOT}miembros/{$USER["meetup_id"]}/editar" class="btn btn-primary btn-block mb1">Editar perfil</a>
+            <a href="{$ROOT}members/{$USER["meetup_id"]}/edit" class="btn btn-primary btn-block mb1">Editar perfil</a>
         {else}
             <p>
                 <small>

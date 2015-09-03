@@ -3,7 +3,7 @@
 <head>
     {include file="header.tpl" title="Login - Geo Developers"}
 </head>
-<body id="login-page">
+<body id="login">
 {include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container style1 wrapper">

@@ -3,7 +3,7 @@
 <head>
     {include file="header.tpl" title="Preferencias - Geo Developers"}
 </head>
-<body id="notifications-page">
+<body id="notifications">
 {include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">

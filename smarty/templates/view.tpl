@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{$ROOT}assets/css/jquery.raty.css">
 </head>
 
-<body id="view-page-{$TYPE}">
+<body id="{$TYPE}-view" class="video-view" mp-props='"videoId": {$VIDEO.id},"videoTitle": "{$VIDEO.title}"'>
 {include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
@@ -57,13 +57,13 @@
                         </div>
                     {/if}
                     <div>
-                        <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate"><i class="fa fa-star-o"></i> Valorar</button>
+                        <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate" mp-name="Click rate"><i class="fa fa-star-o"></i> Valorar</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#preferencesModal"><i class="fa fa-plus"></i> Suscribir</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#preferencesModal" mp-name="Click suscribe"><i class="fa fa-plus"></i> Suscribir</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak"><i class="fa fa-bullhorn"></i> Dar una charla</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak" mp-name="Click give a talk"><i class="fa fa-bullhorn"></i> Dar una charla</button>
                     </div>
                 </div>
             </div>
@@ -76,14 +76,16 @@
                         {for $I=0 to $VIDEO.videoIndex|@count-1}
                             <div class="index btnSeek {if $VIDEO.progress[$I][1] == 1}viewed{/if}"
                                  data-seek="{$VIDEO.videoIndex[$I].seconds}">
-                                <span class="time">
+                                <span class="time" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
                                     {$VIDEO.videoIndex[$I].time}
                                     <i class="fa fa-play-circle"></i>
                                 </span>
-                                <span class="text">
+                                <span class="text" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
                                     {$VIDEO.videoIndex[$I].text}
                                 </span>
-                                <span class="view"><i class="fa fa-eye"></i></span>
+                                <span class="view" mp-name="Uncheck video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
+                                    <i class="fa fa-eye"></i>
+                                </span>
                             </div>
                         {/for}
                     </div>
@@ -223,7 +225,7 @@
             </div>
             <div class="modal-footer">
                 <div class="pull-left alert alert-success" style="display:none" id="rating-msg"></div>
-                <button type="button" class="btn btn-warning" id="rate">Enviar <i class="fa"></i></button>
+                <button type="button" class="btn btn-warning" id="rate" mp-name="Click rate confirm">Enviar <i class="fa"></i></button>
             </div>
         </div>
     </div>
