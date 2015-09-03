@@ -9,7 +9,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 20px">
-                <a href="../">Home</a> &gt; Webinars
+                <a href="../">Home</a> &gt;
+
+                <a href="{$ROOT}academy">
+                    Eventos y vídeos
+                </a>
+                &gt;
+                Webinars
             </div>
         </div>
     </div>

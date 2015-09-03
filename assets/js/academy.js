@@ -44,12 +44,18 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
 
             if(seccion === "videos") {
 
-                $("#speakBtn").click(function(){
-                    var $this = $(this);
+                $("#giveATalk").submit(function(e){
+                    e.preventDefault();
+                    var $this = $("#giveATalk").find("button");
                     $this.addClass("disabled");
+                    var email = $("input[name='email']").val();
+                    var data = {
+                        email: email
+                    }
                     $.ajax({
                         type: "POST",
-                        url: GEODEV.rootpath + "api/user/" + USER.meetup_id + "/speak",
+                        url: GEODEV.rootpath + "api/speak",
+                        data: data,
                         dataType: "json",
                         success: function (r) {
                             if (r.status !== "success") {

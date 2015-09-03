@@ -92,7 +92,7 @@
                     <button class="btn btn-success btn-block mb1 blink_me" data-toggle="modal" data-target="#speak">
                         ¡Anímate a dar una charla!
                     </button>
-                    <p class="pt0 mt0 pb0"><a href="{$ROOT}webinars" class="small">Ver próximos eventos</a></p>
+                    <p class="pt0 mt0 pb0"><a href="{$ROOT}academy/webinars" class="small">Ver próximos eventos</a></p>
                 </div>
             </div>
             <div class="row box mb3">

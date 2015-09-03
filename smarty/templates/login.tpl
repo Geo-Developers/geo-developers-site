@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6 acenter">
                 <h1 class="mb1">Identificación requerida</h1>
-                <p><img src="../images/academy.png" class="thumbnail"></p>
+                <p><img src="{$ROOT}images/academy.png" class="thumbnail"></p>
                 <p class="mt2">Para acceder a todos los vídeos sólo tienes que autenticarte con Meetup.</p>
             </div>
             <div class="col-md-6">

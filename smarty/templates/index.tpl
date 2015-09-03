@@ -41,15 +41,15 @@
                 </div>
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="academy" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-                        <h3><a href="academy">Generar contenidos</a></h3>
+                        <a href="{$ROOT}academy" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}academy">Generar contenidos</a></h3>
                         <p>Recopilamos todos los vídeos y transparencias en nuestra web.</p>
                     </article>
                 </div>
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-                        <h3><a href="tutoriales">Tutoriales</a></h3>
+                        <a href="{$ROOT}tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}tutoriales">Tutoriales</a></h3>
                         <p>Estamos preparando y recopilando tutoriales sobre APIs, SDKs, etc.</p>
                     </article>
                 </div>
@@ -57,15 +57,15 @@
             <div class="row">
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3><a href="miembros">Bolsa de profesionales</a></h3>
+                        <a href="{$ROOT}miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}miembros">Bolsa de profesionales</a></h3>
                         <p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
                     </article>
                 </div>
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="recursos" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
-                        <h3><a href="recursos">Recursos</a></h3>
+                        <a href="{$ROOT}recursos" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}recursos">Recursos</a></h3>
                         <p>Recopilaciones de juegos de datos, códigos reutilizables, etc.</p>
                     </article>
                 </div>
