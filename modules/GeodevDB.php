@@ -63,7 +63,7 @@ class GeodevDB
         }
 
         // Parse PT40M2S to 40:02
-        $time = covtime($video["duration"]);
+        $time = convtime($video["duration"]);
         $video["length"] = timeToSeconds($time);
 
         //TODO: get current progress for the user meetup_id
