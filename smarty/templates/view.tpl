@@ -50,7 +50,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div id="youtubeVideo"></div>
-                <div class="text-center clearfix" id="videoBar">
+                <div class="text-center clearfix {if $VIDEO.hangoutOnAir && $TYPE !== "academy" }hangoutOnAir{/if}" id="videoBar">
+                    {if $VIDEO.hangoutOnAir && $TYPE !== "academy" }
+                        <div>
+                            <a href="{$VIDEO.hangoutOnAir}" class="btn btn-default btn-xs btn-block" target="_blank"><i class="fa fa-sign-in"></i> Entrar en directo</a>
+                        </div>
+                    {/if}
                     <div>
                         <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate"><i class="fa fa-star-o"></i> Valorar</button>
                     </div>
