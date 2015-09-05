@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Seminarios online y gratuitos - Geo Developers"}
+    <meta name="description" content="Únete a los seminarios online de la comunidad" />
 </head>
-<body class="video-list" id="webinar-listing">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+<body class="video-list" id="webinars">
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
         <div class="row">

@@ -11,14 +11,14 @@
                 ¿Por qué no le echas un poquillo'
                 de morro y le haces una
                 "<i rel="popover" data-img="{$ROOT}images/gato_de_srek.gif" style="color:#337ab7;cursor:pointer;text-decoration: underline">kindly suggestion</i>"
-                a los <a href="{$ROOT}miembros">miembros de la comunidad</a> con los
+                a los <a href="{$ROOT}members">miembros de la comunidad</a> con los
                 que tengas confianza?.<br>
             </small>
         </p>
         <p>
             <small>
                 Te ayudará a ganar visibilidad en
-                <a href="{$ROOT}miembros/rankings/">el ranking</a>. <i class="fa fa-smile-o"></i>
+                <a href="{$ROOT}members/rankings/">el ranking</a>. <i class="fa fa-smile-o"></i>
             </small>
         </p>
 
@@ -29,7 +29,7 @@
     <div class="col-md-12 pt0 text-center">
         {for $J=0 to $REFERRERS|@count-1}
             <div class="referrer" data-referrer="{$REFERRERS[$J]["meetup_id"]}">
-                <a href="{$ROOT}miembros/{$REFERRERS[$J]["meetup_id"]}"  class="image-wrapper">
+                <a href="{$ROOT}members/{$REFERRERS[$J]["meetup_id"]}"  class="image-wrapper">
                     <span class="picture clearfix" style="background-image: url('{$REFERRERS[$J]["photo_url"]}')"></span>
                 </a>
             </div>
@@ -37,7 +37,7 @@
 
         {if isset($USER)}
             <div class="referrer" data-referrer="{$USER["meetup_id"]}" style="display:none;">
-                <a href="{$ROOT}miembros/{$USER["meetup_id"]}" class="image-wrapper">
+                <a href="{$ROOT}members/{$USER["meetup_id"]}" class="image-wrapper">
                     <span class="picture clearfix" style="background-image: url('{if isset($USER["photo_url"])}{$USER["photo_url"]}{else}{$SESSION['photo_url']}{/if}')"></span>
                 </a>
             </div>

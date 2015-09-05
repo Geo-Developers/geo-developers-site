@@ -2,15 +2,16 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Ranking de profesionales GIS - Geo Developers"}
+    <meta name="description" content="Conoce a los profesionales GIS más recomendados, con más conocimientos o más activos del panorama hispano-hablante." />
 </head>
-<body id="rankings-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+<body id="rankings">
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-12" style="margin-bottom:20px;">
-                <a href="../../">Home</a> &gt; <a href="{$ROOT}miembros">Miembros</a> &gt; Rankings
+                <a href="../../">Home</a> &gt; <a href="{$ROOT}members">Miembros</a> &gt; Rankings
             </div>
         </div>
 
@@ -37,7 +38,7 @@
                                     <tr>
                                         <td>{$I+1}</td>
                                         <td class="text-left">
-                                            <a href="{$ROOT}miembros/{$TOPRECOMMENDED[$I]["meetup_id"]}" class="capitalize">
+                                            <a href="{$ROOT}members/{$TOPRECOMMENDED[$I]["meetup_id"]}" class="capitalize">
                                                 <div class="image-wrapper">
                                                     <div class="picture" style="background-image: url('{$TOPRECOMMENDED[$I]["photo_url"]}')"></div>
                                                 </div>
@@ -67,7 +68,7 @@
                                     <tr>
                                         <td>{$I+1}</td>
                                         <td class="text-left">
-                                            <a href="{$ROOT}miembros/{$TOPGISEROS[$I]["meetup_id"]}" class="capitalize">
+                                            <a href="{$ROOT}members/{$TOPGISEROS[$I]["meetup_id"]}" class="capitalize">
                                                 <div class="image-wrapper">
                                                     <div class="picture" style="background-image: url('{$TOPGISEROS[$I]["photo_url"]}')"></div>
                                                 </div>
@@ -97,7 +98,7 @@
                                     <tr>
                                         <td>{$I+1}</td>
                                         <td class="text-left">
-                                            <a href="{$ROOT}miembros/{$TOPEXPERTS[$I]["meetup_id"]}" class="capitalize">
+                                            <a href="{$ROOT}members/{$TOPEXPERTS[$I]["meetup_id"]}" class="capitalize">
                                                 <div class="image-wrapper">
                                                     <div class="picture" style="background-image: url('{$TOPEXPERTS[$I]["photo_url"]}')"></div>
                                                 </div>

@@ -1,17 +1,27 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: "}
+    {assign var="VIDEO.title" value="title"}
 
-    <meta name="description" content="Vídeo, PPTs, chat ... y mucho más!" />
+    {if $TYPE !== "academy"}
+        {include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: " title2=$VIDEO.title}
+        {literal}
+        <script>
+        var addthis_share = {url: "{/literal}{$VIDEO.shortUrl}{literal}"};
+        </script>{/literal}
+    {else}
+        {include file="header.tpl" title=$VIDEO.title}
+    {/if}
+
+    <meta name="description" content="{$VIDEO.description|strip_tags}" />
     <meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
     <link rel="stylesheet" href="{$ROOT}assets/css/view.css">
     <link rel="stylesheet" href="{$ROOT}assets/css/jquery.raty.css">
 </head>
 
-<body id="view-page-{$TYPE}">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+<body id="{$TYPE}-view" class="video-view" mp-props='"videoId": {$VIDEO.id},"videoTitle": "{$VIDEO.title}"'>
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
 
@@ -40,15 +50,20 @@
         <div class="row">
             <div class="col-md-6">
                 <div id="youtubeVideo"></div>
-                <div class="text-center clearfix" id="videoBar">
+                <div class="text-center clearfix {if $VIDEO.hangoutOnAir && $TYPE !== "academy" }hangoutOnAir{/if}" id="videoBar">
+                    {if $VIDEO.hangoutOnAir && $TYPE !== "academy" }
+                        <div>
+                            <a href="{$VIDEO.hangoutOnAir}" class="btn btn-default btn-xs btn-block" target="_blank"><i class="fa fa-sign-in"></i> Entrar en directo</a>
+                        </div>
+                    {/if}
                     <div>
-                        <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate"><i class="fa fa-star-o"></i> Valorar</button>
+                        <button class="btn btn-default btn-xs btn-block" data-toggle="modal" data-target="#rate" mp-name="Click rate"><i class="fa fa-star-o"></i> Valorar</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#preferencesModal"><i class="fa fa-plus"></i> Suscribir</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#preferencesModal" mp-name="Click suscribe"><i class="fa fa-plus"></i> Suscribir</button>
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak"><i class="fa fa-bullhorn"></i> Dar una charla</button>
+                        <button class="btn btn-default btn-xs  btn-block" data-toggle="modal" data-target="#speak" mp-name="Click give a talk"><i class="fa fa-bullhorn"></i> Dar una charla</button>
                     </div>
                 </div>
             </div>
@@ -61,14 +76,16 @@
                         {for $I=0 to $VIDEO.videoIndex|@count-1}
                             <div class="index btnSeek {if $VIDEO.progress[$I][1] == 1}viewed{/if}"
                                  data-seek="{$VIDEO.videoIndex[$I].seconds}">
-                                <span class="time">
+                                <span class="time" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
                                     {$VIDEO.videoIndex[$I].time}
                                     <i class="fa fa-play-circle"></i>
                                 </span>
-                                <span class="text">
+                                <span class="text" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
                                     {$VIDEO.videoIndex[$I].text}
                                 </span>
-                                <span class="view"><i class="fa fa-eye"></i></span>
+                                <span class="view" mp-name="Uncheck video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
+                                    <i class="fa fa-eye"></i>
+                                </span>
                             </div>
                         {/for}
                     </div>
@@ -208,7 +225,7 @@
             </div>
             <div class="modal-footer">
                 <div class="pull-left alert alert-success" style="display:none" id="rating-msg"></div>
-                <button type="button" class="btn btn-warning" id="rate">Enviar <i class="fa"></i></button>
+                <button type="button" class="btn btn-warning" id="rate" mp-name="Click rate confirm">Enviar <i class="fa"></i></button>
             </div>
         </div>
     </div>

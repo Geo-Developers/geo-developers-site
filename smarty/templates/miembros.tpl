@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Directorio de Geo Developers"}
+    <meta name="description" content="Busca por tecnología y encuentra a los mejores profesionales" />
 </head>
-<body id="members-page">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+<body id="members">
+{include file="menu.tpl"}
 <div id="main-wrapper">
     <div class="container">
         <div class="row">
@@ -13,7 +14,7 @@
                 {if !isset($TECH)}
                     Miembros
                 {else}
-                    <a href="{$ROOT}miembros/">Miembros</a> &gt; {$TECH}
+                    <a href="{$ROOT}members/">Miembros</a> &gt; {$TECH}
                 {/if}
             </div>
 

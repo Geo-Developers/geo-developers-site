@@ -2,10 +2,11 @@
 <html>
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Eventos y vídeos - Geo Developers"}
+    <meta name="description" content="Plataforma de formación en GIS: vídeos, transparencias, etc." />
 </head>
-<body class="video-list" id="academy-listing">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+<body class="video-list" id="academy">
+{include file="menu.tpl"}
 <div id="main-wrapper">
 <div class="container">
     <div class="row">
@@ -72,13 +73,13 @@
                 <div class="col-md-12" id="no-results">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="{$ROOT}academy/sugerir" class="image featured">
+                            <a href="{$ROOT}academy/suggest" class="image featured">
                                 <img src="{$ROOT}images/suggestionbox.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-9 text-center">
                             <p class="mb1 mt1 big">¿No encuentras lo que buscas?, sugiere un vídeo</p>
-                            <a class="btn btn-primary btn-block mb1" href="{$ROOT}academy/sugerir">Sugerir un vídeo</a>
+                            <a class="btn btn-primary btn-block mb1" href="{$ROOT}academy/suggest">Sugerir un vídeo</a>
                         </div>
                     </div>
                 </div>
@@ -89,7 +90,8 @@
                 <div class="col-md-12">
                     <p class="strong mt0 mb0 pt0 uppercase">Próximos eventos</p>
                     <img src="{$ROOT}images/speaking-image.gif" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
-                    <button class="btn btn-success btn-block mb1 blink_me" data-toggle="modal" data-target="#speak">
+                    <button class="btn btn-success btn-block mb1 blink_me" data-toggle="modal" data-target="#speak"
+                            mp-name="Click give a talk">
                         ¡Anímate a dar una charla!
                     </button>
                     <p class="pt0 mt0 pb0"><a href="{$ROOT}academy/webinars" class="small">Ver próximos eventos</a></p>
@@ -97,7 +99,7 @@
             </div>
             <div class="row box mb3">
                 <img src="{$ROOT}images/suggestionbox.png" alt="Uncle sam" style="width:100%" class="thumbnail mb1">
-                <a href="sugerir" class="btn btn-primary btn-block mb1" >Sugerir un vídeo</a>
+                <a href="suggest" class="btn btn-primary btn-block mb1" >Sugerir un vídeo</a>
             </div>
         </div>
     </div>

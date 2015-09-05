@@ -3,7 +3,7 @@
         <h1>Edición de perfil</h1>
     </div>
 </div>
-<form action="{$ROOT}miembros/{$PROFILE["meetup_id"]}/editar" method="post" enctype="multipart/form-data">
+<form action="{$ROOT}members/{$PROFILE["meetup_id"]}/edit" method="post" enctype="multipart/form-data">
     <ul id="tabs" class="tabs nav nav-tabs" data-tabs="tabs">
         <li class="active"><a href="#general" data-toggle="tab"><i class="fa fa-user"></i> General</a></li>
         <li><a href="#social" data-toggle="tab"><i class="fa fa-users"></i> Perfiles sociales</a></li>

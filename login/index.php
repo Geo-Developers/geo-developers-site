@@ -12,7 +12,11 @@ if( !isset($_SESSION["user"]['meetup_id']) || !isset($_SESSION["logged"]) ){
 	if( !isset($_SESSION['logged']) ){
 		header('Location: '.$ROOT.'register/');
 	}else{
-		header('Location: '.$_GET['returnURL']);
+		if(isset($_GET['returnURL'])){
+            header('Location: '.$_GET['returnURL']);
+        }else{
+            header('Location: '.$ROOT);
+        }
 	}
 	
 }

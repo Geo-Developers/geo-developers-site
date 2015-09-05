@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {include file="header.tpl" title="Comunidad de Geo Developers"}
+    {include file="header.tpl" title="Comunidad abierta de Geo Developers"}
+    <meta name="description" content="Encontrarás: videos, tutoriales, un directorio de profesionales, etc." />
 </head>
 <body id="home">
-{include file="menu.tpl" title="Comunidad de Geo Developers"}
+{include file="menu.tpl"}
 <!-- Home -->
 <div id="main-wrapper">
 <div class="wrapper style1 background-image">
@@ -53,7 +54,7 @@
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
                         <a href="{$ROOT}miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3><a href="{$ROOT}miembros">Directorio</a></h3>
+                        <h3><a href="{$ROOT}miembros">Conectar profesionales</a></h3>
                         <p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
                     </article>
                 </div>

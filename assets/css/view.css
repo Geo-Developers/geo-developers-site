@@ -112,7 +112,8 @@ h1{
     color: black;
 }
 .index .view:hover .fa-eye{
-    color: #337AB7;
+    /*color: #337AB7;*/
+    cursor: default;
 }
 .index.viewed .view:hover .fa-eye {
     color: red;
@@ -177,10 +178,18 @@ h1{
     float: left;
     padding: 0 22px;
 }
-#videoBar div button{
+#videoBar div button,
+#videoBar.hangoutOnAir div a{
     background-color: black;
     color: white;
     border-color: #333;
+}
+#videoBar.hangoutOnAir div{
+    width: 25%;
+    padding: 0 7px;
+}
+#videoBar.hangoutOnAir div button{
+
 }
 #videoBar {
     background-color: #181817;

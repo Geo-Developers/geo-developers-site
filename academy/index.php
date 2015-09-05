@@ -15,7 +15,7 @@ require_once 'init.php';
         for ($i=0; $i<sizeof($videos); $i++) {
             $videos[$i]["publishedAt"] = date('d-m-Y', strtotime($videos[$i]["publishedAt"]));
             if($videos[$i]["duration"]) {
-                $videos[$i]["duration"] = covtime($videos[$i]["duration"]);
+                $videos[$i]["duration"] = convtime($videos[$i]["duration"]);
             }
             $videos[$i]["arrayTags"] = explode(",", $videos[$i]["tags"]);
             foreach($videos[$i]["arrayTags"] as $t){

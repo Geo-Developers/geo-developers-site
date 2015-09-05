@@ -99,7 +99,7 @@
         <div class="col-md-12 pt0">
             <p>
                 {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
-                    No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-primary">añadelos ahora</a>.
+                    No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/edit#tech" class="btn btn-primary">añadelos ahora</a>.
                 {else}
                     No se ha especificado ninguno
                 {/if}
@@ -111,7 +111,7 @@
                 {for $I=0 to $SKILLSGIS|@count -1}
                     <div class="col-md-4">
                         <div class="truncate" >
-                            <a href="{$ROOT}miembros/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
+                            <a href="{$ROOT}members/?tech={$SKILLSGIS[$I]["name"]}" data-toggle="tooltip" data-placement="right" title="{$SKILLSGIS[$I]["desc"]}">
                                 {$SKILLSGIS[$I]["name"]}
                             </a>
                         </div>
@@ -137,7 +137,7 @@
                     <div class="col-md-4">
                         <p style="margin-bottom: 5px;">Añade más conocimientos:</p>
                         <div class="btn-group-xs">
-                            <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-default btn-block">Editar mi perfil</a>
+                            <a href="{$PROFILE["meetup_id"]}/edit#tech" class="btn btn-default btn-block">Editar mi perfil</a>
                         </div>
                     </div>
                 {/if}
@@ -152,7 +152,7 @@
             <div>
                 <p>
                     {if isset($USER["email"]) && $USER["email"]==$PROFILE["email"]}
-                        No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-success">añadelos ahora</a>.
+                        No has especificado ninguno, <a href="{$PROFILE["meetup_id"]}/edit#tech" class="btn btn-success">añadelos ahora</a>.
                     {else}
                         No se ha especificado ninguno
                     {/if}
@@ -163,7 +163,7 @@
             {for $I=0 to $SKILLS|@count -1}
                 <div class="col-md-4">
                     <a class="truncate" title="{$SKILLS[$I]["name"]}"
-                       href="{$ROOT}miembros/?tech={$SKILLS[$I]["name"]}">
+                       href="{$ROOT}members/?tech={$SKILLS[$I]["name"]}">
                         {$SKILLS[$I]["name"]}
                     </a>
                     <div class="progress">
