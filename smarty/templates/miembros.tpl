@@ -63,17 +63,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Tecnologías</h4>
+                        <h4 class="modal-title" id="myModalLabel">Filtro por tecnologías</h4>
                     </div>
                     <div class="modal-body">
                         <p>
                             <small>El buscador permite filtrar por cualquier conocimiento o aptitud que tenga
-                                algún miembro en la comunidad, pero como actualmente son {$SKILLS|@count} hemos decidido
-                                que en las sugerencias sólo se muestren las relacionadas con el geo-desarrollo.</small>
-                        </p>
-                        <p>
-                            <small>Igualmente aquí te dejamos una lista de todos los conocimientos y aptitudes de la base
-                                de datos para que sepas por qué valores puedes buscar:</small>
+                                algún miembro en la comunidad. Aquí te dejamos con los valores puedes buscar:</small>
                         </p>
 
                         <form class="clearfix form-inline">
@@ -95,7 +90,7 @@
                             <small>Si echas en falta alguna tecnología o conocimiento GIS puedes colaborar sugiriendolo
                                 en esta <a href="https://docs.google.com/spreadsheets/d/1Ewzh5miL5Kh4Qqb3d49pnKXq-zC3Bv7I6lOnbjW0kL8/edit?usp=sharing" rel="popover" data-placement="bottom" data-img="{$ROOT}images/thumb-up.gif">hoja de cálculo de Google Drive</a>. La identificación de estas
                                 tecnologías es muy importante para ayudar a los miembros tanto a buscar profesionales
-                                como a la hora de completar su perfiles, por lo que cualquier ayuda es bienvenida.</small>
+                                como a la hora de completar su perfiles.</small>
                         </p>
 
                     </div>
