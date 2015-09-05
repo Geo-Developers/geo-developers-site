@@ -30,6 +30,8 @@ if($_SERVER['HTTP_HOST']=='localhost'){
   ini_set('display_errors',1);
   ini_set('display_startup_errors',1);
   error_reporting(-1);
+}else{
+  error_reporting(E_ERROR | E_PARSE);
 }
 
 if(isset($_SESSION["user"]["meetup_id"]) ){
