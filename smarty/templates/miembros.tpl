@@ -50,61 +50,12 @@
 
         </div>
         <div class="row">
-
             <ul id="member-list" class="pt0 col-md-12">
-                {for $I=0 to $USERS|@count-1}
 
-                    <li class="col-md-4" data-userid="{$USERS[$I]["meetup_id"]}">
-                        <div class="member-wrapper clearfix">
-                            <div class="image-wrapper">
-                                {if isset($USERS[$I]["photo_url"])}
-
-                                    <div class="picture clearfix" style="background-image: url('{$USERS[$I]["photo_url"]}')">
-                                    </div>
-
-                                {else}
-                                    Sin foto<br>
-                                {/if}
-                            </div>
-                            <p class="mb0"><a href="{$USERS[$I]["meetup_id"]}" class="capitalize">{$USERS[$I]["name"]} {$USERS[$I]["last_name"]}</a></p>
-                            {if isset($USERS[$I]["progress"])}
-                                <p class="mb05"><small>Porcentaje de perfil completado:</small></p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                         style="width: {$USERS[$I]["progress"]}%">
-                                        {if $USERS[$I]["progress"] != 0}{$USERS[$I]["progress"]}%{/if}
-                                    </div>
-
-                                </div>
-                            {/if}
-                            {if isset($USERS[$I]["level"])}
-                                <p><small>Nivel de {$TECH}:</small></p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                         style="
-                                         {if $USERS[$I]["level"] == 0 } width: 0%;{/if}
-                                         {if $USERS[$I]["level"] == 1 } width: 7%;{/if}
-                                         {if $USERS[$I]["level"] == 2 } width: 20%;{/if}
-                                         {if $USERS[$I]["level"] == 3 } width: 50%;{/if}
-                                         {if $USERS[$I]["level"] == 4 } width: 75%;{/if}
-                                         {if $USERS[$I]["level"] == 5 } width: 100%;{/if}
-                                                 "
-                                            >
-                                        {if $USERS[$I]["level"] == 0 } ?{/if}
-                                        {if $USERS[$I]["level"] == 1 } {/if}
-                                        {if $USERS[$I]["level"] == 2 } Básico{/if}
-                                        {if $USERS[$I]["level"] == 3 } Medio{/if}
-                                        {if $USERS[$I]["level"] == 4 } Medio-Alto{/if}
-                                        {if $USERS[$I]["level"] == 5 } Avanzado{/if}
-                                    </div>
-                                </div>
-                            {/if}
-                        </div>
-                    </li>
-
-                {/for}
             </ul>
-
+            <div class="mb1 pt0 text-center col-md-12">
+                <button class="btn btn-primary" id="loadMembers" data-page="0">Ver más <i class="fa fa-refresh" style="margin-left:5px"></i></button>
+            </div>
         </div>
 
         <div class="modal fade" id="modalTechs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -158,10 +109,74 @@
     {include file="footer.tpl"}
 </div>
 
+{literal}
+    <script id="memberTmpl" type="text/x-jsrender">
+        <li class="col-md-4" data-userid="{{:meetup_id}}">
+            <div class="member-wrapper clearfix">
+                <div class="image-wrapper">
+                    <div class="picture clearfix" style="background-image: url('{{:photo_url}}')"></div>
+                </div>
+                <p class="mb0"><a href="{{:meetup_id}}" class="capitalize">{{:name}} {{:last_name}}</a></p>
+                {{if progress }}
+                    <p class="mb05"><small>Porcentaje de perfil completado:</small></p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                             style="width: {{:progress}}%">
+                            {{:progress}}
+                        </div>
+
+                    </div>
+                {{/if}}
+{/literal}
+
+{if isset($TECH)}
+                    {literal}
+
+                        <p><small>Nivel de  {literal} {$TECH} {/literal}:</small></p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                 style="
+                                 {{if level== 0 }} width: 0%;{{/if}}
+                                 {{if level== 1 }} width: 7%;{{/if}}
+                                 {{if level== 2 }} width: 20%;{{/if}}
+                                 {{if level== 3 }} width: 50%;{{/if}}
+                                 {{if level== 4 }} width: 75%;{{/if}}
+                                 {{if level== 5 }} width: 100%;{{/if}}
+                                         "
+                                    >
+                                {{if level== 0 }} ?{{/if}}
+                                {{if level== 1 }} {{/if}}
+                                {{if level== 2 }} Básico{{/if}}
+                                {{if level== 3 }} Medio{{/if}}
+                                {{if level== 4 }} Medio-Alto{{/if}}
+                                {{if level== 5 }} Avanzado{{/if}}
+                            </div>
+                        </div>
+                     {/literal}
+{/if}
+{literal}
+            </div>
+        </li>
+    </script>
+{/literal}
+
 
 <script>
 
     var SKILLS = [{for $I=0 to $SKILLS|@count-1}"{$SKILLS[$I]["name"]}",{/for}]
+
+    var USERS = [
+        {for $I=0 to $USERS|@count-1}
+            {
+                photo_url: '{if isset($USERS[$I]["photo_url"])} {$USERS[$I]["photo_url"]} {/if}',
+                meetup_id: {$USERS[$I]["meetup_id"]},
+                name: '{$USERS[$I]["name"]}',
+                last_name: '{$USERS[$I]["last_name"]}',
+                progress: {if isset($USERS[$I]["progress"])} {$USERS[$I]["progress"]} {else} 0 {/if},
+                level: {if isset($USERS[$I]["level"])} {$USERS[$I]["level"]}{else}0{/if}
+            },
+        {/for}
+        ];
     require([
         'jquery',
         'members'

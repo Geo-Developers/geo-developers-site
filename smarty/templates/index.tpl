@@ -14,7 +14,11 @@
 
                 <h1><strong>GeoDevelopers.org</strong></h1>
 
-                <p>La comunidad de profesionales del mundo de los <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica" target="_blank">SIG</a></p>
+                <p>
+                    La comunidad de profesionales del mundo de los <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica" target="_blank">SIG</a>
+                    <button class="btn btn-success btn-lg mt1 block" data-toggle="modal" data-target="#video">VER VÍDEO DE PRESENTACIÓN</button>
+                </p>
+
                 <!--
 
                 <p>Somos una <strong>comunidad abierta</strong> de profesionales que colaboramos para estar a la última de tecnologías geográficas.</p>
@@ -48,18 +52,19 @@
                 </div>
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="{$ROOT}tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-                        <h3><a href="{$ROOT}tutoriales">Tutoriales</a></h3>
-                        <p>Estamos preparando y recopilando tutoriales sobre APIs, SDKs, etc.</p>
+                        <a href="{$ROOT}miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}miembros">Directorio</a></h3>
+                        <p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
                     </article>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
+
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="{$ROOT}miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-                        <h3><a href="{$ROOT}miembros">Bolsa de profesionales</a></h3>
-                        <p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
+                        <a href="{$ROOT}tutoriales" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+                        <h3><a href="{$ROOT}tutoriales">Tutoriales</a></h3>
+                        <p>Estamos preparando y recopilando tutoriales sobre APIs, SDKs, etc.</p>
                     </article>
                 </div>
                 <div class="4u 12u(mobile)">
@@ -76,10 +81,29 @@
                         <p>Puedes proponer o unirte a cualquier proyecto Open Source realizado.</p>
                     </article>
                 </div>
-            </div>
+            </div>-->
         </div>
     </article>
 </div>
+
+<div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--<div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Valorar</h4>
+            </div>-->
+            <div class="modal-body text-center">
+
+                    <iframe width="420" height="310" style="height:310px !important"src="https://www.youtube.com/embed/lXdkN5WgZ28" frameborder="0" allowfullscreen></iframe>
+
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+
 {include file="footer.tpl"}
 
 <script>

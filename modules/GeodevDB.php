@@ -188,7 +188,7 @@ class GeodevDB
     public function getMembers($options = null){
         $this->db->join("users u", "u.meetup_id=p.meetup_id", "LEFT");
         $this->db->orderBy("p.progress","desc");
-        return $this->db->get("profiles p",/*null*/24, "u.meetup_id, u.name, u.last_name,  p.progress, p.photo_url, p.location");
+        return $this->db->get("profiles p",null, "u.meetup_id, u.name, u.last_name,  p.progress, p.photo_url, p.location");
     }
 
     public function getReferrers($options = null)

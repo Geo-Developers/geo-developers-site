@@ -1,4 +1,4 @@
-define(['jquery','cookies','base', 'typeahead'], function($, Cookies, base){
+define(['jquery','cookies','base', 'typeahead', 'jsrender'], function($, Cookies, base){
     var Methods = {
         init: function(seccion){
 
@@ -16,6 +16,25 @@ define(['jquery','cookies','base', 'typeahead'], function($, Cookies, base){
                 e.preventDefault();
                 console.log("Yeah");
             });
+
+            $("#loadMembers").click(function(){
+                template = $.templates("#memberTmpl");
+
+                var page = parseInt($(this).attr("data-page"));
+
+                $(this).attr("data-page", page+1);
+
+
+                var members = USERS.slice(page*24, (page*24+24));
+
+                if(members.length < 24){
+                    $(this).hide();
+                }
+
+                htmlOutput = template.render(members);
+                $("#member-list").append(htmlOutput);
+            });
+            $("#loadMembers").click();
         }
     };
     return Methods;
