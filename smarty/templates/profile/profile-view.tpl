@@ -188,7 +188,7 @@
                 <div class="col-md-4">
                     <p style="margin-bottom: 5px;">Añade más conocimientos:</p>
                     <div class="btn-group-xs">
-                        <a href="{$PROFILE["meetup_id"]}/editar#tech" class="btn btn-warning btn-block">Editar mi perfil</a>
+                        <a href="{$PROFILE["meetup_id"]}/edit#tech" class="btn btn-default btn-block">Editar mi perfil</a>
                     </div>
                 </div>
             {/if}

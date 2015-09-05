@@ -27,10 +27,10 @@ class Skill
         $skills = $this->db->get('skills');
 
         $relevants = array();
-        $special_character = "[\ |\.|,|;\?|¿|!|¡|:|-|(|)|_]";
+        $special_character = "[ |\.|,|;|\?|¿|!|¡|:|-|(|)|_]";
         foreach($skills as $s){
             //$pos = strpos($string, ));
-            $regex = "/".$special_character.$s["name"].$special_character."/i";
+            $regex = "~".$special_character.$s["name"].$special_character."~i";
             $found = preg_match($regex, $string);
             if($found){
                 //echo "<hr>Encontrado ".$s["name"];
