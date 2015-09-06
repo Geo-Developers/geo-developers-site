@@ -88,7 +88,7 @@ strong{font-weight: bold;}
         font-size: 1.3em;
     }
     .progress-bar[data-level="0"]{
-        width: 0%;
+        width: 5%;
 
     }
     .progress-bar[data-level="1"]{

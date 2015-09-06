@@ -259,6 +259,8 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                                         if(firechat != ""){
                                             chat._chat.enterRoom(firechat);
                                         }
+                                        // Display rooms id
+                                        chat._chat.getRoomList(function(r){console.log(r);})
                                     },2000);
                                 } else {
                                     chatRef.authAnonymously(function(error, authData) {

@@ -118,7 +118,7 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                              style="width: {{:progress}}%">
-                            {{:progress}}
+                            {{:progress}}%
                         </div>
 
                     </div>
@@ -128,11 +128,11 @@
 {if isset($TECH)}
                     {literal}
 
-                        <p><small>Nivel de  {literal} {$TECH} {/literal}:</small></p>
+                        <p><small>Nivel de  {/literal} {$TECH} {literal}:</small></p>
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                  style="
-                                 {{if level== 0 }} width: 0%;{{/if}}
+                                 {{if level== 0 }} width: 5%;{{/if}}
                                  {{if level== 1 }} width: 7%;{{/if}}
                                  {{if level== 2 }} width: 20%;{{/if}}
                                  {{if level== 3 }} width: 50%;{{/if}}

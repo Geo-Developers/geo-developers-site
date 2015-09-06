@@ -18,6 +18,7 @@ if($userprofile){
     if(isset($_SESSION["user"])){
 
       $date = getdate();
+
       $date = $date["year"] ."-". $date["mon"]."-".$date["mday"];
       $db -> where ("visitor", $_SESSION["user"]['id'])
           -> where ("visited", $userprofile['id'])
