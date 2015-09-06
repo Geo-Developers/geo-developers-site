@@ -71,7 +71,7 @@ define(['jquery', 'dropdown', 'tab', 'tooltip', 'bootstrap'], function($) {
                         showNewsletter = false;
                     }
                 }catch(e){
-                    console.log("Exception: ",e)
+                    //console.log("Exception: ",e)
                 }
 
 				visits = parseInt(Cookies.get("visits"));

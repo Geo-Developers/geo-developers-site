@@ -60,7 +60,11 @@
             <p>
                 <small>
                     {if isset($USER["email"]) == false}
-                        ¿Eres tú?, puedes <a href="#">completarlo ahora</a>; o si sabes quién es <a href="#">puedes avísarle</a>.
+                        ¿Eres tú?, puedes <a data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">completarlo ahora</a>
+                        <!-- TODO: Send message
+                        ; o si sabes quién es <a href="#">puedes avísarle</a>
+                        -->
+                        .
                     {else}
                         <!-- TODO: Avisar a alguien de su perfil
                         Si sabes quién es <a href="#">puedes avísarle</a>.

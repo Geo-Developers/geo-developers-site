@@ -8,7 +8,7 @@ define(['jquery','cookies','base','jsrender', 'typeahead'], function($,Cookies,b
                 trigger: 'hover',
                 content: function () {
                     var html = $('#donut_info').html();
-                    console.log("html=",html);
+                    //console.log("html=",html);
                     return html;
                 }
             });

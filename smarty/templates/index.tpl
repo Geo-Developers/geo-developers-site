@@ -53,7 +53,7 @@
                 </div>
                 <div class="4u 12u(mobile)">
                     <article class="box style2">
-                        <a href="{$ROOT}miembros" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+                        <a href="{$ROOT}members" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
                         <h3><a href="{$ROOT}miembros">Conectar profesionales</a></h3>
                         <p>Si buscas un desarrollador GIS o eres uno puedes consultarla o inscribirte</p>
                     </article>

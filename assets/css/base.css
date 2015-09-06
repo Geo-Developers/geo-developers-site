@@ -2453,6 +2453,13 @@ a#login-btn{
 #loginModal .modal-header{text-align: center;}
 #loginModal .modal-header,
 #loginModal .modal-footer{border:0}
+#loginModal p.msg{
+    width: 63%;
+    margin: 1em auto 0;
+    color: #999;
+    font-style: italic;
+    line-height: 1.8em;
+}
 a#login-btn:hover{
     color: red !important;
     background-color: #FFEAEA ;
