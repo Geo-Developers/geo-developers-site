@@ -95,7 +95,7 @@
             </div>-->
             <div class="modal-body text-center">
 
-                    <iframe width="420" height="310" style="height:310px !important"src="https://www.youtube.com/embed/lXdkN5WgZ28" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="420" height="310" src="https://www.youtube.com/embed/lXdkN5WgZ28" frameborder="0" allowfullscreen></iframe>
 
             </div>
             <!--<div class="modal-footer">
