@@ -94,7 +94,7 @@
                             mp-name="Click give a talk">
                         ¡Anímate a dar una charla!
                     </button>
-                    <p class="pt0 mt0 pb0"><a href="{$ROOT}academy/webinars" class="small">Ver próximos eventos</a></p>
+                    <p class="pt0 mt0 pb0"><a href="{$ROOT}academy/events" class="small">Ver próximos eventos</a></p>
                 </div>
             </div>
             <div class="row box mb3">

@@ -16,7 +16,7 @@
                     Eventos y vídeos
                 </a>
                 &gt;
-                Webinars
+                Próximos eventos
             </div>
         </div>
     </div>

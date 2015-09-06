@@ -37,8 +37,8 @@
 
                     {if $TYPE !== "academy"}
                         &gt;
-                        <a href="{$ROOT}academy/webinars">
-                            Webinars
+                        <a href="{$ROOT}academy/events">
+                            Próximos eventos
                         </a>
                     {/if}
                     &gt;
