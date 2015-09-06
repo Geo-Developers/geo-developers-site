@@ -36,7 +36,7 @@
 
             {foreach from=$USER key=k item=v}
                 {if $v|is_array == false}
-                    USER.{$k} = "{$v}";
+                    USER.{$k} = "{$v|escape:'javascript'}";
                 {/if}
             {/foreach}
             USER["$email"]  = USER.email;
