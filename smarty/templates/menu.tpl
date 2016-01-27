@@ -1,7 +1,7 @@
 <!-- Nav -->
 <nav id="nav">
     <ul class="container">
-        <li class="logo"><a href="{$ROOT}"><img src="{$ROOT}images/geodevelopers-logo.png"></a></li>
+        <li class="logo"><a href="{$ROOT}"><img src="{$ROOT}images/logogeodevblancoreducido.png"></a></li>
         <!--<li><a href="{$ROOT}tutoriales">Tutoriales</a></li>-->
         <li><a href="{$ROOT}">Inicio</a></li>
         <li><a href="{$ROOT}members">Miembros</a></li>
