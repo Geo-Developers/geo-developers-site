@@ -80,7 +80,7 @@
                                     {$VIDEO.videoIndex[$I].time}
                                     <i class="fa fa-play-circle"></i>
                                 </span>
-                                <span class="text" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
+                                <span class="text" title="{$VIDEO.videoIndex[$I].text}" mp-name="Check video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>
                                     {$VIDEO.videoIndex[$I].text}
                                 </span>
                                 <span class="view" mp-name="Uncheck video index" mp-props='"seek":{$VIDEO.videoIndex[$I].seconds}'>

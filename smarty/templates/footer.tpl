@@ -36,7 +36,7 @@
         <footer>
             <ul id="copyright">
                 <li><img src="http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png" class="creative-commons"> GeoDevelopers.org</li>
-                <li>Comunidad apoyada por: <a href="http://www.esri.es">Esri España</a> y <a href="http://www.lunacloud.com/">Lunacloud</a></li>
+                <li>Comunidad apoyada por: <a href="http://www.esri.es">Esri España</a>, <a href="http://www.kunlabori.es">KUNlabori</a> y <a href="http://www.lunacloud.com/">Lunacloud</a></li>
                 <li>Diseño: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>
         </footer>

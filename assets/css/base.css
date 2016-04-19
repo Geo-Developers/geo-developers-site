@@ -1674,7 +1674,7 @@ ol.default li {
 .logo img{
 
     height: 30px;
-    margin-top: 0px;
+    margin-top: -6px;
     position: relative;
     bottom: -14px;
 }

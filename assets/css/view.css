@@ -106,6 +106,9 @@ h1{
     padding-left: 10px;
     width:75%;
     display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .index.viewed .fa-eye{
