@@ -141,5 +141,9 @@
     });
 </script>
 </div>
+
+<script type=”text/javascript”>
+var cdPriority = true;
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     {assign var="VIDEO.title" value="title"}
 
     {if $TYPE !== "academy"}
-        {include file="header.tpl" title="Empieza la charla de @GeoDevelopers en directo: " title2=$VIDEO.title}
+        {include file="header.tpl" title="@GeoDevelopers en directo: " title2=$VIDEO.title}
         {literal}
         <script>
         var addthis_share = {url: "{/literal}{$VIDEO.shortUrl}{literal}"};
@@ -194,6 +194,10 @@
             </div>
         </div>
     </div>
+    <script type=”text/javascript”>
+    var cdPriority = true;
+    var cdScore = 5;
+    </script>
     {include file="footer.tpl"}
 </div>
 

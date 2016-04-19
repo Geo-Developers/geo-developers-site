@@ -9,6 +9,11 @@ if( isset($_SESSION['user']['meetup_id']) ){
         "youtubeId" => $_GET["id"],
         "meetupId" => $_SESSION['user']['meetup_id']
     ));
+    
+    
+    if($video["length"] == 0){
+        header('Location: '.$ROOT.'academy/');
+    }
 
     // Get user preferences
     $user = new Member(array("meetup_id" => $_SESSION["user"]["meetup_id"]));
