@@ -2,11 +2,16 @@
 Source code of our community site
 
 # Requirements
-Software:
-* [Apache](https://httpd.apache.org/download.cgi) >= 2.2.31
-* [PHP](http://php.net/downloads.php) >= 5.5.8
-* [MySQL](https://www.mysql.com/downloads/) >= 5.6.15
-* [Composer](https://getcomposer.org/download/) >= 1.0.0
+**Software**:
+* Operative System: Windows/Linux/Mac
+* Applicactions:
+  * [Apache](https://httpd.apache.org/download.cgi) >= 2.2.31
+  * [PHP](http://php.net/downloads.php) >= 5.5.8
+  * [MySQL](https://www.mysql.com/downloads/) >= 5.6.15
+  * [Composer](https://getcomposer.org/download/) >= 1.0.0
+
+**Hardware**: 
+* Whatever you need to make that software run ^_^
 
 # How to install
 
