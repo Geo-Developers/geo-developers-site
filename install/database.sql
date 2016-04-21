@@ -2,7 +2,6 @@
 -- version 4.6.0
 -- http://www.phpmyadmin.net
 --
--- Host: mysql.geodevelopers.org
 -- Generation Time: Apr 21, 2016 at 08:54 AM
 -- Server version: 5.6.25-log
 -- PHP Version: 7.0.4
@@ -16,8 +15,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `geodevelopers`
 --
 
 -- --------------------------------------------------------
