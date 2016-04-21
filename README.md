@@ -3,7 +3,7 @@ Source code of our community site
 
 # Requirements
 **Software**:
-* Operative System: Windows/Linux/Mac
+* Operative System: Windows/Linux/OS X
 * Applicactions:
   * [Apache](https://httpd.apache.org/download.cgi) >= 2.2.31
   * [PHP](http://php.net/downloads.php) >= 5.5.8
