@@ -1,4 +1,4 @@
-# geo-developers-site
+# GeoDevelopers.org website
 Source code of our community site, [theses slides shows what we want to achieve with this site and how](https://docs.google.com/presentation/d/18zXqx5RdCLdoSkhwlZLPHN4Tbg5tcQCw0A1vn927mio/pub?start=false&loop=false&delayms=3000)
 
 # Requirements
