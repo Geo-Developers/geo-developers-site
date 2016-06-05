@@ -1,0 +1,37 @@
+server:
+  build: .
+  container_name: server
+  restart: always
+  working_dir: /app
+  ports:
+    - '9090:80'
+  volumes:
+    - ../:/var/www/html/
+  links:
+    - mysql
+  environment:
+    TERM: xterm
+
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  container_name: phpmyadmin
+  restart: always
+  ports:
+    - '8080:80'
+  links:
+    - mysql
+  environment:
+    PMA_HOST: mysql
+    MYSQL_USERNAME: root
+    MYSQL_ROOT_PASSWORD: 1234
+
+mysql:
+  image: mysql:5.7
+  container_name: mysql
+  ports:
+    - '9876:3306'
+  volumes:
+    - /.data/mysql:/var/lib/mysql
+  environment:
+    MYSQL_DATABASE: geodevelopers
+    MYSQL_ROOT_PASSWORD: 1234
