@@ -4,7 +4,7 @@ server:
   restart: always
   working_dir: /app
   ports:
-    - '9090:80'
+    - '80:80'
   volumes:
     - ../:/var/www/html/
   links:
