@@ -288,3 +288,12 @@ strong{font-weight: bold;}
 #register .skills li:hover i{
     color: red;
 }
+
+/* #tos */
+#tos p{
+    font-size: 1.3rem;
+}
+#tos p a{
+    color: #23527c;
+    text-decoration: underline;
+}

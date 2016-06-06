@@ -435,6 +435,25 @@ $app->post('/user/:userid/preferences', 'authenticated', 'same_user', function (
   echo json_encode($data);
 });
 
+$app->get('/jobs',function () use ($app, $db) {
+
+  $db->where('is_open', 1);
+  $jobs = $db->get('jobs');
+  /*$res = array(
+    'status' => 'error',
+    'message' => 'Tus preferencias no han podido ser guardadas, vuelve a intentarlo más tarde'
+  );
+  nombre({
+    asdasd: 123 as
+  })
+  */
+  $jobs = json_encode($jobs);
+  if(isset($_GET['callback'])){
+    $jobs = $_GET['callback'] . "(" . $jobs . ")";
+  }
+  echo $jobs;
+});
+
 
 function insertOrUpdate($db, $table, $attrs, $id, $where){
   $data = array();

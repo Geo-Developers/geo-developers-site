@@ -1,10 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.0
--- http://www.phpmyadmin.net
+-- version 4.6.2
+-- https://www.phpmyadmin.net/
 --
--- Generation Time: Apr 21, 2016 at 08:54 AM
--- Server version: 5.6.25-log
--- PHP Version: 7.0.4
+-- Host: mysql
+-- Generation Time: Jun 06, 2016 at 12:08 AM
+-- Server version: 5.7.12
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -15,6 +16,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `geodevelopers`
 --
 
 -- --------------------------------------------------------
@@ -28,6 +31,28 @@ CREATE TABLE `interests` (
   `userid` int(13) NOT NULL,
   `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` int(4) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `contact_other` text,
+  `on_remote` varchar(100) NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `location_lat` float DEFAULT NULL,
+  `location_lon` float DEFAULT NULL,
+  `contract_type` varchar(100) NOT NULL,
+  `salary_budget` varchar(255) DEFAULT NULL,
+  `offer_details` text NOT NULL,
+  `is_open` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -193,6 +218,12 @@ ALTER TABLE `interests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `profiles`
 --
 ALTER TABLE `profiles`
@@ -261,20 +292,25 @@ ALTER TABLE `votes`
 ALTER TABLE `interests`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1203;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1510;
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- Constraints for dumped tables
 --

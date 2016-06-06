@@ -24,6 +24,11 @@ If you are running docker on Windows or Mac and you need to know the IP of
 the docker container that is running the website you can run `docker-machine ls`.
 Then you can access to it at port <ip-address>:9090.
 
+This tool is also very useful when you are learning who docker works:
+`docker run -d -p 9000:9000 --privileged -v //var/run/docker.sock:/var/run/docker.sock --name=dockerui kevan/dockerui`
+
+It allows you to monitor your resources, containers, images, volumnes, etc.
+
 ## Get ready for deployment
 
 ** Pending**

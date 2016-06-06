@@ -44,7 +44,7 @@
 </div>
 
 <div id="cookies">
-    <p>Al cerrar esta ventana aceptas nuestra <a href="{$ROOT}terminos-legales">política de cookies.</a><span onclick="closeCookies()" class="close">X</span></p>
+    <p>Al cerrar esta ventana aceptas nuestra <a href="{$ROOT}tos">política de cookies.</a><span onclick="closeCookies()" class="close">X</span></p>
 </div>
 <div class="geodev-academy" id="newsletter-footer">
     {include file="blocks/newsletter.tpl"}
