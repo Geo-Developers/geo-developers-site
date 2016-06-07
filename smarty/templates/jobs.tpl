@@ -121,15 +121,22 @@
 	  "dojo/domReady!"
 	], function(Map, MapView,Point,PictureMarkerSymbol,Graphic){
 	  var map = new Map({
-	    basemap: "streets"
+	    basemap: "streets-night-vector"
 	  });
 	  view = new MapView({
 	    container: "viewDiv",  
 	    map: map,
-	    zoom: 7, 
+	    zoom: 6, 
 	    center: [-3, 40]
 	  });
-	  var symbol = new PictureMarkerSymbol({
+  	var symbol = new PictureMarkerSymbol({
+		  url: "https://webapps-cdn.esri.com/CDN/custom-pages/about/static/img/dist/animation/what-we-do-pin-lg.png",
+		  width: 10,
+		  height: 20,
+		  yoffset: 7
+		});
+
+	  var highlightedsymbol = new PictureMarkerSymbol({
 		  url: "http://desarrolladores.esri.es/wp-content/uploads/images/ArcGIS%20PIN%20ICON.png",
 		  width: 10,
 		  height: 20,
@@ -147,22 +154,47 @@
 		$.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
 
 			data = datos;
-
-
-			var template = $.templates("#theTmpl");
-
-			var htmlOutput = template.render(data);
-
-			$("#accordion").html(htmlOutput);
-
-			$('#collapse-1').collapse('show');
-
 			drawPoints();
 
+			// *********************************
+			// RENDERIZE JOBS OBJET IN THE TEMPLATE
+			// *********************************
+			var template = $.templates("#theTmpl");
+			var htmlOutput = template.render(data);
+			$("#accordion").html(htmlOutput);
+
+			// *********************************
+			// BOOTSTRAP ACORDION FUNCTIONS
+			//1.Highlight job location
+			//2.GoTo Job location
+			// *********************************		
+			$('.collapse').on('show.bs.collapse', function (e) {
+		  	view.graphics.removeAll();
+		  	drawPoints();
+		  	var divId = e.target.id;
+		  	var idPt = divId.substring(9);
+		  	console.log(idPt);
+		  	var jobsGraphic = view.graphics._items;
+
+		  	for (i = 0; i < jobsGraphic.length; i++) {
+		  		if (idPt == jobsGraphic[i].attributes.id) {
+		  			jobsGraphic[i].symbol = highlightedsymbol;
+		  			view.goTo({
+		  					target: jobsGraphic[i].geometry,
+		  					zoom: 8
+		  				},
+		  				{
+		  					animate: true,
+  							duration: 1000,
+  							easing: "ease-in-out"
+						});
+		  		}
+		  	}
+			});
 		});
 
+
 	  function drawPoints(){
-	  	debugger
 			if (data && view) {
 			  for (i = 0; i < data.length; i++) {
 			  	var lat = data[i].location_lat;
