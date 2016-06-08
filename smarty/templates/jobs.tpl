@@ -67,7 +67,7 @@
 	</div>
 	<div id="mapContainer" class="col-md-8">
 		<div id="viewDiv"></div>
-		<div id="miniViewDiv"></div>
+		<div id="miniViewDiv" data-toggle="0" ></div>
 	</div>
 
 	<?php {literal} ?>
@@ -118,8 +118,6 @@
 	</script>
 
 	<script>
-	var view,simpsonView;
-	var data = [];
 	require([
 	  "esri/Map",
 	  "esri/WebMap",
@@ -138,21 +136,11 @@
       portalItem: {
         id: "7f3b77c3833540e49ab3b9cf3644ee7b"
       }
-    });	  
-	  // view = new MapView({
-	  //   container: "viewDiv",  
-	  //   map: map,
-	  //   zoom: 6, 
-	  //   center: [-3, 40]
-	  // });
-	  createView ("viewDiv",map,6,[-3, 40]);
-	  createView ("miniViewDiv",simpsonsMap,6,0);
-	  // var simpsonView = new MapView({
-   //    map: simpsonsMap,
-   // 		zoom: 4,
-   //    container: "miniViewDiv",
-   //    center: 0
-   //  });
+    });
+
+    var view = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
+		var miniView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+
   	var symbol = new PictureMarkerSymbol({
 		  url: "https://webapps-cdn.esri.com/CDN/custom-pages/about/static/img/dist/animation/what-we-do-pin-lg.png",
 		  width: 10,
@@ -174,16 +162,16 @@
 	  // *********************************
 		// PETICION AJAX
 		// *********************************
-		var data = [];
+
 		$.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
 
-			data = datos;
+			GEODEV.jobs = datos;
 			drawPoints();
 			// *********************************
 			// RENDERIZE JOBS OBJET IN THE TEMPLATE
 			// *********************************
 			var template = $.templates("#theTmpl");
-			var htmlOutput = template.render(data);
+			var htmlOutput = template.render(GEODEV.jobs);
 			$("#accordion").html(htmlOutput);
 
 			// *********************************
@@ -218,11 +206,13 @@
 
 
 	  function drawPoints(){
-			if (data && view) {
-			  for (i = 0; i < data.length; i++) {
-			  	var lat = data[i].location_lat;
-			  	var long = data[i].location_lon;
-			  	var jobID = data[i].id;
+	  	debugger
+	  	//!!!!"
+			if (GEODEV.jobs && view) {    
+			  for (i = 0; i < GEODEV.jobs.length; i++) {
+			  	var lat = GEODEV.jobs[i].location_lat;
+			  	var long = GEODEV.jobs[i].location_lon;
+			  	var jobID = GEODEV.jobs[i].id;
 			    var point = new Point({
 			 			longitude: long,
 			      latitude: lat
@@ -245,23 +235,33 @@
 		// *********************************
 
 		var miniViewDiv = dom.byId('miniViewDiv');
-		on(miniViewDiv, "click",changeViews);
+		on(miniViewDiv, "dblclick",changeViews);
 
 		function changeViews(){
-			
-			if (this.id === "miniViewDiv") {
+			if (this.getAttribute("data-toggle") === "0") {
+				view = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
+	  		miniView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
+	  		drawPoints();
+	  		this.setAttribute("data-toggle","1");
 			}else{
+				view = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
+	  		miniView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+	  		drawPoints();
+	  		this.setAttribute("data-toggle","0");
 
 			}
 
 		}
 
-		function createView(viewId,mapToSet,zoomToApply,centerToSet){
-			view = new MapView({
+		function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
+			return new MapView({
 	    container: viewId,  
 	    map: mapToSet,
 	    zoom: zoomToApply, 
-	    center: centerToSet
+	    center: centerToSet,
+	    ui: {
+	    	components: uiArray 
+	    }
 	  });
 		}
 
