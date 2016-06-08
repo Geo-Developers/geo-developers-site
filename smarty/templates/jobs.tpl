@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	 <link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
   
@@ -47,8 +47,15 @@
 		  padding: 10;
 	    margin: 0;	
 		}
-
-
+		#miniViewDiv {
+      position: absolute;
+      right: 15px;
+      width: 300px;
+      height: 150px;
+      bottom: 0px;
+      border-top: 5px solid rgba(255, 255, 255, 0.65);
+      border-left: 5px solid rgba(255, 255, 255, 0.65);
+    }
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
@@ -60,6 +67,7 @@
 	</div>
 	<div id="mapContainer" class="col-md-8">
 		<div id="viewDiv"></div>
+		<div id="miniViewDiv"></div>
 	</div>
 
 	<?php {literal} ?>
@@ -110,25 +118,41 @@
 	</script>
 
 	<script>
-	var view;
+	var view,simpsonView;
 	var data = [];
 	require([
 	  "esri/Map",
+	  "esri/WebMap",
 	  "esri/views/MapView",
 	  "esri/geometry/Point",
 	  "esri/symbols/PictureMarkerSymbol",
 	  "esri/Graphic",
+	  "dojo/on",
+	  "dojo/dom",
 	  "dojo/domReady!"
-	], function(Map, MapView,Point,PictureMarkerSymbol,Graphic){
+	], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,on,dom){
 	  var map = new Map({
 	    basemap: "streets-night-vector"
 	  });
-	  view = new MapView({
-	    container: "viewDiv",  
-	    map: map,
-	    zoom: 6, 
-	    center: [-3, 40]
-	  });
+		var simpsonsMap = new WebMap({
+      portalItem: {
+        id: "7f3b77c3833540e49ab3b9cf3644ee7b"
+      }
+    });	  
+	  // view = new MapView({
+	  //   container: "viewDiv",  
+	  //   map: map,
+	  //   zoom: 6, 
+	  //   center: [-3, 40]
+	  // });
+	  createView ("viewDiv",map,6,[-3, 40]);
+	  createView ("miniViewDiv",simpsonsMap,6,0);
+	  // var simpsonView = new MapView({
+   //    map: simpsonsMap,
+   // 		zoom: 4,
+   //    container: "miniViewDiv",
+   //    center: 0
+   //  });
   	var symbol = new PictureMarkerSymbol({
 		  url: "https://webapps-cdn.esri.com/CDN/custom-pages/about/static/img/dist/animation/what-we-do-pin-lg.png",
 		  width: 10,
@@ -155,7 +179,6 @@
 
 			data = datos;
 			drawPoints();
-
 			// *********************************
 			// RENDERIZE JOBS OBJET IN THE TEMPLATE
 			// *********************************
@@ -215,6 +238,33 @@
 			  }
 			}
 		}
+
+
+		// *********************************
+		// Setting the viewdivs change
+		// *********************************
+
+		var miniViewDiv = dom.byId('miniViewDiv');
+		on(miniViewDiv, "click",changeViews);
+
+		function changeViews(){
+			
+			if (this.id === "miniViewDiv") {
+			}else{
+
+			}
+
+		}
+
+		function createView(viewId,mapToSet,zoomToApply,centerToSet){
+			view = new MapView({
+	    container: viewId,  
+	    map: mapToSet,
+	    zoom: zoomToApply, 
+	    center: centerToSet
+	  });
+		}
+
 
 	});
 
