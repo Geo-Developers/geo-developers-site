@@ -67,7 +67,7 @@
 	</div>
 	<div id="mapContainer" class="col-md-8">
 		<div id="viewDiv"></div>
-		<div id="miniViewDiv" data-toggle="0" ></div>
+		<div id="miniViewDiv" simpsons-in-main-view="0" ></div>
 	</div>
 
 	<?php {literal} ?>
@@ -82,7 +82,7 @@
 		        </a>
 		      </h4>
 		    </div>
-		    <div id="collapse-{{:id}}" class="panel-collapse collapse padding10" role="tabpanel" aria-labelledby="headingOne">
+		    <div id="collapse-{{:id}}" job-id="{{:id}}" class="panel-collapse collapse padding10" role="tabpanel" aria-labelledby="headingOne">
 		    	<h5 class="text-primary" >Información de contacto</h5>
 		    	<span class="text-primary">Empresa: </span>
 		    	{{:company_name}}
@@ -138,8 +138,8 @@
       }
     });
 
-    var view = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
-		var miniView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+    var worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
+		var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 
   	var symbol = new PictureMarkerSymbol({
 		  url: "https://webapps-cdn.esri.com/CDN/custom-pages/about/static/img/dist/animation/what-we-do-pin-lg.png",
@@ -155,7 +155,7 @@
 		  yoffset: 7
 		});
 	  var viewDone = false;
-	  view.then(function(){
+	  worldView.then(function(){
 	  	viewDone = true;
 	  	drawPoints();
 	  }, function(error){
@@ -184,26 +184,45 @@
 			// *********************************		
 			$('.collapse').on('show.bs.collapse', function (e) {
 
-				//	PROPIEDAD EN EL HTML
-				//	CHECKEAR SI ES REMOTE
-				//	
-				//	CAMBIAR VIEW
-				//
-				//
-				//
 
-		  	view.graphics.removeAll();
+				//Borrar las dos capas¿?
+		  	worldView.graphics.removeAll();
+		  	simpsonsView.graphics.removeAll();
+
 		  	drawPoints();
-		  	var divId = e.target.id;
-		  	var idPt = divId.substring(9);
-		  	console.log(idPt);
-		  	var jobsGraphic = view.graphics._items;
+		  
+		  	var idPt = e.target.getAttribute("job-id");
+		  	var simpsonsViewGraphic = simpsonsView.graphics.items;
+		  	var worldViewGraphic = worldView.graphics.items;
 
-		  	for (i = 0; i < jobsGraphic.length; i++) {
-		  		if (idPt == jobsGraphic[i].attributes.id) {
-		  			jobsGraphic[i].symbol = highlightedsymbol;
-		  			view.goTo({
-		  					target: jobsGraphic[i].geometry,
+		  	for (i = 0; i < simpsonsViewGraphic.length; i++) {
+		  		if (idPt == simpsonsViewGraphic[i].attributes.id) {
+		  			console.log("el trabajo es remoto");
+		  			// if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
+		  			// 	changeViews();
+		  			// }else{
+		  			// 	console.log("el mapa de los simpsons está en el mainview");
+		  			// }
+	  				simpsonsView.goTo({
+		  					target: simpsonsViewGraphic[i].geometry,
+		  				},
+		  				{
+		  					animate: true,
+  							duration: 1000,
+  							easing: "ease-in-out"
+						});
+		  		}
+				}
+				for (n = 0; n < worldViewGraphic.length; n++) {
+		  		if (idPt == worldViewGraphic[n].attributes.id) {
+		  			console.log("está en presencial");
+		  			// if (miniViewDiv.getAttribute("simpsons-in-main-view") === "1") {
+		  			// 	changeViews();
+		  			// }else{
+		  			// 	console.log("el mapa del mundo está en el mainview");
+		  			// }
+	  				worldView.goTo({
+		  					target: worldViewGraphic[n].geometry,
 		  					zoom: 8
 		  				},
 		  				{
@@ -212,30 +231,72 @@
   							easing: "ease-in-out"
 						});
 		  		}
-		  	}
+				}
+
+		  				//********************
+		  				//Estoy cogiendo una variable privada, revisar
+		  			// 	//********************
+		  			// 	var jobsGraphic = simpsonsView.graphics.items;
+			  		// 	jobsGraphic[i].symbol = highlightedsymbol;
+			  		// 	simpsonsView.goTo({
+			  		// 			target: jobsGraphic[i].geometry,
+			  		// 			zoom: 8
+			  		// 		},
+			  		// 		{
+			  		// 			animate: true,
+	  				// 			duration: 1000,
+	  				// 			easing: "ease-in-out"
+							// });
+		  			// }else{
+		  			// 	var jobsGraphic = worldView.graphics._items;
+			  		// 	jobsGraphic[i].symbol = highlightedsymbol;
+			  		// 	worldView.goTo({
+			  		// 			target: jobsGraphic[i].geometry,
+			  		// 			zoom: 8
+			  		// 		},
+			  		// 		{
+			  		// 			animate: true,
+	  				// 			duration: 1000,
+	  				// 			easing: "ease-in-out"
+							// });
+
+		  			// }
+
+		  		// }
+		  		
+		  			
+		  	
+		  	
+
+
+		  	
+		  	// var jobsGraphic = worldView.graphics._items;
+
+		  	// for (i = 0; i < jobsGraphic.length; i++) {
+		  	// 	if (idPt == jobsGraphic[i].attributes.id) {
+		  	// 		jobsGraphic[i].symbol = highlightedsymbol;
+		  	// 		worldView.goTo({
+		  	// 				target: jobsGraphic[i].geometry,
+		  	// 				zoom: 8
+		  	// 			},
+		  	// 			{
+		  	// 				animate: true,
+  			// 				duration: 1000,
+  			// 				easing: "ease-in-out"
+					// 	});
+		  	// 	}
+		  	// }
 			});
 		});
 
 
 	  function drawPoints(){
-	  	debugger
-	  	//!!!!"
+
 			if (GEODEV.jobs && viewDone) {    
 			  for (i = 0; i < GEODEV.jobs.length; i++) {
-			  	// var lat = GEODEV.jobs[i].location_lat;
-			  	// var long = GEODEV.jobs[i].location_lon;
+
 			  	var jobID = GEODEV.jobs[i].id;
-			    // var point = new Point({
-			 			// longitude: long,
-			    //   latitude: lat
-			    // });
-			   //  var pointGraphic = new Graphic({
-			   //    geometry: point,
-			   //    symbol: symbol,
-			   //    attributes: {
-						//   "id": jobID,
-						// }
-			   //  });
+
 			    if (GEODEV.jobs[i].on_remote === "yes") {
 				    var point = new Point({
 				    	//Coordenadas de prueba
@@ -250,7 +311,7 @@
 							  "id": jobID,
 							}
 				    });
-				    miniView.graphics.add(pointGraphic);	
+				    simpsonsView.graphics.add(pointGraphic);	
 				  }else	{
 
 				  	var lat = GEODEV.jobs[i].location_lat;
@@ -266,7 +327,7 @@
 							  "id": jobID,
 							}
 				    });
-				  	view.graphics.add(pointGraphic);
+				  	worldView.graphics.add(pointGraphic);
 				  }
 			  }
 			}
@@ -276,21 +337,21 @@
 		// *********************************
 		// Setting the viewdivs change
 		// *********************************
-
+		//Subir esta variable al principio
 		var miniViewDiv = dom.byId('miniViewDiv');
 		on(miniViewDiv, "dblclick",changeViews);
 
 		function changeViews(){
-			if (this.getAttribute("data-toggle") === "0") {
-				view = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
-	  		miniView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
+			if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
+				worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
+	  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
 	  		drawPoints();
-	  		this.setAttribute("data-toggle","1");
+	  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
 			}else{
-				view = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
-	  		miniView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+				worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
+	  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 	  		drawPoints();
-	  		this.setAttribute("data-toggle","0");
+	  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
 
 			}
 
