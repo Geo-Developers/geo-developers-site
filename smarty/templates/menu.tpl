@@ -5,6 +5,7 @@
         <!--<li><a href="{$ROOT}tutoriales">Tutoriales</a></li>-->
         <li><a href="{$ROOT}">Inicio</a></li>
         <li><a href="{$ROOT}members">Miembros</a></li>
+        <li><a href="{$ROOT}jobs">Empleo</a></li>
         <li><a href="{$ROOT}academy">Eventos y vídeos</a></li>
         <!--<li><a href="{$ROOT}webinars">Webinars</a></li>-->
         {*<li><a href="{$ROOT}recursos">Recursos</a></li>*}
