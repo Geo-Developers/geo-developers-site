@@ -77,7 +77,7 @@
 		  <div class="panel panel-default">
 		    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
 		      <h4 class="panel-title">
-		        <a id="link2Collapse-{{:id}}" data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
+		        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
 		          <h4>{{:title}}</h4>
 		        </a>
 		      </h4>
@@ -114,115 +114,116 @@
 	<?php {/literal} ?>
 
 	<script>
+		require([
+		  "esri/Map",
+		  "esri/WebMap",
+		  "esri/views/MapView",
+		  "esri/geometry/Point",
+		  "esri/symbols/PictureMarkerSymbol",
+		  "esri/Graphic",
+		  "dojo/on",
+		  "dojo/dom",
+		  "dojo/domReady!"
+		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,on,dom){
+		  var map = new Map({
+		    basemap: "streets-night-vector"
+		  });
+			var simpsonsMap = new WebMap({
+	      portalItem: {
+	        id: "9ac664557a774a858adee0edbb4f686c"
+	      }
+	    });
 
-	</script>
+	    var worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
+			var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 
-	<script>
-	require([
-	  "esri/Map",
-	  "esri/WebMap",
-	  "esri/views/MapView",
-	  "esri/geometry/Point",
-	  "esri/symbols/PictureMarkerSymbol",
-	  "esri/Graphic",
-	  "dojo/on",
-	  "dojo/dom",
-	  "dojo/domReady!"
-	], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,on,dom){
-	  var map = new Map({
-	    basemap: "streets-night-vector"
-	  });
-		var simpsonsMap = new WebMap({
-      portalItem: {
-        id: "7f3b77c3833540e49ab3b9cf3644ee7b"
-      }
-    });
+	  	var symbol = new PictureMarkerSymbol({
+			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-blank.png",
+			  width: 15,
+			  height: 30,
+			  yoffset: 10
+			});
 
-    var worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
-		var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+		  var highlightedSymbol = new PictureMarkerSymbol({
+			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-star.png",
+			  width: 15,
+			  height: 30,
+			  yoffset: 10
+			});
 
-  	var symbol = new PictureMarkerSymbol({
-		  url: "https://webapps-cdn.esri.com/CDN/custom-pages/about/static/img/dist/animation/what-we-do-pin-lg.png",
-		  width: 10,
-		  height: 20,
-		  yoffset: 7
-		});
+		  var symbolSips = new PictureMarkerSymbol({
+			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-blank.png",
+			  width: 15,
+			  height: 30,
+			  yoffset: 10
+			});
 
-	  var highlightedsymbol = new PictureMarkerSymbol({
-		  url: "http://desarrolladores.esri.es/wp-content/uploads/images/ArcGIS%20PIN%20ICON.png",
-		  width: 10,
-		  height: 20,
-		  yoffset: 7
-		});
-	  var viewDone = false;
-	  worldView.then(function(){
-	  	viewDone = true;
-	  	drawPoints();
-	  }, function(error){
-	  	console.log("Imposible cargar el mapa:" + error);
-		});
+		  var highlightedSymbolSimps = new PictureMarkerSymbol({
+			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-star.png",
+			  width: 15,
+			  height: 30,
+			  yoffset: 10
+			});
 
-	  // *********************************
-		// PETICION AJAX
-		// *********************************
-
-		$.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
-
-			GEODEV.jobs = datos;
-			drawPoints();
-			// *********************************
-			// RENDERIZE JOBS OBJET IN THE TEMPLATE
-			// *********************************
-			var template = $.templates("#theTmpl");
-			var htmlOutput = template.render(GEODEV.jobs);
-			$("#accordion").html(htmlOutput);
-
-			// *********************************
-			// BOOTSTRAP ACORDION FUNCTIONS
-			//1.Highlight job location
-			//2.GoTo Job location
-			// *********************************		
-			$('.collapse').on('show.bs.collapse', function (e) {
-
-
-				//Borrar las dos capas¿?
-		  	worldView.graphics.removeAll();
-		  	simpsonsView.graphics.removeAll();
-
-		  	drawPoints();
 		  
-		  	var idPt = e.target.getAttribute("job-id");
-		  	var simpsonsViewGraphic = simpsonsView.graphics.items;
-		  	var worldViewGraphic = worldView.graphics.items;
+		  worldView.then(function(){
+		  	
+		  	drawPoints();
+		  }, function(error){
+		  	console.log("Imposible cargar el mapa:" + error);
+			});
+		  GEODEV.jobs = {};
+			$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
+				GEODEV.jobs.simpsonsPOIs = datos;
+			});
 
-		  	for (i = 0; i < simpsonsViewGraphic.length; i++) {
-		  		if (idPt == simpsonsViewGraphic[i].attributes.id) {
-		  			console.log("el trabajo es remoto");
-		  			// if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
-		  			// 	changeViews();
-		  			// }else{
-		  			// 	console.log("el mapa de los simpsons está en el mainview");
-		  			// }
-	  				simpsonsView.goTo({
-		  					target: simpsonsViewGraphic[i].geometry,
-		  				},
-		  				{
-		  					animate: true,
-  							duration: 1000,
-  							easing: "ease-in-out"
-						});
-		  		}
-				}
-				for (n = 0; n < worldViewGraphic.length; n++) {
-		  		if (idPt == worldViewGraphic[n].attributes.id) {
-		  			console.log("está en presencial");
-		  			// if (miniViewDiv.getAttribute("simpsons-in-main-view") === "1") {
-		  			// 	changeViews();
-		  			// }else{
-		  			// 	console.log("el mapa del mundo está en el mainview");
-		  			// }
+
+
+		  // *********************************
+			// PETICION AJAX
+			// *********************************
+
+			$.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
+
+				GEODEV.jobs.data = datos;
+				drawPoints();
+				// *********************************
+				// RENDERIZE JOBS OBJET IN THE TEMPLATE
+				// *********************************
+				var template = $.templates("#theTmpl");
+				var htmlOutput = template.render(GEODEV.jobs.data);
+				$("#accordion").html(htmlOutput);
+				// *********************************
+				// Setting the viewdivs change
+				// *********************************
+				var miniViewDiv = dom.byId('miniViewDiv');
+				on(miniViewDiv, "dblclick",changeViews);
+
+				// *********************************
+				// BOOTSTRAP ACORDION FUNCTIONS
+				//1.Highlight job location
+				//2.GoTo Job location
+				// *********************************		
+				$('.collapse').on('show.bs.collapse', function (e) {
+
+			  	worldView.graphics.removeAll();
+			  	simpsonsView.graphics.removeAll();
+			  	drawPoints();
+			  
+			  	var idJob = parseInt(e.target.getAttribute("job-id"));
+			  	var simpsonsViewGraphic = simpsonsView.graphics.items;
+			  	var worldViewGraphic = worldView.graphics.items;
+
+			  	var isInWorldView = worldViewGraphic.find(isInView);
+			  	var isInSimpsonsView = simpsonsViewGraphic.find(isInView);
+			  	function isInView (lyr){
+			  		return lyr.attributes.id=== idJob;
+			  	}
+
+			  	if (isInWorldView) {
+			  		isInWorldView.symbol = highlightedSymbol;
 	  				worldView.goTo({
-		  					target: worldViewGraphic[n].geometry,
+		  					target: isInWorldView.geometry,
 		  					zoom: 8
 		  				},
 		  				{
@@ -230,156 +231,93 @@
   							duration: 1000,
   							easing: "ease-in-out"
 						});
-		  		}
-				}
 
-		  				//********************
-		  				//Estoy cogiendo una variable privada, revisar
-		  			// 	//********************
-		  			// 	var jobsGraphic = simpsonsView.graphics.items;
-			  		// 	jobsGraphic[i].symbol = highlightedsymbol;
-			  		// 	simpsonsView.goTo({
-			  		// 			target: jobsGraphic[i].geometry,
-			  		// 			zoom: 8
-			  		// 		},
-			  		// 		{
-			  		// 			animate: true,
-	  				// 			duration: 1000,
-	  				// 			easing: "ease-in-out"
-							// });
-		  			// }else{
-		  			// 	var jobsGraphic = worldView.graphics._items;
-			  		// 	jobsGraphic[i].symbol = highlightedsymbol;
-			  		// 	worldView.goTo({
-			  		// 			target: jobsGraphic[i].geometry,
-			  		// 			zoom: 8
-			  		// 		},
-			  		// 		{
-			  		// 			animate: true,
-	  				// 			duration: 1000,
-	  				// 			easing: "ease-in-out"
-							// });
+			  	} else {
+			  		isInSimpsonsView.symbol = highlightedSymbolSimps;
+	  				simpsonsView.goTo({
+		  					target: isInSimpsonsView.geometry
+		  				},
+		  				{
+		  					animate: true,
+  							duration: 1000,
+  							easing: "ease-in-out"
+						});
+			  	}
 
-		  			// }
-
-		  		// }
-		  		
-		  			
-		  	
-		  	
-
-
-		  	
-		  	// var jobsGraphic = worldView.graphics._items;
-
-		  	// for (i = 0; i < jobsGraphic.length; i++) {
-		  	// 	if (idPt == jobsGraphic[i].attributes.id) {
-		  	// 		jobsGraphic[i].symbol = highlightedsymbol;
-		  	// 		worldView.goTo({
-		  	// 				target: jobsGraphic[i].geometry,
-		  	// 				zoom: 8
-		  	// 			},
-		  	// 			{
-		  	// 				animate: true,
-  			// 				duration: 1000,
-  			// 				easing: "ease-in-out"
-					// 	});
-		  	// 	}
-		  	// }
+				});
 			});
-		});
-
-
-	  function drawPoints(){
-
-			if (GEODEV.jobs && viewDone) {    
-			  for (i = 0; i < GEODEV.jobs.length; i++) {
-
-			  	var jobID = GEODEV.jobs[i].id;
-
-			    if (GEODEV.jobs[i].on_remote === "yes") {
-				    var point = new Point({
-				    	//Coordenadas de prueba
-				 			longitude: 0.027,
-				      latitude: -0.017
-				    });
-	 			    var pointGraphic = new Graphic({
-				      geometry: point,
-				      // Establezco aqui el highligted simbol a proposito para que se vea bien
-				      symbol: highlightedsymbol,
-				      attributes: {
-							  "id": jobID,
-							}
-				    });
-				    simpsonsView.graphics.add(pointGraphic);	
-				  }else	{
-
-				  	var lat = GEODEV.jobs[i].location_lat;
-			  		var long = GEODEV.jobs[i].location_lon;
-			  		var point = new Point({
-				 			longitude: long,
-				      latitude: lat
-				    });
-					  var pointGraphic = new Graphic({
-				      geometry: point,
-				      symbol: symbol,
-				      attributes: {
-							  "id": jobID,
-							}
-				    });
-				  	worldView.graphics.add(pointGraphic);
+			
+		  function drawPoints(){
+				if (GEODEV.jobs.data && worldView.ready && simpsonsView.ready) {    
+				  for (i = 0; i < GEODEV.jobs.data.length; i++) {
+				  	var jobID = GEODEV.jobs.data[i].id;
+				    if (GEODEV.jobs.data[i].on_remote === "yes") {
+					    var point = new Point({
+					    	//Coordenadas de prueba
+					 			longitude: 0.0285,
+					      latitude: -0.018
+					    });
+		 			    var pointGraphic = new Graphic({
+					      geometry: point,
+					      // Establezco aqui el highligted simbol a proposito para que se vea bien
+					      symbol: symbolSips,
+					      attributes: {
+								  "id": jobID,
+								}
+					    });
+					    simpsonsView.graphics.add(pointGraphic);	
+					  }else	{
+					  	var lat = GEODEV.jobs.data[i].location_lat;
+				  		var long = GEODEV.jobs.data[i].location_lon;
+				  		var point = new Point({
+					 			longitude: long,
+					      latitude: lat
+					    });
+						  var pointGraphic = new Graphic({
+					      geometry: point,
+					      symbol: symbol,
+					      attributes: {
+								  "id": jobID,
+								}
+					    });
+					  	worldView.graphics.add(pointGraphic);
+					  }
 				  }
-			  }
-			}
-		}
-
-
-		// *********************************
-		// Setting the viewdivs change
-		// *********************************
-		//Subir esta variable al principio
-		var miniViewDiv = dom.byId('miniViewDiv');
-		on(miniViewDiv, "dblclick",changeViews);
-
-		function changeViews(){
-			if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
-				worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
-	  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
-	  		drawPoints();
-	  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
-			}else{
-				worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
-	  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
-	  		drawPoints();
-	  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
-
+				}
 			}
 
-		}
+			function changeViews(callback){
+				if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
+					worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
+		  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
+		  		drawPoints();
+		  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
 
-		function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
-			return new MapView({
-	    container: viewId,  
-	    map: mapToSet,
-	    zoom: zoomToApply, 
-	    center: centerToSet,
-	    ui: {
-	    	components: uiArray 
-	    }
-	  });
-		}
+				}else{
+					worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
+		  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+		  		drawPoints();
+		  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
+				}
+			}
 
+			function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
+				return new MapView({
+			    container: viewId,  
+			    map: mapToSet,
+			    zoom: zoomToApply, 
+			    center: centerToSet,
+			    ui: {
+			    	components: uiArray 
+			    }
+			  });
+			}
 
-	});
-
-
+		});
 	</script>
 
 	    {include file="footer.tpl"}
 	</div>
 
-	<script>
-	    	
-	</script>
 </body>
 </html>
