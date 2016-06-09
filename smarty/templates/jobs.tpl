@@ -154,8 +154,11 @@
 		  height: 20,
 		  yoffset: 7
 		});
-
-	  view.then(drawPoints(), function(error){
+	  var viewDone = false;
+	  view.then(function(){
+	  	viewDone = true;
+	  	drawPoints();
+	  }, function(error){
 	  	console.log("Imposible cargar el mapa:" + error);
 		});
 
@@ -180,6 +183,15 @@
 			//2.GoTo Job location
 			// *********************************		
 			$('.collapse').on('show.bs.collapse', function (e) {
+
+				//	PROPIEDAD EN EL HTML
+				//	CHECKEAR SI ES REMOTE
+				//	
+				//	CAMBIAR VIEW
+				//
+				//
+				//
+
 		  	view.graphics.removeAll();
 		  	drawPoints();
 		  	var divId = e.target.id;
@@ -208,23 +220,54 @@
 	  function drawPoints(){
 	  	debugger
 	  	//!!!!"
-			if (GEODEV.jobs && view) {    
+			if (GEODEV.jobs && viewDone) {    
 			  for (i = 0; i < GEODEV.jobs.length; i++) {
-			  	var lat = GEODEV.jobs[i].location_lat;
-			  	var long = GEODEV.jobs[i].location_lon;
+			  	// var lat = GEODEV.jobs[i].location_lat;
+			  	// var long = GEODEV.jobs[i].location_lon;
 			  	var jobID = GEODEV.jobs[i].id;
-			    var point = new Point({
-			 			longitude: long,
-			      latitude: lat
-			    });
-			    var pointGraphic = new Graphic({
-			      geometry: point,
-			      symbol: symbol,
-			      attributes: {
-						  "id": jobID,
-						}
-			    });
-			  	view.graphics.add(pointGraphic);
+			    // var point = new Point({
+			 			// longitude: long,
+			    //   latitude: lat
+			    // });
+			   //  var pointGraphic = new Graphic({
+			   //    geometry: point,
+			   //    symbol: symbol,
+			   //    attributes: {
+						//   "id": jobID,
+						// }
+			   //  });
+			    if (GEODEV.jobs[i].on_remote === "yes") {
+				    var point = new Point({
+				    	//Coordenadas de prueba
+				 			longitude: 0.027,
+				      latitude: -0.017
+				    });
+	 			    var pointGraphic = new Graphic({
+				      geometry: point,
+				      // Establezco aqui el highligted simbol a proposito para que se vea bien
+				      symbol: highlightedsymbol,
+				      attributes: {
+							  "id": jobID,
+							}
+				    });
+				    miniView.graphics.add(pointGraphic);	
+				  }else	{
+
+				  	var lat = GEODEV.jobs[i].location_lat;
+			  		var long = GEODEV.jobs[i].location_lon;
+			  		var point = new Point({
+				 			longitude: long,
+				      latitude: lat
+				    });
+					  var pointGraphic = new Graphic({
+				      geometry: point,
+				      symbol: symbol,
+				      attributes: {
+							  "id": jobID,
+							}
+				    });
+				  	view.graphics.add(pointGraphic);
+				  }
 			  }
 			}
 		}
