@@ -175,20 +175,34 @@
 
 		  window.GEODEV.jobs = {};
 			$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
-				GEODEV.jobs.simpsonsPOIs = datos.POIS;
+				 GEODEV.jobs.simpsonsAllPOIs = datos.POIS;
+				GEODEV.jobs.simpsonsPOIs = [];
+				getRandomSimpsPOIs(datos.POIS);
+				// drawPoints();
 
-				// (function () {
-				//   for (i = 0; i < GEODEV.jobs.data.length; i++) {
-				//   	if (GEODEV.jobs.data[i].on_remote === "yes") {
-				// 			var POIIndex = Math.floor(Math.random() * (54-i));
-				// 	    var POICoordX = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.x;	
-				// 	    var POICoordY = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.y;
-				// 	    GEODEV.jobs.simpsonsPOIs.splice(POIIndex,1);
-
-				// 	  }
-				// 	}
-				// })();
 			});
+
+
+				function getRandomSimpsPOIs() {
+					if (GEODEV.jobs.data && GEODEV.jobs.simpsonsAllPOIs){
+						var count = 0;
+					  for (i = 0; i < GEODEV.jobs.data.length; i++) {
+					  	if (GEODEV.jobs.data[i].on_remote === "yes") {
+								var POIIndex = Math.floor(Math.random() * (54-count));
+						    GEODEV.jobs.simpsonsPOIs[count] = GEODEV.jobs.simpsonsAllPOIs[POIIndex];
+						    // GEODEV.jobs.simpsonsPOIs[count].y = GEODEV.jobs.simpsonsAllPOIs[POIIndex].geometry.y;
+						    GEODEV.jobs.simpsonsAllPOIs.splice(POIIndex,1);
+						    count++;
+						  }
+						}
+						drawPoints();
+					}
+				}
+
+
+
+
+
 		  // *********************************
 			// PETICION AJAX JOBS DATA
 			// *********************************
@@ -196,7 +210,7 @@
 			// $.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
 			$.getJSON("/api/jobs?callback=?", function(datos){
 				GEODEV.jobs.data = datos;
-				drawPoints();
+				getRandomSimpsPOIs();
 				// *********************************
 				// RENDERIZE JOBS OBJET IN THE TEMPLATE
 				// *********************************
@@ -284,20 +298,19 @@
 		  }
 			
 		  function drawPoints(){
-				if (GEODEV.jobs.data && worldView.ready && simpsonsView.ready) {    
+				if ( worldView.ready && simpsonsView.ready) {
+					var count = 0;
 				  for (i = 0; i < GEODEV.jobs.data.length; i++) {
 				  	var jobID = GEODEV.jobs.data[i].id;
 				    if (GEODEV.jobs.data[i].on_remote === "yes") {
 
-					    var POIIndex = Math.floor(Math.random() * (54-i));
-					    var POICoordX = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.x;	
-					    var POICoordY = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.y;
-					    GEODEV.jobs.simpsonsPOIs.splice(POIIndex,1);
+					    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;	
+					    var POICoordY = GEODEV.jobs.simpsonsPOIs[count].geometry.y;
 
-					    //
-					    //
-					    //
-					    //
+
+					    count++;
+
+
 
 
 					    var point = new Point({
