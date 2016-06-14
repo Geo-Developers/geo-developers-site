@@ -34,12 +34,17 @@
 	    padding: 0;
 	    margin: 0;
 	  }
+	  #footer{
+	  	display: none;
+	  }
 	  #viewDiv,
 	  #main-wrapper,
 	  #mapContainer {
 	  	height: 100%;
 	  }
 	  #viewDiv{
+	  	position: absolute;
+	  	/*position: fixed;*/
 	  	width: 100%;
 	  }
 	  
@@ -48,6 +53,7 @@
 	    margin: 0;	
 		}
 		#miniViewDiv {
+      /*position: fixed;*/
       position: absolute;
       right: 15px;
       width: 300px;
@@ -56,6 +62,13 @@
       border-top: 5px solid rgba(255, 255, 255, 0.65);
       border-left: 5px solid rgba(255, 255, 255, 0.65);
     }
+    #chngViewBtn{
+    	position: absolute;
+    	z-index: 900;
+    	top: 3px;
+    	left: 3px;
+    }
+
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
@@ -67,7 +80,17 @@
 	</div>
 	<div id="mapContainer" class="col-md-8">
 		<div id="viewDiv"></div>
-		<div id="miniViewDiv" simpsons-in-main-view="0" ></div>
+
+		<div id="miniMapElements">
+
+			<div id="miniViewDiv" simpsons-in-main-view="0" >
+				<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
+				  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+				</button>	
+			</div>
+
+		</div>
+		
 	</div>
 
 	<?php {literal} ?>
@@ -134,57 +157,44 @@
 	      }
 	    });
 
-	    var worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);	  
+	    var worldView = createView ("viewDiv",map,5,[-3, 40],["zoom","attribution"]);	  
 			var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 
-	  	var symbol = new PictureMarkerSymbol({
-			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-blank.png",
-			  width: 15,
-			  height: 30,
-			  yoffset: 10
-			});
 
-		  var highlightedSymbol = new PictureMarkerSymbol({
-			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-star.png",
-			  width: 15,
-			  height: 30,
-			  yoffset: 10
-			});
-
-		  var symbolSips = new PictureMarkerSymbol({
-			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-blank.png",
-			  width: 15,
-			  height: 30,
-			  yoffset: 10
-			});
-
-		  var highlightedSymbolSimps = new PictureMarkerSymbol({
-			  url: "https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-star.png",
-			  width: 15,
-			  height: 30,
-			  yoffset: 10
-			});
-
-		  
-		  worldView.then(function(){
-		  	
-		  	drawPoints();
-		  }, function(error){
-		  	console.log("Imposible cargar el mapa:" + error);
-			});
-		  GEODEV.jobs = {};
-			$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
-				GEODEV.jobs.simpsonsPOIs = datos;
-			});
+		  var symbol = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-blank.png");
+		  var highlightedSymbol = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-star.png");
+			var symbolSips = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-blank.png");
+		  var highlightedSymbolSimps = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-star.png");
 
 
+		  checkViewsThenDraw();
 
-		  // *********************************
-			// PETICION AJAX
+ 		  // *********************************
+			// PETICION AJAX SIMPSONS POIS
 			// *********************************
 
-			$.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
+		  window.GEODEV.jobs = {};
+			$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
+				GEODEV.jobs.simpsonsPOIs = datos.POIS;
 
+				// (function () {
+				//   for (i = 0; i < GEODEV.jobs.data.length; i++) {
+				//   	if (GEODEV.jobs.data[i].on_remote === "yes") {
+				// 			var POIIndex = Math.floor(Math.random() * (54-i));
+				// 	    var POICoordX = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.x;	
+				// 	    var POICoordY = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.y;
+				// 	    GEODEV.jobs.simpsonsPOIs.splice(POIIndex,1);
+
+				// 	  }
+				// 	}
+				// })();
+			});
+		  // *********************************
+			// PETICION AJAX JOBS DATA
+			// *********************************
+
+			// $.getJSON("http://www.geodevelopers.org/api/jobs?callback=?", function(datos){
+			$.getJSON("/api/jobs?callback=?", function(datos){
 				GEODEV.jobs.data = datos;
 				drawPoints();
 				// *********************************
@@ -197,7 +207,11 @@
 				// Setting the viewdivs change
 				// *********************************
 				var miniViewDiv = dom.byId('miniViewDiv');
-				on(miniViewDiv, "dblclick",changeViews);
+				var chngViewBtn = dom.byId('chngViewBtn');
+				on(chngViewBtn, "click",changeViews);
+
+
+
 
 				// *********************************
 				// BOOTSTRAP ACORDION FUNCTIONS
@@ -246,20 +260,52 @@
 
 				});
 			});
+
+			function createSymbol (url){
+				return new PictureMarkerSymbol({
+				  url: url,
+				  width: 15,
+				  height: 30,
+				  yoffset: 10
+				});
+			}
+
+			function checkViewsThenDraw () {
+			  worldView.then(function(){ 	
+			  	drawPoints();
+			  }, function(error){
+			  	console.log("Imposible cargar el mapa:" + error);
+				});
+				simpsonsView.then(function(){ 	
+			  	drawPoints();
+			  }, function(error){
+			  	console.log("Imposible cargar el mapa:" + error);
+				});	
+		  }
 			
 		  function drawPoints(){
 				if (GEODEV.jobs.data && worldView.ready && simpsonsView.ready) {    
 				  for (i = 0; i < GEODEV.jobs.data.length; i++) {
 				  	var jobID = GEODEV.jobs.data[i].id;
 				    if (GEODEV.jobs.data[i].on_remote === "yes") {
+
+					    var POIIndex = Math.floor(Math.random() * (54-i));
+					    var POICoordX = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.x;	
+					    var POICoordY = GEODEV.jobs.simpsonsPOIs[POIIndex].geometry.y;
+					    GEODEV.jobs.simpsonsPOIs.splice(POIIndex,1);
+
+					    //
+					    //
+					    //
+					    //
+
+
 					    var point = new Point({
-					    	//Coordenadas de prueba
-					 			longitude: 0.0285,
-					      latitude: -0.018
+					 			longitude: POICoordX,
+					      latitude: POICoordY
 					    });
 		 			    var pointGraphic = new Graphic({
 					      geometry: point,
-					      // Establezco aqui el highligted simbol a proposito para que se vea bien
 					      symbol: symbolSips,
 					      attributes: {
 								  "id": jobID,
@@ -283,6 +329,8 @@
 					  	worldView.graphics.add(pointGraphic);
 					  }
 				  }
+				} else{
+					console.log('No se han cargado los 3 params');
 				}
 			}
 
@@ -290,13 +338,13 @@
 				if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
 					worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
 		  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
-		  		drawPoints();
+		  		checkViewsThenDraw();
 		  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
 
 				}else{
 					worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
 		  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
-		  		drawPoints();
+		  		checkViewsThenDraw();
 		  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
 				}
 			}

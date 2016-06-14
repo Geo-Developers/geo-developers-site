@@ -1,8 +1,8 @@
 {
 	"POIS": [{
 		"geometry": {
-			"x": 1925,
-			"y": -3983,
+			"x": 0.017310	,
+			"y": -0.035783,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -19,8 +19,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1852,
-			"y": -3944,
+			"x": 0.016666,
+			"y": -0.035483,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -37,8 +37,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2329,
-			"y": -4006,
+			"x": 0.020915,
+			"y": -0.036083,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -55,8 +55,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2199,
-			"y": -3930,
+			"x": 0.019713,
+			"y": -0.035354,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -73,8 +73,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1888,
-			"y": -3804,
+			"x": 0.016881,
+			"y": -0.034109,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -91,8 +91,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1759,
-			"y": -3871,
+			"x": 0.015894,
+			"y": -0.034839,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -109,8 +109,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2454,
-			"y": -4071,
+			"x": 0.021945,
+			"y": -0.036641,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -127,8 +127,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3386,
-			"y": -3397,
+			"x": 0.030356,
+			"y": -0.030547,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -145,8 +145,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3002,
-			"y": -3115,
+			"x": 0.027009,
+			"y": -0.027930,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -163,8 +163,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2566,
-			"y": -2873,
+			"x": 0.023060,
+			"y": -0.025913,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -181,8 +181,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2639,
-			"y": -2495,
+			"x": 0.023661,
+			"y": -0.022436,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -199,8 +199,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1876,
-			"y": -2588,
+			"x": 0.023661,
+			"y": -0.022436,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -217,8 +217,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2217,
-			"y": -3502,
+			"x": 0.019906,
+			"y": -0.031427,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -235,8 +235,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 2515,
-			"y": -3329,
+			"x": 0.022610,
+			"y": -0.029925,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -253,8 +253,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3039,
-			"y": -3585,
+			"x": 0.027331,
+			"y": -0.032157,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -271,8 +271,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3104,
-			"y": -3467,
+			"x": 0.027974,
+			"y": -0.031213,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -289,8 +289,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1034,
-			"y": -2402,
+			"x": 0.009220,
+			"y": -0.021449,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -307,8 +307,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3306,
-			"y": -2900,
+			"x": 0.029734,
+			"y": -0.026084,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -325,8 +325,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3475,
-			"y": -2969,
+			"x": 0.031193,
+			"y": -0.026771,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -343,8 +343,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3574,
-			"y": -2918,
+			"x": 0.032137,
+			"y": -0.026256,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -361,8 +361,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3809,
-			"y": -2798,
+			"x": 0.034197,
+			"y": -0.025226,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -379,8 +379,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 1299,
-			"y": -2545,
+			"x": 0.011624,
+			"y": -0.022908,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -397,8 +397,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3136,
-			"y": -2686,
+			"x": 0.028189,
+			"y": -0.024174,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -415,8 +415,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3780,
-			"y": -2560,
+			"x": 0.033897,
+			"y": -0.023016,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -433,8 +433,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3903,
-			"y": -2507,
+			"x": 0.035055,
+			"y": -0.022286,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -451,8 +451,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4032,
-			"y": -2448,
+			"x": 0.036214,
+			"y": -0.021857,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -469,8 +469,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4138,
-			"y": -2392,
+			"x": 0.037158,
+			"y": -0.021514,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -487,8 +487,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3940,
-			"y": -3063,
+			"x": 0.035313,
+			"y": -0.027608,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -505,8 +505,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4392,
-			"y": -2856,
+			"x": 0.039476,
+			"y": -0.025677,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -523,8 +523,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4640,
-			"y": -2892,
+			"x": 0.041621,
+			"y": -0.025977,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -541,8 +541,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4829,
-			"y": -2800,
+			"x": 0.043381,
+			"y": -0.025119,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -559,8 +559,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5075,
-			"y": -2669,
+			"x": 0.045570,
+			"y": -0.023960,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -577,8 +577,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5428,
-			"y": -2556,
+			"x": 0.048745,
+			"y": -0.022930,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -595,8 +595,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5612,
-			"y": -2646,
+			"x": 0.050419,
+			"y": -0.023659,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -613,8 +613,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5028,
-			"y": -2275,
+			"x": 0.045140,
+			"y": -0.020355,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -631,8 +631,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4373,
-			"y": -2276,
+			"x": 0.039347,
+			"y": -0.020398,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -649,8 +649,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4488,
-			"y": -2212,
+			"x": 0.039347,
+			"y": -0.020398,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -667,8 +667,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5388,
-			"y": -3236,
+			"x": 0.048445,
+			"y": -0.029067,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -685,8 +685,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5849,
-			"y": -2749,
+			"x": 0.052522,
+			"y": -0.024689,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -703,8 +703,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5969,
-			"y": -2683,
+			"x": 0.053681,
+			"y": -0.024003,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -721,8 +721,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 6059,
-			"y": -2437,
+			"x": 0.054367,
+			"y": -0.021900,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -739,8 +739,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 7456,
-			"y": -2232,
+			"x": 0.066898,
+			"y": -0.019969,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -757,8 +757,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 7638,
-			"y": -2493,
+			"x": 0.068615,
+			"y": -0.022329,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -775,8 +775,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3417,
-			"y": -2125,
+			"x": 0.030678,
+			"y": -0.019153,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -793,8 +793,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3793,
-			"y": -1362,
+			"x": 0.034068,
+			"y": -0.012330,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -811,8 +811,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4951,
-			"y": -967,
+			"x": 0.044411,
+			"y": -0.008768,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -829,8 +829,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4425,
-			"y": -692,
+			"x": 0.039733,
+			"y": -0.006193,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -847,8 +847,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4253,
-			"y": -1512,
+			"x": 0.038231,
+			"y": -0.013489,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -865,8 +865,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4848,
-			"y": -1549,
+			"x": 0.043510,
+			"y": -0.013918,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -883,8 +883,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4516,
-			"y": -2040,
+			"x": 0.040548,
+			"y": -0.018402,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -901,8 +901,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 4700,
-			"y": -2144,
+			"x": 0.042179,
+			"y": -0.019261,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -919,8 +919,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 5300,
-			"y": -1705,
+			"x": 0.047576,
+			"y": -0.015152,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -937,8 +937,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 7049,
-			"y": -2094,
+			"x": 0.063283,
+			"y": -0.018928,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -955,8 +955,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3564,
-			"y": -1599,
+			"x": 0.032041,
+			"y": -0.014465,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
@@ -973,8 +973,8 @@
 		}
 	}, {
 		"geometry": {
-			"x": 3765,
-			"y": -1691,
+			"x": 0.033757,
+			"y": -0.015152,
 			"spatialReference": {
 				"wkid": 102100,
 				"latestWkid": 3857
