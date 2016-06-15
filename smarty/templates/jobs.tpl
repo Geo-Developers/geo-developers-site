@@ -144,10 +144,11 @@
 		  "esri/geometry/Point",
 		  "esri/symbols/PictureMarkerSymbol",
 		  "esri/Graphic",
+		  "esri/PopupTemplate",
 		  "dojo/on",
 		  "dojo/dom",
 		  "dojo/domReady!"
-		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,on,dom){
+		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,on,dom){
 		  var map = new Map({
 		    basemap: "streets-night-vector"
 		  });
@@ -166,8 +167,43 @@
 			var symbolSips = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-blank.png");
 		  var highlightedSymbolSimps = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-star.png");
 
+		  {literal}
+		  var template = new PopupTemplate({
+        // title: "Marriage in NY, Zip Code: {ZIP}",
+        // content: "<p>As of 2015, <b>{MARRIEDRATE}%</b> of the population in this zip code is married.</p>" +
+        //   "<ul><li>{MARRIED_CY} people are married</li>" +
+        //   "<li>{NEVMARR_CY} have never married</li>" +
+        //   "<li>{DIVORCD_CY} are divorced</li><ul>"
+        title: "{title}",
 
-		  checkViewsThenDraw();
+        
+        	content:'<span class="text-primary">Localización: </span>\
+		    	{location}\
+		    	<br>\
+        	<h5 class="text-primary" >Información de contacto</h5>\
+		    	<span class="text-primary">Empresa: </span>\
+		    	{title}\
+		    	<br>\
+		    	<span class="text-primary">Email:  </span>\
+		    	{company_name}\
+		    	<br>\
+		    	<h5 class="text-primary" >Detalles de la oferta</h5>\
+		    	<span class="text-primary">Tipo de contrato: </span>\
+		    	{contract_type}\
+		    	<br>\
+		    	<span class="text-primary">Salario: </span>\
+		    	{salary_budget}\
+		    	<br>\
+		    	<br>'
+      });
+
+		  {/literal}
+
+
+		  //Esto quitarlo?????
+		  // !?!?!?!??!?!?!?!?
+		  // checkViewsThenDraw();
+
 
  		  // *********************************
 			// PETICION AJAX SIMPSONS POIS
@@ -195,7 +231,8 @@
 						    count++;
 						  }
 						}
-						drawPoints();
+						checkViewsThenDraw();
+						// drawPoints();
 					}
 				}
 
@@ -302,48 +339,64 @@
 					var count = 0;
 				  for (i = 0; i < GEODEV.jobs.data.length; i++) {
 				  	var jobID = GEODEV.jobs.data[i].id;
+				  	var jobTitle = GEODEV.jobs.data[i].title;
+				  	var jobCompany_name = GEODEV.jobs.data[i].company_name;
+				  	var jobContact_email = GEODEV.jobs.data[i].contact_email;
+				  	var jobContact_other = GEODEV.jobs.data[i].contact_other;
+				  	var jobSalary_budget = GEODEV.jobs.data[i].salary_budget;
+				  	var jobOffer_details = GEODEV.jobs.data[i].offer_details;
+						var jobContract_type = GEODEV.jobs.data[i].contract_type;
+						var jobLocation = GEODEV.jobs.data[i].location;
+
+				  	var pointGraphic = new Graphic({
+					      attributes: {
+								  "id": jobID,
+								  "title": jobTitle,
+								  "company_name": jobCompany_name,
+								  "contact_email": jobContact_email,
+								  "contact_other": jobContact_other,
+								  "salary_budget": jobSalary_budget,
+								  "offer_details": jobOffer_details,
+								  "contract_type": jobContract_type,
+									"location": jobLocation
+								}
+					    });
+
+				  		var point = new Point();
+
 				    if (GEODEV.jobs.data[i].on_remote === "yes") {
 
 					    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;	
 					    var POICoordY = GEODEV.jobs.simpsonsPOIs[count].geometry.y;
-
-
+					    var POIname = GEODEV.jobs.simpsonsPOIs[count].attributes.Name;
 					    count++;
+					    point.longitude = POICoordX;
+					    point.latitude = POICoordY;
 
 
+					    pointGraphic.geometry = point;
+					    pointGraphic.symbol = symbolSips;
+					    pointGraphic.attributes.location = POIname;
+					    pointGraphic.popupTemplate = template;
 
-
-					    var point = new Point({
-					 			longitude: POICoordX,
-					      latitude: POICoordY
-					    });
-		 			    var pointGraphic = new Graphic({
-					      geometry: point,
-					      symbol: symbolSips,
-					      attributes: {
-								  "id": jobID,
-								}
-					    });
 					    simpsonsView.graphics.add(pointGraphic);	
 					  }else	{
 					  	var lat = GEODEV.jobs.data[i].location_lat;
 				  		var long = GEODEV.jobs.data[i].location_lon;
-				  		var point = new Point({
-					 			longitude: long,
-					      latitude: lat
-					    });
-						  var pointGraphic = new Graphic({
-					      geometry: point,
-					      symbol: symbol,
-					      attributes: {
-								  "id": jobID,
-								}
-					    });
+
+				  		point.longitude = long;
+					    point.latitude = lat;
+
+
+					    pointGraphic.geometry = point;
+					    pointGraphic.symbol = symbol;
+					    pointGraphic.popupTemplate = template;
+
 					  	worldView.graphics.add(pointGraphic);
 					  }
 				  }
 				} else{
-					console.log('No se han cargado los 3 params');
+					console.log('No estan ready las views aun');
 				}
 			}
 
