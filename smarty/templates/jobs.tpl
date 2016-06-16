@@ -55,6 +55,7 @@
 		#miniViewDiv {
       /*position: fixed;*/
       position: absolute;
+      z-index: 1;
       right: 15px;
       width: 300px;
       height: 150px;
@@ -64,7 +65,7 @@
     }
     #chngViewBtn{
     	position: absolute;
-    	z-index: 900;
+    	z-index: 1;
     	top: 3px;
     	left: 3px;
     }
@@ -162,10 +163,12 @@
 			var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 
 
-		  var symbol = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-blank.png");
-		  var highlightedSymbol = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-star.png");
-			var symbolSips = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-blank.png");
-		  var highlightedSymbolSimps = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/orange-pin-star.png");
+		  // var symbol = createSymbol("https://raw.githubusercontent.com/Esri/quickstart-map-js/master/images/grey-pin-blank.png");
+		  var symbol = createSymbol("/images/grey-pin-blank.png");
+		  
+		  var highlightedSymbol = createSymbol("/images/grey-pin-star.png");
+			var symbolSips = createSymbol("/images/orange-pin-blank.png");
+		  var highlightedSymbolSimps = createSymbol("/images/orange-pin-star.png");
 
 		  {literal}
 		  var template = new PopupTemplate({
@@ -182,10 +185,10 @@
 		    	<br>\
         	<h5 class="text-primary" >Información de contacto</h5>\
 		    	<span class="text-primary">Empresa: </span>\
-		    	{title}\
+		    	{company_name}\
 		    	<br>\
 		    	<span class="text-primary">Email:  </span>\
-		    	{company_name}\
+		    	{contact_email}\
 		    	<br>\
 		    	<h5 class="text-primary" >Detalles de la oferta</h5>\
 		    	<span class="text-primary">Tipo de contrato: </span>\
@@ -268,13 +271,18 @@
 				// BOOTSTRAP ACORDION FUNCTIONS
 				//1.Highlight job location
 				//2.GoTo Job location
-				// *********************************		
+				// *********************************	
+
+				GEODEV.jobs.prevJobShow;
+
 				$('.collapse').on('show.bs.collapse', function (e) {
 
 			  	worldView.graphics.removeAll();
 			  	simpsonsView.graphics.removeAll();
 			  	drawPoints();
-			  
+			  	//Collapse previous accordion opened
+			  	$(GEODEV.jobs.prevJobShow).collapse('hide');
+			  	
 			  	var idJob = parseInt(e.target.getAttribute("job-id"));
 			  	var simpsonsViewGraphic = simpsonsView.graphics.items;
 			  	var worldViewGraphic = worldView.graphics.items;
@@ -309,15 +317,20 @@
 						});
 			  	}
 
+			  	//Getting the element to collapse when another accordion is been opened
+			  	var prevJobShow = $("#" + e.target.getAttribute("id"));
+			  	GEODEV.jobs.prevJobShow = prevJobShow[0];
+			  	
+
 				});
 			});
 
 			function createSymbol (url){
 				return new PictureMarkerSymbol({
 				  url: url,
-				  width: 15,
-				  height: 30,
-				  yoffset: 10
+				  // width: 15,
+				  width: 60,
+				  height: 65
 				});
 			}
 
@@ -377,8 +390,10 @@
 					    pointGraphic.geometry = point;
 					    pointGraphic.symbol = symbolSips;
 					    pointGraphic.attributes.location = POIname;
-					    pointGraphic.popupTemplate = template;
 
+						    if (simpsonsView.container.id === "viewDiv") {
+						    	pointGraphic.popupTemplate = template;	
+						    }
 					    simpsonsView.graphics.add(pointGraphic);	
 					  }else	{
 					  	var lat = GEODEV.jobs.data[i].location_lat;
@@ -390,8 +405,10 @@
 
 					    pointGraphic.geometry = point;
 					    pointGraphic.symbol = symbol;
-					    pointGraphic.popupTemplate = template;
 
+					    if (worldView.container.id === "viewDiv") {
+						   	pointGraphic.popupTemplate = template;	
+						  }
 					  	worldView.graphics.add(pointGraphic);
 					  }
 				  }
