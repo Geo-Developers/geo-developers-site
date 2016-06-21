@@ -76,23 +76,75 @@
 <body id="tos">
 	{include file="menu.tpl"}
 	<div id="main-wrapper">
-	<div id= "jobsDiv" class="col-md-4 padding10" >
-		<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
-	</div>
-	<div id="mapContainer" class="col-md-8">
-		<div id="viewDiv"></div>
 
-		<div id="miniMapElements">
+		<!-- MODAL -->
+		<div class="container">
+		  <!-- Trigger the modal with a button -->
+		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Crear oferta</button>
 
-			<div id="miniViewDiv" simpsons-in-main-view="0" >
-				<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
-				  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-				</button>	
-			</div>
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Publicar oferta de trabajo</h4>
+		        </div>
+		        <div class="modal-body">
 
+							<form role="form">
+							  <div class="form-group">
+							    <label for="inputTitle">Título de la oferta:</label>
+							    <input type="email" class="form-control" id="inputTitle">
+							    <hr>
+							  
+							  </div>
+							  <h4>Información de contacto</h4>
+							  <div class="form-group">
+							    <label for="inputCompany">Empresa:</label>
+							    <input type="password" class="form-control" id="inputCompany">
+							  </div>
+							  <div class="form-group">
+							    <label for="inputEmail">Email:</label>
+							    <input type="password" class="form-control" id="inputEmail">
+							  </div>
+							  <div class="form-group">
+								  <label for="inputOtherInfo">Otra información:</label>
+								  <textarea class="form-control" rows="5" id="inputOtherInfo"></textarea>
+								</div>
+								<hr>
+							  <h4>Detalles de la oferta</h4>
+
+							  <button type="submit" class="btn btn-default">Submit</button>
+							</form>
+		          <p>Some text in the modal.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>		      
+		    </div>
+		  </div>  
 		</div>
-		
-	</div>
+
+
+		<!-- JOBS ACCORDION -->
+		<div id= "jobsDiv" class="col-md-4 padding10" >
+			<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
+		</div>
+		<div id="mapContainer" class="col-md-8">
+			<div id="viewDiv"></div>
+			<div id="miniMapElements">
+				<div id="miniViewDiv" simpsons-in-main-view="0" >
+					<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
+					  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+					</button>	
+				</div>
+			</div>	
+		</div>
+
 
 	<?php {literal} ?>
 	<!-- HERE IS THE TEMPLATE TO GENERATE THE JOBS OFFERS ACCORDION -->
