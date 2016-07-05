@@ -7,6 +7,9 @@
   
   <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
 
+<!-- ************************ Typeahead + bloodhound ************************ -->
+ <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script> 
+<!-- ************************************************ -->
 
 <!-- ************************ ArcGIS Libraries ************************ -->
 
@@ -28,6 +31,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <!-- **************************************** -->
+
+
 
 	<style>
 	  html, body, #viewDiv {
@@ -69,6 +74,15 @@
     	top: 3px;
     	left: 3px;
     }
+    .tt-dropdown-menu {
+      background-color: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 8px 8px 8px 8px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 12px;
+      padding: 8px 0;
+      width: 422px;
+    }
 
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
@@ -81,7 +95,7 @@
 		<div class="container">
 		  <!-- Trigger the modal with a button -->
 		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Crear oferta</button>
-
+		  <hr>
 		  <!-- Modal -->
 		  <div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
@@ -97,18 +111,21 @@
 							<form role="form">
 							  <div class="form-group">
 							    <label for="inputTitle">Título de la oferta:</label>
-							    <input type="email" class="form-control" id="inputTitle">
+							    <input type="text" class="form-control" id="inputTitle">
 							    <hr>
 							  
 							  </div>
 							  <h4>Información de contacto</h4>
-							  <div class="form-group">
+
+								<div class="form-group">
 							    <label for="inputCompany">Empresa:</label>
-							    <input type="password" class="form-control" id="inputCompany">
+							    <input class="typeahead form-control" type="text" id="inputCompany">
 							  </div>
+
+
 							  <div class="form-group">
 							    <label for="inputEmail">Email:</label>
-							    <input type="password" class="form-control" id="inputEmail">
+							    <input type="email" class="form-control" id="inputEmail">
 							  </div>
 							  <div class="form-group">
 								  <label for="inputOtherInfo">Otra información:</label>
@@ -116,13 +133,38 @@
 								</div>
 								<hr>
 							  <h4>Detalles de la oferta</h4>
+							  <div class="form-group">
+								  <label for="selOnRemote">Tipo de trabajo:</label>
+								  <select class="form-control" id="selOnRemote">
+								    <option value="no">Presencial</option>
+								    <option value="yes">Teletrabajo</option>
+								    <option value="negociate">Negociable</option>
+								  </select>
+								</div>
 
-							  <button type="submit" class="btn btn-default">Submit</button>
+								<div class="form-group">
+								  <label for="selContract">Tipo de contrato:</label>
+								  <select class="form-control" id="selContract">
+								    <option value="Indefinido">Indefinido</option>
+								    <option value="Obra y servico">Obra y servico</option>
+								    <option value="Otro">Otro</option>
+								  </select>
+								</div>
+
+								<div class="form-group">
+							    <label for="inputSalary">Salario:</label>
+							    <input type="text" class="form-control" id="inputSalary">
+							  </div>
+
+							  <div class="form-group">
+								  <label for="inputDetails">Detalles:</label>
+								  <textarea class="form-control" rows="5" id="inputDetails"></textarea>
+								</div>
 							</form>
-		          <p>Some text in the modal.</p>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="submit" class="btn btn-default">Enviar</button>
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		        </div>
 		      </div>		      
 		    </div>
@@ -190,6 +232,7 @@
 	<?php {/literal} ?>
 
 	<script>
+		var places;
 		require([
 		  "esri/Map",
 		  "esri/WebMap",
@@ -254,10 +297,40 @@
 
 		  {/literal}
 
+		  // ******************
+		  // AUTOCOMPLETAR NMBRE EMPRESA EN FORM
+			// ******************
+			var companies = new Bloodhound({
+        datumTokenizer: function(datum) {
+          return Bloodhound.tokenizers.whitespace(datum.value);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: 'https://autocomplete.clearbit.com/v1/companies/suggest?query=%QUERY',
+          filter: function(companies) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(companies, function(company) {
+              return {
+                value: company.name
+              };
+            });
+          }
+        }
+      });
 
-		  //Esto quitarlo?????
-		  // !?!?!?!??!?!?!?!?
-		  // checkViewsThenDraw();
+      // Initialize the Bloodhound suggestion engine
+      companies.initialize();
+
+      // Instantiate the Typeahead UI
+      $('.typeahead').typeahead(null, {
+        displayKey: 'value',
+        source: companies.ttAdapter()
+
+      });
+
+
+
+
 
 
  		  // *********************************
@@ -269,30 +342,8 @@
 				 GEODEV.jobs.simpsonsAllPOIs = datos.POIS;
 				GEODEV.jobs.simpsonsPOIs = [];
 				getRandomSimpsPOIs(datos.POIS);
-				// drawPoints();
 
 			});
-
-
-				function getRandomSimpsPOIs() {
-					if (GEODEV.jobs.data && GEODEV.jobs.simpsonsAllPOIs){
-						var count = 0;
-					  for (i = 0; i < GEODEV.jobs.data.length; i++) {
-					  	if (GEODEV.jobs.data[i].on_remote === "yes") {
-								var POIIndex = Math.floor(Math.random() * (54-count));
-						    GEODEV.jobs.simpsonsPOIs[count] = GEODEV.jobs.simpsonsAllPOIs[POIIndex];
-						    // GEODEV.jobs.simpsonsPOIs[count].y = GEODEV.jobs.simpsonsAllPOIs[POIIndex].geometry.y;
-						    GEODEV.jobs.simpsonsAllPOIs.splice(POIIndex,1);
-						    count++;
-						  }
-						}
-						checkViewsThenDraw();
-						// drawPoints();
-					}
-				}
-
-
-
 
 
 		  // *********************************
@@ -376,6 +427,22 @@
 
 				});
 			});
+
+			function getRandomSimpsPOIs() {
+				if (GEODEV.jobs.data && GEODEV.jobs.simpsonsAllPOIs){
+					var count = 0;
+				  for (i = 0; i < GEODEV.jobs.data.length; i++) {
+				  	if (GEODEV.jobs.data[i].on_remote === "yes") {
+							var POIIndex = Math.floor(Math.random() * (54-count));
+					    GEODEV.jobs.simpsonsPOIs[count] = GEODEV.jobs.simpsonsAllPOIs[POIIndex];
+					    // GEODEV.jobs.simpsonsPOIs[count].y = GEODEV.jobs.simpsonsAllPOIs[POIIndex].geometry.y;
+					    GEODEV.jobs.simpsonsAllPOIs.splice(POIIndex,1);
+					    count++;
+					  }
+					}
+					checkViewsThenDraw();
+				}
+			}
 
 			function createSymbol (url){
 				return new PictureMarkerSymbol({
