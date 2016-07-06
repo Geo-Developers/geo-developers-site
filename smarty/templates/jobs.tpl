@@ -1,33 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
+
+
+
+	<!-- boostrap, ArcGIS and bootstrap-map CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">
+
   
-  <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
-
- <!-- ************************ Typeahead + bloodhound ************************ -->
- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script> 
-
-
-  <!-- ************************ ArcGIS Libraries ************************ -->
-  <link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
+  <!-- ArcGIS,JQuery, Bootstrap, JSrender, typeahead+bloodhound JS -->
   <script src="https://js.arcgis.com/4.0/"></script>
-
-  <!-- ***********BOOTSTRAP LIBRARIES******************* -->
-
-  <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <!-- **************************************** -->
-<link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+  
 
 
 
@@ -148,9 +138,9 @@
 							    <!-- <label for="inputAdress">Dirección</label> -->
 <!-- 							    <input type="text" class="form-control" id="inputAdress"> -->
 								<label>Dirección</label>	
-							  	<div id="viewLocDiv"></div>
+							  	
 							  </div>
-
+							  <div id="viewLocDiv"></div>
 							  <!-- <div id="viewLocDiv"></div> -->
 
 								<div class="form-group">
