@@ -7,19 +7,15 @@
   
   <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
 
-<!-- ************************ Typeahead + bloodhound ************************ -->
+ <!-- ************************ Typeahead + bloodhound ************************ -->
  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script> 
-<!-- ************************************************ -->
 
-<!-- ************************ ArcGIS Libraries ************************ -->
 
+  <!-- ************************ ArcGIS Libraries ************************ -->
   <link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
   <script src="https://js.arcgis.com/4.0/"></script>
 
-<!-- ************************************************ -->
-
-
-<!-- ***********BOOTSTRAP LIBRARIES******************* -->
+  <!-- ***********BOOTSTRAP LIBRARIES******************* -->
 
   <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -30,7 +26,8 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<!-- **************************************** -->
+  <!-- **************************************** -->
+
 
 
 
@@ -39,6 +36,13 @@
 	    padding: 0;
 	    margin: 0;
 	  }
+	  #viewLocDiv {
+      padding: 0;
+      margin: 0;
+      height: 400px;
+      width: 100%;
+      position: relative;
+    }
 	  #footer{
 	  	display: none;
 	  }
@@ -49,7 +53,6 @@
 	  }
 	  #viewDiv{
 	  	position: absolute;
-	  	/*position: fixed;*/
 	  	width: 100%;
 	  }
 	  
@@ -58,7 +61,6 @@
 	    margin: 0;	
 		}
 		#miniViewDiv {
-      /*position: fixed;*/
       position: absolute;
       z-index: 1;
       right: 15px;
@@ -110,31 +112,31 @@
 
 							<form role="form">
 							  <div class="form-group">
-							    <label for="inputTitle">Título de la oferta:</label>
-							    <input type="text" class="form-control" id="inputTitle">
+							    <label for="inputTitle">Título de la oferta</label>
+							    <input type="text" class="form-control" name="inputTitle" id="inputTitle">
 							    <hr>
 							  
 							  </div>
 							  <h4>Información de contacto</h4>
 
 								<div class="form-group">
-							    <label for="inputCompany">Empresa:</label>
-							    <input class="typeahead form-control" type="text" id="inputCompany">
+							    <label for="inputCompany">Empresa</label>
+							    <input class="typeahead form-control" type="text" name="inputCompany" id="inputCompany">
 							  </div>
 
 
 							  <div class="form-group">
-							    <label for="inputEmail">Email:</label>
-							    <input type="email" class="form-control" id="inputEmail">
+							    <label for="inputEmail">Email</label>
+							    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
 							  </div>
 							  <div class="form-group">
-								  <label for="inputOtherInfo">Otra información:</label>
+								  <label for="inputOtherInfo">Otra información</label>
 								  <textarea class="form-control" rows="5" id="inputOtherInfo"></textarea>
 								</div>
 								<hr>
 							  <h4>Detalles de la oferta</h4>
 							  <div class="form-group">
-								  <label for="selOnRemote">Tipo de trabajo:</label>
+								  <label for="selOnRemote">Tipo de trabajo</label>
 								  <select class="form-control" id="selOnRemote">
 								    <option value="no">Presencial</option>
 								    <option value="yes">Teletrabajo</option>
@@ -142,8 +144,17 @@
 								  </select>
 								</div>
 
+								<div class="form-group" id="inputAdressDiv">
+							    <!-- <label for="inputAdress">Dirección</label> -->
+<!-- 							    <input type="text" class="form-control" id="inputAdress"> -->
+								<label>Dirección</label>	
+							  	<div id="viewLocDiv"></div>
+							  </div>
+
+							  <!-- <div id="viewLocDiv"></div> -->
+
 								<div class="form-group">
-								  <label for="selContract">Tipo de contrato:</label>
+								  <label for="selContract">Tipo de contrato</label>
 								  <select class="form-control" id="selContract">
 								    <option value="Indefinido">Indefinido</option>
 								    <option value="Obra y servico">Obra y servico</option>
@@ -152,18 +163,18 @@
 								</div>
 
 								<div class="form-group">
-							    <label for="inputSalary">Salario:</label>
+							    <label for="inputSalary">Salario</label>
 							    <input type="text" class="form-control" id="inputSalary">
 							  </div>
 
 							  <div class="form-group">
-								  <label for="inputDetails">Detalles:</label>
+								  <label for="inputDetails">Detalles</label>
 								  <textarea class="form-control" rows="5" id="inputDetails"></textarea>
 								</div>
 							</form>
 		        </div>
 		        <div class="modal-footer">
-		        	<button type="submit" class="btn btn-default">Enviar</button>
+		        	<button type="button" class="btn btn-default" id="sendBtnId">Enviar</button>
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 		        </div>
 		      </div>		      
@@ -241,10 +252,12 @@
 		  "esri/symbols/PictureMarkerSymbol",
 		  "esri/Graphic",
 		  "esri/PopupTemplate",
+		  "esri/tasks/Locator",
+		  "esri/widgets/Search",
 		  "dojo/on",
 		  "dojo/dom",
 		  "dojo/domReady!"
-		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,on,dom){
+		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,Locator,Search,on,dom){
 		  var map = new Map({
 		    basemap: "streets-night-vector"
 		  });
@@ -267,11 +280,6 @@
 
 		  {literal}
 		  var template = new PopupTemplate({
-        // title: "Marriage in NY, Zip Code: {ZIP}",
-        // content: "<p>As of 2015, <b>{MARRIEDRATE}%</b> of the population in this zip code is married.</p>" +
-        //   "<ul><li>{MARRIED_CY} people are married</li>" +
-        //   "<li>{NEVMARR_CY} have never married</li>" +
-        //   "<li>{DIVORCD_CY} are divorced</li><ul>"
         title: "{title}",
 
         
@@ -296,10 +304,13 @@
       });
 
 		  {/literal}
+		  //******************
+		  // 
+		  // FORM STUFF CODE
+		  // 
+			// 
+			// Autocomplete company name @company name input
 
-		  // ******************
-		  // AUTOCOMPLETAR NMBRE EMPRESA EN FORM
-			// ******************
 			var companies = new Bloodhound({
         datumTokenizer: function(datum) {
           return Bloodhound.tokenizers.whitespace(datum.value);
@@ -329,6 +340,115 @@
       });
 
 
+      //**************
+      //Search widget/Map
+
+      var companyLocatMap = new Map({
+        basemap: "dark-gray"
+      });
+
+      var companyLocatView = new MapView({
+        container: "viewLocDiv",
+        map: companyLocatMap,
+        center: [-97, 38],
+        scale: 10000000
+      });
+      //create widget
+      var searchWidget = new Search({
+        view: companyLocatView
+      });
+      //Change widget icon
+      searchWidget.sources.items[0].resultSymbol = new PictureMarkerSymbol({
+        url: "https://raw.githubusercontent.com/Jimeno0/geo-developers-site/jobs_site/images/orange-pin-blank.png",
+        width: 60,
+        height: 65
+      });
+      //start widget
+      searchWidget.startup();
+      // On start serach clear graphics
+      searchWidget.viewModel.on("search-start", function(evt){
+        companyLocatView.graphics.removeAll();
+      });
+      // add widget to the UI
+      companyLocatView.ui.add(searchWidget, {
+        position: "top-right"
+      });
+      //On map click create graphic/ clear previous
+      companyLocatView.on("click", function(evt){
+        if (companyLocatView.graphics.items[0]) {
+          companyLocatView.graphics.removeAll();
+        }else {
+        }
+
+        companyLocatView.graphics.add(createGraphic(evt.mapPoint));
+      });
+
+      function createGraphic(point){
+        return new Graphic ({
+          geometry: point,
+          symbol: new PictureMarkerSymbol({
+          url: "https://raw.githubusercontent.com/Jimeno0/geo-developers-site/jobs_site/images/orange-pin-blank.png",
+          width: 60,
+          height: 65
+          })
+        });
+      }
+
+
+      //**************
+      //End Search widget/Map
+
+
+
+
+
+
+
+
+
+      //*******
+      //Show/hide Adress input depending on the job tipe
+
+      $('#selOnRemote').on('change', function() {
+      	if ($('#selOnRemote').val() === 'yes') {
+					$("#inputAdressDiv").hide();
+				} else {
+					$("#inputAdressDiv").show();						
+				}			  
+			});
+			//*******
+      //Submit button
+      $('#sendBtnId').on('click', function() {
+				alert(" modal clicked moda focka");
+				var offerJobTitle = $('#inputTitle').val();
+				var offerJobCompany = $('#inputCompany').val();
+				var offerJobMail = $('#inputEmail').val();
+				var offerJobOtherContact = $('#inputOtherInfo').val();
+				var offerJobTipe = $('#selOnRemote').val();
+				var offerJobAdress = $('#inputAdress').val();
+				var offerJobContract = $('#selContract').val();
+				var offerJobBudget = $('#inputSalary').val();
+				var offerJobDetails = $('#inputDetails').val();
+
+
+				var offerToPush = {
+					offerJobTitle: offerJobTitle,
+					offerJobCompany: offerJobCompany,
+					offerJobMail: offerJobMail,
+					offerJobOtherContact: offerJobOtherContact,
+					offerJobTipe: offerJobTipe,
+					offerJobAdress: offerJobAdress,
+					offerJobContract: offerJobContract,
+					offerJobBudget: offerJobBudget,
+					offerJobDetails: offerJobDetails
+
+				}
+				console.log(offerToPush);
+
+
+
+			});
+      
 
 
 
@@ -366,9 +486,6 @@
 				var miniViewDiv = dom.byId('miniViewDiv');
 				var chngViewBtn = dom.byId('chngViewBtn');
 				on(chngViewBtn, "click",changeViews);
-
-
-
 
 				// *********************************
 				// BOOTSTRAP ACORDION FUNCTIONS
@@ -447,7 +564,6 @@
 			function createSymbol (url){
 				return new PictureMarkerSymbol({
 				  url: url,
-				  // width: 15,
 				  width: 60,
 				  height: 65
 				});
@@ -479,6 +595,8 @@
 				  	var jobOffer_details = GEODEV.jobs.data[i].offer_details;
 						var jobContract_type = GEODEV.jobs.data[i].contract_type;
 						var jobLocation = GEODEV.jobs.data[i].location;
+
+
 
 				  	var pointGraphic = new Graphic({
 					      attributes: {
@@ -562,7 +680,6 @@
 			    }
 			  });
 			}
-
 		});
 	</script>
 
