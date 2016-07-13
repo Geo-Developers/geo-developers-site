@@ -242,9 +242,18 @@
 		  "dojo/dom",
 		  "dojo/domReady!"
 		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,Locator,Search,on,dom){
-		  var map = new Map({
+		  
+			try{
+				var map = new Map({
 		    basemap: "streets-night-vector"
 		  });
+			}catch(e){
+				console.log("error al cargar el mapa: " + e + ". Refrescando página....");
+				location.reload();
+			}
+
+
+		  
 			var simpsonsMap = new WebMap({
 	      portalItem: {
 	        id: "9ac664557a774a858adee0edbb4f686c"
@@ -301,15 +310,6 @@
 	        $("input, textarea").val("");
 			});
 
-
-			// $(function () {
-		 //    $('.toggle').click(function (event) {
-	  //       event.preventDefault();
-	  //       var target = $(this).attr('href');
-	  //       $(target).toggleClass('hidden show');
-	  //       $("input, textarea").val("");
-		 //    });
-			// });
 
 			var companies = new Bloodhound({
         datumTokenizer: function(datum) {
@@ -637,9 +637,7 @@
 					  	worldView.graphics.add(pointGraphic);
 					  }
 				  }
-				} else{
-					console.log('No estan ready las views aun');
-				}
+				} 
 			}
 
 			function changeViews(callback){
