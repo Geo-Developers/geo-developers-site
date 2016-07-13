@@ -29,7 +29,7 @@
 	  #viewLocDiv {
       padding: 0;
       margin: 0;
-      height: 400px;
+      height: 390px;
       width: 100%;
       position: relative;
     }
@@ -44,8 +44,7 @@
 	  #viewDiv{
 	  	position: absolute;
 	  	width: 100%;
-	  }
-	  
+	  }	  
 		.padding10{
 		  padding: 10;
 	    margin: 0;	
@@ -76,101 +75,94 @@
       width: 422px;
     }
 
+    #createJobBtn{
+	    position: relative;
+	    top: -18px;
+	    /*top: +8px;*/
+	    display: block;
+	    width: 100%;
+	    border-radius: 0;	
+	    margin-bottom: 10px;
+    }
+    
+
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
 <body id="tos">
 	{include file="menu.tpl"}
+  <button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
+
 	<div id="main-wrapper">
+	<div calss="container">
+		<form role="form" id="form" class="well hidden">
+			<div class="row">
 
-		<!-- MODAL -->
-		<div class="container">
-		  <!-- Trigger the modal with a button -->
-		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Crear oferta</button>
-		  <hr>
-		  <!-- Modal -->
-		  <div class="modal fade" id="myModal" role="dialog">
-		    <div class="modal-dialog">
-		    
-		      <!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Publicar oferta de trabajo</h4>
-		        </div>
-		        <div class="modal-body">
+				<div class="col-md-4">
+					<h4>Información de la oferta</h4>
+				  <div class="form-group">
+				    <label for="inputTitle">Título de la oferta</label>
+				    <input type="text" class="form-control" name="inputTitle" id="inputTitle"> 
+				  </div>
+					<div class="form-group">
+				    <label for="inputCompany">Empresa</label>
+				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany">
+				  </div>
+				  <div class="form-group">
+				    <label for="inputEmail">Email</label>
+				    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+				  </div>
+				  <div class="form-group">
+					  <label for="inputOtherInfo">Otra información de contacto</label>
+					  <textarea class="form-control" rows="5" name="inputOtherInfo" id="inputOtherInfo"></textarea>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<h4>Detalles de la oferta</h4>
+				  <div class="form-group">
+					  <label for="selOnRemote">Tipo de trabajo</label>
+					  <select class="form-control" name="selOnRemote" id="selOnRemote">
+					    <option value="no">Presencial</option>
+					    <option value="yes">Teletrabajo</option>
+					    <option value="negociate">Negociable</option>
+					  </select>
+					</div>
+					<div class="form-group">
+					  <label for="selContract">Tipo de contrato</label>
+					  <select class="form-control" name="selContract" id="selContract">
+					    <option value="Indefinido">Indefinido</option>
+					    <option value="Obra y servico">Obra y servico</option>
+					    <option value="Otro">Otro</option>
+					  </select>
+					</div>
+					<div class="form-group">
+				    <label for="inputSalary">Salario</label>
+				    <input type="text" class="form-control" name="inputSalary" id="inputSalary">
+				  </div>
+				  <div class="form-group">
+					  <label for="inputDetails">Detalles</label>
+					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails"></textarea>
+					</div>
+				</div>
+				<div class="col-md-4">
+	  			<h4>Dirección</h4>
+	  			<div class="form-group" id="inputAdressDiv">
+						<div id="viewLocDiv"></div>
+						<input type="hidden" class="form-control" name="inputLong" id="inputLong">
+	  				<input type="hidden" class="form-control" name="inputLat" id="inputLat">
+				  </div>
+	  		</div>
+			</div>
+			<div class="row">
+	  		<div class="col-md-12">
+	  			<button type="button" class="btn btn-default" id="sendBtnId">Enviar</button>
 
-							<form role="form">
-							  <div class="form-group">
-							    <label for="inputTitle">Título de la oferta</label>
-							    <input type="text" class="form-control" name="inputTitle" id="inputTitle">
-							    <hr>
-							  
-							  </div>
-							  <h4>Información de contacto</h4>
-
-								<div class="form-group">
-							    <label for="inputCompany">Empresa</label>
-							    <input class="typeahead form-control" type="text" name="inputCompany" id="inputCompany">
-							  </div>
-
-
-							  <div class="form-group">
-							    <label for="inputEmail">Email</label>
-							    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
-							  </div>
-							  <div class="form-group">
-								  <label for="inputOtherInfo">Otra información</label>
-								  <textarea class="form-control" rows="5" id="inputOtherInfo"></textarea>
-								</div>
-								<hr>
-							  <h4>Detalles de la oferta</h4>
-							  <div class="form-group">
-								  <label for="selOnRemote">Tipo de trabajo</label>
-								  <select class="form-control" id="selOnRemote">
-								    <option value="no">Presencial</option>
-								    <option value="yes">Teletrabajo</option>
-								    <option value="negociate">Negociable</option>
-								  </select>
-								</div>
-
-								<div class="form-group" id="inputAdressDiv">
-							    <!-- <label for="inputAdress">Dirección</label> -->
-<!-- 							    <input type="text" class="form-control" id="inputAdress"> -->
-								<label>Dirección</label>	
-							  	
-							  </div>
-							  <div id="viewLocDiv"></div>
-							  <!-- <div id="viewLocDiv"></div> -->
-
-								<div class="form-group">
-								  <label for="selContract">Tipo de contrato</label>
-								  <select class="form-control" id="selContract">
-								    <option value="Indefinido">Indefinido</option>
-								    <option value="Obra y servico">Obra y servico</option>
-								    <option value="Otro">Otro</option>
-								  </select>
-								</div>
-
-								<div class="form-group">
-							    <label for="inputSalary">Salario</label>
-							    <input type="text" class="form-control" id="inputSalary">
-							  </div>
-
-							  <div class="form-group">
-								  <label for="inputDetails">Detalles</label>
-								  <textarea class="form-control" rows="5" id="inputDetails"></textarea>
-								</div>
-							</form>
-		        </div>
-		        <div class="modal-footer">
-		        	<button type="button" class="btn btn-default" id="sendBtnId">Enviar</button>
-		          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-		        </div>
-		      </div>		      
-		    </div>
-		  </div>  
-		</div>
+		      <button type="button" class="btn btn-default toggle" href="#form" >Cerrar</button>
+	  		</div>
+	  	</div>
+		</form>
+	</div>
+		
 
 
 		<!-- JOBS ACCORDION -->
@@ -301,6 +293,15 @@
 			// 
 			// Autocomplete company name @company name input
 
+			$(function () {
+		    $('.toggle').click(function (event) {
+	        event.preventDefault();
+	        var target = $(this).attr('href');
+	        $(target).toggleClass('hidden show');
+	        $("input, textarea").val("");
+		    });
+			});
+
 			var companies = new Bloodhound({
         datumTokenizer: function(datum) {
           return Bloodhound.tokenizers.whitespace(datum.value);
@@ -343,6 +344,13 @@
         center: [-97, 38],
         scale: 10000000
       });
+
+      //Set the view as global to allow the form to call the localion coordinates to send it as a form
+			companyLocatView.then(function(){
+				GEODEV.jobs.companyLocatView = companyLocatView;
+			}); 
+
+      
       //create widget
       var searchWidget = new Search({
         view: companyLocatView
@@ -358,6 +366,7 @@
       // On start serach clear graphics
       searchWidget.viewModel.on("search-start", function(evt){
         companyLocatView.graphics.removeAll();
+        evt.target.popupOpenOnSelect = false;
       });
       // add widget to the UI
       companyLocatView.ui.add(searchWidget, {
@@ -388,14 +397,6 @@
       //**************
       //End Search widget/Map
 
-
-
-
-
-
-
-
-
       //*******
       //Show/hide Adress input depending on the job tipe
 
@@ -409,40 +410,28 @@
 			//*******
       //Submit button
       $('#sendBtnId').on('click', function() {
-				alert(" modal clicked moda focka");
-				var offerJobTitle = $('#inputTitle').val();
-				var offerJobCompany = $('#inputCompany').val();
-				var offerJobMail = $('#inputEmail').val();
-				var offerJobOtherContact = $('#inputOtherInfo').val();
-				var offerJobTipe = $('#selOnRemote').val();
-				var offerJobAdress = $('#inputAdress').val();
-				var offerJobContract = $('#selContract').val();
-				var offerJobBudget = $('#inputSalary').val();
-				var offerJobDetails = $('#inputDetails').val();
-
-
-				var offerToPush = {
-					offerJobTitle: offerJobTitle,
-					offerJobCompany: offerJobCompany,
-					offerJobMail: offerJobMail,
-					offerJobOtherContact: offerJobOtherContact,
-					offerJobTipe: offerJobTipe,
-					offerJobAdress: offerJobAdress,
-					offerJobContract: offerJobContract,
-					offerJobBudget: offerJobBudget,
-					offerJobDetails: offerJobDetails
-
+				
+				if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
+					var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
+					$('#inputLat').val(location.latitude);
+					$('#inputLong').val(location.longitude);
 				}
-				console.log(offerToPush);
-
-
-
+				else {
+					$('#inputLat').val("");
+					$('#inputLong').val("");	
+				}
+				//send form
+				$.ajax( {
+		      type: "POST",
+		      url: form.attr( 'action' ),
+		      data: form.serialize(),
+		      success: function( response ) {
+		        console.log( response );
+		      }
+		    } );
+				console.log($("form").serialize());
 			});
       
-
-
-
-
  		  // *********************************
 			// PETICION AJAX SIMPSONS POIS
 			// *********************************
