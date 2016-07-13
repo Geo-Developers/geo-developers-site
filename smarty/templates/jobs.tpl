@@ -84,7 +84,9 @@
 	    border-radius: 0;	
 	    margin-bottom: 10px;
     }
-    
+    form{
+    	display: none;
+    }
 
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
@@ -95,32 +97,32 @@
 
 	<div id="main-wrapper">
 	<div calss="container">
-		<form role="form" id="form" class="well hidden">
+		<form role="form" id="form" class="well">
 			<div class="row">
 
 				<div class="col-md-4">
 					<h4>Información de la oferta</h4>
 				  <div class="form-group">
-				    <label for="inputTitle">Título de la oferta</label>
+				    <label class="text-primary" for="inputTitle">Título de la oferta</label>
 				    <input type="text" class="form-control" name="inputTitle" id="inputTitle"> 
 				  </div>
 					<div class="form-group">
-				    <label for="inputCompany">Empresa</label>
+				    <label  class="text-primary" for="inputCompany">Empresa</label>
 				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany">
 				  </div>
 				  <div class="form-group">
-				    <label for="inputEmail">Email</label>
+				    <label class="text-primary" for="inputEmail">Email</label>
 				    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
 				  </div>
 				  <div class="form-group">
-					  <label for="inputOtherInfo">Otra información de contacto</label>
+					  <label class="text-primary" for="inputOtherInfo">Otra información de contacto</label>
 					  <textarea class="form-control" rows="5" name="inputOtherInfo" id="inputOtherInfo"></textarea>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<h4>Detalles de la oferta</h4>
 				  <div class="form-group">
-					  <label for="selOnRemote">Tipo de trabajo</label>
+					  <label class="text-primary" for="selOnRemote">Tipo de trabajo</label>
 					  <select class="form-control" name="selOnRemote" id="selOnRemote">
 					    <option value="no">Presencial</option>
 					    <option value="yes">Teletrabajo</option>
@@ -128,7 +130,7 @@
 					  </select>
 					</div>
 					<div class="form-group">
-					  <label for="selContract">Tipo de contrato</label>
+					  <label class="text-primary" for="selContract">Tipo de contrato</label>
 					  <select class="form-control" name="selContract" id="selContract">
 					    <option value="Indefinido">Indefinido</option>
 					    <option value="Obra y servico">Obra y servico</option>
@@ -136,11 +138,11 @@
 					  </select>
 					</div>
 					<div class="form-group">
-				    <label for="inputSalary">Salario</label>
+				    <label class="text-primary" for="inputSalary">Salario</label>
 				    <input type="text" class="form-control" name="inputSalary" id="inputSalary">
 				  </div>
 				  <div class="form-group">
-					  <label for="inputDetails">Detalles</label>
+					  <label class="text-primary" for="inputDetails">Detalles</label>
 					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails"></textarea>
 					</div>
 				</div>
@@ -293,14 +295,21 @@
 			// 
 			// Autocomplete company name @company name input
 
-			$(function () {
-		    $('.toggle').click(function (event) {
-	        event.preventDefault();
-	        var target = $(this).attr('href');
-	        $(target).toggleClass('hidden show');
+			$('.toggle').click(function(){
+					var target = $(this).attr('href');
+	        $(target).toggle(500);
 	        $("input, textarea").val("");
-		    });
 			});
+
+
+			// $(function () {
+		 //    $('.toggle').click(function (event) {
+	  //       event.preventDefault();
+	  //       var target = $(this).attr('href');
+	  //       $(target).toggleClass('hidden show');
+	  //       $("input, textarea").val("");
+		 //    });
+			// });
 
 			var companies = new Bloodhound({
         datumTokenizer: function(datum) {
