@@ -439,14 +439,7 @@ $app->get('/jobs',function () use ($app, $db) {
 
   $db->where('is_open', 1);
   $jobs = $db->get('jobs');
-  /*$res = array(
-    'status' => 'error',
-    'message' => 'Tus preferencias no han podido ser guardadas, vuelve a intentarlo más tarde'
-  );
-  nombre({
-    asdasd: 123 as
-  })
-  */
+
   $jobs = json_encode($jobs);
   if(isset($_GET['callback'])){
     $jobs = $_GET['callback'] . "(" . $jobs . ")";
@@ -454,6 +447,47 @@ $app->get('/jobs',function () use ($app, $db) {
   echo $jobs;
 });
 
+$app->post('/jobs',function () use ($app, $db) {
+
+  $data = array(
+    "title"=> $_POST['inputTitle'],
+    "contact_email"=> $_POST['inputEmail'],
+    "company_name"=> $_POST['inputCompany'],
+    "contact_other"=> $_POST['inputOtherInfo'],
+    "on_remote"=> $_POST['selOnRemote'],
+    "location"=> $_POST['inputAddress'],
+    "location_lat"=> $_POST['inputLat'],
+    "location_lon"=> $_POST['inputLong'],
+    "salary_budget"=> $_POST['inputSalary'],
+    "contract_type"=> $_POST['selContract'],
+    "offer_details"=> $_POST['inputDetails'],
+    "is_open"=> 1,
+
+    
+    
+
+
+
+
+    );
+  if (!$db->insert("jobs",$data)) {
+    $res = array(
+        'status' => 'error',
+        'message' => 'Job could no be added: '.$db->getLastError()
+      );
+    # code...
+  }
+
+
+  if(!isset($res)){
+    $res = array(
+      'status' => 'success',
+      'message' => $data
+    );
+  }
+  echo json_encode($res.$_POST['inputLat']);
+  echo json_encode($_POST['inputLat']);
+});
 
 function insertOrUpdate($db, $table, $attrs, $id, $where){
   $data = array();

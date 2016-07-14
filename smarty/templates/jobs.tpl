@@ -97,7 +97,7 @@
 
 	<div id="main-wrapper">
 	<div calss="container">
-		<form role="form" id="form" class="well">
+		<form method="POST" action="../api/jobs" id="form" class="well">
 			<div class="row">
 
 				<div class="col-md-4">
@@ -148,16 +148,17 @@
 				</div>
 				<div class="col-md-4">
 	  			<h4>Dirección</h4>
-	  			<div class="form-group" id="inputAdressDiv">
+	  			<div class="form-group" id="inputAddressDiv">
 						<div id="viewLocDiv"></div>
-						<input type="hidden" class="form-control" name="inputLong" id="inputLong">
-	  				<input type="hidden" class="form-control" name="inputLat" id="inputLat">
+						<input type="hidden" class="form-control" type="number" name="inputLong" id="inputLong">
+	  				<input type="hidden" class="form-control" type="number" name="inputLat" id="inputLat">
+	  				<input type="hidden" class="form-control" name="inputAddress" id="inputAddress">
 				  </div>
 	  		</div>
 			</div>
 			<div class="row">
 	  		<div class="col-md-12">
-	  			<button type="button" class="btn btn-default" id="sendBtnId">Enviar</button>
+	  			<button type="button" class="btn btn-default" href="#form" id="sendBtnId">Enviar</button>
 
 		      <button type="button" class="btn btn-default toggle" href="#form" >Cerrar</button>
 	  		</div>
@@ -407,13 +408,13 @@
       //End Search widget/Map
 
       //*******
-      //Show/hide Adress input depending on the job tipe
+      //Show/hide Address input depending on the job tipe
 
       $('#selOnRemote').on('change', function() {
       	if ($('#selOnRemote').val() === 'yes') {
-					$("#inputAdressDiv").hide();
+					$("#inputAddressDiv").hide();
 				} else {
-					$("#inputAdressDiv").show();						
+					$("#inputAddressDiv").show();						
 				}			  
 			});
 			//*******
@@ -422,23 +423,35 @@
 				
 				if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
 					var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
+					var address = GEODEV.jobs.companyLocatView.graphics.items[0].attributes.searchResult;
 					$('#inputLat').val(location.latitude);
 					$('#inputLong').val(location.longitude);
+
+					if (address) {
+						$('#inputAddress').val(address);
+					}else{
+						console.log("hay que hacer reverse geocoder");
+					}
 				}
 				else {
-					$('#inputLat').val("");
-					$('#inputLong').val("");	
+					console.log("no lat/long values beacuse of remote job");
+					$('#inputLat').val(null);
+					$('#inputLong').val(null);
 				}
 				//send form
 				$.ajax( {
 		      type: "POST",
-		      url: form.attr( 'action' ),
-		      data: form.serialize(),
+		      url: $("form").attr( 'action' ),
+		      data: $("form").serialize(),
 		      success: function( response ) {
 		        console.log( response );
+		        //on success close form
+    		    var target = $(this).attr('href');
+			      $(target).toggle(500);
+			      $("input, textarea").val("");
 		      }
 		    } );
-				console.log($("form").serialize());
+
 			});
       
  		  // *********************************

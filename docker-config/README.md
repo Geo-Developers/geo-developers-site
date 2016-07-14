@@ -29,6 +29,29 @@ This tool is also very useful when you are learning who docker works:
 
 It allows you to monitor your resources, containers, images, volumnes, etc.
 
+## Troubleshooting
+
+* What to do when you Docker machine cant connect with the proper IP `Docker machine status timeout`:
+
+	1. Delete our virtual machine (named dev in this case):
+
+	  * `docker-machine rm dev`
+
+	2. Create a new virutal machine
+	  
+	  * `docker-machine create --driver virtualbox dev`
+	  
+	3. Set the enviroments
+
+	  * `docker-machine env dev`
+	  * `eval $(docker-machine env dev)`
+	  
+	4. Compose up the containers and set up the network
+	  
+	  * `docker-compose up -d`
+
+	5. Run `docker-machine ls` to know our virtual machine IP
+
 ## Get ready for deployment
 
 ** Pending**
