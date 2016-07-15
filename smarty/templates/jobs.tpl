@@ -104,15 +104,15 @@
 					<h4>Información de la oferta</h4>
 				  <div class="form-group">
 				    <label class="text-primary" for="inputTitle">Título de la oferta</label>
-				    <input type="text" class="form-control" name="inputTitle" id="inputTitle"> 
+				    <input type="text" class="form-control" name="inputTitle" id="inputTitle" required="true"> 
 				  </div>
 					<div class="form-group">
 				    <label  class="text-primary" for="inputCompany">Empresa</label>
-				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany">
+				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany" required="true">
 				  </div>
 				  <div class="form-group">
 				    <label class="text-primary" for="inputEmail">Email</label>
-				    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+				    <input type="email" class="form-control" name="inputEmail" id="inputEmail" required="true">
 				  </div>
 				  <div class="form-group">
 					  <label class="text-primary" for="inputOtherInfo">Otra información de contacto</label>
@@ -143,12 +143,13 @@
 				  </div>
 				  <div class="form-group">
 					  <label class="text-primary" for="inputDetails">Detalles</label>
-					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails"></textarea>
+					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails" required="true"></textarea>
 					</div>
 				</div>
 				<div class="col-md-4">
 	  			<h4>Dirección</h4>
 	  			<div class="form-group" id="inputAddressDiv">
+	  				<p style="color: red;" id ="warningMsng"></p>
 						<div id="viewLocDiv"></div>
 						<input type="hidden" class="form-control" type="number" name="inputLong" id="inputLong">
 	  				<input type="hidden" class="form-control" type="number" name="inputLat" id="inputLat">
@@ -158,7 +159,7 @@
 			</div>
 			<div class="row">
 	  		<div class="col-md-12">
-	  			<button type="button" class="btn btn-default" href="#form" id="sendBtnId">Enviar</button>
+	  			<button type="submit" class="btn btn-default" href="#form" id="sendBtnId">Enviar</button>
 
 		      <button type="button" class="btn btn-default toggle" href="#form" >Cerrar</button>
 	  		</div>
@@ -377,6 +378,7 @@
       searchWidget.viewModel.on("search-start", function(evt){
         companyLocatView.graphics.removeAll();
         evt.target.popupOpenOnSelect = false;
+        GEODEV.jobs.address = evt.target.currentSuggestion.text;
       });
       // add widget to the UI
       companyLocatView.ui.add(searchWidget, {
@@ -419,40 +421,56 @@
 			});
 			//*******
       //Submit button
-      $('#sendBtnId').on('click', function() {
-				
-				if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
-					var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
-					var address = GEODEV.jobs.companyLocatView.graphics.items[0].attributes.searchResult;
-					$('#inputLat').val(location.latitude);
-					$('#inputLong').val(location.longitude);
 
-					if (address) {
-						$('#inputAddress').val(address);
-					}else{
-						console.log("hay que hacer reverse geocoder");
+
+			  var $form = $('form');
+			  $form.submit(function(event){
+			   	event.preventDefault();
+
+			    if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
+			    	var address = GEODEV.jobs.address;
+			    	if (GEODEV.jobs.companyLocatView.graphics.items[0]) {
+			    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;	
+			    	}else{
+			    		
+			    		return $("#warningMsng").html("Introduce una localización");
+			    	}
+						// var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
+						
+						$('#inputLat').val(location.latitude);
+						$('#inputLong').val(location.longitude);
+						if (address) {
+							$('#inputAddress').val(address);
+							submitFormAndClose();
+						}else{
+							console.log("hay que hacer reverse geocoder");
+							var lat = location.latitude.toString();
+							var long = location.longitude.toString();
+							var urlGeoCoder = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&location="+long+","+lat;
+							$.getJSON(urlGeoCoder, function(data){
+								if (data.address) {
+									$('#inputAddress').val(data.address.Match_addr);
+								}else{
+									$('#inputAddress').val(long+","+lat);
+								}
+								submitFormAndClose();
+							});
+						}
 					}
-				}
-				else {
-					console.log("no lat/long values beacuse of remote job");
-					$('#inputLat').val(null);
-					$('#inputLong').val(null);
-				}
-				//send form
-				$.ajax( {
-		      type: "POST",
-		      url: $("form").attr( 'action' ),
-		      data: $("form").serialize(),
-		      success: function( response ) {
-		        console.log( response );
-		        //on success close form
-    		    var target = $(this).attr('href');
-			      $(target).toggle(500);
-			      $("input, textarea").val("");
-		      }
-		    } );
+					else {
+						console.log("no lat/long values beacuse of remote job");
+						submitFormAndClose();
+					}
 
-			});
+					
+					function submitFormAndClose(){
+						$.post($form.attr('action'), $form.serialize(), function(response){
+			      	console.log(response);
+			      	$form.toggle(500);
+			    	},'json');
+					};
+			    return false;
+			   });
       
  		  // *********************************
 			// PETICION AJAX SIMPSONS POIS

@@ -455,21 +455,19 @@ $app->post('/jobs',function () use ($app, $db) {
     "company_name"=> $_POST['inputCompany'],
     "contact_other"=> $_POST['inputOtherInfo'],
     "on_remote"=> $_POST['selOnRemote'],
-    "location"=> $_POST['inputAddress'],
-    "location_lat"=> $_POST['inputLat'],
-    "location_lon"=> $_POST['inputLong'],
     "salary_budget"=> $_POST['inputSalary'],
     "contract_type"=> $_POST['selContract'],
     "offer_details"=> $_POST['inputDetails'],
     "is_open"=> 1,
-
     
-    
-
-
-
-
     );
+  if ($_POST['inputLat'] && $_POST['inputLong']) {
+    $data["location_lat"] = $_POST['inputLat'];
+    $data["location_lon"] = $_POST['inputLong'];
+    $data["location"]= $_POST['inputAddress'];
+  }
+  
+
   if (!$db->insert("jobs",$data)) {
     $res = array(
         'status' => 'error',
@@ -485,8 +483,7 @@ $app->post('/jobs',function () use ($app, $db) {
       'message' => $data
     );
   }
-  echo json_encode($res.$_POST['inputLat']);
-  echo json_encode($_POST['inputLat']);
+  echo json_encode($res);
 });
 
 function insertOrUpdate($db, $table, $attrs, $id, $where){
