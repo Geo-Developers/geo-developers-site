@@ -171,7 +171,7 @@
 		<div calss="container">
 			<div class="row">
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>			
+					<button type="button" class="btn btn-primary btn-block toggle hideMapsAtPhone" href="#form" id="createJobBtn">Crear oferta</button>			
 				</div>
 			</div>
 			<div class="row">
@@ -180,13 +180,13 @@
 					<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
 				</div>
 				<!-- MapsViews -->
-				<div id="mapContainer" class="col-md-8">
+				<div id="mapContainer" class="col-md-8 hideMapsAtPhone">
 					<div id="viewDiv"></div>
 					<div id="miniMapElements">
 						<div id="miniViewDiv" simpsons-in-main-view="0" >
 							<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
 							  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-							</button>	
+							</button>
 						</div>
 					</div>	
 				</div>
@@ -526,51 +526,54 @@
 
 				$('.collapse').on('show.bs.collapse', function (e) {
 
-			  	worldView.graphics.removeAll();
-			  	simpsonsView.graphics.removeAll();
-			  	drawPoints();
-			  	//Collapse previous accordion opened
-			  	$(GEODEV.jobs.prevJobShow).collapse('hide');
-			  	
-			  	var idJob = parseInt(e.target.getAttribute("job-id"));
-			  	var simpsonsViewGraphic = simpsonsView.graphics.items;
-			  	var worldViewGraphic = worldView.graphics.items;
+					try{
+				  	worldView.graphics.removeAll();
+				  	simpsonsView.graphics.removeAll();
+				  	drawPoints();
+				  	//Collapse previous accordion opened
+				  	$(GEODEV.jobs.prevJobShow).collapse('hide');
+				  	
+				  	var idJob = parseInt(e.target.getAttribute("job-id"));
+				  	var simpsonsViewGraphic = simpsonsView.graphics.items;
+				  	var worldViewGraphic = worldView.graphics.items;
 
-			  	var isInWorldView = worldViewGraphic.find(isInView);
-			  	var isInSimpsonsView = simpsonsViewGraphic.find(isInView);
-			  	function isInView (lyr){
-			  		return lyr.attributes.id=== idJob;
-			  	}
+				  	var isInWorldView = worldViewGraphic.find(isInView);
+				  	var isInSimpsonsView = simpsonsViewGraphic.find(isInView);
+				  	function isInView (lyr){
+				  		return lyr.attributes.id=== idJob;
+				  	}
 
-			  	if (isInWorldView) {
-			  		isInWorldView.symbol = highlightedSymbol;
-	  				worldView.goTo({
-		  					target: isInWorldView.geometry,
-		  					zoom: 8
-		  				},
-		  				{
-		  					animate: true,
-  							duration: 1000,
-  							easing: "ease-in-out"
-						});
+				  	if (isInWorldView) {
+				  		isInWorldView.symbol = highlightedSymbol;
+		  				worldView.goTo({
+			  					target: isInWorldView.geometry,
+			  					zoom: 8
+			  				},
+			  				{
+			  					animate: true,
+	  							duration: 1000,
+	  							easing: "ease-in-out"
+							});
 
-			  	} else {
-			  		isInSimpsonsView.symbol = highlightedSymbolSimps;
-	  				simpsonsView.goTo({
-		  					target: isInSimpsonsView.geometry
-		  				},
-		  				{
-		  					animate: true,
-  							duration: 1000,
-  							easing: "ease-in-out"
-						});
-			  	}
+				  	} else {
+				  		isInSimpsonsView.symbol = highlightedSymbolSimps;
+		  				simpsonsView.goTo({
+			  					target: isInSimpsonsView.geometry
+			  				},
+			  				{
+			  					animate: true,
+	  							duration: 1000,
+	  							easing: "ease-in-out"
+							});
+				  	}
 
-			  	//Getting the element to collapse when another accordion is been opened
-			  	var prevJobShow = $("#" + e.target.getAttribute("id"));
-			  	GEODEV.jobs.prevJobShow = prevJobShow[0];
-			  	
-
+				  	//Getting the element to collapse when another accordion is been opened
+				  	var prevJobShow = $("#" + e.target.getAttribute("id"));
+				  	GEODEV.jobs.prevJobShow = prevJobShow[0];
+				  	
+				 } catch(e){
+				 	console.log("No autozoom porque no se muestran los mapas en version movil");
+				 }
 				});
 			});
 
