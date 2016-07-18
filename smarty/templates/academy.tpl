@@ -19,15 +19,15 @@
             <form>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-sm-12 col-md-8">
                             <div class="input-group">
                                 <input type="text" id="search" class="form-control" autocomplete="off">
                                   <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" type="button" id="search-btn"><i class="glyphicon glyphicon-search" ></i></button>
                                   </span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
                             <select name="filter" class="form-control" id="filter">
                                 <option value="">Filtrar</option>
                                 {for $K=0 to $TAGS|@count - 1}
@@ -41,16 +41,16 @@
             <hr>
             <div class="row" id="video-list">
                 {for $I=0 to $NUMVIDEOS}
-                    <div class="col-md-12 video" data-tags="{$VIDEOS[$I].tags}" data-title="{$VIDEOS[$I].title}">
+                    <div class="col-xs-12 col-sm-12 col-md-12 video" data-tags="{$VIDEOS[$I].tags}" data-title="{$VIDEOS[$I].title}">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-xs-4 col-sm-4 col-md-3">
                                 <a href="{$VIDEOS[$I].youtubeId}/view" class="image featured">
                                     <img src="https://i.ytimg.com/vi/{$VIDEOS[$I].youtubeId}/mqdefault.jpg" alt="" />
                                     <span class="duration">{$VIDEOS[$I].duration}</span>
                                 </a>
                             </div>
-                            <div class="col-md-9">
-                                <p><a href="{$VIDEOS[$I].youtubeId}/view" class="title">{$VIDEOS[$I].title}</a></p>
+                            <div class="col-xs-8 col-sm-8 col-md-9">
+                                <p><a href="{$VIDEOS[$I].youtubeId}/view" class="title" title="{$VIDEOS[$I].title}">{$VIDEOS[$I].title}</a></p>
 
                                 <div class="details">
                                     <span><i class="glyphicon glyphicon-eye-open"></i>{$VIDEOS[$I].viewCount}</span>
