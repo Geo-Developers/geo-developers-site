@@ -455,6 +455,24 @@ $app->get('/jobs',function () use ($app, $db) {
 });
 
 
+/*
+  GET USER PROFILES
+*/
+$app->get('/users',function () use ($app, $db) {
+
+  $db->join("users u", "p.meetup_id=u.meetup_id", "LEFT");
+  //$db->where("u.id", 6);
+  $profiles = $db->get ("profiles p", null, "u.name, p.twitter_url, p.meetup_id, p.photo_url, p.location, p.lat,p.lon, p.facebook_url, p.flickr_url, p.github_url, p.linkedin_url");
+  //print_r ($products);
+
+  $profiles = json_encode($profiles);
+  if(isset($_GET['callback'])){
+    $profiles = $_GET['callback'] . "(" . $profiles . ")";
+  }
+  echo $profiles;
+});
+
+
 function insertOrUpdate($db, $table, $attrs, $id, $where){
   $data = array();
 
