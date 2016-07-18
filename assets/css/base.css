@@ -86,6 +86,7 @@ body {
     width: 960px;
 }
 
+
 @media screen and (min-width: 737px) {
 
     .container.\31 25\25 {
@@ -2181,6 +2182,11 @@ body .logo img{
         margin: -50px 0 50px -40px;
         width: auto;
     }
+    .video-list .box .image.featured {
+          margin: 20px 10px 0 0;
+    left: 0;
+    top: -15px;
+    }
 
     /* Wrappers */
 
@@ -2486,15 +2492,16 @@ a#login-btn:hover{
     padding: 1em;
     margin-bottom: 1em;
 }
+@media screen and (min-width: 580px) {
+  #members,
+  #members li{
 
-#members,
-#members li{
-
-}
-#members{    width: 100%;}
-#member-list li{
-    padding: 0;
-    margin-bottom: 1.5em;
+  }
+  #members{    width: 100%;}
+  #member-list li{
+      padding: 0;
+      margin-bottom: 1.5em;
+  }
 }
 
 #members .picture,
@@ -2570,18 +2577,49 @@ a#login-btn:hover{
     margin-right: 10px;
     padding: 7px 0;
 }
-#members li:nth-child(3n+1) .member-wrapper{
-    /*1, 4, 7*/
-    margin-right: 15px;
+@media screen and (min-width: 580px) {
+  #members li:nth-child(3n+1) .member-wrapper{
+      /*1, 4, 7*/
+      margin-right: 15px;
+  }
+  #members li:nth-child(3n+2) .member-wrapper{
+      /*2, 5, 8*/
+      margin-left: 7px;
+      margin-right: 7px;
+  }
+  #members li:nth-child(3n+3) .member-wrapper{
+      /*2, 5, 8*/
+      margin-left: 15px;
+
+  }
 }
-#members li:nth-child(3n+2) .member-wrapper{
-    /*2, 5, 8*/
-    margin-left: 7px;
-    margin-right: 7px;
+.member-wrapper p.mb0 a,
+.video div.col-sm-8.col-md-9 p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 62%;
+  display: inline-block;
 }
-#members li:nth-child(3n+3) .member-wrapper{
-    /*2, 5, 8*/
-    margin-left: 15px;
+.video div.col-sm-8.col-md-9 p{
+  width: 96%;
+}
+.col-sm-12 #search-btn{
+  margin-right: 0;
+}
+@media screen and (max-width: 580px) {
+    #member-list{
+      width: 100%;
+      margin-top: 15px;
+    }
+    #members li{
+      margin-bottom: 15px;
+    }
+    #members .col-md-offset-2.col-md-2.text-right{
+      display: block;
+      width: 94%;
+      margin-left: 3%;
+    }
 
 }
 .member-wrapper{
@@ -2823,3 +2861,24 @@ div#referrers.box p{
     100% { opacity: 1.0; }
 }
 
+@media screen and (max-width: 960px) and (min-width: 580px) {
+  #member-list{
+    width: 100%
+  }
+  #members #member-list li{
+    width: 48%;
+    float: left;
+  }
+  #members li:nth-child(3n+3) .member-wrapper,
+  #members li:nth-child(3n+1) .member-wrapper,
+  #members li:nth-child(3n+2) .member-wrapper{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #members li:nth-child(even) .member-wrapper{
+    margin-left: 2%;
+  }
+  #members li:nth-child(odd) .member-wrapper{
+    margin-right: 2%;
+  }
+}
