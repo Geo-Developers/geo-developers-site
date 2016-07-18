@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -34,21 +36,14 @@
       position: relative;
     }
 	  #footer{
-	  	display: none;
-	  }
-	  #viewDiv,
-	  #main-wrapper,
-	  #mapContainer {
-	  	height: 100%;
+	  	/*display: none;*/
 	  }
 	  #viewDiv{
-	  	position: absolute;
+	  	position: relative;
 	  	width: 100%;
+	  	height: 500px;
 	  }	  
-		.padding10{
-		  padding: 10;
-	    margin: 0;	
-		}
+
 		#miniViewDiv {
       position: absolute;
       z-index: 1;
@@ -75,44 +70,47 @@
       width: 422px;
     }
 
-    #createJobBtn{
-	    position: relative;
-	    top: -18px;
-	    /*top: +8px;*/
-	    display: block;
-	    width: 100%;
-	    border-radius: 0;	
-	    margin-bottom: 10px;
-    }
+		#createJobBtn{
+			position: fixed;
+			z-index: 999;
+			top: 42px;
+			display: block;
+			width: 100%;
+			border-radius: 0;	
+			margin-bottom: 10px;
+		}
     form{
     	display: none;
     }
-
+    #jobsDiv{
+    	height: 500px;
+    	overflow: auto;
+    }
 	</style>
     {include file="header.tpl" title="Comunidad de Geo Developers"}
 </head>
 <body id="tos">
-	{include file="menu.tpl"}
-  <button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
+
 
 	<div id="main-wrapper">
+		{include file="menu.tpl"}
 	<div calss="container">
-		<form role="form" id="form" class="well">
+		<form method="POST" action="../api/jobs" id="form" class="well">
 			<div class="row">
 
 				<div class="col-md-4">
 					<h4>Información de la oferta</h4>
 				  <div class="form-group">
 				    <label class="text-primary" for="inputTitle">Título de la oferta</label>
-				    <input type="text" class="form-control" name="inputTitle" id="inputTitle"> 
+				    <input type="text" class="form-control" name="inputTitle" id="inputTitle" required="true"> 
 				  </div>
 					<div class="form-group">
 				    <label  class="text-primary" for="inputCompany">Empresa</label>
-				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany">
+				    <input type="text" class="typeahead form-control" name="inputCompany" id="inputCompany" required="true">
 				  </div>
 				  <div class="form-group">
 				    <label class="text-primary" for="inputEmail">Email</label>
-				    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+				    <input type="email" class="form-control" name="inputEmail" id="inputEmail" required="true">
 				  </div>
 				  <div class="form-group">
 					  <label class="text-primary" for="inputOtherInfo">Otra información de contacto</label>
@@ -143,21 +141,23 @@
 				  </div>
 				  <div class="form-group">
 					  <label class="text-primary" for="inputDetails">Detalles</label>
-					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails"></textarea>
+					  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails" required="true"></textarea>
 					</div>
 				</div>
 				<div class="col-md-4">
 	  			<h4>Dirección</h4>
-	  			<div class="form-group" id="inputAdressDiv">
+	  			<div class="form-group" id="inputAddressDiv">
+	  				<p style="color: red;" id ="warningMsng"></p>
 						<div id="viewLocDiv"></div>
-						<input type="hidden" class="form-control" name="inputLong" id="inputLong">
-	  				<input type="hidden" class="form-control" name="inputLat" id="inputLat">
+						<input type="hidden" class="form-control" type="number" name="inputLong" id="inputLong">
+	  				<input type="hidden" class="form-control" type="number" name="inputLat" id="inputLat">
+	  				<input type="hidden" class="form-control" name="inputAddress" id="inputAddress">
 				  </div>
 	  		</div>
 			</div>
 			<div class="row">
 	  		<div class="col-md-12">
-	  			<button type="button" class="btn btn-default" id="sendBtnId">Enviar</button>
+	  			<button type="submit" class="btn btn-default" href="#form" id="sendBtnId">Enviar</button>
 
 		      <button type="button" class="btn btn-default toggle" href="#form" >Cerrar</button>
 	  		</div>
@@ -167,61 +167,73 @@
 		
 
 
-		<!-- JOBS ACCORDION -->
-		<div id= "jobsDiv" class="col-md-4 padding10" >
-			<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
-		</div>
-		<div id="mapContainer" class="col-md-8">
-			<div id="viewDiv"></div>
-			<div id="miniMapElements">
-				<div id="miniViewDiv" simpsons-in-main-view="0" >
-					<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
-					  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-					</button>	
+		
+		<div calss="container">
+			<div class="row">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>			
 				</div>
-			</div>	
+			</div>
+			<div class="row">
+			<!-- JOBS ACCORDION -->
+				<div id= "jobsDiv" class="col-md-4" >
+					<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
+				</div>
+				<!-- MapsViews -->
+				<div id="mapContainer" class="col-md-8">
+					<div id="viewDiv"></div>
+					<div id="miniMapElements">
+						<div id="miniViewDiv" simpsons-in-main-view="0" >
+							<button id="chngViewBtn" type="button" class="btn btn-default btn-xs">
+							  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+							</button>	
+						</div>
+					</div>	
+				</div>
+			</div>
 		</div>
+
 
 
 	<?php {literal} ?>
 	<!-- HERE IS THE TEMPLATE TO GENERATE THE JOBS OFFERS ACCORDION -->
 	<script id="theTmpl" type="text/x-jsrender">
 	<div>
-		  <div class="panel panel-default">
-		    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
-		      <h4 class="panel-title">
-		        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
-		          <h4>{{:title}}</h4>
-		        </a>
-		      </h4>
-		    </div>
-		    <div id="collapse-{{:id}}" job-id="{{:id}}" class="panel-collapse collapse padding10" role="tabpanel" aria-labelledby="headingOne">
-		    	<h5 class="text-primary" >Información de contacto</h5>
-		    	<span class="text-primary">Empresa: </span>
-		    	{{:company_name}}
-		    	<br>
-		    	<span class="text-primary">Email:  </span>
-		    	{{:contact_email}}
-		    	<br>
-		    	<span class="text-primary">Otra información: </span>
-		    	{{:contact_other}}
-		    	<br>
-		    	<h5 class="text-primary" >Detalles de la oferta</h5>
-		    	<span class="text-primary">Tipo de contrato: </span>
-		    	{{:contract_type}}
-		    	<br>
-		    	<span class="text-primary">Salario: </span>
-		    	{{:salary_budget}}
-		    	<br>
-		    	<span class="text-primary">Detalles: </span>
-		    	{{:offer_details}}
-		    	<br>
-		    	<br>
-		    	<span class="text-primary">Localización: </span>
-		    	{{:location}}
-		    	<br>    	
-		    </div>
+	  <div class="panel panel-default">
+	    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
+	      <h4 class="panel-title">
+	        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
+	          <h4>{{:title}}</h4>
+	        </a>
+	      </h4>
 	    </div>
+	    <div id="collapse-{{:id}}" job-id="{{:id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+	    	<h5 class="text-primary" >Información de contacto</h5>
+	    	<span class="text-primary">Empresa: </span>
+	    	{{:company_name}}
+	    	<br>
+	    	<span class="text-primary">Email:  </span>
+	    	{{:contact_email}}
+	    	<br>
+	    	<span class="text-primary">Otra información: </span>
+	    	{{:contact_other}}
+	    	<br>
+	    	<h5 class="text-primary" >Detalles de la oferta</h5>
+	    	<span class="text-primary">Tipo de contrato: </span>
+	    	{{:contract_type}}
+	    	<br>
+	    	<span class="text-primary">Salario: </span>
+	    	{{:salary_budget}}
+	    	<br>
+	    	<span class="text-primary">Detalles: </span>
+	    	{{:offer_details}}
+	    	<br>
+	    	<br>
+	    	<span class="text-primary">Localización: </span>
+	    	{{:location}}
+	    	<br>    	
+	    </div>
+    </div>
 	</div>
 	</script>
 	<?php {/literal} ?>
@@ -242,9 +254,18 @@
 		  "dojo/dom",
 		  "dojo/domReady!"
 		], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,Locator,Search,on,dom){
-		  var map = new Map({
+		  
+			try{
+				var map = new Map({
 		    basemap: "streets-night-vector"
 		  });
+			}catch(e){
+				console.log("error al cargar el mapa: " + e + ". Refrescando página....");
+				location.reload();
+			}
+
+
+		  
 			var simpsonsMap = new WebMap({
 	      portalItem: {
 	        id: "9ac664557a774a858adee0edbb4f686c"
@@ -301,15 +322,6 @@
 	        $("input, textarea").val("");
 			});
 
-
-			// $(function () {
-		 //    $('.toggle').click(function (event) {
-	  //       event.preventDefault();
-	  //       var target = $(this).attr('href');
-	  //       $(target).toggleClass('hidden show');
-	  //       $("input, textarea").val("");
-		 //    });
-			// });
 
 			var companies = new Bloodhound({
         datumTokenizer: function(datum) {
@@ -376,6 +388,7 @@
       searchWidget.viewModel.on("search-start", function(evt){
         companyLocatView.graphics.removeAll();
         evt.target.popupOpenOnSelect = false;
+        GEODEV.jobs.address = evt.target.currentSuggestion.text;
       });
       // add widget to the UI
       companyLocatView.ui.add(searchWidget, {
@@ -407,39 +420,67 @@
       //End Search widget/Map
 
       //*******
-      //Show/hide Adress input depending on the job tipe
+      //Show/hide Address input depending on the job tipe
 
       $('#selOnRemote').on('change', function() {
       	if ($('#selOnRemote').val() === 'yes') {
-					$("#inputAdressDiv").hide();
+					$("#inputAddressDiv").hide();
 				} else {
-					$("#inputAdressDiv").show();						
+					$("#inputAddressDiv").show();						
 				}			  
 			});
 			//*******
       //Submit button
-      $('#sendBtnId').on('click', function() {
-				
-				if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
-					var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
-					$('#inputLat').val(location.latitude);
-					$('#inputLong').val(location.longitude);
-				}
-				else {
-					$('#inputLat').val("");
-					$('#inputLong').val("");	
-				}
-				//send form
-				$.ajax( {
-		      type: "POST",
-		      url: form.attr( 'action' ),
-		      data: form.serialize(),
-		      success: function( response ) {
-		        console.log( response );
-		      }
-		    } );
-				console.log($("form").serialize());
-			});
+
+
+			  var $form = $('form');
+			  $form.submit(function(event){
+			   	event.preventDefault();
+
+			    if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
+			    	var address = GEODEV.jobs.address;
+			    	if (GEODEV.jobs.companyLocatView.graphics.items[0]) {
+			    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;	
+			    	}else{
+			    		
+			    		return $("#warningMsng").html("Introduce una localización");
+			    	}
+						// var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
+						
+						$('#inputLat').val(location.latitude);
+						$('#inputLong').val(location.longitude);
+						if (address) {
+							$('#inputAddress').val(address);
+							submitFormAndClose();
+						}else{
+							console.log("hay que hacer reverse geocoder");
+							var lat = location.latitude.toString();
+							var long = location.longitude.toString();
+							var urlGeoCoder = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&location="+long+","+lat;
+							$.getJSON(urlGeoCoder, function(data){
+								if (data.address) {
+									$('#inputAddress').val(data.address.Match_addr);
+								}else{
+									$('#inputAddress').val(long+","+lat);
+								}
+								submitFormAndClose();
+							});
+						}
+					}
+					else {
+						console.log("no lat/long values beacuse of remote job");
+						submitFormAndClose();
+					}
+
+					
+					function submitFormAndClose(){
+						$.post($form.attr('action'), $form.serialize(), function(response){
+			      	console.log(response);
+			      	$form.toggle(500);
+			    	},'json');
+					};
+			    return false;
+			   });
       
  		  // *********************************
 			// PETICION AJAX SIMPSONS POIS
@@ -637,9 +678,7 @@
 					  	worldView.graphics.add(pointGraphic);
 					  }
 				  }
-				} else{
-					console.log('No estan ready las views aun');
-				}
+				} 
 			}
 
 			function changeViews(callback){
