@@ -2822,12 +2822,16 @@ div#referrers.box p{
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
-
-@media (max-width: 700px) {
+/*Jobs media for smartphones*/
+@media (max-width: 750px) {
 /*  #createJobBtn {
     display: none; 
   }*/
   #viewDiv, #createJobBtn, #miniViewDiv {
     display: none;
+  }
+  #jobsDiv {
+    height: 600px;
+    width: 100%;
   }
 }

@@ -6,6 +6,21 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+	  <?php {literal} ?>
+	  <script>
+		var _rollbarConfig = {
+	    accessToken: "bd8336286d3e497bb5e3a28c9788bcbf",
+	    captureUncaught: true,
+	    captureUnhandledRejections: false,
+	    payload: {
+	        environment: "staging"
+	    }
+		};
+		// Rollbar Snippet
+		!function(r){function e(t){if(o[t])return o[t].exports;var n=o[t]={exports:{},id:t,loaded:!1};return r[t].call(n.exports,n,n.exports,e),n.loaded=!0,n.exports}var o={};return e.m=r,e.c=o,e.p="",e(0)}([function(r,e,o){"use strict";var t=o(1).Rollbar,n=o(2);_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://d37gvrvc0wt4s1.cloudfront.net/js/v1.9/rollbar.min.js";var a=t.init(window,_rollbarConfig),i=n(a,_rollbarConfig);a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,i)},function(r,e){"use strict";function o(r){return function(){try{return r.apply(this,arguments)}catch(e){try{console.error("[Rollbar]: Internal error",e)}catch(o){}}}}function t(r,e,o){window._rollbarWrappedError&&(o[4]||(o[4]=window._rollbarWrappedError),o[5]||(o[5]=window._rollbarWrappedError._rollbarContext),window._rollbarWrappedError=null),r.uncaughtError.apply(r,o),e&&e.apply(window,o)}function n(r){var e=function(){var e=Array.prototype.slice.call(arguments,0);t(r,r._rollbarOldOnError,e)};return e.belongsToShim=!0,e}function a(r){this.shimId=++c,this.notifier=null,this.parentShim=r,this._rollbarOldOnError=null}function i(r){var e=a;return o(function(){if(this.notifier)return this.notifier[r].apply(this.notifier,arguments);var o=this,t="scope"===r;t&&(o=new e(this));var n=Array.prototype.slice.call(arguments,0),a={shim:o,method:r,args:n,ts:new Date};return window._rollbarShimQueue.push(a),t?o:void 0})}function l(r,e){if(e.hasOwnProperty&&e.hasOwnProperty("addEventListener")){var o=e.addEventListener;e.addEventListener=function(e,t,n){o.call(this,e,r.wrap(t),n)};var t=e.removeEventListener;e.removeEventListener=function(r,e,o){t.call(this,r,e&&e._wrapped?e._wrapped:e,o)}}}var c=0;a.init=function(r,e){var t=e.globalAlias||"Rollbar";if("object"==typeof r[t])return r[t];r._rollbarShimQueue=[],r._rollbarWrappedError=null,e=e||{};var i=new a;return o(function(){if(i.configure(e),e.captureUncaught){i._rollbarOldOnError=r.onerror,r.onerror=n(i);var o,a,c="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(o=0;o<c.length;++o)a=c[o],r[a]&&r[a].prototype&&l(i,r[a].prototype)}return e.captureUnhandledRejections&&(i._unhandledRejectionHandler=function(r){var e=r.reason,o=r.promise,t=r.detail;!e&&t&&(e=t.reason,o=t.promise),i.unhandledRejection(e,o)},r.addEventListener("unhandledrejection",i._unhandledRejectionHandler)),r[t]=i,i})()},a.prototype.loadFull=function(r,e,t,n,a){var i=function(){var e;if(void 0===r._rollbarPayloadQueue){var o,t,n,i;for(e=new Error("rollbar.js did not load");o=r._rollbarShimQueue.shift();)for(n=o.args,i=0;i<n.length;++i)if(t=n[i],"function"==typeof t){t(e);break}}"function"==typeof a&&a(e)},l=!1,c=e.createElement("script"),d=e.getElementsByTagName("script")[0],p=d.parentNode;c.crossOrigin="",c.src=n.rollbarJsUrl,c.async=!t,c.onload=c.onreadystatechange=o(function(){if(!(l||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){c.onload=c.onreadystatechange=null;try{p.removeChild(c)}catch(r){}l=!0,i()}}),p.insertBefore(c,d)},a.prototype.wrap=function(r,e){try{var o;if(o="function"==typeof e?e:function(){return e||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._wrapped){r._wrapped=function(){try{return r.apply(this,arguments)}catch(e){throw e._rollbarContext=o()||{},e._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=e,e}},r._wrapped._isWrap=!0;for(var t in r)r.hasOwnProperty(t)&&(r._wrapped[t]=r[t])}return r._wrapped}catch(n){return r}};for(var d="log,debug,info,warn,warning,error,critical,global,configure,scope,uncaughtError,unhandledRejection".split(","),p=0;p<d.length;++p)a.prototype[d[p]]=i(d[p]);r.exports={Rollbar:a,_rollbarWindowOnError:t}},function(r,e){"use strict";r.exports=function(r,e){return function(o){if(!o&&!window._rollbarInitialized){var t=window.RollbarNotifier,n=e||{},a=n.globalAlias||"Rollbar",i=window.Rollbar.init(n,r);i._processShimQueue(window._rollbarShimQueue||[]),window[a]=i,window._rollbarInitialized=!0,t.processPayloads()}}}}]);
+		// End Rollbar Snippet
+		</script>
+		<?php {/literal} ?>
 
 		<!-- boostrap, ArcGIS and bootstrap-map CSS -->
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -166,7 +181,7 @@
 			<div calss="container">
 				<div class="row">
 					<div class="col-md-12">
-						<button type="button" class="btn btn-primary btn-block toggle hideMapsAtPhone" href="#form" id="createJobBtn">Crear oferta</button>			
+						<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>			
 					</div>
 				</div>
 				<div class="row">
@@ -175,7 +190,7 @@
 						<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
 					</div>
 					<!-- MapsViews -->
-					<div id="mapContainer" class="col-md-8 hideMapsAtPhone">
+					<div id="mapContainer" class="col-md-8">
 						<div id="viewDiv"></div>
 						<div id="miniMapElements">
 							<div id="miniViewDiv" simpsons-in-main-view="0" >
@@ -249,412 +264,428 @@
 				], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,Locator,Search,on,dom){
 				  
 					try{
-						var map = new Map({
-				    basemap: "streets-night-vector"
-				  });
-					}catch(e){
-						console.log("error al cargar el mapa: " + e + ". Refrescando página....");
-						location.reload();
-					}
-					var simpsonsMap = new WebMap({
-			      portalItem: {
-			        id: "9ac664557a774a858adee0edbb4f686c"
+
+				 // try{
+							var map = new Map({
+					    basemap: "streets-night-vector"
+					  });
+						// }catch(e){
+						// 	Rollbar.error("error al cargar el mapa: ", e);
+						// 	console.log("error al cargar el mapa: " + e + ". Refrescando página....");
+						// 	location.reload();
+						// }
+						var simpsonsMap = new WebMap({
+				      portalItem: {
+				        id: "9ac664557a774a858adee0edbb4f686c"
+				      }
+				    });
+				    var worldView = createView ("viewDiv",map,5,[-3, 40],["zoom","attribution"]);	  
+						var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+
+					  var symbol = createSymbol("/images/grey-pin-blank.png");	  
+					  var highlightedSymbol = createSymbol("/images/grey-pin-star.png");
+						var symbolSips = createSymbol("/images/orange-pin-blank.png");
+					  var highlightedSymbolSimps = createSymbol("/images/orange-pin-star.png");
+
+					  
+					  var template = new PopupTemplate({
+			        title: "{title}",    
+			      	content:'<span class="text-primary">Localización: </span>\
+				    	{location}\
+				    	<br>\
+			      	<h5 class="text-primary" >Información de contacto</h5>\
+				    	<span class="text-primary">Empresa: </span>\
+				    	{company_name}\
+				    	<br>\
+				    	<span class="text-primary">Email:  </span>\
+				    	{contact_email}\
+				    	<br>\
+				    	<h5 class="text-primary" >Detalles de la oferta</h5>\
+				    	<span class="text-primary">Tipo de contrato: </span>\
+				    	{contract_type}\
+				    	<br>\
+				    	<span class="text-primary">Salario: </span>\
+				    	{salary_budget}\
+				    	<br>\
+				    	<br>'
+			      });
+					  
+					  //******************+
+					  //*									*
+					  //* FORM STUFF CODE *
+					  //* 								*
+						//*******************
+						
+						//show-hide form
+						$('.toggle').click(function(){
+								var target = $(this).attr('href');
+				        $(target).toggle(500);
+				        $(target)[0].reset();
+						});
+
+						//Autocomplete comapy name
+						var companies = new Bloodhound({
+			        datumTokenizer: function(datum) {
+			          return Bloodhound.tokenizers.whitespace(datum.value);
+			        },
+			        queryTokenizer: Bloodhound.tokenizers.whitespace,
+			        remote: {
+			          url: 'https://autocomplete.clearbit.com/v1/companies/suggest?query=%QUERY',
+			          filter: function(companies) {
+			            // Map the remote source JSON array to a JavaScript object array
+			            return $.map(companies, function(company) {
+			              return {
+			                value: company.name
+			              };
+			            });
+			          }
+			        }
+			      });
+			      // Initialize the Bloodhound suggestion engine
+			      companies.initialize();
+			      // Instantiate the Typeahead UI
+			      $('.typeahead').typeahead(null, {
+			        displayKey: 'value',
+			        source: companies.ttAdapter()
+			      });
+
+
+			      //Creating map to locate views:
+			      //****************************
+			      var companyLocatMap = new Map({
+			        basemap: "dark-gray"
+			      });
+			      var companyLocatView = createView ("viewLocDiv",companyLocatMap,5,[-3, 40]);
+			      //Set the view global access to allow the form to call the localion coordinates from map to send it as a form
+						companyLocatView.then(function(){
+							GEODEV.jobs.companyLocatView = companyLocatView;
+						});  
+			      //create widget
+			      var searchWidget = new Search({
+			        view: companyLocatView
+			      });
+			      //Change widget icon
+			      searchWidget.sources.items[0].resultSymbol = highlightedSymbol;
+			      //start widget
+			      searchWidget.startup();
+			      // On start serach clear graphics and get the address
+			      searchWidget.viewModel.on("search-start", function(evt){
+			        companyLocatView.graphics.removeAll();
+			        evt.target.popupOpenOnSelect = false;
+			        GEODEV.jobs.address = evt.target.currentSuggestion.text;
+			      });
+			      //add widget to the UI
+			      companyLocatView.ui.add(searchWidget, {
+			        position: "top-right"
+			      });
+			      //On map click create graphic/ clear previous
+			      companyLocatView.on("click", function(evt){
+			        if (companyLocatView.graphics.items[0]) {
+			          companyLocatView.graphics.removeAll();
+			        }else {
+			        }
+			        companyLocatView.graphics.add(createGraphic(evt.mapPoint));
+			      });
+
+			      function createGraphic(point){
+			        return new Graphic ({
+			          geometry: point,
+			          symbol: highlightedSymbol
+			        });
 			      }
-			    });
-			    var worldView = createView ("viewDiv",map,5,[-3, 40],["zoom","attribution"]);	  
-					var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+			      //Show/hide Address input depending on the job tipe
 
-				  var symbol = createSymbol("/images/grey-pin-blank.png");	  
-				  var highlightedSymbol = createSymbol("/images/grey-pin-star.png");
-					var symbolSips = createSymbol("/images/orange-pin-blank.png");
-				  var highlightedSymbolSimps = createSymbol("/images/orange-pin-star.png");
+			      $('#selOnRemote').on('change', function() {
+			      	if ($('#selOnRemote').val() === 'yes') {
+								$("#inputAddressDiv").hide();
+							} else {
+								$("#inputAddressDiv").show();
+							}			  
+						});
 
-				  
-				  var template = new PopupTemplate({
-		        title: "{title}",    
-		      	content:'<span class="text-primary">Localización: </span>\
-			    	{location}\
-			    	<br>\
-		      	<h5 class="text-primary" >Información de contacto</h5>\
-			    	<span class="text-primary">Empresa: </span>\
-			    	{company_name}\
-			    	<br>\
-			    	<span class="text-primary">Email:  </span>\
-			    	{contact_email}\
-			    	<br>\
-			    	<h5 class="text-primary" >Detalles de la oferta</h5>\
-			    	<span class="text-primary">Tipo de contrato: </span>\
-			    	{contract_type}\
-			    	<br>\
-			    	<span class="text-primary">Salario: </span>\
-			    	{salary_budget}\
-			    	<br>\
-			    	<br>'
-		      });
-				  
-				  //******************+
-				  //*									*
-				  //* FORM STUFF CODE *
-				  //* 								*
-					//*******************
-					
-					//show-hide form
-					$('.toggle').click(function(){
-							var target = $(this).attr('href');
-			        $(target).toggle(500);
-			        // $("input, textarea").val("");
-			        $(target)[0].reset();
-					});
+			      //Submit button
+						//*************
 
-					//Autocomplete comapy name
-					var companies = new Bloodhound({
-		        datumTokenizer: function(datum) {
-		          return Bloodhound.tokenizers.whitespace(datum.value);
-		        },
-		        queryTokenizer: Bloodhound.tokenizers.whitespace,
-		        remote: {
-		          url: 'https://autocomplete.clearbit.com/v1/companies/suggest?query=%QUERY',
-		          filter: function(companies) {
-		            // Map the remote source JSON array to a JavaScript object array
-		            return $.map(companies, function(company) {
-		              return {
-		                value: company.name
-		              };
-		            });
-		          }
-		        }
-		      });
-		      // Initialize the Bloodhound suggestion engine
-		      companies.initialize();
-		      // Instantiate the Typeahead UI
-		      $('.typeahead').typeahead(null, {
-		        displayKey: 'value',
-		        source: companies.ttAdapter()
-		      });
-
-
-		      //Creating map to locate views:
-		      //****************************
-		      var companyLocatMap = new Map({
-		        basemap: "dark-gray"
-		      });
-		      var companyLocatView = createView ("viewLocDiv",companyLocatMap,5,[-3, 40]);
-		      //Set the view global access to allow the form to call the localion coordinates from map to send it as a form
-					companyLocatView.then(function(){
-						GEODEV.jobs.companyLocatView = companyLocatView;
-					});  
-		      //create widget
-		      var searchWidget = new Search({
-		        view: companyLocatView
-		      });
-		      //Change widget icon
-		      searchWidget.sources.items[0].resultSymbol = highlightedSymbol;
-		      //start widget
-		      searchWidget.startup();
-		      // On start serach clear graphics and get the address
-		      searchWidget.viewModel.on("search-start", function(evt){
-		        companyLocatView.graphics.removeAll();
-		        evt.target.popupOpenOnSelect = false;
-		        GEODEV.jobs.address = evt.target.currentSuggestion.text;
-		      });
-		      //add widget to the UI
-		      companyLocatView.ui.add(searchWidget, {
-		        position: "top-right"
-		      });
-		      //On map click create graphic/ clear previous
-		      companyLocatView.on("click", function(evt){
-		        if (companyLocatView.graphics.items[0]) {
-		          companyLocatView.graphics.removeAll();
-		        }else {
-		        }
-		        companyLocatView.graphics.add(createGraphic(evt.mapPoint));
-		      });
-
-		      function createGraphic(point){
-		        return new Graphic ({
-		          geometry: point,
-		          symbol: highlightedSymbol
-		        });
-		      }
-		      //Show/hide Address input depending on the job tipe
-
-		      $('#selOnRemote').on('change', function() {
-		      	if ($('#selOnRemote').val() === 'yes') {
-							$("#inputAddressDiv").hide();
-						} else {
-							$("#inputAddressDiv").show();						
-						}			  
-					});
-
-		      //Submit button
-					//*************
-
-				  var $form = $('form');
-				  $form.submit(function(event){
-				   	event.preventDefault();
-				    if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
-				    	var address = GEODEV.jobs.address;
-				    	if (GEODEV.jobs.companyLocatView.graphics.items[0]) {
-				    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;	
-				    	}else{	
-				    		return $("#warningMsng").html("Introduce una localización");
-				    	}
-							
-							$('#inputLat').val(location.latitude);
-							$('#inputLong').val(location.longitude);
-							if (address) {
-								$('#inputAddress').val(address);
-								submitFormAndClose();
-							}else{
-								console.log("hay que hacer reverse geocoder");
-								var lat = location.latitude.toString();
-								var long = location.longitude.toString();
-								var urlGeoCoder = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&location="+long+","+lat;
-								$.getJSON(urlGeoCoder, function(data){
-									if (data.address) {
-										$('#inputAddress').val(data.address.Match_addr);
-									}else{
-										$('#inputAddress').val(long+","+lat);
-									}
+					  var $form = $('form');
+					  $form.submit(function(event){
+					   	event.preventDefault();
+					    if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
+					    	var address = GEODEV.jobs.address;
+					    	if (GEODEV.jobs.companyLocatView.graphics.items[0]) {
+					    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;	
+					    	}else{	
+					    		return $("#warningMsng").html("Introduce una localización");
+					    	}
+								
+								$('#inputLat').val(location.latitude);
+								$('#inputLong').val(location.longitude);
+								if (address) {
+									$('#inputAddress').val(address);
 									submitFormAndClose();
-								});
+								}else{
+									console.log("hay que hacer reverse geocoder");
+									var lat = location.latitude.toString();
+									var long = location.longitude.toString();
+									var urlGeoCoder = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&location="+long+","+lat;
+									$.getJSON(urlGeoCoder, function(data){
+										if (data.address) {
+											$('#inputAddress').val(data.address.Match_addr);
+										}else{
+											$('#inputAddress').val(long+","+lat);
+										}
+										submitFormAndClose();
+									});
+								}
+							}
+							else {
+								console.log("no lat/long values beacuse of remote job");
+								submitFormAndClose();
+							}
+							
+							function submitFormAndClose(){
+								$.post($form.attr('action'), $form.serialize(), function(response){
+					      	console.log(response);
+					      	$form.toggle(500);
+					    	},'json');
+							}
+					    return false;
+					   });
+			      
+			 		  // *********************************
+						// AJAX SIMPSONS POIS REQUEST
+						// *********************************
+
+					  window.GEODEV.jobs = {};
+						$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
+							 GEODEV.jobs.simpsonsAllPOIs = datos.POIS;
+							GEODEV.jobs.simpsonsPOIs = [];
+							getRandomSimpsPOIs(datos.POIS);
+						});
+
+					  // *********************************
+						// AJAX JOBS DATA REQUEST
+						// *********************************
+
+						$.getJSON("/api/jobs?callback=?", function(datos){
+							GEODEV.jobs.data = datos;
+							getRandomSimpsPOIs();
+							// *********************************
+							// RENDERIZE JOBS OBJET IN THE TEMPLATE
+							// *********************************
+							var template = $.templates("#theTmpl");
+							var htmlOutput = template.render(GEODEV.jobs.data);
+							$("#accordion").html(htmlOutput);
+							// *********************************
+							// Setting the viewdivs change
+							// *********************************
+							var miniViewDiv = dom.byId('miniViewDiv');
+							var chngViewBtn = dom.byId('chngViewBtn');
+							on(chngViewBtn, "click",changeViews);
+
+							// *********************************
+							// BOOTSTRAP ACORDION FUNCTIONS
+							// 1.Highlight job location
+							// 2.GoTo Job location
+							// *********************************	
+							GEODEV.jobs.prevJobShow;
+
+
+
+
+							$('.collapse').on('show.bs.collapse', function (e) {
+
+								try{								
+							  	worldView.graphics.removeAll();
+							  	simpsonsView.graphics.removeAll();
+							  	drawPoints();
+							  	//Collapse previous accordion opened
+							  	$(GEODEV.jobs.prevJobShow).collapse('hide');
+							  	
+							  	var idJob = parseInt(e.target.getAttribute("job-id"));
+							  	var simpsonsViewGraphic = simpsonsView.graphics.items;
+							  	var worldViewGraphic = worldView.graphics.items;
+
+							  	var isInWorldView = worldViewGraphic.find(isInView);
+							  	var isInSimpsonsView = simpsonsViewGraphic.find(isInView);
+							  	function isInView (lyr){
+							  		return lyr.attributes.id=== idJob;
+							  	}
+
+							  	if (isInWorldView) {
+							  		isInWorldView.symbol = highlightedSymbol;
+					  				worldView.goTo({
+						  					target: isInWorldView.geometry,
+						  					zoom: 8
+						  				},
+						  				{
+						  					animate: true,
+				  							duration: 1000,
+				  							easing: "ease-in-out"
+										});
+
+							  	} else {
+							  		isInSimpsonsView.symbol = highlightedSymbolSimps;
+					  				simpsonsView.goTo({
+						  					target: isInSimpsonsView.geometry
+						  				},
+						  				{
+						  					animate: true,
+				  							duration: 1000,
+				  							easing: "ease-in-out"
+										});
+							  	}
+
+							  	//Getting the element to collapse when another accordion is been opened
+							  	var prevJobShow = $("#" + e.target.getAttribute("id"));
+							  	GEODEV.jobs.prevJobShow = prevJobShow[0];
+							  }catch(e){
+							 	  Rollbar.error(e);
+							  }							 
+							});
+
+						});
+
+						function getRandomSimpsPOIs() {
+							if (GEODEV.jobs.data && GEODEV.jobs.simpsonsAllPOIs){
+								var count = 0;
+							  for (i = 0; i < GEODEV.jobs.data.length; i++) {
+							  	if (GEODEV.jobs.data[i].on_remote === "yes") {
+										var POIIndex = Math.floor(Math.random() * (54-count));
+								    GEODEV.jobs.simpsonsPOIs[count] = GEODEV.jobs.simpsonsAllPOIs[POIIndex];
+								    GEODEV.jobs.simpsonsAllPOIs.splice(POIIndex,1);
+								    count++;
+								  }
+								}
+								checkViewsThenDraw();
 							}
 						}
-						else {
-							console.log("no lat/long values beacuse of remote job");
-							submitFormAndClose();
+
+						function createSymbol (url){
+								return new PictureMarkerSymbol({
+								  url: url,
+								  width: 60,
+								  height: 65
+								});
+						}
+
+						function checkViewsThenDraw () {
+						  worldView.then(function(){ 	
+						  	drawPoints();
+						  }, function(error){
+						  	console.log("Imposible cargar el mapa:" + error);
+							});
+							simpsonsView.then(function(){ 	
+						  	drawPoints();
+						  }, function(error){
+						  	console.log("Imposible cargar el mapa:" + error);
+							});	
+					  }
+						
+					  function drawPoints(){
+							if ( worldView.ready && simpsonsView.ready) {
+								var count = 0;
+							  for (i = 0; i < GEODEV.jobs.data.length; i++) {
+							  	var jobID = GEODEV.jobs.data[i].id;
+							  	var jobTitle = GEODEV.jobs.data[i].title;
+							  	var jobCompany_name = GEODEV.jobs.data[i].company_name;
+							  	var jobContact_email = GEODEV.jobs.data[i].contact_email;
+							  	var jobContact_other = GEODEV.jobs.data[i].contact_other;
+							  	var jobSalary_budget = GEODEV.jobs.data[i].salary_budget;
+							  	var jobOffer_details = GEODEV.jobs.data[i].offer_details;
+									var jobContract_type = GEODEV.jobs.data[i].contract_type;
+									var jobLocation = GEODEV.jobs.data[i].location;
+
+
+
+							  	var pointGraphic = new Graphic({
+								      attributes: {
+											  "id": jobID,
+											  "title": jobTitle,
+											  "company_name": jobCompany_name,
+											  "contact_email": jobContact_email,
+											  "contact_other": jobContact_other,
+											  "salary_budget": jobSalary_budget,
+											  "offer_details": jobOffer_details,
+											  "contract_type": jobContract_type,
+												"location": jobLocation
+											}
+								    });
+
+							  	var point = new Point();
+
+							    if (GEODEV.jobs.data[i].on_remote === "yes") {
+
+								    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;	
+								    var POICoordY = GEODEV.jobs.simpsonsPOIs[count].geometry.y;
+								    var POIname = GEODEV.jobs.simpsonsPOIs[count].attributes.Name;
+								    count++;
+								    point.longitude = POICoordX;
+								    point.latitude = POICoordY;
+
+								    pointGraphic.geometry = point;
+								    pointGraphic.symbol = symbolSips;
+								    pointGraphic.attributes.location = POIname;
+
+								    if (simpsonsView.container.id === "viewDiv") {
+								    	pointGraphic.popupTemplate = template;	
+								    }
+								    simpsonsView.graphics.add(pointGraphic);	
+								  }else	{
+								  	var lat = GEODEV.jobs.data[i].location_lat;
+							  		var long = GEODEV.jobs.data[i].location_lon;
+
+							  		point.longitude = long;
+								    point.latitude = lat;
+
+								    pointGraphic.geometry = point;
+								    pointGraphic.symbol = symbol;
+
+								    if (worldView.container.id === "viewDiv") {
+									   	pointGraphic.popupTemplate = template;	
+									  }
+								  	worldView.graphics.add(pointGraphic);
+								  }
+							  }
+							} 
+						}
+
+						function changeViews(callback){
+							if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
+								worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
+					  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
+					  		checkViewsThenDraw();
+					  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
+
+							}else{
+								worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
+					  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
+					  		checkViewsThenDraw();
+					  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
+							}
+						}
+
+						function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
+							return new MapView({
+						    container: viewId,  
+						    map: mapToSet,
+						    zoom: zoomToApply, 
+						    center: centerToSet,
+						    ui: {
+						    	components: uiArray 
+						    }
+						  });
+						}
+
+					}catch(e){
+						Rollbar.error("ERROR OCCURRED", e);
+						if (e.indexOf("Map") !== -1) {
+						location.reload();
+						} else {
+						console.log("unexpected error: " + e);
 						}
 						
-						function submitFormAndClose(){
-							$.post($form.attr('action'), $form.serialize(), function(response){
-				      	console.log(response);
-				      	$form.toggle(500);
-				    	},'json');
-						}
-				    return false;
-				   });
-		      
-		 		  // *********************************
-					// AJAX SIMPSONS POIS REQUEST
-					// *********************************
-
-				  window.GEODEV.jobs = {};
-					$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
-						 GEODEV.jobs.simpsonsAllPOIs = datos.POIS;
-						GEODEV.jobs.simpsonsPOIs = [];
-						getRandomSimpsPOIs(datos.POIS);
-					});
-
-				  // *********************************
-					// AJAX JOBS DATA REQUEST
-					// *********************************
-
-					$.getJSON("/api/jobs?callback=?", function(datos){
-						GEODEV.jobs.data = datos;
-						getRandomSimpsPOIs();
-						// *********************************
-						// RENDERIZE JOBS OBJET IN THE TEMPLATE
-						// *********************************
-						var template = $.templates("#theTmpl");
-						var htmlOutput = template.render(GEODEV.jobs.data);
-						$("#accordion").html(htmlOutput);
-						// *********************************
-						// Setting the viewdivs change
-						// *********************************
-						var miniViewDiv = dom.byId('miniViewDiv');
-						var chngViewBtn = dom.byId('chngViewBtn');
-						on(chngViewBtn, "click",changeViews);
-
-						// *********************************
-						// BOOTSTRAP ACORDION FUNCTIONS
-						// 1.Highlight job location
-						// 2.GoTo Job location
-						// *********************************	
-						GEODEV.jobs.prevJobShow;
-
-						$('.collapse').on('show.bs.collapse', function (e) {
-
-							try{
-						  	worldView.graphics.removeAll();
-						  	simpsonsView.graphics.removeAll();
-						  	drawPoints();
-						  	//Collapse previous accordion opened
-						  	$(GEODEV.jobs.prevJobShow).collapse('hide');
-						  	
-						  	var idJob = parseInt(e.target.getAttribute("job-id"));
-						  	var simpsonsViewGraphic = simpsonsView.graphics.items;
-						  	var worldViewGraphic = worldView.graphics.items;
-
-						  	var isInWorldView = worldViewGraphic.find(isInView);
-						  	var isInSimpsonsView = simpsonsViewGraphic.find(isInView);
-						  	function isInView (lyr){
-						  		return lyr.attributes.id=== idJob;
-						  	}
-
-						  	if (isInWorldView) {
-						  		isInWorldView.symbol = highlightedSymbol;
-				  				worldView.goTo({
-					  					target: isInWorldView.geometry,
-					  					zoom: 8
-					  				},
-					  				{
-					  					animate: true,
-			  							duration: 1000,
-			  							easing: "ease-in-out"
-									});
-
-						  	} else {
-						  		isInSimpsonsView.symbol = highlightedSymbolSimps;
-				  				simpsonsView.goTo({
-					  					target: isInSimpsonsView.geometry
-					  				},
-					  				{
-					  					animate: true,
-			  							duration: 1000,
-			  							easing: "ease-in-out"
-									});
-						  	}
-
-						  	//Getting the element to collapse when another accordion is been opened
-						  	var prevJobShow = $("#" + e.target.getAttribute("id"));
-						  	GEODEV.jobs.prevJobShow = prevJobShow[0];
-						  	
-						 } catch(e){
-						 	console.log("goTo and highlight target symbol disabled because of: " + e); 
-						 }
-						});
-					});
-
-					function getRandomSimpsPOIs() {
-						if (GEODEV.jobs.data && GEODEV.jobs.simpsonsAllPOIs){
-							var count = 0;
-						  for (i = 0; i < GEODEV.jobs.data.length; i++) {
-						  	if (GEODEV.jobs.data[i].on_remote === "yes") {
-									var POIIndex = Math.floor(Math.random() * (54-count));
-							    GEODEV.jobs.simpsonsPOIs[count] = GEODEV.jobs.simpsonsAllPOIs[POIIndex];
-							    GEODEV.jobs.simpsonsAllPOIs.splice(POIIndex,1);
-							    count++;
-							  }
-							}
-							checkViewsThenDraw();
-						}
 					}
 
-					function createSymbol (url){
-						return new PictureMarkerSymbol({
-						  url: url,
-						  width: 60,
-						  height: 65
-						});
-					}
-
-					function checkViewsThenDraw () {
-					  worldView.then(function(){ 	
-					  	drawPoints();
-					  }, function(error){
-					  	console.log("Imposible cargar el mapa:" + error);
-						});
-						simpsonsView.then(function(){ 	
-					  	drawPoints();
-					  }, function(error){
-					  	console.log("Imposible cargar el mapa:" + error);
-						});	
-				  }
-					
-				  function drawPoints(){
-						if ( worldView.ready && simpsonsView.ready) {
-							var count = 0;
-						  for (i = 0; i < GEODEV.jobs.data.length; i++) {
-						  	var jobID = GEODEV.jobs.data[i].id;
-						  	var jobTitle = GEODEV.jobs.data[i].title;
-						  	var jobCompany_name = GEODEV.jobs.data[i].company_name;
-						  	var jobContact_email = GEODEV.jobs.data[i].contact_email;
-						  	var jobContact_other = GEODEV.jobs.data[i].contact_other;
-						  	var jobSalary_budget = GEODEV.jobs.data[i].salary_budget;
-						  	var jobOffer_details = GEODEV.jobs.data[i].offer_details;
-								var jobContract_type = GEODEV.jobs.data[i].contract_type;
-								var jobLocation = GEODEV.jobs.data[i].location;
-
-
-
-						  	var pointGraphic = new Graphic({
-							      attributes: {
-										  "id": jobID,
-										  "title": jobTitle,
-										  "company_name": jobCompany_name,
-										  "contact_email": jobContact_email,
-										  "contact_other": jobContact_other,
-										  "salary_budget": jobSalary_budget,
-										  "offer_details": jobOffer_details,
-										  "contract_type": jobContract_type,
-											"location": jobLocation
-										}
-							    });
-
-						  	var point = new Point();
-
-						    if (GEODEV.jobs.data[i].on_remote === "yes") {
-
-							    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;	
-							    var POICoordY = GEODEV.jobs.simpsonsPOIs[count].geometry.y;
-							    var POIname = GEODEV.jobs.simpsonsPOIs[count].attributes.Name;
-							    count++;
-							    point.longitude = POICoordX;
-							    point.latitude = POICoordY;
-
-							    pointGraphic.geometry = point;
-							    pointGraphic.symbol = symbolSips;
-							    pointGraphic.attributes.location = POIname;
-
-							    if (simpsonsView.container.id === "viewDiv") {
-							    	pointGraphic.popupTemplate = template;	
-							    }
-							    simpsonsView.graphics.add(pointGraphic);	
-							  }else	{
-							  	var lat = GEODEV.jobs.data[i].location_lat;
-						  		var long = GEODEV.jobs.data[i].location_lon;
-
-						  		point.longitude = long;
-							    point.latitude = lat;
-
-							    pointGraphic.geometry = point;
-							    pointGraphic.symbol = symbol;
-
-							    if (worldView.container.id === "viewDiv") {
-								   	pointGraphic.popupTemplate = template;	
-								  }
-							  	worldView.graphics.add(pointGraphic);
-							  }
-						  }
-						} 
-					}
-
-					function changeViews(callback){
-						if (miniViewDiv.getAttribute("simpsons-in-main-view") === "0") {
-							worldView = createView ("miniViewDiv",map,6,[-3, 40],["attribution"]);
-				  		simpsonsView = createView ("viewDiv",simpsonsMap,6,0,["zoom","attribution"]);
-				  		checkViewsThenDraw();
-				  		miniViewDiv.setAttribute("simpsons-in-main-view","1");
-
-						}else{
-							worldView = createView ("viewDiv",map,6,[-3, 40],["zoom","attribution"]);
-				  		simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
-				  		checkViewsThenDraw();
-				  		miniViewDiv.setAttribute("simpsons-in-main-view","0");
-						}
-					}
-
-					function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
-						return new MapView({
-					    container: viewId,  
-					    map: mapToSet,
-					    zoom: zoomToApply, 
-					    center: centerToSet,
-					    ui: {
-					    	components: uiArray 
-					    }
-					  });
-					}
 				});
 			</script>
 			<?php {/literal} ?>
