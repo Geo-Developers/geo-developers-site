@@ -53,17 +53,29 @@
 <!-- Scripts -->
 <script data-main="{$ROOT}assets/js/common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.min.js"></script>
 
-<script type="text/javascript"> 
-  var cdJsHost = (("https:" == document.location.protocol) ? "https://" : "http://"); 
-  document.write(unescape("%3Cscript src='" + cdJsHost + "analytics-eu.clickdimensions.com/ts.js' type='text/javascript'%3E%3C/script%3E")); 
-</script> 
+<script type="text/javascript">
+  var cdJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+  document.write(unescape("%3Cscript src='" + cdJsHost + "analytics-eu.clickdimensions.com/ts.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
 
-<script type="text/javascript"> 
-  var cdAnalytics = new clickdimensions.Analytics('analytics-eu.clickdimensions.com'); 
-  cdAnalytics.setAccountKey('aIml5mV6O5kKyZlOWP6GzA'); 
-  cdAnalytics.setDomain('geodevelopers.org'); 
-  cdAnalytics.trackPage(); 
-</script> 
+<script type="text/javascript">
+  var cdAnalytics = new clickdimensions.Analytics('analytics-eu.clickdimensions.com');
+  cdAnalytics.setAccountKey('aIml5mV6O5kKyZlOWP6GzA');
+  cdAnalytics.setDomain('geodevelopers.org');
+  cdAnalytics.trackPage();
+</script>
+{literal}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49620025-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
+{/literal}
 
 {if isset($USER) == false}
     {include file="blocks/modal-login.tpl"}
