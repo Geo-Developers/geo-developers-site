@@ -27,14 +27,14 @@
 		<link rel="stylesheet" href="https://js.arcgis.com/4.0/esri/css/main.css">
 		<link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">
 
-	  
+
 	  <!-- ArcGIS,JQuery, Bootstrap, JSrender, typeahead+bloodhound JS -->
 	  <script src="https://js.arcgis.com/4.0/"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	  <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
 	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
-	  
+
 
 
 
@@ -57,7 +57,7 @@
 		  	position: relative;
 		  	width: 100%;
 		  	height: 500px;
-		  }	  
+		  }
 
 			#miniViewDiv {
 	      position: absolute;
@@ -91,7 +91,7 @@
 				top: 42px;
 				display: block;
 				width: 100%;
-				border-radius: 0;	
+				border-radius: 0;
 				margin-bottom: 10px;
 			}
 	    form{
@@ -116,7 +116,7 @@
 							<h4>Información de la oferta</h4>
 						  <div class="form-group">
 						    <label class="text-primary" for="inputTitle">Título de la oferta</label>
-						    <input type="text" class="form-control" name="inputTitle" id="inputTitle" required="true"> 
+						    <input type="text" class="form-control" name="inputTitle" id="inputTitle" required="true">
 						  </div>
 							<div class="form-group">
 						    <label  class="text-primary" for="inputCompany">Empresa</label>
@@ -181,7 +181,7 @@
 			<div calss="container">
 				<div class="row">
 					<div class="col-md-12">
-						<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>			
+						<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
 					</div>
 				</div>
 				<div class="row">
@@ -198,7 +198,7 @@
 								  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
 								</button>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
@@ -239,7 +239,7 @@
 					    	<br>
 					    	<span class="text-primary">Localización: </span>
 					    	{{:location}}
-					    	<br>    	
+					    	<br>
 					    </div>
 				    </div>
 					</div>
@@ -262,7 +262,7 @@
 				  "dojo/dom",
 				  "dojo/domReady!"
 				], function(Map,WebMap,MapView,Point,PictureMarkerSymbol,Graphic,PopupTemplate,Locator,Search,on,dom){
-				  
+
 					try{
 
 				 // try{
@@ -279,17 +279,17 @@
 				        id: "9ac664557a774a858adee0edbb4f686c"
 				      }
 				    });
-				    var worldView = createView ("viewDiv",map,5,[-3, 40],["zoom","attribution"]);	  
+				    var worldView = createView ("viewDiv",map,5,[-3, 40],["zoom","attribution"]);
 						var simpsonsView = createView ("miniViewDiv",simpsonsMap,6,0,["attribution"]);
 
-					  var symbol = createSymbol("/images/grey-pin-blank.png");	  
+					  var symbol = createSymbol("/images/grey-pin-blank.png");
 					  var highlightedSymbol = createSymbol("/images/grey-pin-star.png");
 						var symbolSips = createSymbol("/images/orange-pin-blank.png");
 					  var highlightedSymbolSimps = createSymbol("/images/orange-pin-star.png");
 
-					  
+
 					  var template = new PopupTemplate({
-			        title: "{title}",    
+			        title: "{title}",
 			      	content:'<span class="text-primary">Localización: </span>\
 				    	{location}\
 				    	<br>\
@@ -309,13 +309,13 @@
 				    	<br>\
 				    	<br>'
 			      });
-					  
+
 					  //******************+
 					  //*									*
 					  //* FORM STUFF CODE *
 					  //* 								*
 						//*******************
-						
+
 						//show-hide form
 						$('.toggle').click(function(){
 								var target = $(this).attr('href');
@@ -359,7 +359,7 @@
 			      //Set the view global access to allow the form to call the localion coordinates from map to send it as a form
 						companyLocatView.then(function(){
 							GEODEV.jobs.companyLocatView = companyLocatView;
-						});  
+						});
 			      //create widget
 			      var searchWidget = new Search({
 			        view: companyLocatView
@@ -400,7 +400,7 @@
 								$("#inputAddressDiv").hide();
 							} else {
 								$("#inputAddressDiv").show();
-							}			  
+							}
 						});
 
 			      //Submit button
@@ -412,11 +412,11 @@
 					    if ($('#selOnRemote').val()==='no' || $('#selOnRemote').val()==='negociate') {
 					    	var address = GEODEV.jobs.address;
 					    	if (GEODEV.jobs.companyLocatView.graphics.items[0]) {
-					    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;	
-					    	}else{	
+					    		var location = GEODEV.jobs.companyLocatView.graphics.items[0].geometry;
+					    	}else{
 					    		return $("#warningMsng").html("Introduce una localización");
 					    	}
-								
+
 								$('#inputLat').val(location.latitude);
 								$('#inputLong').val(location.longitude);
 								if (address) {
@@ -441,7 +441,7 @@
 								console.log("no lat/long values beacuse of remote job");
 								submitFormAndClose();
 							}
-							
+
 							function submitFormAndClose(){
 								$.post($form.attr('action'), $form.serialize(), function(response){
 					      	console.log(response);
@@ -450,7 +450,7 @@
 							}
 					    return false;
 					   });
-			      
+
 			 		  // *********************************
 						// AJAX SIMPSONS POIS REQUEST
 						// *********************************
@@ -486,7 +486,7 @@
 							// BOOTSTRAP ACORDION FUNCTIONS
 							// 1.Highlight job location
 							// 2.GoTo Job location
-							// *********************************	
+							// *********************************
 							GEODEV.jobs.prevJobShow;
 
 
@@ -494,13 +494,13 @@
 
 							$('.collapse').on('show.bs.collapse', function (e) {
 
-								try{								
+								try{
 							  	worldView.graphics.removeAll();
 							  	simpsonsView.graphics.removeAll();
 							  	drawPoints();
 							  	//Collapse previous accordion opened
 							  	$(GEODEV.jobs.prevJobShow).collapse('hide');
-							  	
+
 							  	var idJob = parseInt(e.target.getAttribute("job-id"));
 							  	var simpsonsViewGraphic = simpsonsView.graphics.items;
 							  	var worldViewGraphic = worldView.graphics.items;
@@ -540,7 +540,7 @@
 							  	GEODEV.jobs.prevJobShow = prevJobShow[0];
 							  }catch(e){
 							 	  Rollbar.error(e);
-							  }							 
+							  }
 							});
 
 						});
@@ -569,18 +569,18 @@
 						}
 
 						function checkViewsThenDraw () {
-						  worldView.then(function(){ 	
+						  worldView.then(function(){
 						  	drawPoints();
 						  }, function(error){
 						  	console.log("Imposible cargar el mapa:" + error);
 							});
-							simpsonsView.then(function(){ 	
+							simpsonsView.then(function(){
 						  	drawPoints();
 						  }, function(error){
 						  	console.log("Imposible cargar el mapa:" + error);
-							});	
+							});
 					  }
-						
+
 					  function drawPoints(){
 							if ( worldView.ready && simpsonsView.ready) {
 								var count = 0;
@@ -615,7 +615,7 @@
 
 							    if (GEODEV.jobs.data[i].on_remote === "yes") {
 
-								    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;	
+								    var POICoordX = GEODEV.jobs.simpsonsPOIs[count].geometry.x;
 								    var POICoordY = GEODEV.jobs.simpsonsPOIs[count].geometry.y;
 								    var POIname = GEODEV.jobs.simpsonsPOIs[count].attributes.Name;
 								    count++;
@@ -627,9 +627,9 @@
 								    pointGraphic.attributes.location = POIname;
 
 								    if (simpsonsView.container.id === "viewDiv") {
-								    	pointGraphic.popupTemplate = template;	
+								    	pointGraphic.popupTemplate = template;
 								    }
-								    simpsonsView.graphics.add(pointGraphic);	
+								    simpsonsView.graphics.add(pointGraphic);
 								  }else	{
 								  	var lat = GEODEV.jobs.data[i].location_lat;
 							  		var long = GEODEV.jobs.data[i].location_lon;
@@ -641,12 +641,12 @@
 								    pointGraphic.symbol = symbol;
 
 								    if (worldView.container.id === "viewDiv") {
-									   	pointGraphic.popupTemplate = template;	
+									   	pointGraphic.popupTemplate = template;
 									  }
 								  	worldView.graphics.add(pointGraphic);
 								  }
 							  }
-							} 
+							}
 						}
 
 						function changeViews(callback){
@@ -666,24 +666,25 @@
 
 						function createView(viewId,mapToSet,zoomToApply,centerToSet,uiArray){
 							return new MapView({
-						    container: viewId,  
+						    container: viewId,
 						    map: mapToSet,
-						    zoom: zoomToApply, 
+						    zoom: zoomToApply,
 						    center: centerToSet,
 						    ui: {
-						    	components: uiArray 
+						    	components: uiArray
 						    }
 						  });
 						}
 
 					}catch(e){
+						e = e.toString();
 						Rollbar.error("ERROR OCCURRED", e);
 						if (e.indexOf("Map") !== -1) {
 						location.reload();
 						} else {
 						console.log("unexpected error: " + e);
 						}
-						
+
 					}
 
 				});
