@@ -54,15 +54,15 @@
 <script data-main="{$ROOT}assets/js/common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.18/require.min.js"></script>
 
 <script type="text/javascript">
-  var cdJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-  document.write(unescape("%3Cscript src='" + cdJsHost + "analytics-eu.clickdimensions.com/ts.js' type='text/javascript'%3E%3C/script%3E"));
+  /*var cdJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+  document.write(unescape("%3Cscript src='" + cdJsHost + "analytics-eu.clickdimensions.com/ts.js' type='text/javascript'%3E%3C/script%3E"));*/
 </script>
 
 <script type="text/javascript">
-  var cdAnalytics = new clickdimensions.Analytics('analytics-eu.clickdimensions.com');
+  /*var cdAnalytics = new clickdimensions.Analytics('analytics-eu.clickdimensions.com');
   cdAnalytics.setAccountKey('aIml5mV6O5kKyZlOWP6GzA');
   cdAnalytics.setDomain('geodevelopers.org');
-  cdAnalytics.trackPage();
+  cdAnalytics.trackPage();*/
 </script>
 {literal}
 <script>
