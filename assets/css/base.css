@@ -2897,3 +2897,15 @@ div#referrers.box p{
     width: 100%;
   }
 }
+
+.panel-collapse{
+  padding: 1rem;
+  word-wrap: break-word;
+}
+.panel-collapse h5{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 300;
+    border-bottom: 1px dotted;
+    padding-bottom: 7px;
+}

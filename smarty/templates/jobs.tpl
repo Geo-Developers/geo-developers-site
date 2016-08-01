@@ -86,30 +86,31 @@
 	    }
 
 			#createJobBtn{
-				position: fixed;
-				z-index: 999;
-				top: 42px;
-				display: block;
-				width: 100%;
-				border-radius: 0;
-				margin-bottom: 10px;
+		    z-index: 999;
+		    top: 0;
+		    display: block;
+		    width: 100%;
+		    border-radius: 0;
+		    margin-bottom: 10px;
+		    margin-top: -18px;
 			}
 	    form{
 	    	display: none;
 	    }
 	    #jobsDiv{
-	    	height: 500px;
-	    	overflow: auto;
+	    	/*height: 500px;
+	    	overflow: auto;*/
 	    }
 		</style>
 	    {include file="header.tpl" title="Comunidad de Geo Developers"}
 	</head>
 
-	<body id="tos">
+	<body id="jobs">
 		<div id="main-wrapper">
 			{include file="menu.tpl"}
+			<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
 			<!-- Form -->
-			<div calss="container">
+			<div class="container">
 				<form method="POST" action="../api/jobs" id="form" class="well">
 					<div class="row">
 						<div class="col-md-4">
@@ -158,8 +159,8 @@
 							  <textarea class="form-control" rows="5" name="inputDetails" id="inputDetails" required="true"></textarea>
 							</div>
 						</div>
-						<div class="col-md-4">
-			  			<h4>Dirección</h4>
+						<div class="col-md-4" id="inputAddressCol">
+			  			<h4>Localización</h4>
 			  			<div class="form-group" id="inputAddressDiv">
 			  				<p style="color: red;" id ="warningMsng"></p>
 								<div id="viewLocDiv"></div>
@@ -178,19 +179,15 @@
 				</form>
 			</div>
 			<!-- Show form -->
-			<div calss="container">
-				<div class="row">
-					<div class="col-md-12">
-						<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
-					</div>
-				</div>
+			<div class="container mt1">
+				
 				<div class="row">
 				<!-- JOBS ACCORDION -->
-					<div id= "jobsDiv" class="col-md-4" >
+					<div id= "jobsDiv" class="col-md-6" >
 						<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
 					</div>
 					<!-- MapsViews -->
-					<div id="mapContainer" class="col-md-8">
+					<div id="mapContainer" class="col-md-6">
 						<div id="viewDiv"></div>
 						<div id="miniMapElements">
 							<div id="miniViewDiv" simpsons-in-main-view="0" >
@@ -216,6 +213,29 @@
 					      </h4>
 					    </div>
 					    <div id="collapse-{{:id}}" job-id="{{:id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+					    	<h5 class="text-primary" >Detalles de la oferta</h5>
+					    	<span class="text-primary">Tipo de contrato: </span>
+					    	{{:contract_type}}
+					    	<br>
+					    	
+						    <span class="text-primary">Salario: </span>
+						    {{if salary_budget}}
+						    	{{:salary_budget}}
+						    {{else}}
+						    	Negociable
+					    	{{/if}}
+					    	<br>
+					    	<span class="text-primary">Detalles: </span>
+					    	{{:offer_details}}
+					    	<br>
+					    	<span class="text-primary">Localización: </span>
+					    	
+					    	{{if location}}
+						    	{{:location}}
+						    {{else}}
+						    	En remoto
+					    	{{/if}}
+					    	<br><br>
 					    	<h5 class="text-primary" >Información de contacto</h5>
 					    	<span class="text-primary">Empresa: </span>
 					    	{{:company_name}}
@@ -223,22 +243,8 @@
 					    	<span class="text-primary">Email:  </span>
 					    	{{:contact_email}}
 					    	<br>
-					    	<span class="text-primary">Otra información: </span>
+					    	<span class="text-primary">Más información: </span>
 					    	{{:contact_other}}
-					    	<br>
-					    	<h5 class="text-primary" >Detalles de la oferta</h5>
-					    	<span class="text-primary">Tipo de contrato: </span>
-					    	{{:contract_type}}
-					    	<br>
-					    	<span class="text-primary">Salario: </span>
-					    	{{:salary_budget}}
-					    	<br>
-					    	<span class="text-primary">Detalles: </span>
-					    	{{:offer_details}}
-					    	<br>
-					    	<br>
-					    	<span class="text-primary">Localización: </span>
-					    	{{:location}}
 					    	<br>
 					    </div>
 				    </div>
@@ -397,9 +403,13 @@
 
 			      $('#selOnRemote').on('change', function() {
 			      	if ($('#selOnRemote').val() === 'yes') {
-								$("#inputAddressDiv").hide();
+								//$("#inputAddressDiv").hide();
+								$("#inputAddressCol").hide();
+								$("#form > .row .col-md-4").removeClass("col-md-4").addClass("col-md-6");
 							} else {
-								$("#inputAddressDiv").show();
+								$("#inputAddressCol").show();
+								$("#form > .row .col-md-6").removeClass("col-md-6").addClass("col-md-4");
+								//$("#inputAddressDiv").show();
 							}
 						});
 
@@ -456,7 +466,7 @@
 						// *********************************
 
 					  window.GEODEV.jobs = {};
-						$.getJSON("/assets/data/simpsonsPOIs.json", function(datos){
+						$.getJSON("../assets/data/simpsonsPOIs.json", function(datos){
 							 GEODEV.jobs.simpsonsAllPOIs = datos.POIS;
 							GEODEV.jobs.simpsonsPOIs = [];
 							getRandomSimpsPOIs(datos.POIS);
@@ -466,7 +476,7 @@
 						// AJAX JOBS DATA REQUEST
 						// *********************************
 
-						$.getJSON("/api/jobs?callback=?", function(datos){
+						$.getJSON("../api/jobs?callback=?", function(datos){
 							GEODEV.jobs.data = datos;
 							getRandomSimpsPOIs();
 							// *********************************
