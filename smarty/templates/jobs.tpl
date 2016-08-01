@@ -208,7 +208,15 @@
 					    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
 					      <h4 class="panel-title">
 					        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
-					          <h4>{{:title}}</h4>
+					          <h3>{{:title}}</h3>
+					          <span class="text-primary">Fecha de publicación: </span>{{:date}} | 
+					          <span class="text-primary">Salario: </span>
+								    {{if salary_budget}}
+								    	{{:salary_budget}} €
+								    {{else}}
+								    	Negociable
+							    	{{/if}}
+
 					        </a>
 					      </h4>
 					    </div>
@@ -478,6 +486,11 @@
 
 						$.getJSON("../api/jobs?callback=?", function(datos){
 							GEODEV.jobs.data = datos;
+							GEODEV.jobs.data.forEach(function(element){
+								var date = new Date(element.date);
+								element.date = (date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear());
+							});
+						
 							getRandomSimpsPOIs();
 							// *********************************
 							// RENDERIZE JOBS OBJET IN THE TEMPLATE
