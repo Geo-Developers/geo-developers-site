@@ -185,13 +185,13 @@
 				
 				<div class="row">
 				<!-- JOBS ACCORDION -->
-					<div class="col-md-6" >
+					<div class="col-md-6 col-sm-6 col-xs-12" >
 						<div  id= "jobsDiv">
 							<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
 						</div>
 					</div>
 					<!-- MapsViews -->
-					<div id="mapContainer" class="col-md-6">
+					<div id="mapContainer" class="col-md-6 col-sm-6 hidden-xs">
 						<div id="viewDiv"></div>
 						<div id="miniMapElements">
 							<div id="miniViewDiv" simpsons-in-main-view="0" >
