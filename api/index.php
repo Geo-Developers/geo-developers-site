@@ -438,6 +438,7 @@ $app->post('/user/:userid/preferences', 'authenticated', 'same_user', function (
 $app->get('/jobs',function () use ($app, $db) {
 
   $db->where('is_open', 1);
+  $db->orderBy("date","desc");
   $jobs = $db->get('jobs');
 
   $jobs = json_encode($jobs);

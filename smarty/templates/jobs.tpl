@@ -98,8 +98,10 @@
 	    	display: none;
 	    }
 	    #jobsDiv{
-	    	/*height: 500px;
-	    	overflow: auto;*/
+  	    height: 500px;
+		    overflow: auto;
+		    border: 1px dotted #ccc;
+		    padding: 1em;
 	    }
 		</style>
 	    {include file="header.tpl" title="Comunidad de Geo Developers"}
@@ -183,8 +185,10 @@
 				
 				<div class="row">
 				<!-- JOBS ACCORDION -->
-					<div id= "jobsDiv" class="col-md-6" >
-						<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
+					<div class="col-md-6" >
+						<div  id= "jobsDiv">
+							<div id="accordion" role="tablist" aria-multiselectable="true" ></div>
+						</div>
 					</div>
 					<!-- MapsViews -->
 					<div id="mapContainer" class="col-md-6">
@@ -208,7 +212,7 @@
 					    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
 					      <h4 class="panel-title">
 					        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
-					          <h3>{{:title}}</h3>
+					          <h3 class="mt0">{{:title}}</h3>
 					          <span class="text-primary">Fecha de publicación: </span>{{:date}} | 
 					          <span class="text-primary">Salario: </span>
 								    {{if salary_budget}}

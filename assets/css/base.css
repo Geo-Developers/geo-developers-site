@@ -2909,3 +2909,6 @@ div#referrers.box p{
     border-bottom: 1px dotted;
     padding-bottom: 7px;
 }
+.panel-title > a:hover{
+  text-decoration: none;
+}
