@@ -29,11 +29,17 @@
 
 
 	  <!-- ArcGIS,JQuery, Bootstrap, JSrender, typeahead+bloodhound JS -->
-	  <script src="https://js.arcgis.com/4.0/"></script>
+	  <!--<script src="https://js.arcgis.com/4.0/"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	  <script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
-	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+	  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>-->
+
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="http://geodevelopers.org/assets/js/jsrender.js"></script>
+		<script src="https://js.arcgis.com/4.0/"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
 
 
 
