@@ -16,8 +16,9 @@
                 <h1><strong>GeoDevelopers.org</strong></h1>
 
                 <p>
-                    La comunidad de profesionales del mundo de los <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica" target="_blank">SIG</a>
-                    <button class="btn btn-success btn-lg mt1 block" data-toggle="modal" data-target="#video">VER VÍDEO DE PRESENTACIÓN</button>
+                    La comunidad de profesionales del mundo de los <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica" target="_blank">SIG</a><br>
+                    <button class="btn btn-success btn-lg mt1 block" data-toggle="modal" data-target="#video" style="margin-right:2rem"><i class="fa fa-video-camera" aria-hidden="true" style="margin-right:1rem"></i> Qué hacemos</button>
+                    <a class="btn btn-warning btn-lg mt1 block" href="community"><i class="fa fa-users" aria-hidden="true" style="margin-right:1rem"></i> Dónde estamos</a><br>
                 </p>
 
                 <!--

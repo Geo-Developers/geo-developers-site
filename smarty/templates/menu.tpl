@@ -4,8 +4,9 @@
         <li class="logo"><a href="{$ROOT}"><img src="{$ROOT}images/logogeodevblancoreducido.png"></a></li>
         <!--<li><a href="{$ROOT}tutoriales">Tutoriales</a></li>-->
         <li><a href="{$ROOT}">Inicio</a></li>
+        <li><a href="{$ROOT}community">Comunidad</a></li>
         <li><a href="{$ROOT}members">Miembros</a></li>
-        
+
         <li><a href="{$ROOT}academy">Eventos y vídeos</a></li>
         <li><a href="{$ROOT}jobs">Empleo</a></li>
         <!--<li><a href="{$ROOT}webinars">Webinars</a></li>-->

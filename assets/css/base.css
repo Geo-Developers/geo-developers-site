@@ -1,5 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,600,600italic,700");
-@import url("font-awesome.min.css");
+G@import url("font-awesome.min.css");
 
 /*
 	Miniport by HTML5 UP
@@ -2911,4 +2910,48 @@ div#referrers.box p{
 }
 .panel-title > a:hover{
   text-decoration: none;
+}
+/*************************************
+*
+*						COMMUNITY PAGE
+*
+**************************************/
+#community a#login-btn{
+  margin-top: 0;
+}
+#community .channel{
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #ececec;
+
+border-radius: 2%;
+position:relative;
+}
+#community .channel .btn{
+  border-radius: 0;
+}
+#community .channel img{
+  width: 100%;
+  border-bottom: 5px solid #ececec;
+}
+#community h2{
+  text-align: center;
+    position: absolute;
+    top: 130px;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    text-transform: uppercase;
+
+}
+#community h2 a:hover{
+  color: white;
+}
+#community .channel ul{
+  width: 80%;
+  margin: 2rem auto 2rem;
+  font-size: 1.7rem;
+
 }
