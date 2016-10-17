@@ -187,7 +187,7 @@
 			</div>
 			<!-- Show form -->
 			<div class="container mt1">
-				
+
 				<div class="row">
 				<!-- JOBS ACCORDION -->
 					<div class="col-md-6 col-sm-6 col-xs-12" >
@@ -209,6 +209,21 @@
 				</div>
 			</div>
 
+      <div class="row">
+        <div class="col-md-12 acenter mt1">
+        No te pierdas:
+        <i class="fa fa-envelope-o" aria-hidden="true" style="margin-left: 1rem"></i> <a href="http://eepurl.com/ckpO_v">Suscríbete por email</a>
+         <span style="margin-left: 1rem">|</span>
+        <i class="fa fa-slack" aria-hidden="true" style="margin-left: 1rem"></i> <a href="../community">Canal de #empleo en Slack</a>
+        <span style="margin-left: 1rem">|</span>
+        <i class="fa fa-rss-square" aria-hidden="true" style="margin-left: 1rem"></i> <a href="feed">Feed RSS</a>
+        <span style="margin-left: 1rem">|</span>
+        <i class="fa fa-video-camera" aria-hidden="true" style="margin-left: 1rem"></i> <a href="https://www.youtube.com/watch?v=bRFzRXI3nzQ">Charla sobre Empleo y marca personal</a>
+      </div>
+    </div>
+
+
+
 			<!-- Template to generate offers -->
 			<?php {literal} ?>
 				<script id="theTmpl" type="text/x-jsrender">
@@ -218,7 +233,7 @@
 					      <h4 class="panel-title">
 					        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
 					          <h3 class="mt0">{{:title}}</h3>
-					          <span class="text-primary">Fecha de publicación: </span>{{:date}} | 
+					          <span class="text-primary">Fecha de publicación: </span>{{:date}} |
 					          <span class="text-primary">Salario: </span>
 								    {{if salary_budget}}
 								    	{{:salary_budget}} €
@@ -234,7 +249,7 @@
 					    	<span class="text-primary">Tipo de contrato: </span>
 					    	{{:contract_type}}
 					    	<br>
-					    	
+
 						    <span class="text-primary">Salario: </span>
 						    {{if salary_budget}}
 						    	{{:salary_budget}}
@@ -246,7 +261,7 @@
 					    	{{:offer_details}}
 					    	<br>
 					    	<span class="text-primary">Localización: </span>
-					    	
+
 					    	{{if location}}
 						    	{{:location}}
 						    {{else}}
@@ -499,7 +514,7 @@
 								var date = new Date(element.date);
 								element.date = (date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear());
 							});
-						
+
 							getRandomSimpsPOIs();
 							// *********************************
 							// RENDERIZE JOBS OBJET IN THE TEMPLATE
