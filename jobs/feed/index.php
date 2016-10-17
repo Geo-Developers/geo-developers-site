@@ -33,9 +33,10 @@ $data .= '<image>
 foreach ($rs_post as $row) {
     $data .= '<item>';
     $data .= '<title>'.$row['title'].'</title>';
-    $data .= '<link>http://geodevelopers.org/jobs/</link>';
+    $data .= '<link>http://geodevelopers.org/jobs/#'.$row['id'].'</link>';
     $data .= '<description><![CDATA['.substr($row['offer_details'],0, 255).']]></description>';
     $data .= '<guid>'.$row['id'].'</guid>';
+    $data .= '<pubDate>'.date("D, d M Y H:i:s T", strtotime($row['date'])).'</pubDate>';
     $data .= '</item>';
 }
 $data .= '</channel>';

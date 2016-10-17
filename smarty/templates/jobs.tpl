@@ -231,8 +231,11 @@
 					  <div class="panel panel-default">
 					    <div id="heading-{{:id}}" class="panel-heading" role="tab" >
 					      <h4 class="panel-title">
-					        <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
-					          <h3 class="mt0">{{:title}}</h3>
+                  <a href="http://geodevelopers.org/jobs/#{{:id}}" style="float:right"><h3 style="margin:0"><i class="fa fa-share-alt-square" aria-hidden="true"></i></h3></a>
+                  <a id="link2Collapse-{{:id}}"  data-toggle="collapse" data-parent="#accordion"  href="#collapse-{{:id}}" aria-expanded="true" aria-controls="collapseOne">
+					          <h3 class="mt0">
+                      {{:title}}
+                    </h3>
 					          <span class="text-primary">Fecha de publicación: </span>{{:date}} |
 					          <span class="text-primary">Salario: </span>
 								    {{if salary_budget}}
@@ -285,6 +288,8 @@
 			<?php {/literal} ?>
 			<?php {literal} ?>
 			<script>
+
+
 				var places;
 				require([
 				  "esri/Map",
@@ -522,6 +527,18 @@
 							var template = $.templates("#theTmpl");
 							var htmlOutput = template.render(GEODEV.jobs.data);
 							$("#accordion").html(htmlOutput);
+
+              //debugger
+              id= window.location.hash.substr(1)
+              if(id){
+                offer = document.getElementById("link2Collapse-"+id);
+                if(offer){
+                  var elem = $(offer).parent().parent().parent().parent();
+                  elem.parent().prepend(elem);
+                  offer.click();
+                }
+
+              }
 							// *********************************
 							// Setting the viewdivs change
 							// *********************************
@@ -735,6 +752,7 @@
 					}
 
 				});
+
 			</script>
 			<?php {/literal} ?>
 			{include file="footer.tpl"}
