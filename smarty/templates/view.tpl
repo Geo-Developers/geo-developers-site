@@ -15,7 +15,7 @@
 
     <meta name="description" content="{$VIDEO.description|strip_tags}" />
     <meta property="og:image" content="http://geodevelopers.org/streaming/images/geodevelopers.png"/>
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />
+    <!--<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css" />-->
     <link rel="stylesheet" href="{$ROOT}assets/css/view.css">
     <link rel="stylesheet" href="{$ROOT}assets/css/jquery.raty.css">
 </head>
@@ -70,7 +70,9 @@
             <div class="col-md-6">
                 <!--<div id="spinner"><img src="{$ROOT}assets/css/images/spinner.gif"></div>-->
                 {if $TYPE !== "academy"}
-                    <div id="firechat-wrapper"></div>
+                    <div id="firechat-wrapper">
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd18XdM62wakhQCf1yZHbvFWLr2ztM-WN1PNDdI9Hr-hx2ElQ/viewform">Acceder al chat (vía Slack)</a>
+                    </div>
                 {else}
                     <div id="youtube-index">
                         {for $I=0 to $VIDEO.videoIndex|@count-1}

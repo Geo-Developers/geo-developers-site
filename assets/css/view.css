@@ -30,7 +30,7 @@ h1{
 #youtube-index {
     height: 285px;
     /*max-width: 325px;*/
-    padding: 10px;
+
     border: 1px solid #ccc;
     background-color: #fff;
     margin: 0px auto;
@@ -46,6 +46,22 @@ h1{
 }
 #firechat-wrapper{
     height: 323px;
+    background-image: url("../../images/slack-screenshot.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+#firechat-wrapper a{
+  background-color: rgba(0,0,0,.5);
+  width: 100%;
+  display: block;
+  color: #fff;
+  text-decoration: underline;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  top: 50%;
+  position: relative;
+  margin-top: -22px;
 }
 #youtube-index{
     padding: 0px;

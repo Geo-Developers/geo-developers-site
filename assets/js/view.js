@@ -238,7 +238,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                 //$("a[href='#home']").click();
                 //$("#youtubeVideo").addClass(type);
 
-                jQuery.getScript("https://cdn.firebase.com/js/client/2.0.2/firebase.js", function(){
+                /*jQuery.getScript("https://cdn.firebase.com/js/client/2.0.2/firebase.js", function(){
                     jQuery.getScript("https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js", function(){
 
                         var chatRef = new Firebase("https://blistering-fire-8130.firebaseio.com");
@@ -272,7 +272,7 @@ define(['jquery','cookies','base', 'bootstrap','jsrender', 'raty'], function($,C
                             }
                         });
                     });
-                });
+                });*/
 
                 (function() {
 
