@@ -27,8 +27,9 @@
             {for $I=0 to $WEBINARS|@count-1}
                 <div class="col-md-4">
                     <article class="box style2">
-                        <a href="{$WEBINARS[$I]["youtubeId"]}" class="image featured">
-                            <img src="{$ROOT}images/webinar.jpg" alt="" />
+                        <a href="{$WEBINARS[$I]["youtubeId"]}" class="image featured"
+                            style="background-image: url('{if $WEBINARS[$I]["thumbnail"]}{$WEBINARS[$I]["thumbnail"]}{else}{$ROOT}images/webinar.jpg{/if}')" >
+
                         </a>
                         <div class="table">
                             <p>{$WEBINARS[$I]["title"]}</p>
