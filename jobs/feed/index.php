@@ -18,8 +18,9 @@ $rs_post = $query->fetchAll();
 
 // The XML structure
 $data = '<?xml version="1.0" encoding="UTF-8" ?>';
-$data .= '<rss version="2.0">';
+$data .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
 $data .= '<channel>';
+$data .= '<atom:link href="http://geodevelopers.org/jobs/feed" rel="self" type="application/rss+xml" />';
 $data .= '<title>GeoDevelopers: Ofertas de empleo</title>';
 $data .= '<link>http://www.geodevelopers.org</link>';
 $data .= '<description>Comunidad de profesionales del mundo de los SIG</description>';
@@ -32,11 +33,11 @@ $data .= '<image>
 
 foreach ($rs_post as $row) {
     $data .= '<item>';
-    $data .= '<title>'.$row['title'].'</title>';
+    $data .= '<title><![CDATA['.html_entity_decode($row['title']).']]></title>';
     $data .= '<link>http://geodevelopers.org/jobs/#'.$row['id'].'</link>';
     $data .= '<description><![CDATA['.substr($row['offer_details'],0, 255).']]></description>';
-    $data .= '<guid>'.$row['id'].'</guid>';
-    $data .= '<pubDate>'.date("D, d M Y H:i:s T", strtotime($row['date'])).'</pubDate>';
+    $data .= '<guid>http://geodevelopers.org/jobs/#'.$row['id'].'</guid>';
+    $data .= '<pubDate>'.date("D, d M Y H:i:s O", strtotime($row['date'])).'</pubDate>';
     $data .= '</item>';
 }
 $data .= '</channel>';
