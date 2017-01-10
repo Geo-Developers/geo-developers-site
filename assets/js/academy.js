@@ -70,6 +70,38 @@ define(['jquery','cookies','base','jsrender'], function($, Cookies, base){
                         }
                     });
                 });
+            }else{
+              // seccion == "webinars"
+
+              var events = $("#video-list article")
+              events.each(function(i, elem){
+                var imgEl = $(elem).find(".image");
+                if(imgEl.css("background-image").indexOf("images/webinar") !== -1){
+
+                  var title = $(elem).find(".table");
+                  title = title.text().trim();
+                  $.get( "https://www.googleapis.com/customsearch/v1?q="+title+"&cx=011889005247941996496%3Abysxgoaijyg&key=AIzaSyCRMwUQWoxcBEi1VdWYYf581_fUXdWjK6A", function( data ) {
+                    console.log(data);
+                    var img = null, max_width = 0;
+                    data.items.forEach(function(elem, i){
+                      if(elem.pagemap && elem.pagemap.cse_thumbnail){
+                        //console.log("thumbnail=", elem.pagemap.cse_thumbnail)
+                        if(parseInt(elem.pagemap.cse_thumbnail[0].width) > max_width){
+                          console.log("elem.pagemap.cse_thumbnail[0].width=", elem.pagemap.cse_thumbnail[0].width)
+                          console.log("max_width=", max_width)
+                          max_width = parseInt(elem.pagemap.cse_thumbnail[0].width);
+                          img = elem.pagemap.cse_thumbnail[0].src;
+                        }
+                      }
+                    });
+
+                    imgEl.css("background-image", "url("+ img+")");
+                    console.log("img=", img)
+                  });
+                }
+              });
+
+
             }
 
         },
