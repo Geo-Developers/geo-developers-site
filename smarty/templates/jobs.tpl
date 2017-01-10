@@ -115,7 +115,7 @@
 	<body id="jobs">
 		<div id="main-wrapper">
 			{include file="menu.tpl"}
-			<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Crear oferta</button>
+			<button type="button" class="btn btn-primary btn-block toggle" href="#form" id="createJobBtn">Publica tu oferta gratuitamente</button>
 			<!-- Form -->
 			<div class="container">
 				<form method="POST" action="../api/jobs" id="form" class="well">
@@ -310,7 +310,7 @@
 
 				 // try{
 							var map = new Map({
-					    basemap: "streets-night-vector"
+					    basemap: "streets"
 					  });
 						// }catch(e){
 						// 	Rollbar.error("error al cargar el mapa: ", e);
